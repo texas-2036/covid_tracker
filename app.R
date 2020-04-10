@@ -76,7 +76,15 @@ tx_county_sf <- tx_counties %>%
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326") %>% 
   fill(c("date"),.direction="downup") %>% 
-  select(-state, -country_region, -time, -combined_key, -iso3)
+  select(-state, -country_region, -time, -combined_key, -iso3) %>% 
+  mutate(cases_label=case_when(
+    is.na(cases) ~ "No Reported",
+    is.numeric(cases) ~ scales::comma(cases)
+  ),
+  active_label=case_when(
+    is.na(active) ~ "No Reported",
+    is.numeric(active) ~ scales::comma(active),
+  ))
   
 tx_series <-fredr(
   series_id = "TXICLAIMS",
@@ -167,10 +175,11 @@ body <- dashboardBody(
                      h4("Data As of:",textOutput("currentTime", inline=TRUE)),
                      leafletOutput("map", width = "100%", height = 600)),
               column(width = 6,
-                     selectInput(inputId = "countyname", label = "Search For A County...",
-                                 choices = county_list),
-              # h3(style="font-weight:700;",textOutput("county_name", inline = TRUE)),
-              # hr(),
+                     selectizeInput(inputId = "countyname", label = h4("Create A County Profile"), choices = county_list,
+                                    selected=character(0), multiple = FALSE, width="100%",
+                                    options = list(maxItems=1,placeholder = 'Select Your County...')),
+              h3(style="font-weight:700;",textOutput("county_name", inline = TRUE)),
+              hr(),
               box(solidHeader = TRUE, 
                   width=12, 
                   height = 600,
@@ -478,20 +487,14 @@ output$map <- renderLeaflet({
     
 # COUNTY MAP --------------------------------------------------------------
 
-   #  addLegendCustom <- function(map, colors, labels, sizes, opacity = 0.8){
-   #    colorAdditions <- paste0(colors, "; width:", sizes, "px; border-radius:50%;
-   # border: 3px solid #F26852; height:", sizes, "px")
-   #    labelAdditions <- paste0("<div style='display: inline-block;height: ",
-   #                             sizes, "px;margin-top: 5px;line-height: ", sizes, "px;'>",
-   #                             labels, "</div>")
-   # 
-   #    return(addLegend(map, colors = colorAdditions,
-   #                     labels = labelAdditions, opacity = opacity))
-   #  }
-
     pal <- colorNumeric(palette = "Reds", na.color = "#DBDCDD", 
                         domain = tx_county_sf$incident_rate)
     
+    labels_clean <- sprintf("<a style = 'font-family: Montserrat; font-size: 22px; font-weight: 700; color:#3a4a9f'>%s County</a> <br/><a style = 'font-family: Montserrat; font-size: 16px; font-weight: 400; color:#6B6D6F'>%s Active Cases</a><br/><a style = 'font-family: Montserrat; font-size: 12px; font-weight: 400; color:#8C8F93'>%s Total Confirmed Cases</a>",
+                            tx_county_sf$county,
+                            tx_county_sf$active_label,
+                            tx_county_sf$cases_label) %>%
+      lapply(htmltools::HTML)
     
     map <- leaflet(tx_county_sf, width = "100%", height = "600px", 
                    options = leafletOptions(zoomControl = FALSE, minZoom = 6, 
@@ -507,24 +510,45 @@ output$map <- renderLeaflet({
                   smoothFactor = 0, 
                   fillColor = ~pal(incident_rate),
                   fillOpacity = 1,
-                  layerId = ~county) %>% 
+                  group="Incidence Rate",
+                  layerId = ~county,
+                  label = labels_clean,
+                  labelOptions = labelOptions(
+                    style = list("font-family" = "Montserrat", 
+                                 "font-weight" = "normal",
+                                 "text-align" = "left",
+                                 "line-height" = "1.3",
+                                 padding = "3px 8px"),
+                    textsize = "18px",
+                    direction = "auto")) %>% 
       addCircleMarkers(~long, ~lat,
-        radius = ~sqrt(cases),
-        color = "#F26852",
-        stroke = TRUE,
-        weight=2,
-        fillOpacity = 0.5
-      ) %>%
-      # addLegendCustom(colors = c("#F26852", "#F26852", "#F26852", "#F26852", "#F26852"),
-      #                 labels = avgs$label, sizes = avgs$value) %>%
-      # addResetMapButton() %>% 
-      # setView(31.9686, -99.9018, zoom = 6) %>% 
+                       radius = ~sqrt(cases),
+                       color = "#F26852",
+                       stroke = TRUE,
+                       weight=2,
+                       fillOpacity = 0.5,
+                       group="Confirmed Cases",
+                       label = labels_clean,
+                       labelOptions = labelOptions(
+                         style = list("font-family" = "Montserrat", 
+                                      "font-weight" = "normal",
+                                      "text-align" = "left",
+                                      "line-height" = "1.3",
+                                      padding = "3px 8px"),
+                         textsize = "18px",
+                         direction = "auto")) %>%
+      addLayersControl(
+        # baseGroups = c("Incidence Rate"),
+        overlayGroups = c("Confirmed Cases"),
+        options = layersControlOptions(collapsed = FALSE)) %>% 
       addLegend("bottomleft",
                 data = tx_county_sf,
-                pal = ~pal,
+                pal = pal,
                 values = ~incident_rate,
-                title = "Incident Rate",
+                title = "Incident Rate<br>(Per 100k People)",
+                # labFormat = labelFormat(suffix = ""),
                 opacity = 1) %>%
+      # setView(31.9686, -99.9018, zoom = 6) %>% 
       fitBounds(-106.64585, 25.83706, -93.50782, 36.50045)
     
     map 

@@ -231,3 +231,18 @@ color: #fff;
 p > .info-box{
 font-size: 3px;
 }
+
+hr {
+margin-top: 5px;
+margin-bottom: 10px;
+border: 0;
+border-top: 1px solid #eee;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+border: none;
+background: #3a4a9f;
+color: #fff;
+font-family: Montserrat;
+/* background-clip: padding-box; */
+}
