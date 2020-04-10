@@ -1,0 +1,233 @@
+.main-header .logo {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: bold;
+  /* font-size: 24px; */
+}
+
+.skin-blue .main-header .navbar {
+background-color: #3A4A9F;
+}
+
+.leaflet-container .leaflet-control-attribution {
+	background: #3A4A9F;
+	color:#fff;
+	margin: 0;
+	}
+	
+.small-box {
+border-radius: 2px;
+position: relative;
+display: block;
+margin-bottom: 20px;
+box-shadow: 0 0px 0px rgba(0,0,0,.1);
+}
+
+.leaflet-control-attribution:hover {
+outline: 0;
+text-decoration: none;
+color: #F26852;
+}
+
+.leaflet-control-attribution, .leaflet-control-scale-line {
+padding: 0 5px;
+color: #fff ;
+}
+
+.leaflet-container a {
+color: #fff;
+font-size: 12px;
+font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.slider-animate-container {
+text-align: right;
+margin-top: 0px;
+}
+
+.skin-blue .main-header .logo {
+background-color: #3A4A9F;
+color: #ffffff;
+border-bottom: 0 solid transparent;
+}
+
+.skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
+background-color: #3A4A9F;
+color: #fff;
+}
+
+.skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
+color: #fff;
+font-weight: 700;
+background: #3A4A9F;
+border-left-color: #F26852;
+}
+
+.content-wrapper, .right-side {
+min-height: 100%;
+background-color: #3A4A9F;
+z-index: 800;
+}
+
+.skin-blue .main-header .logo:hover {
+background-color: #3A4A9F;
+color: #ffffff;
+border-bottom: 0 solid transparent;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle {
+color: #ffffff;
+background: #3A4A9F;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+color: #ffffff;
+background: #3A4A9F;
+}
+
+body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #3A4A9F;
+  background: #3A4A9F;
+  box-shadow: none;
+  border-radius: 5px;
+}
+
+.legend {
+    line-height: 18px;
+    color: #fff;
+}
+
+.legend svg text {
+fill: #fff;
+}
+
+.legend svg line {
+stroke: #fff;
+}
+
+line {
+stroke-width: 2px;
+}
+
+a {
+color: #fbfbfb;
+text-decoration: none;
+}
+
+#play-output {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.skin-blue .sidebar-form {
+border-radius: 0px;
+border: none;
+border-bottom: 1px solid #fff;
+margin: 0px !important;
+}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+font-size: 22px;
+background-color: #3A4A9F;
+color: #fff;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+border: 1px solid rgba(255,255,255,0.9);
+background-clip: padding-box;
+}
+
+.leaflet-bar a.leaflet-disabled {
+cursor: default;
+background-color: #3A4A9F;
+color: #fff;
+}
+
+.legendCircle {
+   border-radius:50%; 
+   border: 2px solid black; 
+   display: inline-block;
+   position: relative;
+ }
+
+.skin-blue .sidebar-form input[type=text] {
+color: #fff;
+font-size: 24px;
+font-weight: 700;
+border-top-left-radius: 2px;
+border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 2px;
+}
+
+.skin-blue .sidebar-form .btn, .skin-blue .sidebar-form input[type=text] {
+box-shadow: none;
+background-color: #3a4a9f;
+border: none;
+height: 35px;
+}
+
+.skin-blue .sidebar-form input[type=text]:focus, .skin-blue .sidebar-form input[type=text]:focus + .input-group-btn .btn {
+    background-color: #3a4a9f;
+    color:#fff
+}
+
+.bg-blue {
+  background-color: #3a4a9f !important;
+  color: #fff !important;
+}
+
+.bg-navy {
+  background-color: #3a4a9f !important;
+  /*background-color: #EAEFF6 !important;*/
+  color: #fff !important;
+}
+
+.small-box .icon-large {
+position: absolute;
+top: auto;
+bottom: 5px;
+right: 5px;
+font-size: 70px;
+/*color:#DBDCDD*/
+color: #F26852
+}
+
+small-box p {
+font-size: 12px;
+}
+
+.info-box {
+display: block;
+min-height: 90px;
+background: #3a4a9f;
+width: 100%;
+box-shadow: 0 0px 0px rgba(0,0,0,.1);
+border-radius: 2px;
+margin-bottom: 15px;
+}
+
+.info-box-number {
+display: block;
+font-weight: 800;
+font-size: 28px;
+}
+
+a > .info-box {
+color: #fff;
+}
+
+p > .info-box{
+font-size: 3px;
+}
