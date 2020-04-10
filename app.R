@@ -176,10 +176,21 @@ body <- dashboardBody(
                      leafletOutput("map", width = "100%", height = 600)),
               column(width = 6,
                      selectizeInput(inputId = "countyname", label = h4("Create A County Profile"), choices = county_list,
-                                    selected=character(0), multiple = FALSE, width="100%",
+                                    selected="Harris", multiple = FALSE, width="100%",
                                     options = list(maxItems=1,placeholder = 'Select Your County...')),
-              h3(style="font-weight:700;",textOutput("county_name", inline = TRUE)),
-              hr(),
+              # h3(style="font-weight:700;",textOutput("countyname", inline = TRUE)),
+              fluidRow(
+                column(width = 3,
+                       h2(style="font-weight:800;text-align:center;", textOutput("county_cases_text")),p(style="text-align:center","Confirmed Cases")),
+                column(width = 3,
+                       h2(style="font-weight:800;text-align:center;", textOutput("county_deaths_text")),p(style="text-align:center","Confirmed Deaths")),
+                column(width = 3,
+                       h2(style="font-weight:800;text-align:center;", textOutput("county_incident_text")),p(style="text-align:center","Incident Rate")),
+                column(width = 3,
+                       h2(style="font-weight:800;text-align:center;", textOutput("county_active_text")),p(style="text-align:center","Active Cases")),
+    
+                ),
+              highchartOutput("cnty_curves_hchart", height = 400),
               box(solidHeader = TRUE, 
                   width=12, 
                   height = 600,
@@ -412,7 +423,6 @@ output$map <- renderLeaflet({
 
     output$county_name <- renderText({
 
-      m <- tx_county_sf[tx_county_sf$county == click_cnty(), ]
       m <- m %>%
         as.data.frame()
 
@@ -422,12 +432,44 @@ output$map <- renderLeaflet({
 
 # County Confirmed Cases --------------------------------------------------
 
+    output$county_cases_text <- renderText({
+      
+      tx_county_cases %>%
+        filter(county==input$countyname) %>% 
+        distinct(cases) %>% 
+        as.character()
+    })
+    
+# County Active Cases --------------------------------------------------
+    
+    output$county_active_text <- renderText({
+      
+      tx_county_cases %>%
+        filter(county==input$countyname) %>% 
+        distinct(active) %>% 
+        as.character()
+    })
     
 # County Incident Rate ----------------------------------------------------
   
-
+    output$county_incident_text <- renderText({
+      
+      tx_county_cases %>%
+        filter(county==input$countyname) %>% 
+        distinct(incident_rate) %>% 
+        round(digits=2) %>% 
+        as.character()
+    })
+    
 # County Confirmed Deaths -------------------------------------------------
 
+    output$county_deaths_text <- renderText({
+      
+      tx_county_cases %>%
+        filter(county==input$countyname) %>% 
+        distinct(deaths) %>% 
+        as.character()
+    })
     
 # County Mortality Rate ---------------------------------------------------
     
@@ -442,31 +484,76 @@ output$map <- renderLeaflet({
     
 # {County Curve Charts}  ----------------------------------------------------
     
-    output$chart <- renderHighchart({
+    output$cnty_curves_hchart <- renderHighchart({
       
-      tx_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
-        filter(state=="Texas") %>% 
-        mutate(date = ymd(date)) %>%
-        group_by(state,county) %>% 
-        filter(date == max(date))
+      nyt_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
+        filter(state=="Texas",
+               county==input$countyname) %>% 
+        mutate(date = ymd(date))
       
-      mapdata <- get_data_from_map(download_map_data("countries/us/us-tx-all"))
+      hcoptslang <- getOption("highcharter.lang")
+      hcoptslang$thousandsSep <- ","
+      options(highcharter.lang = hcoptslang)
       
-      tx_county_data <- mapdata %>% 
-        left_join(tx_county_cases, by="fips")
-      
-      hcmap("countries/us/us-tx-all", data = tx_county_data, value = "cases",
-            joinBy = "fips", name = "", borderColor = "#3A4A9F", borderWidth = 0.1) %>%
-        hc_tooltip(pointFormat = "<strong style='font-size:20px;font-weight:800'>{point.name} County</strong><br>
-                   Confirmed Cases: {point.value:,.0f}<br>") %>% 
-        hc_legend() %>% 
+      nyt_county_cases %>% 
+      hchart("area", hcaes(x = date, y = cases), animation=FALSE,
+             color = "#fff") %>% 
+        hc_title(
+          text = paste0(input$countyname, " County COVID-19 Cases"),
+          useHTML = TRUE) %>% 
+        hc_tooltip(table = TRUE, sort = TRUE,
+                   pointFormat = "<b>{point.name}</b><br>
+                   Confirmed Cases: {point.y:,.0f}<br>") %>% 
+        hc_credits(
+          enabled = TRUE,
+          text = "Source: New York Times County-Level COVID-19 Data (Github)",
+          href = "https://github.com/nytimes/covid-19-data") %>%
         hc_add_theme(
-          hc_theme_merge(
-            hc_theme_tufte(),
-            hc_theme(chart = list(
-              # styledMode=TRUE,
-              backgroundColor = "#3A4A9F",
-              style = list(fontFamily = "Montserrat", fontSize = "28px", color="white",fontWeight="500", textTransform="uppercase"))))) 
+              hc_theme_merge(
+                hc_theme_smpl(),
+                hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                      style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                                   color="#fff",fontWeight="500", textTransform="uppercase")),
+                         title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
+                                      align = "left"), 
+                         subtitle = list(style = list(fontFamily = "Montserrat", color="#fff"),
+                                         align = "left"), 
+                         legend = list(align = "right", 
+                                       style = list(fontFamily = "Montserrat", color="white"), 
+                                       verticalAlign = "bottom"),
+                         credits = list(style = list(color = "#fff")),
+                         xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                      title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                                color="#fff",fontWeight="500")),
+                                      gridLineWidth = .5,
+                                      gridLineColor = "#F3F3F3", 
+                                      lineColor = "#fff", 
+                                      minorGridLineColor = "#F3F3F3", 
+                                      tickColor = "#F3F3F3", 
+                                      tickWidth = .5), 
+                         yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                      title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                                color="#fff",fontWeight="500")), 
+                                      gridLineWidth = .5,
+                                      gridLineColor = "#F3F3F3", 
+                                      lineColor = "#fff", 
+                                      minorGridLineColor = "#F3F3F3", 
+                                      tickColor = "#F3F3F3", 
+                                      tickWidth = 1))))
+      
+      
+      # hcmap("countries/us/us-tx-all", data = tx_county_data, value = "cases",
+      #       joinBy = "fips", name = "", borderColor = "#3A4A9F", borderWidth = 0.1) %>%
+      #   hc_tooltip(pointFormat = "<strong style='font-size:20px;font-weight:800'>{point.name} County</strong><br>
+      #              Confirmed Cases: {point.value:,.0f}<br>") %>% 
+      #   hc_legend() %>% 
+      #   hc_add_theme(
+      #     hc_theme_merge(
+      #       hc_theme_tufte(),
+      #       hc_theme(chart = list(
+      #         # styledMode=TRUE,
+      #         backgroundColor = "#3A4A9F",
+      #         style = list(fontFamily = "Montserrat", fontSize = "28px", color="white",fontWeight="500", textTransform="uppercase"))))) 
     })
 
 # TEST CODE ---------------------------------------------------------------
