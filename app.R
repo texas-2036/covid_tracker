@@ -26,6 +26,10 @@ map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a h
 
 # DATA PREP CODE ----------------------------------------------------------
 
+
+# **Coronavirus Data -----------------------------------------------------------
+
+
 jhu_cases_state <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/archived_data/data/cases_state.csv") %>% 
   janitor::clean_names() %>% 
   filter(province_state=="Texas") %>% 
@@ -55,6 +59,11 @@ tx_today <- tx_county_cases %>%
   ungroup() %>% 
   select(-county)
 
+nyt_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
+  filter(state=="Texas") %>% 
+  mutate(min = min(cases),
+         max = max(cases))
+         
 tigris_cntys <- tigris::counties(state="48", cb = TRUE) %>% 
   as_tibble() %>% 
   select(GEOID,county=NAME)
@@ -65,9 +74,10 @@ tx_counties <- tidycensus::county_laea %>%
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326")
 
-county_list <- tigris_cntys %>% 
+county_list <- nyt_county_cases %>% 
   as_tibble() %>% 
-  select(`County Names`=county) %>% 
+  select(`County Names`=county) %>%
+  distinct() %>% 
   arrange(`County Names`) %>% 
   as.list()
 
@@ -85,6 +95,11 @@ tx_county_sf <- tx_counties %>%
     is.na(active) ~ "No Reported",
     is.numeric(active) ~ scales::comma(active),
   ))
+
+
+# **Economic Data -----------------------------------------------------------
+
+hb_summary <-  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv")
   
 tx_series <-fredr(
   series_id = "TXICLAIMS",
@@ -105,7 +120,7 @@ header <- dashboardHeader(
 
 # SIDEBAR CODE-----------------------------------------------------------
 
-sidebar <- dashboardSidebar(
+sidebar <- dashboardSidebar(disable = FALSE,
   collapsed = TRUE,
   sidebarMenu(
     id = "tabs",
@@ -190,7 +205,8 @@ body <- dashboardBody(
                        h2(style="font-weight:800;text-align:center;", textOutput("county_active_text")),p(style="text-align:center","Active Cases")),
     
                 ),
-              highchartOutput("cnty_curves_hchart", height = 400),
+              highchartOutput("cnty_curves_hchart", height = 300),
+              highchartOutput("cnty_compare_hchart", height = 100),
               box(solidHeader = TRUE, 
                   width=12, 
                   height = 600,
@@ -482,25 +498,78 @@ output$map <- renderLeaflet({
 
 # CHARTS ------------------------------------------------------------------
     
-# {County Curve Charts}  ----------------------------------------------------
+
+# {County Compare Chart} ----------------------------------------------------
+
+    output$cnty_compare_hchart <- renderHighchart({
+      
+      nyt_county_cases_chart <- nyt_county_cases %>% 
+        filter(county==input$countyname) %>% 
+        mutate(date = ymd(date)) 
+      
+      nyt_county_cases_today <- nyt_county_cases %>%
+        mutate(date = ymd(date)) %>% 
+        group_by(state) %>% 
+        filter(date == max(date)) %>% 
+        ungroup()
+      
+      nyt_highlight_cnty <- nyt_county_cases_today %>% 
+        filter(county==input$countyname)
+      
+      nyt_county_cases_today %>% 
+        hchart(type="scatter", hcaes(x = cases, y = 0, group=date, name = county), animation=FALSE,
+             color = "#fff") %>%
+        hc_add_series(data=nyt_highlight_cnty, type="scatter",  hcaes(x = cases, y = 0, name = county), size=2, color = "#5da5da", animation = FALSE) %>%
+        # hc_xAxis(labels = list(format = "{value}")) %>%
+        hc_tooltip(table = TRUE, sort = TRUE,
+                   pointFormat = "<b> {series.name}</b>
+                                  <br>Confirmed Cases: <b> {point.x:,.0f}</b>") %>%
+        hc_add_theme(
+          hc_theme_merge(
+            hc_theme_smpl(),
+            hc_theme(chart = list(backgroundColor = "#3A4A9F",
+                                  style = list(fontFamily = "Montserrat")),
+                     yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                  title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                            color="#fff",fontWeight="500")), 
+                                  gridLineWidth = 0,
+                                  gridLineColor = "#F3F3F3", 
+                                  lineColor = "#fff", 
+                                  minorGridLineColor = "#F3F3F3", 
+                                  tickColor = "#F3F3F3", 
+                                  tickWidth = 0),
+                     xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                  title = list(enabled=FALSE),
+                                  gridLineWidth = 0,
+                                  gridLineColor = "#F3F3F3", 
+                                  lineColor = "#fff", 
+                                  minorGridLineColor = "transparent", 
+                                  tickColor = "#F3F3F3", 
+                                  tickWidth = .5)))
+          )
+      
+    })
+    
+# {County Curve Charts}  --------------------------------------------------
     
     output$cnty_curves_hchart <- renderHighchart({
       
-      nyt_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
-        filter(state=="Texas",
-               county==input$countyname) %>% 
+      nyt_county_cases_chart <- nyt_county_cases %>% 
+        filter(county==input$countyname) %>% 
         mutate(date = ymd(date))
       
       hcoptslang <- getOption("highcharter.lang")
       hcoptslang$thousandsSep <- ","
       options(highcharter.lang = hcoptslang)
       
-      nyt_county_cases %>% 
+      nyt_county_cases_chart %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,
              color = "#fff") %>% 
         hc_title(
           text = paste0(input$countyname, " County COVID-19 Cases"),
           useHTML = TRUE) %>% 
+        hc_yAxis(min = round(mean(nyt_county_cases$min), 1), 
+                 max = round(mean(nyt_county_cases$max), 1)) %>% 
         hc_tooltip(table = TRUE, sort = TRUE,
                    pointFormat = "<b>{point.name}</b><br>
                    Confirmed Cases: {point.y:,.0f}<br>") %>% 
@@ -540,20 +609,6 @@ output$map <- renderLeaflet({
                                       minorGridLineColor = "#F3F3F3", 
                                       tickColor = "#F3F3F3", 
                                       tickWidth = 1))))
-      
-      
-      # hcmap("countries/us/us-tx-all", data = tx_county_data, value = "cases",
-      #       joinBy = "fips", name = "", borderColor = "#3A4A9F", borderWidth = 0.1) %>%
-      #   hc_tooltip(pointFormat = "<strong style='font-size:20px;font-weight:800'>{point.name} County</strong><br>
-      #              Confirmed Cases: {point.value:,.0f}<br>") %>% 
-      #   hc_legend() %>% 
-      #   hc_add_theme(
-      #     hc_theme_merge(
-      #       hc_theme_tufte(),
-      #       hc_theme(chart = list(
-      #         # styledMode=TRUE,
-      #         backgroundColor = "#3A4A9F",
-      #         style = list(fontFamily = "Montserrat", fontSize = "28px", color="white",fontWeight="500", textTransform="uppercase"))))) 
     })
 
 # TEST CODE ---------------------------------------------------------------
