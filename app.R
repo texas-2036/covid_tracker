@@ -99,7 +99,8 @@ tx_county_sf <- tx_counties %>%
 
 # **Economic Data -----------------------------------------------------------
 
-hb_summary <-  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv")
+hb_summary <-  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv",
+                        skip=2)
   
 tx_series <-fredr(
   series_id = "TXICLAIMS",
@@ -120,7 +121,7 @@ header <- dashboardHeader(
 
 # SIDEBAR CODE-----------------------------------------------------------
 
-sidebar <- dashboardSidebar(disable = FALSE,
+sidebar <- dashboardSidebar(disable = TRUE,
   collapsed = TRUE,
   sidebarMenu(
     id = "tabs",
