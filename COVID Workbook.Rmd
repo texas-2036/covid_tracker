@@ -1,0 +1,628 @@
+---
+title: "COVID Database Workbook"
+author: "Matthew Worthington, M.Ed., M.PAff."
+date: "4/1/2020"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(gghighlight)
+library(janitor)
+library(geofacet)
+library(tinter)
+library(highcharter)
+library(texas2036)
+library(fredr)
+library(readxl)
+library(grid)
+library(ggthemes)
+library(ggforce)
+library(ggrepel)
+library(ggtext)
+library(gghighlight)
+library(hrbrthemes)
+fredr_set_key("22c6ffaa111781ee88df344a4f120eef")
+```
+
+# COVID Data
+
+## Get State and Pop Data From Tidycensus
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+readRenviron("~/.Renviron")
+census_api_key <- Sys.getenv("CENSUS_API_KEY")
+census_api_key(census_api_key=census_api_key, install=TRUE, overwrite = TRUE)
+
+tx_county_pop <- get_acs(geography="county", survey="acs5", 
+                         variables = "B01003_001", state="TX", 
+                         year=2018, geometry = TRUE) %>% 
+                 select(-moe,-variable)
+      
+write_rds(tx_county_pop, "county_pop.rds")
+
+tx_pop <- get_acs(geography="state", survey="acs5", 
+                  variables = "B01003_001",
+                  year=2018) %>% 
+          select(-moe,-variable)
+
+write_rds(tx_pop, "state_pop.rds")
+
+
+```
+
+## JHU & COVID Tracking Data Files
+
+```{r, macro_covid_data}
+
+# Read In JHU Global Country Time Series Data
+who_global_ts <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/who_covid_19_situation_reports/who_covid_19_sit_rep_time_series/who_covid_19_sit_rep_time_series.csv")
+
+# Read In JHU Cases By Country
+jhu_cases_country <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_country.csv") %>% 
+  clean_names()
+
+# Read In JHU Cases By State
+jhu_cases_state <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_state.csv") %>% 
+  clean_names()
+
+# State Test Data (Current)
+test_current <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-tracking-data/master/data/states_current.csv") %>% 
+  clean_names()
+
+# State Test Data (Dailies)
+test_daily <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-tracking-data/master/data/states_daily_4pm_et.csv") %>% 
+  clean_names()
+```
+
+## IHME Projections
+
+```{r}
+
+ihme_mar25 <- read_csv("data/ihme/2020_03_25/ihme-covid19_all_locs.csv") %>% 
+  select(state=location_name, date=date_reported, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Mar 25th Projection")
+
+ihme_mar26 <- read_csv("data/ihme/2020_03_26/hospitalization_all_locs_corrected.csv") %>% 
+  select(state=location_name, date=date_reported, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Mar 26th Projection")
+
+ihme_mar27 <- read_csv("data/ihme/2020_03_27/hospitalization_all_locs_corrected.csv") %>% 
+  select(state=location_name, date=date_reported, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Mar 27th Projection")
+
+ihme_mar29 <- read_csv("data/ihme/2020_03_29/hospitalization_all_locs_corrected.csv") %>% 
+  select(state=location_name, date=date_reported, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Mar 29th Projection")
+
+
+ihme_mar30 <- read_csv("data/ihme/2020_03_30/Hospitalization_all_locs.csv") %>% 
+  select(state=location_name, date, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Mar 30th Projection")
+
+ihme_mar31 <- read_csv("data/ihme/2020_03_31.1/Hospitalization_all_locs.csv") %>% 
+  select(state=location_name, date, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Mar 31st Projection")
+
+ihme_apr01 <- read_csv("data/ihme/2020_04_01.2/Hospitalization_all_locs.csv") %>% 
+  select(state=location_name, date, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Apr 1st Projection")
+
+ihme_apr05 <- read_csv("data/ihme/2020_04_05/Hospitalization_all_locs.csv") %>% 
+  select(state=location_name, date, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Apr 5th Projection")
+
+ihme_apr09 <- read_csv("data/ihme/2020_04_09/Hospitalization_all_locs.csv") %>% 
+  select(state=location_name, date, 
+         deaths_mean, deaths_lower, deaths_upper, 
+         totdea_mean, totdea_lower, totdea_upper) %>% 
+  filter(state=="Texas") %>% 
+  mutate(proj_date="Apr 9th Projection")
+
+ihme_projs_all <-  bind_rows(ihme_mar25,ihme_mar26,ihme_mar27,ihme_mar29,
+                             ihme_mar30,ihme_mar30,ihme_mar31,ihme_apr01,
+                             ihme_apr05,ihme_apr09)
+
+write_csv(ihme_projs_all,"data/ihme/ihme_all_projections.csv")
+
+# rm(ihme_mar25,ihme_mar26,ihme_mar27,ihme_mar29,
+#    ihme_mar30,ihme_mar30,ihme_mar31,ihme_apr01,
+#    ihme_apr05,ihme_apr09)
+  
+
+```
+
+## DSHS State Data
+
+```{r}
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+dshs_state_case_and_fatalities <- read_excel(lcl, sheet="Cases and Fatalities", skip=1) %>% 
+  clean_names() %>% 
+  filter(!is.na(county))
+  
+dshs_state_recover <- read_excel(lcl, sheet="Recoveries", skip=0) %>% 
+  clean_names() %>% 
+  slice(1) %>% 
+  rename(recoveries=1) %>% 
+  mutate(recoveries=as.numeric(recoveries),
+         state="Texas",
+         fips="48")
+
+dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>% 
+  clean_names() %>% 
+  filter(!is.na(no_of_people)) %>% 
+    mutate(tests=as.numeric(no_of_people),
+           state="Texas",
+           fips="48",
+           test_type=case_when(
+             str_detect(location,"Public") ~ "Public",
+             TRUE ~ "Private"
+           )) %>% 
+  select(state,fips,test_type,tests) 
+
+dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
+  clean_names() %>% 
+  mutate(ind = rep(c(1, 2),length.out = n())) %>%
+  rename(text=1) %>% 
+  group_by(ind) %>%
+  mutate(id = row_number()) %>%
+  spread(ind, text) %>%
+  select(hosp_data=2, value=3,-id) %>% 
+  mutate(value=as.numeric(value),
+         state="Texas",
+         fips="48")
+
+dshs_state_ages <- read_excel(lcl, sheet="Cases by Age Groups", skip=1) %>% 
+  clean_names() %>% 
+  select(group=age_group, cases=count, pct=x3) %>% 
+  filter(pct<1) %>% 
+  mutate(cases=as.numeric(cases),
+         pct=as.numeric(pct),
+         state="Texas",
+         fips="48",
+         demographic_type="ages")
+  
+dshs_state_gender <- read_excel(lcl, sheet="Cases by Gender", skip=1) %>% 
+  clean_names() %>% 
+  select(group=gender, cases=count, pct=percentage) %>% 
+  filter(pct<1) %>% 
+  mutate(cases=as.numeric(cases),
+         pct=as.numeric(pct),
+         state="Texas",
+         fips="48",
+         demographic_type="gender")
+
+dshs_state_race <- read_excel(lcl, sheet="Cases by RaceEthnicity", skip=1) %>% 
+  clean_names() %>% 
+  select(group=race_ethnicity, cases=count, pct=percentage) %>% 
+  filter(pct<1) %>% 
+  mutate(cases=as.numeric(cases),
+         pct=as.numeric(pct),
+         state="Texas",
+         fips="48",
+         demographic_type="race")
+
+dshs_demographic_data <- bind_rows(dshs_state_ages,
+                                   dshs_state_gender,
+                                   dshs_state_race) %>% 
+  select(4,5,6,everything())
+
+rm(dshs_state_ages, dshs_state_gender,dshs_state_race)
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx"
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+dshs_county_data <- read_excel(lcl,skip=2) %>% 
+  clean_names() %>% 
+  
+  rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
+  filter(!is.na(`03_04`))
+
+```
+
+
+## NYT Time Series Data
+```{r}
+ts_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
+
+ts_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
+```
+
+### NYT Highchart County Map
+```{r, nyt county data}
+
+sf_counties <- tidycensus::county_laea
+ts_county_cases_sf <- ts_county_cases %>% 
+  filter(date=="2020-03-27",
+         state=="Texas") %>% 
+  left_join(sf_counties, by=c("fips"="GEOID")) %>% 
+  sf::st_as_sf()
+
+mapdata <- get_data_from_map(download_map_data("countries/us/us-tx-all"))
+
+tx_county_cases <- ts_county_cases %>% 
+  filter(date=="2020-03-27",
+         state=="Texas")
+
+tx_county_data <- mapdata %>% 
+  left_join(tx_county_cases, by="fips")
+
+hcmap("countries/us/us-tx-all", data = tx_county_data, value = "cases",
+      joinBy = "fips", name = "COVID-19 Confirmed Cases",
+      dataLabels = list(enabled = FALSE, format = '*{name}*'),
+      borderColor = "#FAFAFA", borderWidth = 0.1,
+      tooltip = list(valueDecimals = 0, fontSize="18px",valuePrefix = "", valueSuffix = " Cases")) %>%
+  hc_title(text = "Texas COVID-19 Cases", style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                                       fontWeight="bold", textTransform="uppercase")) %>% 
+  hc_add_theme(
+          hc_theme_merge(
+            hc_theme_tufte(),
+            hc_theme(chart = list(
+              # styledMode=TRUE,
+              # backgroundColor = "#f4f7fb",
+              style = list(fontFamily = "Montserrat", fontSize = "28px", fontWeight="700"))))) 
+  highcharter::
+
+ts_county_cases_sf %>% 
+  ggplot() +
+  geom_sf(data=sf_counties %>% filter(str_detect(GEOID,"48")),color="#dddddd", fill="#f2f2f2", lwd=.3) +
+  geom_sf(aes(fill=cases), lwd=.3) +
+  scale_fill_gradientn(colours = tinter(hex, steps = 5), labels = function(x) paste0(x,"Cases")) +
+  coord_sf(datum=NA) +
+  labs(title="Confirmed COVID-19 Cases By County - Texas",
+       subtitle="As of March 26th, 2020",
+       caption="SOURCE: New York Times COVID-19 Database") +
+  theme_2036() +
+  ggsave("current_cases_by_county.png", device="png",width=15, height =10)
+```
+
+### NYT State and County Curves
+
+```{r, nyt state and county data}
+ts_state_cases %>%
+  # filter(state!="New York") %>% 
+  ggplot(aes(x=date,y=cases)) +
+  geom_area(fill="red", color="red") +
+  # gghighlight(state=="Texas") +
+  theme_2036() +
+  facet_geo(~state) +
+  labs(title="Confirmed COVID-19 Cases By State",
+       caption="SOURCE: New York Times COVID-19 Database") +
+  ggsave("ts_cases_by_state.png", device="png",width=15, height =10)
+
+
+ts_county_cases %>%
+  filter(state=="Texas") %>%
+  ggplot(aes(x=date,y=cases, color=county)) +
+  geom_line(size=.8) +
+  scale_color_grey() +
+  theme_2036() +
+  labs(title="Confirmed COVID-19 Texas Cases, By County",
+       caption="SOURCE: New York Times COVID-19 Database") +
+  ggsave("ts_TXcases_by_county.png", device="png",width=10, height=6)
+
+```
+
+# Economic Data
+
+## TWC Weekly Claims Data, By County & Industry
+
+```{r}
+src <- "https://www.twc.texas.gov/files/agency/weekly-claims-by-county-twc.xlsx" # Read URL
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+twc_claims_cnty <- read_excel(lcl, skip=2) %>% 
+  clean_names() %>% 
+  filter(!is.na(county)) %>% 
+  gather(date,value, 2:10) %>% 
+  mutate(date=gsub("^x","0",x=date),
+         date=gsub("_","-",x=date)) %>% 
+  mutate(date=lubridate::mdy(date))
+
+src <- "https://www.twc.texas.gov/files/agency/claims-industry-twc.xlsx" # Read URL
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+twc_claims_ind <- read_excel(lcl, skip=1) %>% 
+  clean_names()
+```
+
+## Homebase Data
+
+```{r}
+hb_summary <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv", skip=2) %>% 
+  select(-1,-2) %>% 
+  rename(summ_group = 1) %>% 
+  filter(!is.na(summ_group),
+         !is.na(`4/1`))
+
+hb_hours_worked <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1930671010&single=true&output=csv", skip=2) %>% 
+  fill(X2) %>% 
+  slice(-1,-3,-4) %>% 
+  select(-1) %>% 
+  mutate(geo_type=case_when(
+    str_detect(X2, "MSA") ~ "MSA",
+    str_detect(X2, "industry") ~ "US Industry",
+    str_detect(X2, "state") ~ "State",
+    TRUE ~ "Nationwide"
+  )) %>% 
+  select(geo_type, area=X3,everything(),-X2) %>% 
+  filter(!is.na(area))
+
+hb_businesses_open <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1102464531&single=true&output=csv", skip=2) %>% 
+  fill(X2) %>% 
+  slice(-1,-3,-4) %>% 
+  select(-1) %>% 
+  mutate(geo_type=case_when(
+    str_detect(X2, "MSA") ~ "MSA",
+    str_detect(X2, "industry") ~ "US Industry",
+    str_detect(X2, "state") ~ "State",
+    TRUE ~ "Nationwide"
+  )) %>% 
+  select(geo_type, area=X3,everything(),-X2) %>% 
+  filter(!is.na(area))
+
+hb_employees_working <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1658358543&single=true&output=csv", skip=2) %>% 
+  fill(X2) %>% 
+  slice(-1,-3,-4) %>% 
+  select(-1) %>% 
+  mutate(geo_type=case_when(
+    str_detect(X2, "MSA") ~ "MSA",
+    str_detect(X2, "industry") ~ "US Industry",
+    str_detect(X2, "state") ~ "State",
+    TRUE ~ "Nationwide"
+  )) %>% 
+  select(geo_type, area=X3,everything(),-X2) %>% 
+  filter(!is.na(area))
+å```
+
+### NYT ggplot2 State Chart
+```{r, nyt state data}
+
+
+sf_states <- tidycensus::state_laea 
+
+ts_state_cases_sf <- ts_state_cases %>% 
+  filter(date=="2020-03-26") %>% 
+  left_join(sf_states, by=c("fips"="GEOID")) %>% 
+  sf::st_as_sf()
+
+hex <- "#2171b5"
+
+ts_state_cases_sf %>% 
+  ggplot() +
+  geom_sf(aes(fill=cases)) +
+  scale_fill_gradientn(colours = tinter(hex, steps = 5), labels = function(x) paste0(x,"Cases")) +
+  # coord_sf(datum=NA) +
+  labs(title="Confirmed COVID-19 Cases By State",
+       subtitle="As of March 26th, 2020",
+       caption="SOURCE: New York Times COVID-19 Database") +
+  theme_2036() +
+  ggsave("current_cases_by_state.png", device="png",width=15, height =10)
+```
+
+
+## FRED Weekly Unemployment Claims
+
+```{r, weekly_unemployment_claims}
+
+# ui_claims <- read_csv("raw_data/TXICLAIMS.csv")
+
+# tx_ui_claims <- read_csv("cleandata/TXICLAIMS.csv") %>% 
+#   add_row()
+
+tx_series <-fredr(
+  series_id = "TXICLAIMS",
+  observation_start = as.Date("2000-01-01")
+) %>% 
+  mutate(date=as.character(date)) %>%
+  add_row(date="2020-04-04", series_id="TXICLAIMS", value=313832) %>% 
+  mutate(date=as.Date(date),
+         recession=case_when(
+         date %>% between(as.Date("2007-12-01"),as.Date("2009-06-01")) ~ "Recession",
+         TRUE ~  "Not Recession"
+         ),
+         harvey=case_when(
+         date %>% between(as.Date("2017-08-17"),as.Date("2017-09-02")) ~ "Harvey",
+         TRUE ~  "Not Harvey"
+         ))
+
+recessions_data <- readxl::read_excel("bcdc1.xlsx") %>% 
+  clean_names() %>% 
+  filter(peak_month_number > 2287) %>% 
+  mutate(peak = case_when(
+    peak_month=="July 1990" ~ as.Date("1990-07-01"),
+    peak_month=="March 2001" ~ as.Date("2001-03-01"),
+    peak_month=="December 2007" ~ as.Date("2007-12-01")
+  ),
+  trough = case_when(
+    trough_month=="March 1991" ~ as.Date("1991-03-01"),
+    trough_month=="November 2001" ~ as.Date("2001-11-01"),
+    trough_month=="June 2009" ~ as.Date("2009-06-01")
+  ))
+
+get_png <- function(filename) {
+  grid::rasterGrob(png::readPNG(filename), interpolate = TRUE)
+}
+
+l <- get_png("logo_orange.png")
+
+tx_series %>% 
+  ggplot() +
+  geom_rect(data=recessions_data, aes(xmin=peak, xmax=trough, ymin=0, ymax=313832), fill='grey', alpha=0.4,
+            show.legend = TRUE) +
+  geom_area(aes(x=date,y=value), position="stack", color="#3A4A9F", fill="#3A4A9F", alpha=.7) +
+  geom_mark_rect(data=tx_series, 
+                 aes(x=date,y=value, fill = recession, label = "Global Financial Crisis", 
+                     description = "Dec 2007 - Jun 2009",filter = recession == 'Recession'),
+                 expand = unit(3, "mm"), 
+                 fill = "#F26852",
+                 label.fontsize = 9,
+                 label.family = "Montserrat",
+                 con.size = 0.5, 
+                 label.buffer = unit(5, "mm"),
+                 radius = unit(1.5,"mm")) +
+  geom_mark_rect(data=tx_series, 
+                 aes(x=date,y=value,label = "Hurricane Harvey", 
+                     description = "Aug 1 - Sep 02, 2017",filter = harvey == 'Harvey'),
+                 expand = unit(3, "mm"), 
+                 fill = "#F26852",
+                 label.fontsize = 9,
+                 label.family = "Montserrat",
+                 con.size = 0.5, 
+                 label.buffer = unit(5, "mm"),
+                 radius = unit(1.5,"mm")) +
+  annotate("text",
+           x = as.Date("2017-09-17"),
+           y = 265597,
+           label = "COVID-19 Pandemic",
+           family = "Montserrat-Bold", color = "#2d2d2d", size=4) +
+  annotate("text",
+           x = as.Date("2016-8-21"),
+           y = 254597,
+           label = "March 2020",
+           family = "Montserrat-Regular", size=3, color = "#2d2d2d") +
+  annotate("segment",
+           x = as.Date("2018-11-01"),
+           xend = as.Date("2020-3-01"),
+           y = 270597,
+           yend = 313832,
+           size=.5, 
+           color = "black", 
+           arrow=arrow(length = unit(0.09, "inches"), type="closed")) +
+  # scale_x_date(date_breaks = "5 year",date_labels = "%Y") +
+  theme_2036() +
+  theme(plot.caption=element_text(size=8)) +
+  scale_y_continuous(labels = scales::comma, breaks=c(50000,100000,150000,200000,250000,300000)) +
+  labs(title="TEXAS INITIAL WEEKLY JOBLESS CLAIMS",
+       subtitle="<span style='color: #2d2d2d'>As of the week ending on April 4, 2020</span> <span style='color: #8C8F93'>**| Shaded Areas Indicate U.S. Recessions**</span> ",
+       y="Non-Adjusted Weekly Claims",
+       x="Date",
+       caption="SOURCE: United States Department of Labor\nDATA: Federal Reserve Bank of St. Louis Economic Research\nNOTE: Recession dates are sourced from the National Bureau of Economic Research") +
+  annotation_custom(grob = linesGrob(gp = gpar(col = "#8C8F93")), xmin = 1998, xmax = 2022, ymin = -10000, ymax = -10000) +
+  annotation_custom(l, xmin = as.Date("2018-01-01"), xmax = as.Date("2021-01-01"), ymin = -85000, ymax = -35000) +
+  coord_cartesian(clip = "off") +
+  ggsave("jobless_claims_chart_ABBRV_YEARS.png", device="png", width=11, height=6.5, dpi=300)
+
+```
+
+```{r, weekly_unemployment_claims for 2020}
+
+# ui_claims <- read_csv("raw_data/TXICLAIMS.csv")
+
+# tx_ui_claims <- read_csv("cleandata/TXICLAIMS.csv") %>% 
+#   add_row()
+
+tx_series <-fredr(
+  series_id = "TXICLAIMS",
+  observation_start = as.Date("2000-01-01")
+) %>% 
+  mutate(date=as.character(date)) %>%
+  add_row(date="2020-04-04", series_id="TXICLAIMS", value=313832) %>% 
+  mutate(date=as.Date(date),
+         recession=case_when(
+         date %>% between(as.Date("2007-12-01"),as.Date("2009-06-01")) ~ "Recession",
+         TRUE ~  "Not Recession"
+         ),
+         harvey=case_when(
+         date %>% between(as.Date("2017-08-17"),as.Date("2017-09-02")) ~ "Harvey",
+         TRUE ~  "Not Harvey"
+         ))
+
+recessions_data <- readxl::read_excel("bcdc1.xlsx") %>% 
+  clean_names() %>% 
+  filter(peak_month_number > 2287) %>% 
+  mutate(peak = case_when(
+    peak_month=="July 1990" ~ as.Date("1990-07-01"),
+    peak_month=="March 2001" ~ as.Date("2001-03-01"),
+    peak_month=="December 2007" ~ as.Date("2007-12-01")
+  ),
+  trough = case_when(
+    trough_month=="March 1991" ~ as.Date("1991-03-01"),
+    trough_month=="November 2001" ~ as.Date("2001-11-01"),
+    trough_month=="June 2009" ~ as.Date("2009-06-01")
+  ))
+
+get_png <- function(filename) {
+  grid::rasterGrob(png::readPNG(filename), interpolate = TRUE)
+}
+
+l <- get_png("logo_orange.png")
+
+tx_series %>% 
+  filter(date >= as.Date("2019-12-31")) %>% 
+  ggplot() +
+  geom_col(aes(x=date,y=value), position="stack", color="#3A4A9F", fill="#3A4A9F", alpha=.8) +
+  geom_text(aes(x=date,y=value, label=scales::comma(value, scale=.001, accuracy=1,suffix="k+")), 
+            family = "Montserrat-Bold", color = "gray40",nudge_y=6000, size = 3) +
+  theme_2036() +
+  theme(plot.caption=element_text(size=8),
+        axis.text.x = element_text(angle = 90, size=8)) +
+  scale_y_continuous(labels = scales::comma, breaks=c(50000,100000,150000,200000,250000,300000)) +
+  scale_x_date(breaks = seq(as.Date("2019-12-28"), as.Date("2020-04-08"), by="7 days"), date_labels = "%b %d", expand=c(0,0)) +
+  labs(title="TEXAS INITIAL WEEKLY JOBLESS CLAIMS",
+       subtitle="<span style='color: #2d2d2d'>As of the week ending on April 4, 2020</span> <span style='color: #8C8F93'>",
+       y="Non-Adjusted Weekly Claims",
+       x="Filing Date",
+       caption="SOURCE: United States Department of Labor\nDATA: Federal Reserve Bank of St. Louis Economic Research") +
+  annotation_custom(grob = linesGrob(gp = gpar(col = "#8C8F93")), xmin = 1998, xmax = 2022, ymin = -10000, ymax = -10000) +
+  annotation_custom(l, xmin = as.Date("2018-01-01"), xmax = as.Date("2021-01-01"), ymin = -85000, ymax = -35000) +
+  coord_cartesian(clip = "off") +
+  ggsave("jobless_claims_chart_2020.png", device="png", width=10, height=6.5, dpi=300)
+
+```
+
+## Poppulation-Related and Other Data
+
+```{r}
+
+src <- "https://www.cdc.gov/nchs/data/data_acces_files/NCHSURCodes2013.xlsx" # Read URL
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+nchs_urbanization_codes <- read_excel(lcl, skip=0) %>% 
+  clean_names() %>% 
+  mutate(nchs_code_2013 = case_when(
+    x2013_code==1 ~ "Large central metro",
+    x2013_code==2 ~ "Large fringe metro",
+    x2013_code==3 ~ "Medium metro",
+    x2013_code==4 ~ "Small metro",
+    x2013_code==5 ~ "Micropolitan",
+    x2013_code==6 ~ "Noncore"
+  ))
+```
+

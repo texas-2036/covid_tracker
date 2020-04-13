@@ -14,6 +14,27 @@ background-color: #3A4A9F;
 	margin: 0;
 	}
 	
+.nav-tabs-custom>.tab-content {
+background: #3A4A9F;
+padding: 0px;
+border-bottom-right-radius: 3px;
+border-bottom-left-radius: 3px;
+}
+
+.nav-tabs-custom>.nav-tabs {
+margin: 0;
+border-bottom-color: #3A4A9F;
+border-top-right-radius: 3px;
+border-top-left-radius: 3px;
+}
+
+.nav-tabs-custom {
+margin-bottom: 20px;
+background: #3A4A9F;
+box-shadow: 0 1px 1px rgba(0,0,0,.1);
+border-radius: 3px;
+}
+	
 .small-box {
 border-radius: 2px;
 position: relative;
@@ -35,6 +56,7 @@ color: #fff ;
 
 .leaflet-container a {
 color: #fff;
+text-transform: uppercase;
 font-size: 12px;
 font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -259,6 +281,14 @@ border-bottom-right-radius: 0;
 border-bottom-left-radius: 2px;
 }
 
+.selectize-dropdown, .selectize-input, .selectize-input input {
+color: #fff;
+font-family: inherit;
+font-size: inherit;
+line-height: 20px;
+-webkit-font-smoothing: inherit;
+}
+
 .selectize-input {
 border: none;
 border-bottom: 1px solid #fff;
@@ -314,6 +344,43 @@ outline: 0;
 box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
 }
 
+.selectize-control.multi .selectize-input > div {
+  cursor: pointer;
+  margin: 0 3px 3px 0;
+  padding: 1px 3px;
+  background: #3a4a9f;
+  color: #fff;
+  border: 0 solid rgba(0, 0, 0, 0);
+}
+.selectize-control.multi .selectize-input > div.active {
+  background: #3a4a9f;
+  color: #ffffff;
+  border: 0 solid rgba(0, 0, 0, 0);
+}
+.selectize-control.multi .selectize-input.disabled > div,
+.selectize-control.multi .selectize-input.disabled > div.active {
+  color: #fff;
+  background: #3a4a9f;
+  border: 0 solid #fff;
+}
+
+.selectize-dropdown .optgroup-header {
+  color: #fff;
+  background: #3a4a9f;
+  cursor: default;
+}
+
+.selectize-input .items .has-options .not-full {
+  color:#fff;
+}
+
+.selectize-dropdown .active {
+  background-color: #3a4a9f;
+  color: #fff;
+}
+.selectize-dropdown .active.create {
+  color: #fff;
+}
 
 .selectize-control.single .selectize-input:after {
   content: ' ';/* color: white; */
