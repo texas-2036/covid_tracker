@@ -86,7 +86,7 @@ tx_county_sf <- tx_counties %>%
   left_join(tx_today, by=c("GEOID"="fips")) %>% 
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326") %>% 
-  fill(c("date"),.direction="downup") %>% 
+  # fill(c("date"),.direction="downup") %>% 
   select(-state, -country_region, -time, -combined_key, -iso3) %>% 
   mutate(cases_label=case_when(
     is.na(cases) ~ "No Reported",
@@ -122,15 +122,16 @@ header <- dashboardHeader(disable = FALSE,
 
 # SIDEBAR CODE-----------------------------------------------------------
 
-sidebar <- dashboardSidebar(disable = TRUE,
+sidebar <- dashboardSidebar(disable = FALSE,
   collapsed = TRUE,
   sidebarMenu(
     id = "tabs",
     menuItem("Case Impact",
              tabName = "dashboard", icon = icon("dashboard")),
-    menuSubItem(
+    menuSubItem(href='#anchorid0',
+      newtab = FALSE,
       tabName = NULL,
-      text = shiny::tags$html("<a href='#anchorid0'>Go to anchor0</a>")
+      text = "Go to anchor id 0"
     ),    # conditionalPanel(
     #   condition = "input.tabs == 'dashboard'",
     #   sliderInput("year", 
