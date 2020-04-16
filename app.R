@@ -125,24 +125,32 @@ header <- dashboardHeader(disable = FALSE,
 sidebar <- dashboardSidebar(disable = FALSE,
   collapsed = TRUE,
   sidebarMenu(
-    id = "tabs",
-    menuItem("Case Impact",
-             tabName = "dashboard", icon = icon("dashboard")),
-    menuSubItem(href='#anchorid0',
-      newtab = FALSE,
-      tabName = NULL,
-      text = "Go to anchor id 0"
-    ),    # conditionalPanel(
-    #   condition = "input.tabs == 'dashboard'",
-    #   sliderInput("year", 
-    #             "Select a Year:",
-    #             min = as.Date("2013-01-01"),
-    #             max = as.Date("2016-01-01"),
-    #             value= as.Date("2013-01-01"),
-    #             timeFormat= "%Y",
-    #             step = 365,
-    #             animate = animationOptions(interval = 1000)),
-    menuItem("About The Dashboard", icon = icon("file-text"), tabName = "about")
+    conditionalPanel(
+      condition = "input.sidebarmenu === 'dashboard'",
+      div(
+        menuItem(href='#statewide-profile',
+                 newtab = FALSE,
+                 tabName = NULL,
+                 selected= TRUE,
+                 icon=icon("flag"),
+                 text = "State Profile"
+        ),
+        menuItem("County Profile", href='#country-profile',
+                 newtab = FALSE,
+                 tabName = NULL,
+                 icon=icon("info-circle")
+        )
+      )
+    ),
+    conditionalPanel(
+      condition = "input.sidebarmenu === 'about'",
+      menuItem("Dashboard", icon = icon("dashboard"), tabName = "dashboard")
+    ),
+    conditionalPanel(
+      condition = "TRUE",
+      menuItem("About", icon = icon("file-text"), tabName = "about")
+    ),
+    id="sidebarmenu"
   )
 )
 
@@ -160,7 +168,7 @@ body <- dashboardBody(
   tabItems(
     tabItem(tabName = "dashboard",
             # hr(),
-            h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='anchorid0'"),
+            h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='statewide-profile'"),
             fluidRow(
               valueBoxOutput("tx_cases", width=3),
               # valueBoxOutput("tx_tests", width=2),
@@ -170,7 +178,7 @@ body <- dashboardBody(
               valueBoxOutput("test_rate", width=3)
               ),
             hr(),
-            h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='anchorid1'"),
+            h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='county-profile'"),
             fluidRow(
               column(width = 6,
                      h4("Data As of:",textOutput("currentTime", inline=TRUE)),
@@ -199,39 +207,39 @@ body <- dashboardBody(
                   background = "navy",
                   collapsible = FALSE))
               )
+            ),
+    tabItem(tabName = "about",
+            fluidRow(
+              box(
+                title = "Calls & Calls Per 100 Households", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+                ),
+              box(
+                title = "Median Household Values & The Gini Index", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+                )
+              ),
+            fluidRow(
+              box(
+                title = "The Map Indicators & Indicator Percentile", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              ),
+              box(
+                title = "Histogram", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              )
+            ),
+            fluidRow(
+              box(
+                title = "Histogram", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              ),
+              box(
+                title = "Histogram", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              )
             )
-    # tabItem(tabName = "about",
-    #         fluidRow(
-    #           box(
-    #             title = "Calls & Calls Per 100 Households", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #             ),
-    #           box(
-    #             title = "Median Household Values & The Gini Index", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #             )
-    #           ),
-    #         fluidRow(
-    #           box(
-    #             title = "The Map Indicators & Indicator Percentile", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           ),
-    #           box(
-    #             title = "Histogram", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           )
-    #         ),
-    #         fluidRow(
-    #           box(
-    #             title = "Histogram", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           ),
-    #           box(
-    #             title = "Histogram", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           )
-    #         )
-    #         )
+            )
     )
 )
 
