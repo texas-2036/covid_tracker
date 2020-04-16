@@ -32,6 +32,7 @@ map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a h
 
 jhu_cases_state <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_state.csv") %>% 
   janitor::clean_names() %>% 
+  # dplyr()
   filter(province_state=="Texas") %>% 
   mutate(fips=as.character(fips))
 
@@ -152,6 +153,7 @@ body <- dashboardBody(
   tags$head(
     tags$script(src="https://kit.fontawesome.com/5272d94c6c.js", crossorigin="anonymous"),
     tags$link(rel = "stylesheet", type = "text/css", href = "custom2.css"),
+    includeHTML(("google_analytics.html")),
     tags$style(type = "text/css", "div.info.legend.leaflet-control br {clear: both;}"),
     tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")
     
@@ -160,14 +162,28 @@ body <- dashboardBody(
     tabItem(tabName = "dashboard",
             # hr(),
             h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='anchorid0'"),
+            h3(class="covid-topic", "Public Health"),
             fluidRow(
               valueBoxOutput("tx_cases", width=3),
+              valueBoxOutput("incident_rate", width=3),
+              valueBoxOutput("tx_deaths", width=3),
+              valueBoxOutput("mort_rate", width=3)
+              ),
+            fluidRow(
+              valueBoxOutput("tx_tests", width=3),
+              valueBoxOutput("test_rate", width=3),
+              valueBoxOutput("days_since_mandate", width=3),
+              valueBoxOutput("social_distancing_score", width=3)
+              ),
+            h3(class="covid-topic", "Economy + Society"),
+            fluidRow(
+              valueBoxOutput("job_claims", width=3),
               # valueBoxOutput("tx_tests", width=2),
               # valueBoxOutput("tx_deaths", width=2),
-              valueBoxOutput("incident_rate", width=3),
-              valueBoxOutput("mort_rate", width=3),
-              valueBoxOutput("test_rate", width=3)
-              ),
+              valueBoxOutput("business_open", width=3),
+              valueBoxOutput("hrly_working", width=3),
+              valueBoxOutput("school_days", width=3)
+            ),
             hr(),
             h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='anchorid1'"),
             fluidRow(
@@ -185,7 +201,7 @@ body <- dashboardBody(
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", textOutput("county_deaths_text")),p(style="text-align:center","Confirmed Deaths")),
                 column(width = 3,
-                       h2(style="font-weight:800;text-align:center;", textOutput("county_incident_text")),p(style="text-align:center","Incident Rate")),
+                       h2(style="font-weight:800;text-align:center;", textOutput("county_incident_text")),p(style="text-align:center","Cases Per Capita")),
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", textOutput("county_active_text")),p(style="text-align:center","Active Cases")),
     
@@ -330,7 +346,7 @@ server <- function (input, output, session) {
       mutate_at(vars(incident_rate), scales::number_format(accuracy=.01, scale=1))
     
     valueBox(
-      subtitle="Incident Rate", value=paste0(tot_pos$incident_rate),
+      subtitle="Cases Per Capita", value=paste0(tot_pos$incident_rate),
       icon = icon("procedures"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
@@ -343,7 +359,7 @@ server <- function (input, output, session) {
       mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1))
     
     valueBox(
-      subtitle="Mortality Rate (Per 100,000)", value=paste0(tot_pos$mortality_rate),
+      subtitle="Mortality Rate", value=paste0(tot_pos$mortality_rate),
       icon = icon("biohazard"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
@@ -351,12 +367,14 @@ server <- function (input, output, session) {
   # {Testing Rate} -----------------------------------------------
   
   output$test_rate <- renderValueBox({
+    
     tot_pos <- jhu_cases_state %>% 
-      select(testing_rate) %>% 
-      mutate_at(vars(testing_rate), scales::number_format(accuracy=.01, scale=1))
+      select(testing_rate, people_tested) %>% 
+      mutate_at(vars(testing_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
+      mutate_at(vars(people_tested), scales::comma)
     
     valueBox(
-      subtitle="Testing Rate (Per 100,000)", value=paste0(tot_pos$testing_rate),
+      subtitle=paste0("Tests Per Capita"), value=paste0(tot_pos$testing_rate),
       icon = icon("vials"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
@@ -454,6 +472,7 @@ output$map <- renderLeaflet({
       
       tx_county_cases %>%
         filter(county==input$countyname) %>% 
+        mutate_at(vars(active), scales::comma) %>% 
         distinct(active) %>% 
         as.character()
     })
@@ -581,8 +600,8 @@ output$map <- renderLeaflet({
       hcoptslang$thousandsSep <- ","
       options(highcharter.lang = hcoptslang)
       
-      hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
-                    name = "Fit", id = "fit") 
+      # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
+      #               name = "Fit", id = "fit") 
       
       nyt_county_cases_chart %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,

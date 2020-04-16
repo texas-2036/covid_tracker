@@ -52,6 +52,16 @@ tx_pop <- get_acs(geography="state", survey="acs5",
 
 write_rds(tx_pop, "state_pop.rds")
 
+tigris_cntys <- tigris::counties(state="48", cb = TRUE) %>% 
+  as_tibble() %>% 
+  select(GEOID,county=NAME)
+
+tx_counties <- tidycensus::county_laea %>% 
+  filter(str_detect(GEOID, "^48")) %>% 
+  left_join(tigris_cntys, by="GEOID") %>% 
+  st_as_sf() %>% 
+  st_transform(crs="+init=epsg:4326")
+
 
 ```
 
@@ -162,6 +172,8 @@ write_csv(ihme_projs_all,"data/ihme/ihme_all_projections.csv")
 
 ## DSHS State Data
 
+### Case Related Data
+
 ```{r}
 
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
@@ -251,6 +263,20 @@ dshs_county_data <- read_excel(lcl,skip=2) %>%
   rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
   filter(!is.na(`03_04`))
 
+```
+
+### County Testing Data
+
+```{r}
+src <- "https://www.dshs.state.tx.us/chs/data/COVID-19CumulativeTestTotalsbyCounty.xlsx"
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+dshs_county_tests <- read_excel(lcl,skip=1) %>% 
+  clean_names() %>% 
+  slice(1:256)
+  
+# write_csv()
 ```
 
 
@@ -345,13 +371,26 @@ src <- "https://www.twc.texas.gov/files/agency/weekly-claims-by-county-twc.xlsx"
 lcl <- basename(src)
 download.file(url = src, destfile = lcl)
 
-twc_claims_cnty <- read_excel(lcl, skip=2) %>% 
+twc_claims_cnty <- read_excel(lcl, skip=2) %>%
+  slice(1:254) %>% 
   clean_names() %>% 
   filter(!is.na(county)) %>% 
-  gather(date,value, 2:10) %>% 
+  remove_empty("cols") %>% 
+  # select_at(vars(county, ends_with("2020"))) %>% 
+  pivot_longer(-county, names_to = "date", values_to = "value") %>% 
   mutate(date=gsub("^x","0",x=date),
          date=gsub("_","-",x=date)) %>% 
   mutate(date=lubridate::mdy(date))
+
+twc_claims_cnty %>% 
+  # group_by(state) %>% 
+  filter(date == max(date)) %>% 
+  left_join(tx_counties, by="county") %>% 
+  st_as_sf() %>% 
+  ggplot() +
+  geom_sf(aes(fill=value)) +
+  theme_2036()
+
 
 src <- "https://www.twc.texas.gov/files/agency/claims-industry-twc.xlsx" # Read URL
 lcl <- basename(src)
@@ -606,7 +645,7 @@ tx_series %>%
 
 ```
 
-## Poppulation-Related and Other Data
+## Population-Related and Other Data
 
 ```{r}
 
