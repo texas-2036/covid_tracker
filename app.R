@@ -147,7 +147,7 @@ sidebar <- dashboardSidebar(disable = FALSE,
       menuItem("Dashboard", icon = icon("dashboard"), tabName = "dashboard")
     ),
     conditionalPanel(
-      condition = "TRUE",
+      condition = "'TRUE' === 'TRUE'",
       menuItem("About", icon = icon("file-text"), tabName = "about")
     ),
     id="sidebarmenu"
@@ -163,7 +163,6 @@ body <- dashboardBody(
     tags$link(rel = "stylesheet", type = "text/css", href = "custom2.css"),
     tags$style(type = "text/css", "div.info.legend.leaflet-control br {clear: both;}"),
     tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")
-    
   ),
   tabItems(
     tabItem(tabName = "dashboard",
