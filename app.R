@@ -102,7 +102,7 @@ tx_county_sf <- tx_counties %>%
 
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
 lcl <- basename(src)
-download.file(url = src, destfile = lcl)
+# download.file(url = src, destfile = lcl)
 
 dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
   clean_names() %>% 
@@ -116,10 +116,30 @@ dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0)
          state="Texas",
          fips="48")
 
+dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>% 
+  clean_names() %>% 
+  filter(!is.na(no_of_people)) %>% 
+  mutate(tests=as.numeric(no_of_people),
+         state="Texas",
+         fips="48",
+         test_type=case_when(
+           str_detect(location,"Public") ~ "Public",
+           TRUE ~ "Private"
+         )) %>% 
+  select(state,fips,test_type,tests) 
 
-available_beds <- (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Hospital Beds"))[1, 2]
-available_beds_icu <- (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas ICU Beds"))[1, 2]
-available_ventilators <- (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Ventilators"))[1, 2]
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx"
+lcl <- basename(src)
+# download.file(url = src, destfile = lcl)
+
+dshs_county_data <- read_excel(lcl,skip=2) %>% 
+  clean_names() %>% 
+  
+  rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
+  filter(!is.na(`03_04`))
+
+print(dshs_county_data)
 
 
 # **Economic Data -----------------------------------------------------------
@@ -139,40 +159,67 @@ tx_series <-fredr(
 # DERIVED METRICS ----
 
 # 
-# ** Statewide ----
-# 
-#   **** Tests Per 100,000 ----
+# ** State ----
 
+# Tests Per 100,000
+
+total_tests = (dshs_state_tests %>% summarise(sum = sum(tests)))$sum
+total_population = (dshs_county_data %>% filter(county_name == "Total"))$population
+
+tests_per_person = total_tests / total_population
+tests_per_100k = 100000 * tests_per_person
+
+
+print("Tests per 100,000")
+print(tests_per_100k)
 
 # Available Ventilators Per COVID-19 Case
+
+available_beds = (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Hospital Beds"))$value
+available_beds_icu = (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas ICU Beds"))$value
+available_ventilators = (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Ventilators"))$value
 
 total_cases = (jhu_cases_state %>% select(confirmed))$confirmed
 
 print("Available Ventilators Per COVID-19 Case")
-print(available_ventilators / total_cases)
+print((available_ventilators / total_cases))
 
 # Available ICU Beds Per COVID-19 Case
 
 print("Available ICU Beds Per COVID-19 Case")
-print(available_beds_icu / total_cases)
+print((available_beds_icu / total_cases))
 
 # Case Growth Rate
+
+
+
+
 # Doubling Every X days
+
 # 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
 # Positive/Negative Testing. Current and TS.
 
 
 # 
-#  ** County Level ----------
+#  ** County ----------
 # 
 # Crosswalk the NCHS and Trauma Service Area Data.
+
 # Integrate DSHS Tests Per County Data
+
 # Tests Per 100,000
+
 # Available Ventilators Per COVID-19 Case
+
 # Available ICU Beds Per COVID-19 Case
+
 # Case Growth Rate
+
 # Doubling Every X days
+
 # 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
 # Positive/Negative Testing. Current and TS. (If we can get comprehensive data on testing at the county level. To my knowledge, COVID-tracking only produces this at a statewide-level).
 # 
 
