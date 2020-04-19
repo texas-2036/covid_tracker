@@ -98,6 +98,30 @@ tx_county_sf <- tx_counties %>%
   ))
 
 
+# ** Hospital Data ----
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
+  clean_names() %>% 
+  mutate(ind = rep(c(1, 2),length.out = n())) %>%
+  rename(text=1) %>% 
+  group_by(ind) %>%
+  mutate(id = row_number()) %>%
+  spread(ind, text) %>%
+  select(hosp_data=2, value=3,-id) %>% 
+  mutate(value=as.numeric(value),
+         state="Texas",
+         fips="48")
+
+
+available_beds <- (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Hospital Beds"))[1, 2]
+available_beds_icu <- (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas ICU Beds"))[1, 2]
+available_ventilators <- (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Ventilators"))[1, 2]
+
+
 # **Economic Data -----------------------------------------------------------
 
 hb_summary <-  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv",
@@ -110,6 +134,47 @@ tx_series <-fredr(
   mutate(date=as.character(date)) %>%
   add_row(date="2020-04-08", series_id="TXICLAIMS", value=313832) %>% 
   mutate(date=as.Date(date))
+
+
+# DERIVED METRICS ----
+
+# 
+# ** Statewide ----
+# 
+#   **** Tests Per 100,000 ----
+
+
+# Available Ventilators Per COVID-19 Case
+
+total_cases = (jhu_cases_state %>% select(confirmed))$confirmed
+
+print("Available Ventilators Per COVID-19 Case")
+print(available_ventilators / total_cases)
+
+# Available ICU Beds Per COVID-19 Case
+
+print("Available ICU Beds Per COVID-19 Case")
+print(available_beds_icu / total_cases)
+
+# Case Growth Rate
+# Doubling Every X days
+# 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+# Positive/Negative Testing. Current and TS.
+
+
+# 
+#  ** County Level ----------
+# 
+# Crosswalk the NCHS and Trauma Service Area Data.
+# Integrate DSHS Tests Per County Data
+# Tests Per 100,000
+# Available Ventilators Per COVID-19 Case
+# Available ICU Beds Per COVID-19 Case
+# Case Growth Rate
+# Doubling Every X days
+# 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+# Positive/Negative Testing. Current and TS. (If we can get comprehensive data on testing at the county level. To my knowledge, COVID-tracking only produces this at a statewide-level).
+# 
 
 
 # HEADER CODE-----------------------------------------------------------
