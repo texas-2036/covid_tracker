@@ -18,6 +18,9 @@ library(lubridate)
 library(tigris)
 library(fredr)
 library(sf)
+library(readxl)
+library(janitor)
+library(zoo)
 
 fredr_set_key("22c6ffaa111781ee88df344a4f120eef")
 
@@ -59,6 +62,10 @@ tx_today <- tx_county_cases %>%
   filter(date == max(date)) %>% 
   ungroup() %>% 
   select(-county)
+
+
+nyt_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv") %>%
+  filter(state=="Texas")
 
 nyt_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
   filter(state=="Texas") %>% 
@@ -102,7 +109,7 @@ tx_county_sf <- tx_counties %>%
 
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
 lcl <- basename(src)
-# download.file(url = src, destfile = lcl)
+download.file(url = src, destfile = lcl)
 
 dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
   clean_names() %>% 
@@ -131,16 +138,13 @@ dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>%
 
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx"
 lcl <- basename(src)
-# download.file(url = src, destfile = lcl)
+download.file(url = src, destfile = lcl)
 
 dshs_county_data <- read_excel(lcl,skip=2) %>% 
   clean_names() %>% 
   
   rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
   filter(!is.na(`03_04`))
-
-print(dshs_county_data)
-
 
 # **Economic Data -----------------------------------------------------------
 
@@ -169,7 +173,6 @@ total_population = (dshs_county_data %>% filter(county_name == "Total"))$populat
 tests_per_person = total_tests / total_population
 tests_per_100k = 100000 * tests_per_person
 
-
 print("Tests per 100,000")
 print(tests_per_100k)
 
@@ -191,12 +194,52 @@ print((available_beds_icu / total_cases))
 
 # Case Growth Rate
 
+daily_rowth_rates = nyt_state_cases %>%
+  arrange(date) %>%
+  mutate(
+    daily_growth_rate = (cases / lag(cases)) - 1
+  ) %>%
+  mutate(
+    daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill=0, align="right")
+  )
 
-
+print("Daily Growth Rates")
+print(daily_rowth_rates %>% arrange(desc(date)))
 
 # Doubling Every X days
 
+## Get total cases today, find the date that was half of that
+today = ((nyt_state_cases %>% arrange(desc(date)))[1, 1])$date
+cases_today = ((nyt_state_cases %>% arrange(desc(date)))[1, 4])$cases
+
+last_half_day = ((nyt_state_cases %>% arrange(desc(date)) %>% filter(cases < (cases_today / 2)))[1, 1])$date
+
+print("Doubling every X days")
+print(today - last_half_day)
+
+
 # 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
+
+rates_of_change = nyt_state_cases %>%
+  arrange(date) %>%
+  mutate(
+    new_cases = case_when(
+      is.na(cases - lag(cases)) ~ 0,
+      TRUE ~ cases - lag(cases)
+    ),
+    new_deaths = case_when(
+      is.na(deaths - lag(deaths)) ~ 0,
+      TRUE ~ deaths - lag(deaths)
+    )
+  ) %>% 
+  mutate(
+    new_cases_7day_avg = rollmean(new_cases, 7, fill=0, align="right"),
+    new_deaths_7day_avg = rollmean(new_deaths, 7, fill=0, align="right")
+  )
+
+print("Rates of Change.")
+print(rates_of_change %>% arrange(desc(date)))
 
 # Positive/Negative Testing. Current and TS.
 
