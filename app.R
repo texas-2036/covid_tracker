@@ -109,7 +109,13 @@ tx_county_sf <- tx_counties %>%
 
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
 lcl <- basename(src)
-download.file(url = src, destfile = lcl)
+# download.file(url = src, destfile = lcl)
+
+
+dshs_state_case_and_fatalities <- read_excel(lcl, sheet="Cases and Fatalities", skip=1) %>% 
+  clean_names() %>% 
+  filter(!is.na(county)) %>%
+  rename(county_name=2)
 
 dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
   clean_names() %>% 
@@ -135,16 +141,29 @@ dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>%
          )) %>% 
   select(state,fips,test_type,tests) 
 
-
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx"
 lcl <- basename(src)
-download.file(url = src, destfile = lcl)
+# download.file(url = src, destfile = lcl)
 
 dshs_county_data <- read_excel(lcl,skip=2) %>% 
   clean_names() %>% 
   
   rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
   filter(!is.na(`03_04`))
+
+
+
+## TODO - We need to automate this scraping to build a timeseries, and make sure that
+##        We have the correct data associated with each spreadsheet. 
+
+src <- "https://www.dshs.state.tx.us/coronavirus/COVID-19CumulativeTestTotalsbyCounty.xlsx"
+lcl <- basename(src)
+# download.file(url = src, destfile = lcl)
+
+dshs_county_test_data = read_excel(lcl,skip=1)  %>% 
+  rename(county_name=1, tests=2) %>% 
+  drop_na(tests)
+
 
 # **Economic Data -----------------------------------------------------------
 
@@ -194,17 +213,17 @@ print((available_beds_icu / total_cases))
 
 # Case Growth Rate
 
-daily_rowth_rates = nyt_state_cases %>%
+daily_growth_rates = nyt_state_cases %>%
   arrange(date) %>%
   mutate(
-    daily_growth_rate = (cases / lag(cases)) - 1
+    daily_growth_rate = (cases / lag(cases))
   ) %>%
   mutate(
     daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill=0, align="right")
   )
 
 print("Daily Growth Rates")
-print(daily_rowth_rates %>% arrange(desc(date)))
+print(daily_growth_rates %>% arrange(desc(date)))
 
 # Doubling Every X days
 
@@ -242,7 +261,7 @@ print("Rates of Change.")
 print(rates_of_change %>% arrange(desc(date)))
 
 # Positive/Negative Testing. Current and TS.
-
+  
 
 # 
 #  ** County ----------
@@ -251,17 +270,63 @@ print(rates_of_change %>% arrange(desc(date)))
 
 # Integrate DSHS Tests Per County Data
 
+dshs_county_data = merge(dshs_county_data, dshs_county_test_data, by="county_name")
+dshs_county_data = merge(dshs_county_data, dshs_state_case_and_fatalities, by="county_name")
+
 # Tests Per 100,000
 
+tests_per_100k_counties = 100000 * dshs_county_data$tests / dshs_county_data$population
+
+print(tests_per_100k_counties)
+
 # Available Ventilators Per COVID-19 Case
+
 
 # Available ICU Beds Per COVID-19 Case
 
 # Case Growth Rate
 
+daily_county_growth_rates = nyt_county_cases %>%
+  group_by(county) %>%
+  arrange(date) %>%
+  mutate(
+    daily_growth_rate = case_when(
+      is.na(cases / lag(cases)) ~ 0,
+      TRUE ~ cases / lag(cases)
+    )
+  ) %>%
+  mutate(
+    daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill=0, align="right")
+  )
+
+print("County growth rate, e.g. Austin County:")
+print(daily_county_growth_rates %>% filter(county=="Austin") %>% arrange(desc(date)))
+
 # Doubling Every X days
 
 # 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
+county_rates_of_change = nyt_county_cases %>%
+  group_by(county) %>%
+  arrange(date) %>%
+  mutate(
+    new_cases = case_when(
+      is.na(cases - lag(cases)) ~ 0,
+      TRUE ~ cases - lag(cases)
+    ),
+    new_deaths = case_when(
+      is.na(deaths - lag(deaths)) ~ 0,
+      TRUE ~ deaths - lag(deaths)
+    )
+  ) %>% 
+  mutate(
+    new_cases_7day_avg = rollmean(new_cases, 7, fill=0, align="right"),
+    new_deaths_7day_avg = rollmean(new_deaths, 7, fill=0, align="right")
+  )
+
+print("County rates of Change.")
+print(county_rates_of_change %>% arrange(desc(date)))
+
 
 # Positive/Negative Testing. Current and TS. (If we can get comprehensive data on testing at the county level. To my knowledge, COVID-tracking only produces this at a statewide-level).
 # 
