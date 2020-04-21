@@ -18,6 +18,9 @@ library(lubridate)
 library(tigris)
 library(fredr)
 library(sf)
+library(readxl)
+library(janitor)
+library(zoo)
 
 fredr_set_key("22c6ffaa111781ee88df344a4f120eef")
 
@@ -76,7 +79,13 @@ tx_today <- tx_county_cases %>%
   ungroup() %>% 
   select(-county)
 
+<<<<<<< HEAD
 # ~~NYT Data --------------------------------------------------------------
+=======
+
+nyt_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv") %>%
+  filter(state=="Texas")
+>>>>>>> cd9486bfd5b09b6ef9d91608b82885ec2b3e8d67
 
 nyt_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
   filter(state=="Texas") %>% 
@@ -124,7 +133,7 @@ tx_county_sf <- tx_counties %>%
   left_join(tx_today, by=c("GEOID"="fips")) %>% 
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326") %>% 
-  fill(c("date"),.direction="downup") %>% 
+  # fill(c("date"),.direction="downup") %>% 
   select(-state, -country_region, -time, -combined_key, -iso3) %>% 
   mutate(cases_label=case_when(
     is.na(cases) ~ "No Reported",
@@ -155,6 +164,89 @@ test_daily <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-
 #   mutate(date=lubridate::mdy(date))
 
 
+# ** Hospital Data ----
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
+lcl <- basename(src)
+# download.file(url = src, destfile = lcl)
+
+
+dshs_state_case_and_fatalities <- read_excel(lcl, sheet="Cases and Fatalities", skip=1) %>% 
+  clean_names() %>% 
+  filter(!is.na(county)) %>%
+  rename(county_name=2)
+
+dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
+  clean_names() %>% 
+  mutate(ind = rep(c(1, 2),length.out = n())) %>%
+  rename(text=1) %>% 
+  group_by(ind) %>%
+  mutate(id = row_number()) %>%
+  spread(ind, text) %>%
+  select(hosp_data=2, value=3,-id) %>% 
+  mutate(value=as.numeric(value),
+         state="Texas",
+         fips="48")
+
+dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>% 
+  clean_names() %>% 
+  filter(!is.na(no_of_people)) %>% 
+  mutate(tests=as.numeric(no_of_people),
+         state="Texas",
+         fips="48",
+         test_type=case_when(
+           str_detect(location,"Public") ~ "Public",
+           TRUE ~ "Private"
+         )) %>% 
+  select(state,fips,test_type,tests) 
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx"
+lcl <- basename(src)
+# download.file(url = src, destfile = lcl)
+
+dshs_county_data <- read_excel(lcl,skip=2) %>% 
+  clean_names() %>% 
+  
+  rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
+  filter(!is.na(`03_04`))
+
+
+
+## TODO - We need to automate this scraping to build a timeseries, and make sure that
+##        We have the correct data associated with each spreadsheet. 
+
+src <- "https://www.dshs.state.tx.us/coronavirus/COVID-19CumulativeTestTotalsbyCounty.xlsx"
+lcl <- basename(src)
+# download.file(url = src, destfile = lcl)
+
+dshs_county_test_data = read_excel(lcl,skip=1)  %>% 
+  rename(county_name=1, tests=2) %>% 
+  drop_na(tests)
+
+
+dshs_tsa_hospital_data = read_excel("TSA COVID Bed Reports_04.19.20.xlsx") %>%
+  rename(
+    tsa=1,
+    adult_icu=3,
+    confirmed_cases=20
+  ) %>%
+  mutate(
+    tsa_clean = substring(tsa, 5)
+  )
+
+## ** Crosswalk Data ----
+
+crosswalk_data = read_excel("Crosswalk TX Counties RACs PHRs.xlsx", skip=2) %>%
+  rename(
+    county_name=1,
+    public_health_region=2,
+    tsa=3
+  ) %>%
+  mutate(
+    tsa_clean = substring(tsa, 1, 1)
+  )
+
+
 # **Economic Data -----------------------------------------------------------
 
 hb_summary <-  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv",
@@ -167,6 +259,181 @@ tx_series <-fredr(
   mutate(date=as.character(date)) %>%
   add_row(date="2020-04-08", series_id="TXICLAIMS", value=313832) %>% 
   mutate(date=as.Date(date))
+
+
+# DERIVED METRICS ----
+
+# 
+# ** State ----
+
+# Tests Per 100,000
+
+total_tests = (dshs_state_tests %>% summarise(sum = sum(tests)))$sum
+total_population = (dshs_county_data %>% filter(county_name == "Total"))$population
+
+tests_per_person = total_tests / total_population
+tests_per_100k = 100000 * tests_per_person
+
+print("Tests per 100,000")
+print(tests_per_100k)
+
+# Available Ventilators Per COVID-19 Case
+
+available_beds = (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Hospital Beds"))$value
+available_beds_icu = (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas ICU Beds"))$value
+available_ventilators = (dshs_state_hospitalizations %>% filter(hosp_data == "Available Texas Ventilators"))$value
+
+total_cases = (jhu_cases_state %>% select(confirmed))$confirmed
+
+print("Available Ventilators Per COVID-19 Case")
+print((available_ventilators / total_cases))
+
+# Available ICU Beds Per COVID-19 Case
+
+print("Available ICU Beds Per COVID-19 Case")
+print((available_beds_icu / total_cases))
+
+# Case Growth Rate
+
+daily_growth_rates = nyt_state_cases %>%
+  arrange(date) %>%
+  mutate(
+    daily_growth_rate = (cases / lag(cases))
+  ) %>%
+  mutate(
+    daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill=0, align="right")
+  )
+
+print("Daily Growth Rates")
+print(daily_growth_rates %>% arrange(desc(date)))
+
+# Doubling Every X days
+
+## Get total cases today, find the date that was half of that
+today = ((nyt_state_cases %>% arrange(desc(date)))[1, 1])$date
+cases_today = ((nyt_state_cases %>% arrange(desc(date)))[1, 4])$cases
+
+last_half_day = ((nyt_state_cases %>% arrange(desc(date)) %>% filter(cases < (cases_today / 2)))[1, 1])$date
+
+print("Doubling every X days")
+print(today - last_half_day)
+
+
+# 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
+
+rates_of_change = nyt_state_cases %>%
+  arrange(date) %>%
+  mutate(
+    new_cases = case_when(
+      is.na(cases - lag(cases)) ~ 0,
+      TRUE ~ cases - lag(cases)
+    ),
+    new_deaths = case_when(
+      is.na(deaths - lag(deaths)) ~ 0,
+      TRUE ~ deaths - lag(deaths)
+    )
+  ) %>% 
+  mutate(
+    new_cases_7day_avg = rollmean(new_cases, 7, fill=0, align="right"),
+    new_deaths_7day_avg = rollmean(new_deaths, 7, fill=0, align="right")
+  )
+
+print("Rates of Change.")
+print(rates_of_change %>% arrange(desc(date)))
+
+# Positive/Negative Testing. Current and TS.
+
+# 
+#  ** County ----------
+# 
+
+# Crosswalk the NCHS and Trauma Service Area Data.
+
+county_tsa_data  = merge(crosswalk_data, dshs_tsa_hospital_data, by="tsa_clean")
+
+print("Crosswalk county hospital data.")
+print(county_tsa_data)
+
+# Integrate DSHS Tests Per County Data
+
+dshs_county_data = merge(dshs_county_data, dshs_county_test_data, by="county_name")
+dshs_county_data = merge(dshs_county_data, dshs_state_case_and_fatalities, by="county_name")
+dshs_county_data = merge(dshs_county_data, county_tsa_data, by="county_name")
+
+# Tests Per 100,000
+
+tests_per_100k_counties = 100000 * dshs_county_data$tests / dshs_county_data$population
+
+print(tests_per_100k_counties)
+
+# Available Ventilators Per COVID-19 Case
+
+dshs_county_data = dshs_county_data %>%
+  mutate(
+    ventilators_per_case = adult_icu / confirmed_cases
+  )
+
+print("Available Ventilators Per COVID-19 Case (Calculated at TSA level)")
+print(dshs_county_data %>% select("county_name", "ventilators_per_case"))
+
+
+# Available ICU Beds Per COVID-19 Case
+
+dshs_county_data = dshs_county_data %>%
+  mutate(
+    icu_beds_per_case = adult_icu / confirmed_cases
+  )
+
+print("Available ICU Beds COVID-19 Case (Calculated at TSA level)")
+print(dshs_county_data %>% select("county_name", "icu_beds_per_case"))
+
+# Case Growth Rate
+
+daily_county_growth_rates = nyt_county_cases %>%
+  group_by(county) %>%
+  arrange(date) %>%
+  mutate(
+    daily_growth_rate = case_when(
+      is.na(cases / lag(cases)) ~ 0,
+      TRUE ~ cases / lag(cases)
+    )
+  ) %>%
+  mutate(
+    daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill=0, align="right")
+  )
+
+print("County growth rate, e.g. Austin County:")
+print(daily_county_growth_rates %>% filter(county=="Austin") %>% arrange(desc(date)))
+
+# Doubling Every X days
+
+# 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
+county_rates_of_change = nyt_county_cases %>%
+  group_by(county) %>%
+  arrange(date) %>%
+  mutate(
+    new_cases = case_when(
+      is.na(cases - lag(cases)) ~ 0,
+      TRUE ~ cases - lag(cases)
+    ),
+    new_deaths = case_when(
+      is.na(deaths - lag(deaths)) ~ 0,
+      TRUE ~ deaths - lag(deaths)
+    )
+  ) %>% 
+  mutate(
+    new_cases_7day_avg = rollmean(new_cases, 7, fill=0, align="right"),
+    new_deaths_7day_avg = rollmean(new_deaths, 7, fill=0, align="right")
+  )
+
+print("County rates of Change.")
+print(county_rates_of_change %>% arrange(desc(date)))
+
+
+# Positive/Negative Testing. Current and TS. (If we can get comprehensive data on testing at the county level. To my knowledge, COVID-tracking only produces this at a statewide-level).
+# 
 
 
 # HEADER CODE-----------------------------------------------------------
@@ -187,6 +454,7 @@ header <- dashboardHeader(disable = FALSE,
 # SIDEBAR CODE-----------------------------------------------------------
 
 sidebar <- dashboardSidebar(disable = FALSE,
+<<<<<<< HEAD
                             collapsed = FALSE,
                             sidebarMenu(
                               id = "tabs",
@@ -196,6 +464,37 @@ sidebar <- dashboardSidebar(disable = FALSE,
                                        tabName = "county_profiles", icon = icon("square"))
                               # menuItem("About", icon = icon("circle"), tabName = "about")
                             )
+=======
+  collapsed = TRUE,
+  sidebarMenu(
+    conditionalPanel(
+      condition = "input.sidebarmenu === 'dashboard'",
+      div(
+        menuItem(href='#statewide-profile',
+                 newtab = FALSE,
+                 tabName = NULL,
+                 selected= TRUE,
+                 icon=icon("flag"),
+                 text = "State Profile"
+        ),
+        menuItem("County Profile", href='#country-profile',
+                 newtab = FALSE,
+                 tabName = NULL,
+                 icon=icon("info-circle")
+        )
+      )
+    ),
+    conditionalPanel(
+      condition = "input.sidebarmenu === 'about'",
+      menuItem("Dashboard", icon = icon("dashboard"), tabName = "dashboard")
+    ),
+    conditionalPanel(
+      condition = "'TRUE' === 'TRUE'",
+      menuItem("About", icon = icon("file-text"), tabName = "about")
+    ),
+    id="sidebarmenu"
+  )
+>>>>>>> cd9486bfd5b09b6ef9d91608b82885ec2b3e8d67
 )
 
 
@@ -208,13 +507,18 @@ body <- dashboardBody(
     includeHTML(("google_analytics.html")),
     tags$style(type = "text/css", "div.info.legend.leaflet-control br {clear: both;}"),
     tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")
-    
   ),
   tabItems(
+<<<<<<< HEAD
     tabItem(tabName = "state_profiles",
 # **Statewide Profile UI ----------------------------------------------------
             h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='statewide-profile'"),            
             h3(class="covid-topic", "Public Health Indicators"),
+=======
+    tabItem(tabName = "dashboard",
+            # hr(),
+            h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='statewide-profile'"),
+>>>>>>> cd9486bfd5b09b6ef9d91608b82885ec2b3e8d67
             fluidRow(
               infoBoxOutput("tx_cases", width=3),
               infoBoxOutput("tx_tests", width=3),
@@ -292,6 +596,11 @@ tabItem(tabName = "county_profiles",
                                     selected="Harris", multiple = FALSE, width="100%",
                                     options = list(maxItems=1,placeholder = 'Select Your County...')))
               ),
+<<<<<<< HEAD
+=======
+            hr(),
+            h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='county-profile'"),
+>>>>>>> cd9486bfd5b09b6ef9d91608b82885ec2b3e8d67
             fluidRow(
               column(width = 6,
                      h4("Data As of:",textOutput("currentTime", inline=TRUE)),
