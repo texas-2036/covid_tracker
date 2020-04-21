@@ -62,6 +62,8 @@ tx_counties <- tidycensus::county_laea %>%
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326")
 
+##
+
 
 ```
 
@@ -87,6 +89,7 @@ test_current <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covi
 # State Test Data (Dailies)
 test_daily <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-tracking-data/master/data/states_daily_4pm_et.csv") %>% 
   clean_names()
+
 ```
 
 ## IHME Projections
@@ -170,6 +173,17 @@ write_csv(ihme_projs_all,"data/ihme/ihme_all_projections.csv")
 
 ```
 
+## Definitive Healthcare ICU Hospital/Bed Data
+
+```{r}
+
+dh_hosp_data <- read_csv("data/definitive_healthcare/County_Level_Data_data-2.csv") %>% 
+  clean_names() #%>% 
+  filter(state_name=="Texas")
+
+```
+
+
 ## DSHS State Data
 
 ### Case Related Data
@@ -184,9 +198,9 @@ dshs_state_case_and_fatalities <- read_excel(lcl, sheet="Cases and Fatalities", 
   clean_names() %>% 
   filter(!is.na(county))
   
-dshs_state_recover <- read_excel(lcl, sheet="Recoveries", skip=0) %>% 
+dshs_state_recover <- read_excel(lcl, sheet="Recoveries", skip=0) #%>% 
   clean_names() %>% 
-  slice(1) %>% 
+  # slice(1) %>% 
   rename(recoveries=1) %>% 
   mutate(recoveries=as.numeric(recoveries),
          state="Texas",
@@ -368,8 +382,11 @@ ts_county_cases %>%
 
 ```{r}
 src <- "https://www.twc.texas.gov/files/agency/weekly-claims-by-county-twc.xlsx" # Read URL
+today <- Sys.Date()
+
 lcl <- basename(src)
-download.file(url = src, destfile = lcl)
+download.file(url = src, destfile = paste0("data/twc/",today,"_", lcl))
+
 
 twc_claims_cnty <- read_excel(lcl, skip=2) %>%
   slice(1:254) %>% 
@@ -394,7 +411,7 @@ twc_claims_cnty %>%
 
 src <- "https://www.twc.texas.gov/files/agency/claims-industry-twc.xlsx" # Read URL
 lcl <- basename(src)
-download.file(url = src, destfile = lcl)
+download.file(url = src, destfile = paste0("data/twc/", lcl))
 
 twc_claims_ind <- read_excel(lcl, skip=1) %>% 
   clean_names()

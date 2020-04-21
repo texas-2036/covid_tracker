@@ -33,7 +33,8 @@ map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a h
 jhu_cases_state <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_state.csv") %>% 
   janitor::clean_names() %>% 
   # dplyr()
-  filter(province_state=="Texas") %>% 
+  # filter(province_state=="Texas") %>% 
+  # group_by(date) %>% 
   mutate(fips=as.character(fips))
 
 jhu_cases_county <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases.csv") %>% 
@@ -119,20 +120,27 @@ header <- dashboardHeader(disable = FALSE,
   title = tags$a(href='http://www.texas2036.org',
                  HTML('<svg viewBox="0 0 227.4 83.5" style="height:4.5vh;padding-bottom:1vh;margin-top:9px"><path fill="currentColor" d="M192.5 66.2c2.2 0 3.9.6 3.9 2.6v4.1c0 2-1.7 3.6-3.9 3.6-2.1 0-3.8-1.6-3.8-3.6v-5.1h-7.8v5.1c0 5.9 5.2 10.6 11.6 10.6 6.4 0 11.5-4.6 11.7-10.4.6 5.4 5.6 10.4 11.6 10.4 6.4 0 11.6-4.8 11.6-10.6v-7.4c0-5.8-5.2-10.6-11.6-10.6-1.4 0-2.7.2-3.9.6v-4.1c0-1.9 1.8-3.5 3.9-3.5 2.1 0 3.8 1.6 3.8 3.5v2.2h7.8v-2.2c0-4-2.5-7.5-6.1-9.3 3.6-1.8 6.1-5.3 6.1-9.3V10.5c0-5.8-5.2-10.5-11.6-10.5-6.1 0-11.1 4.3-11.6 9.8-.4-5.5-5.5-9.8-11.7-9.8-6.4 0-11.6 4.7-11.6 10.6v2.6h7.8v-2.6c0-1.9 1.7-3.5 3.8-3.5 2.2 0 3.9 1.6 3.9 3.5v.8l-.1.1-13 15.6c-2.3 2.8-2.4 3-2.4 5.9v10.5h4.1c-2.5 1.9-4.1 4.8-4.1 8v2.2h7.8v-2.2c0-1.9 1.7-3.5 3.8-3.5 2.2 0 3.9 1.6 3.9 3.5v4.1c0 2-1.7 3.6-3.9 3.6h-2.4v7.1h2.4zm19.4-55.6c0-1.9 1.7-3.5 3.8-3.5 2.1 0 3.8 1.6 3.8 3.5v20.7c0 2-1.7 3.6-3.8 3.6-2.1 0-3.8-1.6-3.8-3.6V10.6zm-7.8 57c-.3-1.9-1.3-3.3-2.9-5 1.6-1.6 2.6-3.7 2.9-5.9v10.9zm-15.4-32.8v-2.6l13.1-15.8c1.6-1.9 2.2-2.6 2.3-3.8v20.3c0 .5 0 .9.1 1.3l2.1 6.4h6.8l-5.5 4 2.1 6.5-5.5-4-5.5 4 2.1-6.5-5.5-4h6.8l1.9-5.9h-15.3zm30.9 38.1c0 2-1.7 3.6-3.8 3.6-2.2 0-3.9-1.6-3.9-3.6v-7.4c0-1.9 1.8-3.5 3.9-3.5 2.1 0 3.8 1.6 3.8 3.5v7.4zM8.4 82.7V8H0V0h24.8v8h-8.4v74.8h-8zm45.4 0H33V0h20.8v8H41v29.5h12.8v8H41v29.4h12.8v7.8zm70.2 0V45.3h-12.8v37.4h-8V14.4c0-8 6.5-14.4 14.4-14.4 7.8 0 14.3 6.5 14.3 14.4v68.3H124zm0-68.3c0-3.6-2.9-6.5-6.3-6.5-3.6 0-6.5 2.9-6.5 6.5v22.9H124V14.4zm37.6 6.1v-6.2c0-3.5-2.9-6.3-6.3-6.3-3.5 0-6.3 2.9-6.3 6.3v6.3c0 1.5 0 1.5.4 2.1l17.9 31.6c2.4 4.2 2.4 4.2 2.4 7.8v6.2c0 8-6.5 14.3-14.3 14.3S141 76.4 141 68.4v-6.2h8v6.2c0 3.6 2.9 6.5 6.3 6.5 3.5 0 6.3-2.9 6.3-6.5v-6.2c0-1.4 0-1.4-.4-2l-17.9-31.6c-2.4-4.2-2.4-4.2-2.4-8v-6.3C141 6.5 147.5 0 155.3 0s14.3 6.5 14.3 14.3v6.2h-8zM95.9 0h-8.2l-9.2 28.7L69.3 0h-8.2l13.3 41.6L61.1 83h8.3l9.1-28.5L87.6 83h8.3L82.6 41.6z"></path><svg>'),
                  tags$title('Texas COVID-19 Resource Kit'))
+  # dropdownMenu(type = "notifications",
+  #              headerText=NULL,
+  #              badgeStatus = "info",
+  #              notificationItem(
+  #                text = "New County Data Has Been Added",
+  #                icon("users")
+  #              ))
   )
 
 # SIDEBAR CODE-----------------------------------------------------------
 
-sidebar <- dashboardSidebar(disable = TRUE,
-  collapsed = TRUE,
-  sidebarMenu(
+sidebar <- dashboardSidebar(disable = FALSE,
+  collapsed = FALSE,
+  sidebarMenu(style = "position: fixed; overflow: visible;",
     id = "tabs",
     menuItem("Case Impact",
              tabName = "dashboard", icon = icon("dashboard")),
-    menuSubItem(
-      tabName = NULL,
-      text = shiny::tags$html("<a href='#anchorid0'>Go to anchor0</a>")
-    ),    # conditionalPanel(
+    # menuSubItem(
+    #   tabName = NULL,
+    #   text = shiny::tags$("<a href='#anchorid0'>Go to anchor0</a>")
+    # ),    # conditionalPanel(
     #   condition = "input.tabs == 'dashboard'",
     #   sliderInput("year", 
     #             "Select a Year:",
@@ -160,18 +168,19 @@ body <- dashboardBody(
   ),
   tabItems(
     tabItem(tabName = "dashboard",
-            # hr(),
+            # br(),
             h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='anchorid0'"),
             h3(class="covid-topic", "Public Health"),
             fluidRow(
               valueBoxOutput("tx_cases", width=3),
               valueBoxOutput("incident_rate", width=3),
-              valueBoxOutput("tx_deaths", width=3),
+              # valueBoxOutput("tx_deaths", width=3),
+              valueBoxOutput("test_rate", width=3),
               valueBoxOutput("mort_rate", width=3)
               ),
             fluidRow(
-              valueBoxOutput("tx_tests", width=3),
-              valueBoxOutput("test_rate", width=3),
+              # valueBoxOutput("tx_tests", width=3),
+              # valueBoxOutput("test_rate", width=3),
               valueBoxOutput("days_since_mandate", width=3),
               valueBoxOutput("social_distancing_score", width=3)
               ),
@@ -185,16 +194,21 @@ body <- dashboardBody(
               valueBoxOutput("school_days", width=3)
             ),
             hr(),
-            h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='anchorid1'"),
+            fluidRow(
+              column(width = 6,
+                     h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='anchorid1'")),
+              column(width = 6,
+                     selectizeInput(inputId = "countyname", label =NULL, choices = county_list,
+                                    selected="Harris", multiple = FALSE, width="100%",
+                                    options = list(maxItems=1,placeholder = 'Select Your County...')))
+              ),
             fluidRow(
               column(width = 6,
                      h4("Data As of:",textOutput("currentTime", inline=TRUE)),
                      leafletOutput("map", width = "100%", height = 600)),
               column(width = 6,
-                     selectizeInput(inputId = "countyname", label = h4("Create A County Profile"), choices = county_list,
-                                    selected="Harris", multiple = FALSE, width="100%",
-                                    options = list(maxItems=1,placeholder = 'Select Your County...')),
               # h3(style="font-weight:700;",textOutput("countyname", inline = TRUE)),
+              # h3(class="covid-topic", "Public Health"),
               fluidRow(
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", textOutput("county_cases_text")),p(style="text-align:center","Confirmed Cases")),
@@ -206,6 +220,7 @@ body <- dashboardBody(
                        h2(style="font-weight:800;text-align:center;", textOutput("county_active_text")),p(style="text-align:center","Active Cases")),
     
                 ),
+              # h3(class="covid-topic", "Economy + Society"),
               highchartOutput("cnty_compare_hchart", height = 100),
               highchartOutput("cnty_curves_hchart", height = 300),
               box(solidHeader = TRUE, 
@@ -214,39 +229,39 @@ body <- dashboardBody(
                   background = "navy",
                   collapsible = FALSE))
               )
+            ),
+    tabItem(tabName = "about",
+            fluidRow(
+              box(
+                title = "Calls & Calls Per 100 Households", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+                ),
+              box(
+                title = "Median Household Values & The Gini Index", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+                )
+              ),
+            fluidRow(
+              box(
+                title = "The Map Indicators & Indicator Percentile", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              ),
+              box(
+                title = "Histogram", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              )
+            ),
+            fluidRow(
+              box(
+                title = "Histogram", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              ),
+              box(
+                title = "Histogram", status = "primary", solidHeader = TRUE,
+                collapsible = TRUE
+              )
             )
-    # tabItem(tabName = "about",
-    #         fluidRow(
-    #           box(
-    #             title = "Calls & Calls Per 100 Households", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #             ),
-    #           box(
-    #             title = "Median Household Values & The Gini Index", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #             )
-    #           ),
-    #         fluidRow(
-    #           box(
-    #             title = "The Map Indicators & Indicator Percentile", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           ),
-    #           box(
-    #             title = "Histogram", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           )
-    #         ),
-    #         fluidRow(
-    #           box(
-    #             title = "Histogram", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           ),
-    #           box(
-    #             title = "Histogram", status = "primary", solidHeader = TRUE,
-    #             collapsible = TRUE
-    #           )
-    #         )
-    #         )
+            )
     )
 )
 
