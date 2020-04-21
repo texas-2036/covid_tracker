@@ -165,6 +165,29 @@ dshs_county_test_data = read_excel(lcl,skip=1)  %>%
   drop_na(tests)
 
 
+dshs_tsa_hospital_data = read_excel("TSA COVID Bed Reports_04.19.20.xlsx") %>%
+  rename(
+    tsa=1,
+    adult_icu=3,
+    confirmed_cases=20
+  ) %>%
+  mutate(
+    tsa_clean = substring(tsa, 5)
+  )
+
+## ** Crosswalk Data ----
+
+crosswalk_data = read_excel("Crosswalk TX Counties RACs PHRs.xlsx", skip=2) %>%
+  rename(
+    county_name=1,
+    public_health_region=2,
+    tsa=3
+  ) %>%
+  mutate(
+    tsa_clean = substring(tsa, 1, 1)
+  )
+
+
 # **Economic Data -----------------------------------------------------------
 
 hb_summary <-  read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1178059516&single=true&output=csv",
@@ -261,17 +284,23 @@ print("Rates of Change.")
 print(rates_of_change %>% arrange(desc(date)))
 
 # Positive/Negative Testing. Current and TS.
-  
 
 # 
 #  ** County ----------
 # 
+
 # Crosswalk the NCHS and Trauma Service Area Data.
+
+county_tsa_data  = merge(crosswalk_data, dshs_tsa_hospital_data, by="tsa_clean")
+
+print("Crosswalk county hospital data.")
+print(county_tsa_data)
 
 # Integrate DSHS Tests Per County Data
 
 dshs_county_data = merge(dshs_county_data, dshs_county_test_data, by="county_name")
 dshs_county_data = merge(dshs_county_data, dshs_state_case_and_fatalities, by="county_name")
+dshs_county_data = merge(dshs_county_data, county_tsa_data, by="county_name")
 
 # Tests Per 100,000
 
@@ -281,8 +310,24 @@ print(tests_per_100k_counties)
 
 # Available Ventilators Per COVID-19 Case
 
+dshs_county_data = dshs_county_data %>%
+  mutate(
+    ventilators_per_case = adult_icu / confirmed_cases
+  )
+
+print("Available Ventilators Per COVID-19 Case (Calculated at TSA level)")
+print(dshs_county_data %>% select("county_name", "ventilators_per_case"))
+
 
 # Available ICU Beds Per COVID-19 Case
+
+dshs_county_data = dshs_county_data %>%
+  mutate(
+    icu_beds_per_case = adult_icu / confirmed_cases
+  )
+
+print("Available ICU Beds COVID-19 Case (Calculated at TSA level)")
+print(dshs_county_data %>% select("county_name", "icu_beds_per_case"))
 
 # Case Growth Rate
 
