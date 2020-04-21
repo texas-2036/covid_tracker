@@ -30,11 +30,25 @@ map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a h
 # **Coronavirus Data -----------------------------------------------------------
 
 
-jhu_cases_state <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_state.csv") %>% 
+# ~~JHU Data --------------------------------------------------------------
+
+
+jhu_cases_state_us <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_state.csv") %>% 
   janitor::clean_names() %>% 
-  # dplyr()
-  # filter(province_state=="Texas") %>% 
-  # group_by(date) %>% 
+  filter(country_region=="US") %>%
+  group_by(last_update) %>% 
+  mutate(cases_rank=dense_rank(desc(confirmed)),
+         deaths_rank=dense_rank(desc(deaths)),
+         tested_rank=dense_rank(desc(people_tested)),
+         hospitalized_rank=dense_rank(desc(people_hospitalized)),
+         incident_rank=dense_rank(desc(incident_rate)),
+         testrate_rank=dense_rank(desc(testing_rate)),
+         mortality_rank=dense_rank(desc(mortality_rate)),
+         hosprate_rank=dense_rank(desc(hospitalization_rate))) %>% 
+  ungroup()
+
+jhu_cases_state <- jhu_cases_state_us %>% 
+  filter(province_state=="Texas") %>%
   mutate(fips=as.character(fips))
 
 jhu_cases_county <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases.csv") %>% 
@@ -62,11 +76,33 @@ tx_today <- tx_county_cases %>%
   ungroup() %>% 
   select(-county)
 
+# ~~NYT Data --------------------------------------------------------------
+
 nyt_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
   filter(state=="Texas") %>% 
   mutate(min = min(cases),
-         max = max(cases))
+         max = max(cases),
+         prev_day_cases = lag(cases,1),
+         prev_week_cases = lag(cases,7),
+         new_cases_1day = cases-prev_day_cases,
+         new_cases_7day= cases-prev_week_cases)
          
+nyt_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv") %>% 
+  group_by(state) %>% 
+  mutate(date = ymd(date),
+         min = min(cases),
+         max = max(cases),
+         prev_day_deaths = lag(deaths,1),
+         new_deaths_1day = deaths-prev_day_deaths,
+         prev_day_cases = lag(cases,1),
+         prev_week_cases = lag(cases,7),
+         new_cases_1day = cases-prev_day_cases,
+         new_cases_7day= cases-prev_week_cases) %>% 
+  ungroup()
+
+nyt_state_cases_tx <- nyt_state_cases %>% 
+  filter(state=="Texas")
+
 tigris_cntys <- tigris::counties(state="48", cb = TRUE) %>% 
   as_tibble() %>% 
   select(GEOID,county=NAME)
@@ -96,8 +132,27 @@ tx_county_sf <- tx_counties %>%
   ),
   active_label=case_when(
     is.na(active) ~ "No Reported",
-    is.numeric(active) ~ scales::comma(active),
+    is.numeric(active) ~ scales::comma(active)
   ))
+
+# ~~COVID Tracking Data --------------------------------------------------------------
+
+test_daily <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-tracking-data/master/data/states_daily_4pm_et.csv") %>% 
+  filter(state=="TX") %>%
+  mutate(date=as.character(date)) %>%
+  mutate(date=str_replace(date,"(\\d{4})(\\d{2})(\\d{2})$","\\1-\\2-\\3")) %>% 
+  mutate(date = ymd(date))
+
+# twc_claims_cnty <- read_excel("data/twc/weekly-claims-by-county-twc.xlsx", skip=2) %>%
+#   slice(1:254) %>% 
+#   clean_names() %>% 
+#   filter(!is.na(county)) %>% 
+#   remove_empty("cols") %>% 
+#   # select_at(vars(county, ends_with("2020"))) %>% 
+#   pivot_longer(-county, names_to = "date", values_to = "value") %>% 
+#   mutate(date=gsub("^x","0",x=date),
+#          date=gsub("_","-",x=date)) %>% 
+#   mutate(date=lubridate::mdy(date))
 
 
 # **Economic Data -----------------------------------------------------------
@@ -132,26 +187,15 @@ header <- dashboardHeader(disable = FALSE,
 # SIDEBAR CODE-----------------------------------------------------------
 
 sidebar <- dashboardSidebar(disable = FALSE,
-  collapsed = FALSE,
-  sidebarMenu(style = "position: fixed; overflow: visible;",
-    id = "tabs",
-    menuItem("Case Impact",
-             tabName = "dashboard", icon = icon("dashboard")),
-    # menuSubItem(
-    #   tabName = NULL,
-    #   text = shiny::tags$("<a href='#anchorid0'>Go to anchor0</a>")
-    # ),    # conditionalPanel(
-    #   condition = "input.tabs == 'dashboard'",
-    #   sliderInput("year", 
-    #             "Select a Year:",
-    #             min = as.Date("2013-01-01"),
-    #             max = as.Date("2016-01-01"),
-    #             value= as.Date("2013-01-01"),
-    #             timeFormat= "%Y",
-    #             step = 365,
-    #             animate = animationOptions(interval = 1000)),
-    menuItem("About The Dashboard", icon = icon("file-text"), tabName = "about")
-  )
+                            collapsed = FALSE,
+                            sidebarMenu(
+                              id = "tabs",
+                              menuItem("State Profile",
+                                       tabName = "state_profiles", icon = icon("square")),
+                              menuItem("County Profile",
+                                       tabName = "county_profiles", icon = icon("square"))
+                              # menuItem("About", icon = icon("circle"), tabName = "about")
+                            )
 )
 
 
@@ -167,36 +211,82 @@ body <- dashboardBody(
     
   ),
   tabItems(
-    tabItem(tabName = "dashboard",
-            # br(),
-            h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='anchorid0'"),
-            h3(class="covid-topic", "Public Health"),
+    tabItem(tabName = "state_profiles",
+# **Statewide Profile UI ----------------------------------------------------
+            h2(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='statewide-profile'"),            
+            h3(class="covid-topic", "Public Health Indicators"),
             fluidRow(
-              valueBoxOutput("tx_cases", width=3),
-              valueBoxOutput("incident_rate", width=3),
-              # valueBoxOutput("tx_deaths", width=3),
-              valueBoxOutput("test_rate", width=3),
-              valueBoxOutput("mort_rate", width=3)
+              infoBoxOutput("tx_cases", width=3),
+              infoBoxOutput("tx_tests", width=3),
+              # infoBoxOutput("incident_rate", width=3),
+              # infoBoxOutput("tx_deaths", width=3),
+              infoBoxOutput("test_rate", width=3),
+              infoBoxOutput("mort_rate", width=3)
               ),
-            fluidRow(
-              # valueBoxOutput("tx_tests", width=3),
-              # valueBoxOutput("test_rate", width=3),
-              valueBoxOutput("days_since_mandate", width=3),
-              valueBoxOutput("social_distancing_score", width=3)
-              ),
-            h3(class="covid-topic", "Economy + Society"),
-            fluidRow(
-              valueBoxOutput("job_claims", width=3),
-              # valueBoxOutput("tx_tests", width=2),
-              # valueBoxOutput("tx_deaths", width=2),
-              valueBoxOutput("business_open", width=3),
-              valueBoxOutput("hrly_working", width=3),
-              valueBoxOutput("school_days", width=3)
-            ),
-            hr(),
+            # fluidRow(
+            #   # valueBoxOutput("tx_tests", width=3),
+            #   # valueBoxOutput("test_rate", width=3),
+            #   valueBoxOutput("days_since_mandate", width=3),
+            #   valueBoxOutput("social_distancing_score", width=3)
+            #   ),
             fluidRow(
               column(width = 6,
-                     h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='anchorid1'")),
+                     highchartOutput("state_curves_hchart", height = 300)),
+              column(width = 6,
+                     highchartOutput("state_new_cases_hchart", height = 300))
+              ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("state_new_deaths_hchart", height = 300)),
+              column(width = 6,
+                     highchartOutput("state_new_tests_hchart", height = 300))
+            )
+            # h3(class="covid-topic", "Economy + Society"),
+            # fluidRow(
+            #   column(width = 2, class="economic-grid",
+            #          h2(class="economic-tile",
+            #             p(style="text-align:center;font-size:1em;font-weight:800","3,261"),
+            #             p(style="text-align:center;font-size:.6em;font-weight:600;color:#F26852;","-4%"),
+            #             p(style="text-align:center;font-size:.5em;font-weight:300","Jobless Claims"),
+            #             p(style="text-align:center;font-size:.3em;font-weight:400","Source: Texas Workforce Commission"))),
+            #   column(width = 2, class="economic-grid",
+            #          h2(class="economic-tile",
+            #             p(style="text-align:center;font-size:1em;font-weight:800","3,261"),
+            #             p(style="text-align:center;font-size:.6em;font-weight:600;color:#F26852;","-4%"),
+            #             p(style="text-align:center;font-size:.5em;font-weight:300","Unemployment Rate"),
+            #             p(style="text-align:center;font-size:.3em;font-weight:400","Source: Texas Workforce Commission"))),
+            #   column(width = 2, class="economic-grid",
+            #          h2(class="economic-tile",
+            #             p(style="text-align:center;font-size:1em;font-weight:800","3,261"),
+            #             p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;","+4%"),
+            #             p(style="text-align:center;font-size:.5em;font-weight:300","Local Businesses Open"),
+            #             p(style="text-align:center;font-size:.3em;font-weight:400","Source: Homebase"))),
+            #   column(width = 2, class="economic-grid",
+            #          h2(class="economic-tile",
+            #             p(style="text-align:center;font-size:1em;font-weight:800","3,261"),
+            #             p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;","+4%"),
+            #             p(style="text-align:center;font-size:.5em;font-weight:300","Reduction In Hours Worked"),
+            #             p(style="text-align:center;font-size:.3em;font-weight:400","Source: Homebase"))),
+            #   column(width = 2, class="economic-grid",
+            #          h2(class="economic-tile",
+            #             p(style="text-align:center;font-size:1em;font-weight:800","3,261"),
+            #             p(style="text-align:center;font-size:.6em;font-weight:600;color:#F26852;","-4%"),
+            #             p(style="text-align:center;font-size:.5em;font-weight:300","Hourly Employees Working"),
+            #             p(style="text-align:center;font-size:.3em;font-weight:400","Source: Homebase"))),
+            #   column(width = 2, class="economic-grid",
+            #          h2(class="economic-tile",
+            #             p(style="text-align:center;font-size:1em;font-weight:800","3,261"),
+            #             p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;","+4%"),
+            #             p(style="text-align:center;font-size:.5em;font-weight:300","Monthly $ Loss Per Employee"),
+            #             p(style="text-align:center;font-size:.3em;font-weight:400","Source: Homebase")))
+            # )
+),
+
+# **County Profile UI  ------------------------------------------------------
+tabItem(tabName = "county_profiles",
+            fluidRow(
+              column(width = 6,
+                     h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='county-profile'")),
               column(width = 6,
                      selectizeInput(inputId = "countyname", label =NULL, choices = county_list,
                                     selected="Harris", multiple = FALSE, width="100%",
@@ -217,7 +307,7 @@ body <- dashboardBody(
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", textOutput("county_incident_text")),p(style="text-align:center","Cases Per Capita")),
                 column(width = 3,
-                       h2(style="font-weight:800;text-align:center;", textOutput("county_active_text")),p(style="text-align:center","Active Cases")),
+                       h2(style="font-weight:800;text-align:center;", textOutput("county_active_text")),p(style="text-align:center","Active Cases"))
     
                 ),
               # h3(class="covid-topic", "Economy + Society"),
@@ -295,103 +385,396 @@ server <- function (input, output, session) {
       
     })
   
-  data_for_dl <- reactive({
-    
-    dat <- travis1 %>%
-      filter(Year == input$year)
-    
-  })
-  
-  output$downloadCSV <- downloadHandler(
-    filename = 'data.csv', 
-    content = function(file) {
-      write_csv(data_for_dl(), file)
-    }
-  )
-  
 
 # INFO BOXES - STATEWIDE--------------------------------------------------------------
 
-  
-
 # --{Total Confirmed Cases} -----------------------------------------------
     
-  output$tx_cases <- renderValueBox({
+  output$tx_cases <- renderInfoBox({
     tot_pos <- jhu_cases_state %>% 
-      select(confirmed) %>% 
-      mutate_at(vars(confirmed), scales::comma)
+      select(confirmed, cases_rank) %>% 
+      mutate_at(vars(confirmed), scales::comma) %>% 
+      mutate_at(vars(cases_rank), scales::label_ordinal())
     
-    valueBox(
-       value=paste0(tot_pos$confirmed), subtitle="Total Confirmed Cases",
+    infoBox(
+       value=paste0(tot_pos$confirmed), title="Total Confirmed Cases",
+       subtitle=paste0(tot_pos$cases_rank, " Most in US"),
       icon = icon("lungs-virus"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
 # {Total COVID-19 Tests} -----------------------------------------------
   
-  output$tx_tests <- renderValueBox({
+  output$tx_tests <- renderInfoBox({
     tot_pos <- jhu_cases_state %>% 
-      select(people_tested) %>% 
-      mutate_at(vars(people_tested), scales::comma)
+      select(people_tested, tested_rank) %>% 
+      mutate_at(vars(people_tested), scales::comma) %>% 
+      mutate_at(vars(tested_rank, scales::label_ordinal()))
     
-    valueBox(
-      value=paste0(tot_pos$people_tested), subtitle="Total People Tested",
-      icon = icon("microscope"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+    infoBox(
+      title="Total People Tested", value=paste0(tot_pos$people_tested), icon = icon("microscope"),
+      subtitle=paste0("(",tot_pos$tested_rank, " in US)"),
+      color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
 # {Total Deaths} -----------------------------------------------
   
-  output$tx_deaths <- renderValueBox({
+  output$tx_deaths <- renderInfoBox({
     tot_pos <- jhu_cases_state %>% 
-      select(deaths) %>% 
-      mutate_at(vars(deaths), scales::comma)
+      select(deaths, deaths_rank) %>% 
+      mutate_at(vars(deaths), scales::comma) %>% 
+      mutate_at(vars(deaths_rank, scales::label_ordinal()))
     
-    valueBox(
-      subtitle="Total Confirmed Deaths", value=paste0(tot_pos$deaths), icon=icon("heartbeat"),
+    
+    infoBox(
+      title="Total Confirmed Deaths", value=paste0(tot_pos$deaths), icon=icon("heartbeat"),
+      subtitle=paste0(tot_pos$deaths_rank, " in US"),
       color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
 # {Hospitalization Rate} -----------------------------------------------
   
-  output$incident_rate <- renderValueBox({
+  output$incident_rate <- renderInfoBox({
     tot_pos <- jhu_cases_state %>% 
-      select(incident_rate) %>% 
-      mutate_at(vars(incident_rate), scales::number_format(accuracy=.01, scale=1))
+      select(incident_rate, incident_rank) %>% 
+      mutate_at(vars(incident_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
+      mutate_at(vars(incident_rank), scales::label_ordinal())
     
-    valueBox(
-      subtitle="Cases Per Capita", value=paste0(tot_pos$incident_rate),
+    
+    infoBox(
+      title="Cases Per Capita", value=paste0(tot_pos$incident_rate),
+      subtitle=paste0(tot_pos$incident_rank, " Most in US"),
       icon = icon("procedures"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
   # {Mortality Rate} -----------------------------------------------
   
-  output$mort_rate <- renderValueBox({
+  output$mort_rate <- renderInfoBox({
     tot_pos <- jhu_cases_state %>% 
-      select(mortality_rate) %>% 
-      mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1))
+      select(mortality_rate,  mortality_rank) %>% 
+      mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
+      mutate_at(vars(mortality_rank), scales::label_ordinal())
     
-    valueBox(
-      subtitle="Mortality Rate", value=paste0(tot_pos$mortality_rate),
+    infoBox(
+      title="Mortality Rate", value=paste0(tot_pos$mortality_rate),
+      subtitle=paste0(tot_pos$mortality_rank, " Most in US"),
       icon = icon("biohazard"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
   # {Testing Rate} -----------------------------------------------
   
-  output$test_rate <- renderValueBox({
+  output$test_rate <- renderInfoBox({
     
     tot_pos <- jhu_cases_state %>% 
-      select(testing_rate, people_tested) %>% 
+      select(testing_rate, testrate_rank) %>% 
       mutate_at(vars(testing_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
-      mutate_at(vars(people_tested), scales::comma)
+      mutate_at(vars(testrate_rank), scales::label_ordinal())
     
-    valueBox(
-      subtitle=paste0("Tests Per Capita"), value=paste0(tot_pos$testing_rate),
+    infoBox(
+      title=paste0("Tests Per Capita"), value=paste0(tot_pos$testing_rate),
+      subtitle=paste0(tot_pos$testrate_rank, " Most in US"),
       icon = icon("vials"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
+  })
+  
+  # {State Curve Charts}  --------------------------------------------------
+  
+  output$state_curves_hchart <- renderHighchart({
+    
+    # Make sure requirements are met
+    # req(input$countyname)
+    
+    hcoptslang <- getOption("highcharter.lang")
+    hcoptslang$thousandsSep <- ","
+    options(highcharter.lang = hcoptslang)
+    
+    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
+    #               name = "Fit", id = "fit") 
+    
+    # min <- nyt_state_cases_tx %>% 
+    #   select(min) %>% 
+    #   distinct() %>% 
+    #   # filter(!is.na(1)) %>% 
+    #   as.character()
+    
+    nyt_tx_hchart <- nyt_state_cases_tx %>% 
+      hchart("area", hcaes(x = date, y = cases), animation=FALSE,
+             color = "#fff") %>% 
+      hc_title(
+        text ="Texas COVID-19 Cumulative Cases",
+        useHTML = TRUE) %>% 
+      hc_yAxis(min = round(mean(nyt_state_cases_tx$min), 2), 
+               max = round(mean(nyt_state_cases_tx$max), 2)) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   Confirmed Cases: {point.y:,.0f}<br>") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: New York Times County-Level COVID-19 Data (Github)",
+        href = "https://github.com/nytimes/covid-19-data") %>%
+      hc_add_theme(
+        hc_theme_merge(
+          hc_theme_smpl(),
+          hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                             color="#fff",fontWeight="500", textTransform="uppercase")),
+                   title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
+                                align = "left"), 
+                   title = list(style = list(fontFamily = "Montserrat", color="#fff"),
+                                align = "left"), 
+                   legend = list(align = "right", 
+                                 style = list(fontFamily = "Montserrat", color="white"), 
+                                 verticalAlign = "bottom"),
+                   credits = list(style = list(color = "#fff")),
+                   xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")),
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = .5), 
+                   yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")), 
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = 1))))
+    
+    nyt_tx_hchart
+  })
+  
+  # {State New Cases Charts}  --------------------------------------------------
+  
+  output$state_new_cases_hchart <- renderHighchart({
+    
+    # Make sure requirements are met
+    # req(input$countyname)
+    
+    hcoptslang <- getOption("highcharter.lang")
+    hcoptslang$thousandsSep <- ","
+    options(highcharter.lang = hcoptslang)
+    
+    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
+    #               name = "Fit", id = "fit") 
+    
+    nyt_tx_new_cases_hchart <- nyt_state_cases_tx %>% 
+      mutate(min_new = min(new_cases_1day, na.rm = TRUE),
+             max_new = max(new_cases_1day, na.rm = TRUE)) %>% 
+      mutate(min_new = as.numeric(min_new),
+             max_new = as.numeric(max_new)) %>% 
+        ungroup()
+    
+    nyt_tx_new_cases_hchart %>% 
+      hchart("column", hcaes(x = date, y = new_cases_1day), 
+             animation=FALSE,
+             color = "#fff") %>% 
+      hc_plotOptions(column = list(pointWidth = 6)) %>% 
+      hc_title(
+        text ="Texas COVID-19 Daily New Cases",
+        useHTML = TRUE) %>% 
+      hc_yAxis(min = mean(nyt_tx_new_cases_hchart$min_new),
+               max = mean(nyt_tx_new_cases_hchart$max_new)) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   New Cases: {point.y:,.0f}<br>") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: New York Times County-Level COVID-19 Data (Github)",
+        href = "https://github.com/nytimes/covid-19-data") %>%
+      hc_add_theme(
+        hc_theme_merge(
+          hc_theme_smpl(),
+          hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                             color="#fff",fontWeight="500", textTransform="uppercase")),
+                   title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
+                                align = "left"), 
+                   title = list(style = list(fontFamily = "Montserrat", color="#fff"),
+                                align = "left"), 
+                   legend = list(align = "right", 
+                                 style = list(fontFamily = "Montserrat", color="white"), 
+                                 verticalAlign = "bottom"),
+                   credits = list(style = list(color = "#fff")),
+                   xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")),
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = .5), 
+                   yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")), 
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = 1))))
+    
+    
+  })
+  
+
+# {State New Deaths  Charts} ----------------------------------------------
+  
+  output$state_new_deaths_hchart <- renderHighchart({
+    
+    # Make sure requirements are met
+    # req(input$countyname)
+    
+    hcoptslang <- getOption("highcharter.lang")
+    hcoptslang$thousandsSep <- ","
+    options(highcharter.lang = hcoptslang)
+    
+    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
+    #               name = "Fit", id = "fit") 
+    
+    nyt_tx_new_cases_hchart <- nyt_state_cases_tx %>% 
+      mutate(min_new = min(new_deaths_1day, na.rm = TRUE),
+             max_new = max(new_deaths_1day, na.rm = TRUE)) %>% 
+      mutate(min_new = as.numeric(min_new),
+             max_new = as.numeric(max_new)) %>% 
+      ungroup()
+    
+    nyt_tx_new_cases_hchart %>% 
+      hchart("column", hcaes(x = date, y = new_deaths_1day), 
+             animation=FALSE,
+             color = "#fff") %>% 
+      hc_plotOptions(column = list(pointWidth = 6)) %>% 
+      hc_title(
+        text ="Texas COVID-19 Daily New Deaths",
+        useHTML = TRUE) %>% 
+      hc_yAxis(min = mean(nyt_tx_new_cases_hchart$min_new),
+               max = mean(nyt_tx_new_cases_hchart$max_new)) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   New Deaths: {point.y:,.0f}<br>") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: New York Times County-Level COVID-19 Data (Github)",
+        href = "https://github.com/nytimes/covid-19-data") %>%
+      hc_add_theme(
+        hc_theme_merge(
+          hc_theme_smpl(),
+          hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                             color="#fff",fontWeight="500", textTransform="uppercase")),
+                   title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
+                                align = "left"), 
+                   title = list(style = list(fontFamily = "Montserrat", color="#fff"),
+                                align = "left"), 
+                   legend = list(align = "right", 
+                                 style = list(fontFamily = "Montserrat", color="white"), 
+                                 verticalAlign = "bottom"),
+                   credits = list(style = list(color = "#fff")),
+                   xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")),
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = .5), 
+                   yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")), 
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = 1))))
+    
+    
+  })
+  
+
+# {State New Tests Chart} -------------------------------------------------
+
+  
+  output$state_new_tests_hchart <- renderHighchart({
+    
+    # Make sure requirements are met
+    # req(input$countyname)
+    
+    hcoptslang <- getOption("highcharter.lang")
+    hcoptslang$thousandsSep <- ","
+    options(highcharter.lang = hcoptslang)
+    
+    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
+    #               name = "Fit", id = "fit") 
+    
+    tx_new_tests_hchart <- test_daily %>% 
+      mutate(min_new = min(totalTestResultsIncrease, na.rm = TRUE),
+             max_new = max(totalTestResultsIncrease, na.rm = TRUE)) %>% 
+      mutate(min_new = as.numeric(min_new),
+             max_new = as.numeric(max_new)) %>% 
+      ungroup()
+    
+    tx_new_tests_hchart %>% 
+      hchart("column", hcaes(x = date, y = totalTestResultsIncrease), 
+             animation=FALSE,
+             color = "#fff") %>% 
+      hc_plotOptions(column = list(pointWidth = 6)) %>% 
+      hc_title(
+        text ="Texas COVID-19 Daily New Tests",
+        useHTML = TRUE) %>% 
+      hc_yAxis(min = mean(tx_new_tests_hchart$min_new),
+               max = mean(tx_new_tests_hchart$max_new)) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   New Tests: {point.y:,.0f}<br>") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: The COVID Tracking Project (Github)",
+        href = "https://github.com/nytimes/covid-19-data") %>%
+      hc_add_theme(
+        hc_theme_merge(
+          hc_theme_smpl(),
+          hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                             color="#fff",fontWeight="500", textTransform="uppercase")),
+                   title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
+                                align = "left"), 
+                   title = list(style = list(fontFamily = "Montserrat", color="#fff"),
+                                align = "left"), 
+                   legend = list(align = "right", 
+                                 style = list(fontFamily = "Montserrat", color="white"), 
+                                 verticalAlign = "bottom"),
+                   credits = list(style = list(color = "#fff")),
+                   xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")),
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = .5), 
+                   yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                          color="#fff",fontWeight="500")), 
+                                gridLineWidth = .5,
+                                gridLineColor = "#F3F3F3", 
+                                lineColor = "#fff", 
+                                minorGridLineColor = "#F3F3F3", 
+                                tickColor = "#F3F3F3", 
+                                tickWidth = 1))))
+    
+    
   })
   
 
@@ -451,18 +834,6 @@ output$map <- renderLeaflet({
     
 
 # REACTIVE TEXT -----------------------------------------------------------
-    
-
-# County Name -------------------------------------------------------------
-
-    output$county_name <- renderText({
-
-      m <- m %>%
-        as.data.frame()
-
-      paste0(m$county, " County Information")
-    })
-
 
 # County Confirmed Cases --------------------------------------------------
 
@@ -641,7 +1012,7 @@ output$map <- renderLeaflet({
                                                    color="#fff",fontWeight="500", textTransform="uppercase")),
                          title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
                                       align = "left"), 
-                         subtitle = list(style = list(fontFamily = "Montserrat", color="#fff"),
+                         title = list(style = list(fontFamily = "Montserrat", color="#fff"),
                                          align = "left"), 
                          legend = list(align = "right", 
                                        style = list(fontFamily = "Montserrat", color="white"), 
@@ -667,6 +1038,9 @@ output$map <- renderLeaflet({
                                       tickWidth = 1))))
     })
 
+    
+
+    
 # TEST CODE ---------------------------------------------------------------
     p <- c(0.5, 0.75, 0.9, .99, 1)
     
