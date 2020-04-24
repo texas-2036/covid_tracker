@@ -36,7 +36,7 @@ library(tidyverse)
 library(tidycensus)
 readRenviron("~/.Renviron")
 census_api_key <- Sys.getenv("CENSUS_API_KEY")
-census_api_key(census_api_key=census_api_key, install=TRUE, overwrite = TRUE)
+# census_api_key(key=census_api_key, install=TRUE, overwrite = TRUE)
 
 tx_county_pop <- get_acs(geography="county", survey="acs5", 
                          variables = "B01003_001", state="TX", 
@@ -47,7 +47,7 @@ write_rds(tx_county_pop, "county_pop.rds")
 
 tx_pop <- get_acs(geography="state", survey="acs5", 
                   variables = "B01003_001",
-                  year=2018) %>% 
+                  year=2018, show_call = TRUE) %>% 
           select(-moe,-variable)
 
 write_rds(tx_pop, "state_pop.rds")
@@ -62,7 +62,8 @@ tx_counties <- tidycensus::county_laea %>%
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326")
 
-##
+
+
 
 
 ```
@@ -88,9 +89,97 @@ test_current <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covi
 
 # State Test Data (Dailies)
 test_daily <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-tracking-data/master/data/states_daily_4pm_et.csv") %>% 
-  clean_names()
+  # clean_names() %>% 
+  filter(state=="TX") %>%
+  mutate(date=as.character(date)) %>%
+  mutate(date=str_replace(date,"(\\d{4})(\\d{2})(\\d{2})$","\\1-\\2-\\3")) %>% 
+  mutate(date = ymd(date))
 
 ```
+
+```{r}
+
+test_positive <- test_daily %>% 
+  filter(date >= as.Date("2020-03-17")) %>% 
+  arrange(date) %>% 
+  select(date, state, positive, totalTestResults, positiveIncrease, negativeIncrease) %>% 
+  mutate(daily_test_pos_rate = round(positive/totalTestResults, digits=4),
+         daily_test_pos_rate_7day_avg = rollmean(daily_test_pos_rate, 5, 
+                                                 fill=0, align = "right"),
+         test_pos_label = daily_test_pos_rate,
+         test_pos_7day_label = daily_test_pos_rate_7day_avg) %>% 
+  mutate_at(vars(test_pos_label,test_pos_7day_label),scales::percent_format(accuracy = .11, scale=100)) %>% 
+  rename(`Positive`=positiveIncrease,`Negative`=negativeIncrease) %>% 
+  gather(increase_type,increase,5:6)
+
+today <- format(Sys.Date(),format="%B %d, %Y")
+
+test_positive %>% 
+  ggplot(aes(x=date,y=increase,fill=increase_type)) +
+  geom_col(position="stack") +
+  theme_2036() +
+  theme(legend.position ="top",
+        legend.title = element_text(family="Montserrat-Bold")) +
+  scale_fill_manual(values = c("#8C8F93", "#F26852"),
+                    guide = guide_legend(keywidth = 1,
+                                         keyheight = 2,
+                                         label.position = "left",
+                                         title.position = "left")) +
+  scale_y_continuous(labels = scales::comma, breaks=c(5000,10000,15000)) +
+  scale_x_date(breaks = seq(as.Date("2020-03-17"), as.Date("2020-04-22"), by="7 days"), date_labels = "%b %d", expand=c(0,0)) +
+  labs(title="Daily New Tests for Texas, by Result",
+       subtitle=paste0("<span style='color: #2d2d2d'>From March 17 to ",today,"</span> <span style='color: #8C8F93'>"),
+       y="Daily New Test Totals, by Result",
+       x="Date Reported",
+       fill="Result",
+       caption="SOURCE: COVID Tracking Project\nDATA: Texas Department of State Health Services") +
+    ggsave(paste0("test_increase_type_",today,".png"), device="png", width=10, height=6.5, dpi=300)
+
+theme_2036_leg <- function(base_size=14,base_family="Montserrat",title_size=23, subtitle_size=12, caption_size=10, ...) {
+  ggplot2::theme_minimal(base_size = base_size,base_family = base_family,...) +
+  ggplot2::theme(plot.title = ggtext::element_markdown(size = title_size, color= "#3A4A9F",family = "Montserrat-ExtraBold"),
+                   plot.subtitle = ggtext::element_markdown(size = subtitle_size, family = "Montserrat"),
+                   plot.caption = ggplot2::element_text(family="Montserrat-Regular", color="#8C8F93",size=caption_size, lineheight = 1, hjust = 0, vjust=-5),
+                   axis.title.x = ggplot2::element_text(family="Montserrat-Bold", size=8, color="#6B6D6F"),
+                   axis.title.y = ggplot2::element_text(family="Montserrat-Bold", size=8, color="#6B6D6F"),
+                   legend.position = "top",
+                   plot.margin = ggplot2::unit(c(t=1, r=1.5, b=2, l=1), "lines")
+    ) +
+  ggplot2::theme(axis.line.x =  ggplot2::element_line(color="#5d5d5d", size=.8),
+              panel.grid.major.y = ggplot2::element_line(color="#e3e3e3"),
+              panel.grid.minor.y = ggplot2::element_line(linetype=2, size=0, color="#e3e3e3"),
+              panel.grid.major.x = ggplot2::element_blank(),
+              panel.grid.minor.x = ggplot2::element_blank(),
+              axis.title.x = ggplot2::element_text(hjust=1),
+              axis.title.y = ggplot2::element_text(hjust=1),
+              axis.ticks.x = ggplot2::element_line(size = .5))
+}
+
+test_positive %>% 
+  filter(increase_type=="Positive") %>% 
+  mutate(color=case_when(
+    daily_test_pos_rate >=.1 ~ "Above 10%",
+    TRUE ~ "Below 10%"
+  ))  %>% 
+  ggplot(aes(x=date,y=daily_test_pos_rate)) +
+  geom_hline(yintercept = .1,color="#00A9C5",size=1,alpha=.5,linetype=2)  +
+  geom_point(aes(color=color), alpha=.5, size=3) +
+  geom_smooth(method="loess", se = FALSE, color="#F26852", linetype=1) +
+  theme_2036() +
+  theme(legend.position =c(.9,.51)) +
+  scale_y_continuous(labels = scales::percent_format(accuracy=1), breaks=c(0,.01,.02,.03,.04,.05,.06,.07,.08,.09,.1), limits=c(0,.12)) +
+  scale_color_manual(values=c("#F26852","#002D74"), 
+                     guide=guide_legend(direction="vertical",label.position = "left")) +
+  scale_x_date(breaks = seq(as.Date("2020-03-17"), as.Date("2020-04-22"), by="7 days"), date_labels = "%b %d", expand=c(0,0)) +
+  labs(title="Daily Positive Test Rate for Texas",
+       subtitle=paste0("<span style='color: #2d2d2d'>From March 17 to ",today,"</span> | <span style='color: #F26852'> **-------- Moving Average**</span>"),
+       y="Daily Positive Test Rate",
+       x="Date Reported",
+       color=NULL,
+       caption="SOURCE: COVID Tracking Project\nDATA: Texas Department of State Health Services") +
+    ggsave(paste0("test_positive_rate_",today,".png"), device="png", width=10, height=6.5, dpi=300)
+```
+
 
 ## IHME Projections
 
@@ -173,22 +262,13 @@ write_csv(ihme_projs_all,"data/ihme/ihme_all_projections.csv")
 
 ```
 
-## Definitive Healthcare ICU Hospital/Bed Data
-
-```{r}
-
-dh_hosp_data <- read_csv("data/definitive_healthcare/County_Level_Data_data-2.csv") %>% 
-  clean_names() #%>% 
-  filter(state_name=="Texas")
-
-```
-
 
 ## DSHS State Data
 
 ### Case Related Data
 
 ```{r}
+today <- Sys.Date()
 
 src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19CaseCountData.xlsx" # Read URL
 lcl <- basename(src)
@@ -197,19 +277,23 @@ download.file(url = src, destfile = lcl)
 dshs_state_case_and_fatalities <- read_excel(lcl, sheet="Cases and Fatalities", skip=1) %>% 
   clean_names() %>% 
   filter(!is.na(county))
+
+write_csv(dshs_state_case_and_fatalities,paste0("clean_data/dshs/cases/state_cases_and_fatalities_",today,".csv"))
   
-dshs_state_recover <- read_excel(lcl, sheet="Recoveries", skip=0) #%>% 
+dshs_state_recover <- read_excel(lcl, sheet="Recoveries", skip=0) %>% 
   clean_names() %>% 
-  # slice(1) %>% 
+  slice(1) %>%
   rename(recoveries=1) %>% 
   mutate(recoveries=as.numeric(recoveries),
          state="Texas",
          fips="48")
 
+write_csv(dshs_state_recover,paste0("clean_data/dshs/cases/state_recovered_",today,".csv"))
+
 dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>% 
   clean_names() %>% 
-  filter(!is.na(no_of_people)) %>% 
-    mutate(tests=as.numeric(no_of_people),
+  filter(!is.na(count)) %>% 
+    mutate(tests=as.numeric(count ),
            state="Texas",
            fips="48",
            test_type=case_when(
@@ -218,26 +302,40 @@ dshs_state_tests <- read_excel(lcl, sheet="Tests", skip=1) %>%
            )) %>% 
   select(state,fips,test_type,tests) 
 
-dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
-  clean_names() %>% 
-  mutate(ind = rep(c(1, 2),length.out = n())) %>%
-  rename(text=1) %>% 
-  group_by(ind) %>%
-  mutate(id = row_number()) %>%
-  spread(ind, text) %>%
-  select(hosp_data=2, value=3,-id) %>% 
-  mutate(value=as.numeric(value),
-         state="Texas",
-         fips="48")
+write_csv(dshs_state_tests,paste0("clean_data/dshs/testing/state_tests_",today,".csv"))
 
-dshs_state_ages <- read_excel(lcl, sheet="Cases by Age Groups", skip=1) %>% 
+# dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=0) %>% 
+#   clean_names() %>% 
+#   mutate(ind = rep(c(1, 2),length.out = n())) %>%
+#   rename(text=1) %>% 
+#   group_by(ind) %>%
+#   mutate(id = row_number()) %>%
+#   spread(ind, text) %>%
+#   select(hosp_data=2, value=3,-id) %>% 
+#   mutate(value=as.numeric(value),
+#          state="Texas",
+#          fips="48")
+
+dshs_state_hospitalizations <- read_excel(lcl, sheet="Hospitalizations", skip=1) %>% 
   clean_names() %>% 
-  select(group=age_group, cases=count, pct=x3) %>% 
+  filter(!is.na(count)) %>% 
+  rename(text=1) %>%
+  mutate(text=gsub(pattern="Texas ",replacement="",x=text),
+         text=gsub(pattern="Available",replacement="Avail",x=text)) %>%
+  spread(text,count) %>%
+  mutate_all(funs(as.numeric)) %>% 
+  clean_names()
+
+ 
+write_csv(dshs_state_hospitalizations,paste0("clean_data/dshs/hospitals/state_hospitalizations_",today,".csv"))
+
+dshs_state_ages <- read_excel(lcl, sheet = "Cases by Age Group", skip=1) %>% 
+  clean_names() %>% 
+  select(group=age, cases=count, pct=3) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
+         report_type="cases",
          pct=as.numeric(pct),
-         state="Texas",
-         fips="48",
          demographic_type="ages")
   
 dshs_state_gender <- read_excel(lcl, sheet="Cases by Gender", skip=1) %>% 
@@ -245,9 +343,8 @@ dshs_state_gender <- read_excel(lcl, sheet="Cases by Gender", skip=1) %>%
   select(group=gender, cases=count, pct=percentage) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
+         report_type="cases",
          pct=as.numeric(pct),
-         state="Texas",
-         fips="48",
          demographic_type="gender")
 
 dshs_state_race <- read_excel(lcl, sheet="Cases by RaceEthnicity", skip=1) %>% 
@@ -255,15 +352,51 @@ dshs_state_race <- read_excel(lcl, sheet="Cases by RaceEthnicity", skip=1) %>%
   select(group=race_ethnicity, cases=count, pct=percentage) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
+         report_type="cases",
          pct=as.numeric(pct),
-         state="Texas",
-         fips="48",
+         demographic_type="race")
+
+dshs_state_ages_fates <- read_excel(lcl, sheet = "Fatalities by Age Group", skip=1) %>% 
+  clean_names() %>% 
+  select(group=age, cases=count, pct=3) %>% 
+  filter(pct<1) %>% 
+  mutate(cases=as.numeric(cases),
+         report_type="fatalities",
+         pct=as.numeric(pct),
+         demographic_type="ages")
+  
+dshs_state_gender_fates <- read_excel(lcl, sheet = "Fatalities by Gender", skip=1) %>% 
+  clean_names() %>% 
+  select(group=gender, cases=count, pct=percentage) %>% 
+  filter(pct<1) %>% 
+  mutate(cases=as.numeric(cases),
+         report_type="fatalities",
+         pct=as.numeric(pct),
+         demographic_type="gender")
+
+dshs_state_race_fates <- read_excel(lcl, sheet = "Fatalities by Race-Ethnicity", skip=1) %>% 
+  clean_names() %>% 
+  select(group=race_ethnicity, cases=count, pct=percentage) %>% 
+  filter(pct<1) %>% 
+  mutate(cases=as.numeric(cases),
+         report_type="fatalities",
+         pct=as.numeric(pct),
          demographic_type="race")
 
 dshs_demographic_data <- bind_rows(dshs_state_ages,
                                    dshs_state_gender,
-                                   dshs_state_race) %>% 
-  select(4,5,6,everything())
+                                   dshs_state_race,
+                                   dshs_state_ages_fates,
+                                   dshs_state_gender_fates,
+                                   dshs_state_race_fates) %>% 
+  select(4,5,1,everything())  %>% 
+  mutate(state="Texas",
+         fips="48") %>% 
+  select(state,fips,everything()) %>%
+  rename(count=cases)
+
+write_csv(dshs_demographic_data,paste0("clean_data/dshs/cases/state_case_demographics_",today,".csv"))
+
 
 rm(dshs_state_ages, dshs_state_gender,dshs_state_race)
 
@@ -273,9 +406,10 @@ download.file(url = src, destfile = lcl)
 
 dshs_county_data <- read_excel(lcl,skip=2) %>% 
   clean_names() %>% 
-  
   rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
   filter(!is.na(`03_04`))
+
+write_csv(dshs_county_data,paste0("clean_data/dshs/cases/county_cases_",today,".csv"))
 
 ```
 
@@ -287,21 +421,56 @@ lcl <- basename(src)
 download.file(url = src, destfile = lcl)
 
 dshs_county_tests <- read_excel(lcl,skip=1) %>% 
-  clean_names() %>% 
-  slice(1:256)
-  
-# write_csv()
+  rename(county_name=1, tests=2) %>%
+  slice(1:256) %>% 
+  mutate(state="Texas") %>%
+  select(state,county_name,total_tests=tests)
+
+
+write_csv(dshs_county_tests,paste0("clean_data/dshs/testing/county_tests_",today,".csv"))
+
 ```
 
+## Trauma Service Area Data
+
+### Crosswalk Data
+
+```{r}
+
+crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", skip=2) %>%
+  clean_names() %>% 
+  separate(trauma_service_area, into=c("tsa", "tsa_label")) %>% 
+  mutate(tsa=paste0("TSA-",tsa)) %>% 
+  select(tsa,county,everything()) %>%
+  left_join(tx_counties, by="county") %>% 
+  group_by(tsa) %>% 
+  summarise(tsa_counties = toString(county),
+            geometry = st_union(geometry))
+
+tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_04.21.20.xlsx", skip=0) %>%
+  clean_names() %>% 
+  filter(!is.na(tsa)) %>% 
+  left_join(crosswalk_data, by="tsa") %>% 
+  select(1,2,tsa_counties,everything()) %>% 
+  separate_rows(tsa_counties) %>% 
+  st_as_sf() %>% 
+  write_rds("clean_data/dshs/hospitals/tsa_hosp_data_with_counties_sf.rds")
+
+write_csv(tsa_data,"clean_data/dshs/hospitals/tsa_hosp_data_with_counties_sf.csv")
+```
 
 ## NYT Time Series Data
+
 ```{r}
+
 ts_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv")
 
 ts_county_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
+
 ```
 
 ### NYT Highchart County Map
+
 ```{r, nyt county data}
 
 sf_counties <- tidycensus::county_laea
@@ -374,6 +543,227 @@ ts_county_cases %>%
        caption="SOURCE: New York Times COVID-19 Database") +
   ggsave("ts_TXcases_by_county.png", device="png",width=10, height=6)
 
+```
+# NPI Datasets
+
+## Google Mobility Reports Data
+
+```{r}
+google_mobility <- read_csv("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv") %>% 
+  filter(sub_region_1=="Texas")
+
+```
+
+# Derived Metrics
+
+```{r}
+
+src <- "https://www.dshs.state.tx.us/coronavirus/COVID-19CumulativeTestTotalsbyCounty.xlsx"
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+dshs_county_test_data <- read_excel(lcl,skip=1)  %>% 
+  rename(county_name=1, tests=2) %>% 
+  drop_na(tests)
+
+
+dshs_tsa_hospital_data <- read_excel("data/dshs/Copy of TSA COVID Bed Reports_04.19.20.xlsx") %>%
+  rename(tsa = 1,
+         adult_icu = 3,
+         confirmed_cases = 20) %>%
+  mutate(tsa_clean = substring(tsa, 5))
+
+## ** Crosswalk Data ----
+
+crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", skip=2) %>%
+  rename(
+    county_name = 1,
+    public_health_region = 2,
+    tsa = 3
+  ) %>%
+  mutate(tsa_clean = substring(tsa, 1, 1))
+
+
+
+# ** State -----------------------------------
+
+# Tests Per 100,000
+
+total_population <- state_pop %>%
+  clean_names() %>% 
+  rename(state=name, total_population=estimate, fips=geoid) %>% 
+  filter(state=="Texas")
+
+#SCRATCH THIS AND USE JHU'S TESTING RATE
+total_tests <- dshs_state_tests %>%
+  group_by(state,fips) %>%
+  summarise(total_tests = sum(tests)) %>%
+  ungroup() %>%
+  left_join(total_population, by=c("state","fips")) %>%
+  mutate(tests_per_100k = round(total_tests/total_population,digits=4)*100000)
+
+# Available Ventilators Per COVID-19 Case
+
+available_beds <- dshs_state_hospitalizations %>% 
+  filter(hosp_data == "Available Texas Hospital Beds") %>% 
+  select(value)
+
+available_beds_icu <- dshs_state_hospitalizations %>% 
+                        filter(hosp_data == "Available Texas ICU Beds") %>% 
+  select(value)
+
+available_ventilators = dshs_state_hospitalizations %>% 
+                           filter(hosp_data == "Available Texas Ventilators") %>% 
+  select(value)
+
+total_cases = (jhu_cases_state %>% select(confirmed))$confirmed
+
+print("Available Ventilators Per COVID-19 Case")
+print((available_ventilators / total_cases))
+
+# Available ICU Beds Per COVID-19 Case
+
+print("Available ICU Beds Per COVID-19 Case")
+print((available_beds_icu / total_cases))
+
+# Case Growth Rate
+
+daily_growth_rates <- nyt_state_cases %>%
+  arrange(date) %>%
+  mutate(daily_growth_rate = (cases / lag(cases))) %>%
+  mutate(daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill =
+                                                 0, align = "right"))
+
+print("Daily Growth Rates")
+print(daily_growth_rates %>% arrange(desc(date)))
+
+# Doubling Every X days
+
+## Get total cases today, find the date that was half of that
+today = ((nyt_state_cases %>% arrange(desc(date)))[1, 1])$date
+cases_today = ((nyt_state_cases %>% arrange(desc(date)))[1, 4])$cases
+
+last_half_day = ((nyt_state_cases %>% arrange(desc(date)) %>% filter(cases < (cases_today / 2)))[1, 1])$date
+
+print("Doubling every X days")
+print(today - last_half_day)
+
+
+# 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
+
+rates_of_change = nyt_state_cases %>%
+  arrange(date) %>%
+  mutate(
+    new_cases = case_when(
+      is.na(cases - lag(cases)) ~ 0,
+      TRUE ~ cases - lag(cases)
+    ),
+    new_deaths = case_when(
+      is.na(deaths - lag(deaths)) ~ 0,
+      TRUE ~ deaths - lag(deaths)
+    )
+  ) %>% 
+  mutate(
+    new_cases_7day_avg = rollmean(new_cases, 7, fill=0, align="right"),
+    new_deaths_7day_avg = rollmean(new_deaths, 7, fill=0, align="right")
+  )
+
+print("Rates of Change.")
+print(rates_of_change %>% arrange(desc(date)))
+
+# Positive/Negative Testing. Current and TS.
+
+# 
+#  ** County ----------
+# 
+
+# Crosswalk the NCHS and Trauma Service Area Data.
+
+county_tsa_data  = merge(crosswalk_data, dshs_tsa_hospital_data, by="tsa_clean")
+
+print("Crosswalk county hospital data.")
+print(county_tsa_data)
+
+# Integrate DSHS Tests Per County Data
+
+dshs_county_data = merge(dshs_county_data, dshs_county_test_data, by="county_name")
+dshs_county_data = merge(dshs_county_data, dshs_state_case_and_fatalities, by="county_name")
+dshs_county_data = merge(dshs_county_data, county_tsa_data, by="county_name")
+
+# Tests Per 100,000
+
+tests_per_100k_counties = 100000 * dshs_county_data$tests / dshs_county_data$population
+
+print(tests_per_100k_counties)
+
+# Available Ventilators Per COVID-19 Case
+
+dshs_county_data = dshs_county_data %>%
+  mutate(
+    ventilators_per_case = adult_icu / confirmed_cases
+  )
+
+print("Available Ventilators Per COVID-19 Case (Calculated at TSA level)")
+print(dshs_county_data %>% select("county_name", "ventilators_per_case"))
+
+
+# Available ICU Beds Per COVID-19 Case
+
+dshs_county_data = dshs_county_data %>%
+  mutate(
+    icu_beds_per_case = adult_icu / confirmed_cases
+  )
+
+print("Available ICU Beds COVID-19 Case (Calculated at TSA level)")
+print(dshs_county_data %>% select("county_name", "icu_beds_per_case"))
+
+# Case Growth Rate
+
+daily_county_growth_rates = nyt_county_cases %>%
+  group_by(county) %>%
+  arrange(date) %>%
+  mutate(
+    daily_growth_rate = case_when(
+      is.na(cases / lag(cases)) ~ 0,
+      TRUE ~ cases / lag(cases)
+    )
+  ) %>%
+  mutate(
+    daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, fill=0, align="right")
+  )
+
+print("County growth rate, e.g. Austin County:")
+print(daily_county_growth_rates %>% filter(county=="Austin") %>% arrange(desc(date)))
+
+# Doubling Every X days
+
+# 1 and 7-day rates of change for cumulative cases, daily new cases, daily new deaths, and daily new hospitalized
+
+county_rates_of_change = nyt_county_cases %>%
+  group_by(county) %>%
+  arrange(date) %>%
+  mutate(
+    new_cases = case_when(
+      is.na(cases - lag(cases)) ~ 0,
+      TRUE ~ cases - lag(cases)
+    ),
+    new_deaths = case_when(
+      is.na(deaths - lag(deaths)) ~ 0,
+      TRUE ~ deaths - lag(deaths)
+    )
+  ) %>% 
+  mutate(
+    new_cases_7day_avg = rollmean(new_cases, 7, fill=0, align="right"),
+    new_deaths_7day_avg = rollmean(new_deaths, 7, fill=0, align="right")
+  )
+
+print("County rates of Change.")
+print(county_rates_of_change %>% arrange(desc(date)))
+
+
+# Positive/Negative Testing. Current and TS. (If we can get comprehensive data on testing at the county level. To my knowledge, COVID-tracking only produces this at a statewide-level).
+# 
 ```
 
 # Economic Data
@@ -464,7 +854,7 @@ hb_employees_working <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX
   )) %>% 
   select(geo_type, area=X3,everything(),-X2) %>% 
   filter(!is.na(area))
-å```
+```
 
 ### NYT ggplot2 State Chart
 ```{r, nyt state data}
