@@ -8,12 +8,24 @@
 background-color: #3A4A9F;
 }
 
+.no-scroll .leaf-map {
+  overflow-y: scroll;
+  position: fixed;
+  width: 700px;
+}
+
+.no-scroll .header-row {
+  overflow-y: scroll;
+  position: fixed;
+  width: 100%;
+}
+
 .leaflet-container .leaflet-control-attribution {
 	background: #3A4A9F;
 	color:#fff;
 	margin: 0;
 	}
-	
+
 .nav-tabs-custom>.tab-content {
 background: #3A4A9F;
 padding: 0px;
@@ -34,7 +46,7 @@ background: #3A4A9F;
 box-shadow: 0 1px 1px rgba(0,0,0,.1);
 border-radius: 3px;
 }
-	
+
 .small-box {
 border-radius: 2px;
 position: relative;
@@ -131,6 +143,12 @@ body {
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+.h1, h1 {
+font-size: 46px;
+text-align: center;
+letter-spacing: 2.1px;
+}
+
 .info {
   padding: 6px 8px;
   font: 14px/16px 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -191,8 +209,8 @@ color: #fff;
 }
 
 .legendCircle {
-   border-radius:50%; 
-   border: 2px solid black; 
+   border-radius:50%;
+   border: 2px solid black;
    display: inline-block;
    position: relative;
  }
@@ -393,6 +411,9 @@ box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
   border: 0 solid #fff;
 }
 
+.shiny-loader-placeholder {
+  height:100px !important;
+}
 .selectize-dropdown .optgroup-header {
   color: #fff;
   background: #3a4a9f;
@@ -425,9 +446,9 @@ box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
   border-color: #fff transparent transparent transparent;
 }
 
-<<<<<<< HEAD
 .covid-topic {
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing:2px;
     text-align: center;
     text-transform: uppercase;
     color: rgb(58, 74, 159);
@@ -444,16 +465,21 @@ box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
   padding: 6% 0;
 }
 
+.tile-header{
+  text-align:center;
+  font-size:.5em;
+  text-transform:uppercase;
+  font-weight:500
+}
+
 .economic-grid {
   padding: 2px;
 }
 .sidebar-menu li {
   display: block;
 }
-=======
 
 .sidebar-menu li {
-  padding-left: 1em;
+  padding-left: 0em;
   display: block;
 }
->>>>>>> cd9486bfd5b09b6ef9d91608b82885ec2b3e8d67
