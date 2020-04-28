@@ -25,7 +25,7 @@ library(zoo)
 
 fredr_set_key("22c6ffaa111781ee88df344a4f120eef")
 
-blank <- "https://api.mapbox.com/styles/v1/mrw03b/cji21nw3e03ht2rqz4kgte0ea/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXJ3MDNiIiwiYSI6IlYwb2FiOWcifQ.RWUm2a87fEC9XrDxzvZKKg"
+blank <- "https://api.mapbox.com/styles/v1/mrw03b/ck9k6odnd1hqd1it49c80p11z/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXJ3MDNiIiwiYSI6IlYwb2FiOWcifQ.RWUm2a87fEC9XrDxzvZKKg"
 map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a href='http://texas2036.org'> MAP © TEXAS 2036</a>"
 
 thumbnail_label <- function (title, label, content, button_link, button_label) {
@@ -684,7 +684,7 @@ body <- dashboardBody(
               HTML("<iframe width='100%' height=1200vh' style='border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://staging.convex.design/texas-2036/texas-covid-live-report/?currentCounty=Anderson'></iframe>"))),
     tabItem(tabName = "state_profiles",
 # **STATEWIDE PROFILE UI ----------------------------------------------------
-            h1(style="font-weight:800;", "STATEWIDE COVID-19 PROFILE", span="id='statewide-profile'"),      
+            h1(style="font-weight:800;", "STATEWIDE PROFILE", span="id='statewide-profile'"),      
 
 # ~~Public Health ---------------------------------------------------------
 
@@ -859,7 +859,7 @@ h3(class="covid-topic", "Current Hospital Data"),
 tabItem(tabName = "county_profiles",
             fluidRow(
               column(width = 6,
-                     h2(style="font-weight:800;","COUNTY COVID-19 PROFILE", span="id='county-profile'")),
+                     h2(style="font-weight:800;","COUNTY PROFILE", span="id='county-profile'")),
               column(width = 6,
                      selectizeInput(inputId = "countyname", label =NULL, choices = county_list,
                                     selected="Harris", multiple = FALSE, width="100%",
@@ -1191,7 +1191,9 @@ server <- function (input, output, session) {
     
     
     infoBox(
-      title="% Hospitalized", value=paste0(tot_pos$hospitalization_rate, "%"),
+      title="% Hospitalized", 
+      value="6.17%",
+      # value=paste0(tot_pos$hospitalization_rate, "%"),
       subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
       icon = icon("hospital-user"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )

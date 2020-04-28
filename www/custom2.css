@@ -691,9 +691,97 @@ display: block;
     border-color:#00A9C5;
 }
 
+html, body, #map {
+height: 640px !important;
+background-color: rgb(58, 74, 159);
+}
+
+/* MOBILE CSS CODE */
+
 @media (max-width: 800px) {
   .jumbotron h1 {
-    font-size: 3.0rem;	  
+    font-size: 3.8rem;	  
   }
+  
+  .jumbotron p {
+    font-size: 2rem;
+  }
+  
+  .skin-blue .main-header .navbar {
+    background-color: transparent;
+    }
+    
+  .h1, h1 {
+    font-size: 39px;
+    text-align: center;
+    letter-spacing: 2.1px;
+  }
+  
+  .economic-tile {
+  width: 100%;
+  background-color: #002D74;
+  margin: 0 2px;
+  padding: 6% 0;
+  max-height: 180px;
+}
+
+.tile-header {
+  text-align: center;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.covid-topic {
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(58, 74, 159);
+  margin-right: -15px;
+  margin-left: -15px;
+  background: rgb(234, 239, 246);
+  padding: 10px;
+}
+
+html, body, #map {
+width: 100vw !important;
+height: 636px !important;
+background-color: rgb(58, 74, 159);
+visibility: inherit !important;
+position: relative !important;
+outline: none;
+}
+
+.main-sidebar{
+  top: -45px;
+}
+
+section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-input.action-link {
+margin: 17px 5px -4px 15px;
+}
+
+.leaflet-container {
+overflow: initial;
+}
+
+.leaflet-left .leaflet-control {
+margin-left: -7px;
+}
+
+.leaflet-bottom .leaflet-control {
+margin-bottom: -6px;
+}
+
+.legend {
+line-height: 16px;
+color: #fff;
+}
+
+.h2, h2 {
+margin-top: 20px;
+margin-bottom: 20px;
+}
 
 }
