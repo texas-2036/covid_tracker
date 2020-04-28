@@ -4,8 +4,17 @@
   /* font-size: 24px; */
 }
 
+.main-header {
+  position: fixed;
+  width:100%;
+  -webkit-box-shadow: 0 8px 6px 0px #002D74;
+	-moz-box-shadow: 0 8px 6px 0px #002D74;
+	box-shadow: 0 8px 15px 0px #002D74;
+}
+
+
 .skin-blue .main-header .navbar {
-background-color: #3A4A9F;
+background-color: #EAEFF6;
 }
 
 .no-scroll .leaf-map {
@@ -79,19 +88,39 @@ margin-top: 0px;
 }
 
 .skin-blue .main-header .logo {
-background-color: #3A4A9F;
-color: #ffffff;
+background-color: #EAEFF6; 
+position: fixed;
+color: #3A4A9F;
+border-bottom: 0 solid transparent;
+}
+
+.skin-blue .main-header .logo:hover {
+background-color: #EAEFF6; 
+color: #3A4A9F;
+position: fixed;
 border-bottom: 0 solid transparent;
 }
 
 .sidebar {
-color: #fff;
-font-size: 20px;
-font-weight:800;
+  color: #fff;
+  font-size: 20px;
+  font-weight:800;
+  position: fixed;
+  white-space: nowrap;
+  overflow: visible;
+}
+
+.content {
+  margin-top: 50px;
 }
 
 .sidebar-menu {
 margin-top:10px;
+}
+
+.sidebar-menu > li > a {
+border-top: solid 0.5px #3a4a9f;
+border-bottom: solid 0.5px #3a4a9f;
 }
 
 .skin-blue .sidebar a {
@@ -99,14 +128,14 @@ color: #fff;
 }
 
 .skin-blue .left-side, .skin-blue .main-sidebar, .skin-blue .wrapper {
-background-color: #3A4A9F;
+background-color: #002D74;
 color: #fff;
 }
 
 .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li:hover>a {
 color: #fff;
-font-weight: 700;
-background: #3A4A9F;
+font-weight: 500;
+background-color: rgba(255, 255, 255, 0.2);
 border-left-color: #F26852;
 }
 
@@ -116,20 +145,21 @@ background-color: #3A4A9F;
 z-index: 800;
 }
 
-.skin-blue .main-header .logo:hover {
-background-color: #3A4A9F;
-color: #ffffff;
-border-bottom: 0 solid transparent;
+.skin-blue .main-header .navbar .sidebar-toggle {
+color: #3A4A9F;
+background: #EAEFF6;
+position:fixed;
+overflow-y:scroll;
+
 }
 
-.skin-blue .main-header .navbar .sidebar-toggle {
-color: #ffffff;
-background: #3A4A9F;
+.idyll-root {
+backgrounbd: #fff;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
-color: #ffffff;
-background: #3A4A9F;
+color: #002D74;
+background: #DBDCDD;
 }
 
 body {
@@ -149,11 +179,96 @@ text-align: center;
 letter-spacing: 2.1px;
 }
 
+.tsa-paragraph {
+  line-height:2;
+  text-align:left;
+  display:inline;
+}
+
+.jumbotron {
+padding-top: 48px;
+background-color: #3A4A9F;
+padding-bottom: 48px;
+}
+
+.jumbotron .h1, .jumbotron h1 {
+font-size: 64px;
+font-weight: 800;
+color: #fff;
+text-transform: uppercase;
+letter-spacing: 6px;
+text-align: center;
+}
+
+.jumbotron p {
+margin-bottom: 15px;
+font-size: 32px;
+font-weight: 500;
+color: #fff;
+text-transform: uppercase;
+letter-spacing: 3px;
+text-align: center;
+}
+
+.thumbnail .caption {
+padding: 9px;
+margin: 0;
+color: #3A4A9F;
+}
+
+.thumbnail {
+  display: block;
+  text-align:center;
+  padding: 5px;
+  margin-bottom: 20px;
+  line-height: 1.42857143;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #3A4A9F;
+  border-radius: 4px;
+  -webkit-transition: border .2s ease-in-out;
+  -o-transition: border .2s ease-in-out;
+  transition: border .2s ease-in-out;
+}
+
+.thumbnail h3{
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.thumbnail p{
+  font-weight: 400;
+  font-size:18px;
+  line-height:1.3;
+  color: #fff;
+  margin:12px;
+  text-align: left;
+}
+
+.thumbnail i{
+  font-size:45px;
+  line-height:1.3;
+  color: #002D74;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-primary {
+background-color: #F26852;
+font-size: 18px;
+font-weight: 500;
+text-transform: uppercase;
+border-width: 2px;
+width: 100%;
+border-color: #F26852;
+}
+
 .info {
   padding: 6px 8px;
   font: 14px/16px 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: #3A4A9F;
-  background: #3A4A9F;
+  background: transparent;
   box-shadow: none;
   border-radius: 5px;
 }
@@ -475,11 +590,10 @@ box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
 .economic-grid {
   padding: 2px;
 }
-.sidebar-menu li {
-  display: block;
-}
 
 .sidebar-menu li {
   padding-left: 0em;
+  font-weight:500;
   display: block;
 }
+ 
