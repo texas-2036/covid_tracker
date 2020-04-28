@@ -1,1 +1,1 @@
-Dillon Ipsum Julie Taylor, will you marry me? Clear Eyes. Full Hearts. Saracen, quarterback's a captain. CHAMPIONS DON'T COMPLAIN! 
+Not every community has felt the effects of COVID-19 equally. Through partnerships with multiple stakeholders across the state, we've worked to document those local impacts being felt across each of our 254 counties. Read here to explorer county-level data. 

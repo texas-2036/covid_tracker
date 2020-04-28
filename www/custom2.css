@@ -220,6 +220,7 @@ color: #3A4A9F;
   display: block;
   text-align:center;
   padding: 5px;
+  height: 375px;
   margin-bottom: 20px;
   line-height: 1.42857143;
   background-color: rgba(255, 255, 255, 0.2);
@@ -596,7 +597,99 @@ box-shadow: inset 0 0px 0px rgba(0,0,0,.075), 0 0 0px rgba(102, 175, 233, 0.6);
   font-weight:500;
   display: block;
 }
- 
+
+.sidebar-menu>li>a>.fa {
+/* width: 20px; */
+text-align: center;
+width: 1.25em;
+}
+
+.modal-content {
+position: relative;
+background-color: #EAEFF6;
+background-clip: padding-box;
+border: 1px solid #999;
+border: 1px solid rgba(0,0,0,.2);
+border-radius: 6px;
+-webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+box-shadow: 0 3px 9px rgba(0,0,0,.5);
+outline: 0;
+}
+
+.modal-title {
+margin: 0;
+font-weight: 500;
+color: #3A4A9F;
+font-size: 25px;
+text-align: center;
+text-transform: uppercase;
+letter-spacing: 3px;
+line-height: 1.42857143;
+}
+
+.modal-header {
+padding: 15px;
+border-bottom: 9px solid #F26852;
+}
+
+.modal-body {
+position: relative;
+padding: 15px;
+color:#6B6D6F;
+font-size: 16px;
+line-height: 1.8;
+}
+
+.modal-body h4{
+  font-weight:700;
+  letter-spacing: 1.5px;
+
+}
+
+.modal-body h2{
+  font-weight:700;
+  letter-spacing: 1.5px;
+
+}
+section.sidebar .shiny-bound-input.action-button, section.sidebar .shiny-bound-input.action-link {
+margin: 6px 5px 6px 15px;
+background-color: #EAEFF6;
+text-transform: uppercase;
+font-weight: 600;
+color: #3A4A9F;
+width:90%;
+font-size:18px;
+letter-spacing: 2px;
+display: block;
+}
+
+.collateral {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.collateral h1{
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:3px;
+}
+
+.collateral h2{
+  font-weight:600;
+  color:#FFD100;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+
+.collateral h3{
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.btn-primary.hover, .btn-primary:active, .btn-primary:hover {
+    background-color:#00A9C5;
+    border-color:#00A9C5;
+}
 
 @media (max-width: 800px) {
   .jumbotron h1 {
