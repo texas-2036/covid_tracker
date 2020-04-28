@@ -1194,7 +1194,8 @@ server <- function (input, output, session) {
       title="% Hospitalized", 
       value="6.17%",
       # value=paste0(tot_pos$hospitalization_rate, "%"),
-      subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
+      subtitle=paste0(tot_pos$hosprate_rank, "Ranks NA Today"),
+      # subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
       icon = icon("hospital-user"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
