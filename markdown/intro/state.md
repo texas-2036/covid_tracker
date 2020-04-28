@@ -1,1 +1,1 @@
-Dillon Ipsum Julie Taylor, will you marry me? Clear Eyes. Full Hearts. Saracen, quarterback's a captain. CHAMPIONS DON'T COMPLAIN!
+The impacts of COVID-19 on Texas has been both wide and deep. In an effort to track the toll taken on the lives of Texans and the deep economic hardships endured across the state, we have organized a series of data visualizations at the statewide level. 

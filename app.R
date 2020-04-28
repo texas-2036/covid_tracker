@@ -626,17 +626,16 @@ sidebar <- dashboardSidebar(disable = FALSE,
                               menuItem("County Explorer",
                                        tabName = "county_profiles", 
                                        icon = icon("city")),
-                              menuItem("About", icon = icon("circle"), 
-                                       tabName = "about"),
-                              menuItem("Credits",
-                                       tabName = "credits", 
-                                       icon = icon("circle")),
-                              menuItem("Data",
-                                       tabName = "data", 
-                                       icon = icon("circle")),
-                              menuItem("Learn More",
-                                       tabName = "learn_more", 
-                                       icon = icon("circle"))
+                              # menuItem("Credits",
+                              #          tabName = "credits", 
+                              #          icon = icon("circle")),
+                              # menuItem("Data",
+                              #          tabName = "data", 
+                              #          icon = icon("circle")),
+                              actionButton("about", "About"),
+                              actionButton("learn", "Learn More")
+                              # actionButton("show", "Learn More", icon = icon("info-circle", class = "fa-pull-left"), style="color: #152934"),
+                              
                             )
 )
 
@@ -652,15 +651,19 @@ body <- dashboardBody(
     includeHTML(("google_analytics.html")),
     tags$script(HTML("$('body').addClass('fixed');")),
     tags$style(type = "text/css", "div.info.legend.leaflet-control br {clear: both;}"),
-    tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")
-    
-  ),
+    tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")  ),
+
+# **Landing Page ----------------------------------------------------------
+
+  
   tabItems(
     tabItem(tabName = "intro",
-      jumbotron("Texas COVID-19 Data Resources", 
-                "A Comprehensive Look Into Our Current Moment",
+      jumbotron("Texas COVID-19 Data Resource", 
+                "A Comprehensive Look At Our Current Moment",
                 button = FALSE),
-      hr(),
+      hr(style="border-top: 48px solid #fff;"),
+      HTML("<i style='color:#F26852;display: block;text-align: center;margin-top:-82px;margin-bottom: 20px;font-size: 112px;}' class='fas fa-2x fa-hands-helping'></i>"),
+      br(),
       fluidRow(
         column(4, thumbnail_label(title="<i class='fas fa-door-open'></i>",
                                   label = 'Reopening Analysis',
@@ -931,39 +934,28 @@ tabItem(tabName = "county_profiles",
                   collapsible = FALSE))
               )
             ),
-    tabItem(tabName = "about",
-            fluidRow(
-              box(
-                title = "Calls & Calls Per 100 Households", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE
-                ),
-              box(
-                title = "Median Household Values & The Gini Index", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE
-                )
-              ),
-            fluidRow(
-              box(
-                title = "The Map Indicators & Indicator Percentile", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE
-              ),
-              box(
-                title = "Histogram", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE
+    tabItem(tabName = "credits",
+            fluidRow(class="collateral",
+              column(width=3),
+              column(width=6,
+                     withMathJax(includeMarkdown("markdown/sidebar/credits.md"))
+                     ),
+              column(width=3)
+              
               )
             ),
-            fluidRow(
-              box(
-                title = "Histogram", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE
-              ),
-              box(
-                title = "Histogram", status = "primary", solidHeader = TRUE,
-                collapsible = TRUE
-              )
-            )
-            )
-    )
+    tabItem(tabName = "data",
+        fluidRow(class="collateral",
+          column(width=2),
+          column(width=8,
+                 withMathJax(includeMarkdown("markdown/sidebar/data.md"))
+                 ),
+          column(width=2)
+          )
+        )
+),
+hr(),
+tags$footer(includeMarkdown("footer.md"), align = "center")
 )
 
 
@@ -973,6 +965,7 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
                     header = header,
                     sidebar = sidebar,
                     body = body
+
 )
 
 
@@ -981,6 +974,8 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
 server <- function (input, output, session) {
   
   options(digits.secs = 0) # Include milliseconds in time display
+  
+  
   
 
 # {Latest NYT Update Date} ----------------------------------------------------
@@ -995,8 +990,33 @@ server <- function (input, output, session) {
     format(latest_update, format="%B %d, %Y")
       
     })
-  
 
+# MODAL - Sign-Up -----------------------------------------------------------
+
+  observeEvent(input$learn, {
+    showModal(
+      modalDialog(
+        title = "Connect with Texas 2036",
+        size = "l",
+        footer = HTML("<a href='http://www.unitedwayaustin.org/our-work/2gen/'>© United Way of Greater Austin</a>"),
+        includeHTML("markdown/sidebar/signup.html"),
+        easyClose = TRUE
+      ))
+  })
+
+# MODAL - About -----------------------------------------------------------
+
+  observeEvent(input$about, {
+    showModal(
+      modalDialog(
+      title = "About This Dashboard",
+      size = "l",
+      footer = HTML("<a href='http://www.unitedwayaustin.org/our-work/2gen/'>© United Way of Greater Austin</a>"),
+      includeMarkdown("markdown/sidebar/learnmore.md"),
+      easyClose = TRUE
+    ))
+  })
+  
 # INFO BOXES - STATEWIDE--------------------------------------------------------------
 
 # --{InfoBox - PH - Total Cases} -----------------------------------------------
