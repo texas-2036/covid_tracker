@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fira+Code:400,700&display=swap');
+
+h1, h2,  .h1, .h2 {
+font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+font-weight: 900;
+line-height: 1.1;
+color: inherit;
+}
+
+.credits h3, h4, h5, h6,.h3, .h4, .h5, .h6 {
+font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+font-weight: 600;
+line-height: 1.1;
+color: inherit;
+text-transform: uppercase;
+text-decoration: none;
+}
+
+.credits body {
+font-family: "Montserrat", "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 16px;
+font-weight: 400;
+line-height: 1.5;
+color: #fff;
+background-color: #3a4a9f;
+}
+
+.credits code, kbd, pre, samp {
+    font-family: "Fira Code",monospace;
+    font-size: .9em;
+}
+
+.credits .btn-group-xs>.btn, .btn-xs {
+padding: 1px 5px;
+font-size: 14px;
+font-weight: 600;
+text-transform: uppercase;
+color: #3A4A9F;
+line-height: 1.5;
+border-radius: 3px;
+}
+
+.credits .navbar-inverse {
+background-color: #3A4A9F;
+border-color: #3A4A9F;
+}
+
+.credits.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+color: #ffffff;
+background-color: #3A4A9F;
+}
+
+.credits .dropdown-menu>li>a {
+display: block;
+padding: 3px 20px;
+clear: both;
+font-weight: 500;
+line-height: 1.42857143;
+color: #3A4A9F;
+white-space: nowrap;
+}
+
+.credits a {
+color: #F26852;
+font-weight: 500;
+text-decoration: none;
+}
+
+.credits a:focus, a:hover {
+color: #f48674;
+text-decoration: underline;
+}
