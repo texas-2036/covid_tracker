@@ -49,10 +49,7 @@ sever_default <- function (title = "Whoops!", subtitle = "You have been disconne
 }
 
 
-waiting_screen <- tagList(
-  spin_flower(),
-  h4("Cool stuff loading...")
-) 
+# Waiting Screen ----------------------------------------------------------
 
 disconnected <- sever_default(
   # logo = "www/logo_short_w.png",
@@ -62,7 +59,7 @@ disconnected <- sever_default(
   button_class = "info"
 )
 
-waiter_set_theme(html = spin_3(), color = "darkblue")
+# waiter_set_theme(html = waiting_screen(), color = "darkblue", logo="www/logo_short_w.png")
 
 
 # DATA PREP CODE ----------------------------------------------------------
@@ -693,8 +690,11 @@ tabItems(
             fluidRow(
               HTML("<iframe width='100%' height=1200vh' style='border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://staging.convex.design/texas-2036/texas-covid-live-report/?currentCounty=Anderson'></iframe>"))),
     tabItem(tabName = "state_profiles",
-            use_waiter(),
+            use_waiter(include_js = FALSE),
             use_hostess(),
+            waiter_show_on_load(html = tagList(spin_flower(),h4("Thanks for being patient while we get everything set up.")),
+                                color = "#3A4A9F",
+                                logo = "logo_short_w.png"),
             # waiter_show_on_load(
             #   color = "#f7fff7",
             #   hostess_loader(
@@ -922,7 +922,7 @@ tabItem(tabName = "county_profiles",
                        h4(style="font-weight:400;display:inline;", "is a part of "),
                        h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                        h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                       h4(style="font-weight:800;color:#FFD100;display:inline;", "On April 24th "),
+                       h4(style="font-weight:800;color:#FFD100;display:inline;", "On April 28th "),
                        h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                        ))),
               fluidRow( 
@@ -999,9 +999,16 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
 
 server <- function (input, output, session) {
   
+  Sys.sleep(3) # do something that takes time
+  waiter_hide()
+  
 # Waiter + Waitress Functions ---------------------------------------------
   
-  w <- Waiter$new(id = c("hc", "table"))
+  w <- Waiter$new(html = spin_facebook(), 
+                  id = c("tx_cases", "tx_mort", "tx_recover","state_growth_rate_hchart", "cli_hchart", "ili_hchart", "state_curves_hchart",
+                         "state_new_cases_hchart", "state_new_deaths_hchart", "state_new_tests_hchart", "state_claims_hchart", 
+                         "state_businesses_hchart", "state_hours_hchart", "state_employees_hchart", "cnty_new_deaths_hchart", 
+                         "cnty_new_cases_hchart", "cnty_curves_hchart"))
   
   dataset <- reactive({
     input$draw
@@ -1012,26 +1019,6 @@ server <- function (input, output, session) {
     
     head(cars)
   })
-  
-  # host <- Hostess$new(n = 3)
-  # 
-  # w <- Waiter$new(
-  #   c("state_growth_rate_hchart", "ili_hchart", "cli_hchart"),
-  #   html = host$get_loader(stroke_color = "#F26852")
-  # )
-  # 
-  # dataset <- reactive({
-  #   input$btn
-  #   
-  #   w$show()
-  #   
-  #   for(i in 1:10){
-  #     Sys.sleep(.7)
-  #     host$set(i * 10)
-  #   }
-  #   
-  #   runif(100)
-  # })
 
 # App Disconnect Dialogue ----------------------------------------------------------
 
@@ -1112,6 +1099,8 @@ server <- function (input, output, session) {
 # --{InfoBox - PH - Total Cases} -----------------------------------------------
     
   output$tx_cases <- renderInfoBox({
+
+    dataset()
     
     tot_pos <- jhu_cases_state %>% 
       select(confirmed, cases_rank) %>% 
@@ -1129,6 +1118,8 @@ server <- function (input, output, session) {
   
   output$tx_mort <- renderInfoBox({
     
+    dataset()
+    
     tot_pos <- jhu_cases_state %>% 
       select(mortality_rate,  mortality_rank) %>% 
       mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
@@ -1145,6 +1136,8 @@ server <- function (input, output, session) {
   # {InfoBox - PH - Recovered} -----------------------------------------------
   
   output$tx_recover <- renderInfoBox({
+    
+    dataset()
     
     tot_pos <- jhu_cases_state %>% 
       select(recovered,  recovered_rank) %>% 
@@ -1216,6 +1209,8 @@ server <- function (input, output, session) {
 
   output$tx_beds <- renderInfoBox({
     
+    dataset()
+    
     tot_pos <- dshs_tsa_hosp_data %>%
       as_tibble() %>% 
       select(tsa,tsa_counties,available_beds,bed_capacity) %>% 
@@ -1235,6 +1230,8 @@ server <- function (input, output, session) {
 # {ICU Beds Availability - State}-------------------------------------------------
   
   output$tx_icu_beds <- renderInfoBox({
+    
+    dataset()
     
     tot_pos <- dshs_tsa_hosp_data %>%
       as_tibble() %>% 
@@ -1256,6 +1253,8 @@ server <- function (input, output, session) {
   
   output$tx_vents <- renderInfoBox({
     
+    dataset()
+    
     tot_pos <- dshs_tsa_vent_data %>% 
       filter(tsa=="Total") %>% 
       mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=2)) %>% 
@@ -1274,6 +1273,8 @@ server <- function (input, output, session) {
   
   output$hospitalized_rate <- renderInfoBox({
     
+    dataset()
+    
     tot_pos <- hosp_capacity %>% 
       select(hospitalization_rate, hosprate_rank) %>% 
       mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
@@ -1282,8 +1283,8 @@ server <- function (input, output, session) {
     
     infoBox(
       title="% Hospitalized", 
-      value="6.17%",
-      # value=paste0(tot_pos$hospitalization_rate, "%"),
+      # value="6.17%",
+      value=paste0(tot_pos$hospitalization_rate, "%"),
       subtitle="Ranks NA Today",
       # subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
       icon = icon("hospital-user"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
@@ -1373,6 +1374,7 @@ server <- function (input, output, session) {
   
   output$cli_hchart <- renderHighchart({
     
+    dataset()
     # Make sure requirements are met
     # req(input$countyname)
     
@@ -1432,9 +1434,7 @@ server <- function (input, output, session) {
                                 minorGridLineColor = "#F3F3F3", 
                                 tickColor = "#F3F3F3", 
                                 tickWidth = 1))))
-  
-    dataset()
-    
+
     
   })
   
@@ -1442,6 +1442,7 @@ server <- function (input, output, session) {
   
   output$ili_hchart <- renderHighchart({
     
+    dataset()
     # Make sure requirements are met
     # req(input$countyname)
     
@@ -1501,7 +1502,6 @@ server <- function (input, output, session) {
                                 minorGridLineColor = "#F3F3F3", 
                                 tickColor = "#F3F3F3", 
                                 tickWidth = 1))))
-    dataset()
     
     
   })
@@ -1856,6 +1856,8 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
+    dataset()
+    
     hcoptslang <- getOption("highcharter.lang")
     hcoptslang$thousandsSep <- ","
     options(highcharter.lang = hcoptslang)
@@ -1927,6 +1929,9 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
+    dataset()
+    
+    
     hcoptslang <- getOption("highcharter.lang")
     hcoptslang$thousandsSep <- ","
     options(highcharter.lang = hcoptslang)
@@ -1937,7 +1942,7 @@ server <- function (input, output, session) {
              color = "#FFD100") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Estimated Change in Businesses Open",
+        text ="Est. Change in Businesses Open",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Business Open")) %>% 
       hc_xAxis(title=NULL) %>% 
@@ -1997,6 +2002,8 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
+    dataset()
+    
     hcoptslang <- getOption("highcharter.lang")
     hcoptslang$thousandsSep <- ","
     options(highcharter.lang = hcoptslang)
@@ -2007,7 +2014,7 @@ server <- function (input, output, session) {
              color = "#FFD100") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Estimated Change in Hours Worked By Hourly Employees",
+        text ="Est. Change in Hours Worked By Hourly Employees",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Hours Worked")) %>% 
       hc_xAxis(title=NULL) %>% 
@@ -2067,6 +2074,8 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
+    dataset()
+    
     hcoptslang <- getOption("highcharter.lang")
     hcoptslang$thousandsSep <- ","
     options(highcharter.lang = hcoptslang)
@@ -2077,7 +2086,7 @@ server <- function (input, output, session) {
              color = "#FFD100") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text = "Estimated Change in Number of Hourly Employees Working",
+        text = "Est. Change in Number of Hourly Employees Working",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Employees Working")) %>% 
       hc_xAxis(title=NULL) %>% 
@@ -2510,6 +2519,8 @@ output$county_mort_rate <- renderText({
       # Make sure requirements are met
      req(input$countyname)
       
+      dataset()
+      
       nyt_county_cases_chart <- nyt_county_cases %>% 
         filter(county==input$countyname) %>% 
         mutate(min_new = min(cases, na.rm = TRUE),
@@ -2577,6 +2588,8 @@ output$county_mort_rate <- renderText({
       
       # Make sure requirements are met
       req(input$countyname)
+      
+      dataset()
       
       hcoptslang <- getOption("highcharter.lang")
       hcoptslang$thousandsSep <- ","
@@ -2666,6 +2679,8 @@ output$county_mort_rate <- renderText({
       
       # Make sure requirements are met
       # req(input$countyname)
+      
+      dataset()
       
       hcoptslang <- getOption("highcharter.lang")
       hcoptslang$thousandsSep <- ","

@@ -747,6 +747,11 @@ letter-spacing: 3px;
     color: #fff  !important;
 }
 
+.lds-facebook div {
+  width: 20px;
+  background: #F26852 !important;
+}
+
 /*path.mainline {
 fill: none;
 stroke-width: 4px;
