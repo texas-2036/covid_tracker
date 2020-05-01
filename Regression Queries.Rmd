@@ -1,0 +1,74 @@
+---
+title: "Regression Analysis Queries"
+author: "Matthew Worthington, M.Ed., M.PAff."
+date: "4/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+
+src <- "https://www.dshs.state.tx.us/coronavirus/TexasCOVID19DailyCountyCaseCountData.xlsx"
+lcl <- basename(src)
+download.file(url = src, destfile = lcl)
+
+dshs_county_data_list <- read_excel(lcl,skip=2) %>% 
+  clean_names() %>% 
+  rename_at(vars(matches("^cases_")), funs(gsub(pattern="^cases_", replacement="",x=.))) %>% 
+  filter(!is.na(`03_04`)) %>% 
+  gather(date,count, 3:56) %>% 
+  filter(date=="04_29") %>% 
+  filter(count <= 5) %>% 
+  select(county_name) %>%
+  distinct() %>% 
+  pull()
+  
+syndromic_cli <- read_excel("data/dshs/TxS2 Chart April 28 Dashboard.xlsx", sheet="CLI Data", skip=0) %>%
+  clean_names() %>% 
+  mutate(date = ymd(date)) %>% 
+  group_by(date) %>% 
+  count(pt_county) %>% 
+  filter(pt_county %in% dshs_county_data_list) %>% 
+  filter(date >= as.Date("2020-04-08")) %>% 
+  ungroup() %>% 
+  group_by(pt_county) %>% 
+  summarise(cli_14day_int_tot = sum(n))
+
+syndromic_ili <- read_excel("data/dshs/TxS2 Chart April 28 Dashboard.xlsx", sheet="ILI Data", skip=0) %>%
+  clean_names() %>% 
+  mutate(date = ymd(date)) %>% 
+  group_by(date) %>% 
+  count(pt_county) %>% 
+  filter(pt_county %in% dshs_county_data_list) %>% 
+  filter(date >= as.Date("2020-04-08")) %>% 
+  ungroup() %>% 
+  group_by(pt_county) %>% 
+  summarise(ili_14day_int_tot = sum(n))
+
+
+symptom_reg <- read_csv("https://raw.githubusercontent.com/convex-design/texas-covid-live-report/master/data/county-symptoms.csv?token=AB6K4YVHYZF2F32QVHEOY3K6WRNL4") 
+  # filter(region %in% dshs_county_data_list) %>% 
+  # filter(date=="2020-04-22") #%>% 
+  mutate(group==)
+  write_csv("johns_cli_ili_pull.csv")
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

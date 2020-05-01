@@ -9,6 +9,7 @@ This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(lubridate)
 library(gghighlight)
 library(janitor)
 library(geofacet)
@@ -18,6 +19,7 @@ library(texas2036)
 library(fredr)
 library(readxl)
 library(grid)
+library(sf)
 library(ggthemes)
 library(ggforce)
 library(ggrepel)
@@ -460,7 +462,7 @@ crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", s
   summarise(tsa_counties = toString(county),
             geometry = st_union(geometry))
 
-tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports 04.24.20.xlsx", 
+tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports 28 APR (TXSG) (002).xlsx", 
                        sheet = "Bed Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -472,7 +474,7 @@ tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports 04.24.20.xlsx",
   st_as_sf() %>% 
   write_rds("clean_data/dshs/hospitals/tsa_bed_data_with_counties_sf.rds")
 
-tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_04.23.20.xlsx", 
+tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports 28 APR (TXSG) (002).xlsx", 
                        sheet = "Vent Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -495,17 +497,17 @@ tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_04.23.20.xlsx",
 
 ```{r}
 
-syndromic_tx <- read_excel("data/dshs/TxS2 Chart April 26 Dashboard.xlsx", sheet="Texas", skip=0) %>%
+syndromic_tx <- read_excel("data/dshs/TxS2 Chart April 29 Dashboard.xlsx", sheet="Texas", skip=0) %>%
   clean_names() %>% 
   mutate(date = ymd(date)) %>% 
   write_csv("clean_data/dshs/syndromic_tx.csv")
 
-syndromic_cli <- read_excel("data/dshs/TxS2 Chart April 26 Dashboard.xlsx", sheet="CLI Data", skip=0) %>%
+syndromic_cli <- read_excel("data/dshs/TxS2 Chart April 28 Dashboard.xlsx", sheet="CLI Data", skip=0) %>%
   clean_names() %>% 
   mutate(date = ymd(date)) %>% 
   write_csv("clean_data/dshs/syndromic_cli.csv")
 
-syndromic_ili <- read_excel("data/dshs/TxS2 Chart April 26 Dashboard.xlsx", sheet="ILI Data", skip=0) %>%
+syndromic_ili <- read_excel("data/dshs/TxS2 Chart April 28 Dashboard.xlsx", sheet="ILI Data", skip=0) %>%
   clean_names() %>% 
   mutate(date = ymd(date)) %>% 
   write_csv("clean_data/dshs/syndromic_ili.csv")
@@ -936,7 +938,43 @@ ts_state_cases_sf %>%
 ```
 
 
-## FRED Weekly Unemployment Claims
+## FREDr Data
+
+### 
+
+```{r}
+
+tx_series_all <-fredr(
+  series_id = "TXICLAIMS",
+  observation_start = as.Date("2020-01-01")
+) %>% 
+  mutate(date=as.character(date)) %>%
+  add_row(date="2020-04-18", series_id="TXICLAIMS", value=273567) %>%
+  add_row(date="2020-04-25", series_id="TXICLAIMS", value=437300) %>%
+  mutate(date=as.Date(date)) %>%
+  arrange(date) %>% 
+  write_rds("clean_data/fredr/ui_claims_ts.rds")
+
+
+
+tx_series <- tx_series_all %>%
+  filter(date >= as.Date("2020-03-21")) %>% 
+  group_by(series_id) %>% 
+  summarise(running_claims=sum(value)) %>% 
+  rename(value=running_claims) %>% 
+  mutate_at(vars(value),scales::comma)
+
+tx_urn <-fredr(
+  series_id = "TXURN",
+  observation_start = as.Date("2020-01-01")
+) %>% 
+  mutate(date=as.Date(date)) %>%
+  filter(date == max(date)) %>% 
+  write_rds("clean_data/fredr/unemploy_rate.rds")
+```
+
+
+#### ggplot2 Graphic
 
 ```{r, weekly_unemployment_claims}
 
@@ -1126,3 +1164,4 @@ nchs_urbanization_codes <- read_excel(lcl, skip=0) %>%
   ))
 ```
 
+# Regression Analysis Queries
