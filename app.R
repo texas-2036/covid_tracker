@@ -17,13 +17,12 @@ library(magrittr)
 library(leaflet)
 library(leaflet.extras)
 library(lubridate)
-library(tigris)
 library(janitor)
-library(fredr)
+library(waiter)
+library(sever)
+library(knitr)
 library(sf)
 library(zoo)
-
-fredr_set_key("22c6ffaa111781ee88df344a4f120eef")
 
 blank <- "https://api.mapbox.com/styles/v1/mrw03b/ck9k6odnd1hqd1it49c80p11z/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXJ3MDNiIiwiYSI6IlYwb2FiOWcifQ.RWUm2a87fEC9XrDxzvZKKg"
 map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a href='http://texas2036.org'> MAP © TEXAS 2036</a>"
@@ -34,11 +33,37 @@ thumbnail_label <- function (title, label, content, button_link, button_label) {
                              HTML(title),
                              h3(label), 
                              p(content), 
-                             div(class = "caption",
-                                 p(a(href = button_link, 
-                                     class = "btn btn-primary", 
-                                     role = "button", button_label))))))
+                             actionButton(inputId=button_link, 
+                                          label=button_label)
+                             )))
 }
+
+
+sever_default <- function (title = "Whoops!", subtitle = "You have been disconnected", 
+                           button = "Reload", button_class = "default") 
+{
+  tagList(tags$a(href='http://www.texas2036.org',
+                 HTML('<svg viewBox="0 0 227.4 83.5" style="height:7vh;padding-bottom:1.1vh;margin-top:7px"><path fill="#fff" d="M192.5 66.2c2.2 0 3.9.6 3.9 2.6v4.1c0 2-1.7 3.6-3.9 3.6-2.1 0-3.8-1.6-3.8-3.6v-5.1h-7.8v5.1c0 5.9 5.2 10.6 11.6 10.6 6.4 0 11.5-4.6 11.7-10.4.6 5.4 5.6 10.4 11.6 10.4 6.4 0 11.6-4.8 11.6-10.6v-7.4c0-5.8-5.2-10.6-11.6-10.6-1.4 0-2.7.2-3.9.6v-4.1c0-1.9 1.8-3.5 3.9-3.5 2.1 0 3.8 1.6 3.8 3.5v2.2h7.8v-2.2c0-4-2.5-7.5-6.1-9.3 3.6-1.8 6.1-5.3 6.1-9.3V10.5c0-5.8-5.2-10.5-11.6-10.5-6.1 0-11.1 4.3-11.6 9.8-.4-5.5-5.5-9.8-11.7-9.8-6.4 0-11.6 4.7-11.6 10.6v2.6h7.8v-2.6c0-1.9 1.7-3.5 3.8-3.5 2.2 0 3.9 1.6 3.9 3.5v.8l-.1.1-13 15.6c-2.3 2.8-2.4 3-2.4 5.9v10.5h4.1c-2.5 1.9-4.1 4.8-4.1 8v2.2h7.8v-2.2c0-1.9 1.7-3.5 3.8-3.5 2.2 0 3.9 1.6 3.9 3.5v4.1c0 2-1.7 3.6-3.9 3.6h-2.4v7.1h2.4zm19.4-55.6c0-1.9 1.7-3.5 3.8-3.5 2.1 0 3.8 1.6 3.8 3.5v20.7c0 2-1.7 3.6-3.8 3.6-2.1 0-3.8-1.6-3.8-3.6V10.6zm-7.8 57c-.3-1.9-1.3-3.3-2.9-5 1.6-1.6 2.6-3.7 2.9-5.9v10.9zm-15.4-32.8v-2.6l13.1-15.8c1.6-1.9 2.2-2.6 2.3-3.8v20.3c0 .5 0 .9.1 1.3l2.1 6.4h6.8l-5.5 4 2.1 6.5-5.5-4-5.5 4 2.1-6.5-5.5-4h6.8l1.9-5.9h-15.3zm30.9 38.1c0 2-1.7 3.6-3.8 3.6-2.2 0-3.9-1.6-3.9-3.6v-7.4c0-1.9 1.8-3.5 3.9-3.5 2.1 0 3.8 1.6 3.8 3.5v7.4zM8.4 82.7V8H0V0h24.8v8h-8.4v74.8h-8zm45.4 0H33V0h20.8v8H41v29.5h12.8v8H41v29.4h12.8v7.8zm70.2 0V45.3h-12.8v37.4h-8V14.4c0-8 6.5-14.4 14.4-14.4 7.8 0 14.3 6.5 14.3 14.4v68.3H124zm0-68.3c0-3.6-2.9-6.5-6.3-6.5-3.6 0-6.5 2.9-6.5 6.5v22.9H124V14.4zm37.6 6.1v-6.2c0-3.5-2.9-6.3-6.3-6.3-3.5 0-6.3 2.9-6.3 6.3v6.3c0 1.5 0 1.5.4 2.1l17.9 31.6c2.4 4.2 2.4 4.2 2.4 7.8v6.2c0 8-6.5 14.3-14.3 14.3S141 76.4 141 68.4v-6.2h8v6.2c0 3.6 2.9 6.5 6.3 6.5 3.5 0 6.3-2.9 6.3-6.5v-6.2c0-1.4 0-1.4-.4-2l-17.9-31.6c-2.4-4.2-2.4-4.2-2.4-8v-6.3C141 6.5 147.5 0 155.3 0s14.3 6.5 14.3 14.3v6.2h-8zM95.9 0h-8.2l-9.2 28.7L69.3 0h-8.2l13.3 41.6L61.1 83h8.3l9.1-28.5L87.6 83h8.3L82.6 41.6z"></path><svg>'),
+                 tags$title('Texas COVID-19 Resource Kit')),
+          tags$h1(title), tags$p(subtitle), reload_button(button, class = button_class))
+}
+
+
+waiting_screen <- tagList(
+  spin_flower(),
+  h4("Cool stuff loading...")
+) 
+
+disconnected <- sever_default(
+  # logo = "www/logo_short_w.png",
+  title = "Howdy!", 
+  subtitle = "There's a lot of data here, so this app has been resting while you were away.", 
+  button = "Push to Wake", 
+  button_class = "info"
+)
+
+waiter_set_theme(html = spin_3(), color = "darkblue")
+
 
 # DATA PREP CODE ----------------------------------------------------------
 
@@ -126,15 +151,7 @@ nyt_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-
 nyt_state_cases_tx <- nyt_state_cases %>% 
   filter(state=="Texas")
 
-tigris_cntys <- tigris::counties(state="48", cb = TRUE) %>% 
-  as_tibble() %>% 
-  select(GEOID,county=NAME)
-
-tx_counties <- tidycensus::county_laea %>% 
-  filter(str_detect(GEOID, "^48")) %>% 
-  left_join(tigris_cntys, by="GEOID") %>% 
-  st_as_sf() %>% 
-  st_transform(crs="+init=epsg:4326")
+tx_counties <- read_rds("data/population/county_pop.rds")
 
 county_list <- nyt_county_cases %>% 
   as_tibble() %>% 
@@ -156,7 +173,8 @@ tx_county_sf <- tx_counties %>%
   active_label=case_when(
     is.na(active) ~ "No Reported",
     is.numeric(active) ~ scales::comma(active)
-  ))
+  )) %>% 
+  rename(county=NAME)
 
 # ~~COVID Tracking Data --------------------------------------------------------------
 
@@ -169,7 +187,7 @@ test_daily <- read_csv("https://raw.githubusercontent.com/COVID19Tracking/covid-
 test_positive <- test_daily %>% 
   arrange(date) %>% 
   select(date, state, positive, totalTestResults, positiveIncrease, negativeIncrease,totalTestResultsIncrease) %>% 
-  mutate(daily_test_pos_rate = round(positive/totalTestResultsIncrease, digits=4),
+  mutate(daily_test_pos_rate = round((positiveIncrease/totalTestResultsIncrease), digits=4),
          daily_test_pos_rate_7day_avg = rollmean(daily_test_pos_rate, 5, 
                                                  fill=0, align = "right"),
          test_pos_label = daily_test_pos_rate,
@@ -190,6 +208,7 @@ tex_today_tests <- test_daily %>%
   mutate_at(vars(totalTestResults,per_capita), scales::comma) %>% 
   mutate_at(vars(test_pos_label,test_pos_7day_label),scales::percent_format(accuracy = .11, scale=100)) %>% 
   # gather(increase_type,increase,5:6) %>% 
+  filter(totalTestResultsIncrease!=0) %>% 
   filter(date==max(date))
 
 # twc_claims_cnty <- read_excel("data/twc/weekly-claims-by-county-twc.xlsx", skip=2) %>%
@@ -243,7 +262,6 @@ dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/mrworthington/c
 # ** Population Data ---------------------------------------------------------
 
 state_pop <- read_rds("data/population/state_pop.rds")
-county_pop <- read_rds("data/population/county_pop.rds")
 
 tsa_shps <- dshs_tsa_hosp_data %>%
   filter(tsa!="Total") %>% 
@@ -295,8 +313,8 @@ hb_hours_worked_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-
          date=paste0("2020-",date),
          date=ymd(date)) %>% 
   arrange(date) %>% 
-  mutate(prev_date=lag(pct,1),
-         prev_day=lag(date,1),
+  mutate(prev_date=lag(pct,7),
+         prev_day=lag(date,7),
          change=pct-prev_date,
          change_lbl=case_when(
            change > 0 ~ "+",
@@ -335,8 +353,8 @@ hb_businesses_open_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PA
                                         date=paste0("2020-",date),
                                         date=ymd(date)) %>% 
   arrange(date) %>% 
-  mutate(prev_date=lag(pct,1),
-         prev_day=lag(date,1),
+  mutate(prev_date=lag(pct,7),
+         prev_day=lag(date,7),
          change=pct-prev_date,
          change_lbl=case_when(
            change > 0 ~ "+",
@@ -375,8 +393,8 @@ hb_employees_working_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2
          date=paste0("2020-",date),
          date=ymd(date)) %>% 
   arrange(date) %>% 
-  mutate(prev_date=lag(pct,1),
-         prev_day=lag(date,1),
+  mutate(prev_date=lag(pct,7),
+         prev_day=lag(date,7),
          change=pct-prev_date,
          change_lbl=case_when(
            change > 0 ~ "+",
@@ -394,15 +412,7 @@ hb_employees_working <- hb_employees_working_all %>%
 
 # ^^^FREDR Data -----------------------------------------------------
 
- tx_series_all <-fredr(
-  series_id = "TXICLAIMS",
-  observation_start = as.Date("2020-01-01")
-) %>% 
-  mutate(date=as.character(date)) %>%
-  # add_row(date="2020-04-08", series_id="TXICLAIMS", value=313832) %>%
-  add_row(date="2020-04-16", series_id="TXICLAIMS", value=273567) %>%
-  mutate(date=as.Date(date)) %>%
-  arrange(date)
+tx_series_all <- read_rds("clean_data/fredr/ui_claims_ts.rds")
 
 tx_series <- tx_series_all %>%
   filter(date >= as.Date("2020-03-21")) %>% 
@@ -411,13 +421,7 @@ tx_series <- tx_series_all %>%
   rename(value=running_claims) %>% 
   mutate_at(vars(value),scales::comma)
 
-tx_urn <-fredr(
-  series_id = "TXURN",
-  observation_start = as.Date("2020-01-01")
-) %>% 
-  mutate(date=as.Date(date)) %>%
-  filter(date == max(date))
-
+tx_urn <- read_rds("clean_data/fredr/unemploy_rate.rds")
 
 
 # **DERIVED METRICS -----------------------------------
@@ -509,7 +513,7 @@ rates_of_change <- nyt_state_cases %>%
 
 # Integrate DSHS Tests Per County Data
 
-total_cnty_population <- county_pop %>%
+total_cnty_population <- tx_counties %>%
   clean_names() %>%
   as_tibble() %>% 
   select(-geometry) %>% 
@@ -592,6 +596,10 @@ total_cnty_tests <- dshs_county_test_data %>%
 # Positive/Negative Testing. Current and TS. (If we can get comprehensive data on testing at the county level. To my knowledge, COVID-tracking only produces this at a statewide-level).
 # 
 
+waiting_screen <- tagList(
+  spin_flower(),
+  h4("Pulling the latest data from 6 different sources...")
+  )
 
 # HEADER CODE-----------------------------------------------------------
 
@@ -627,10 +635,10 @@ sidebar <- dashboardSidebar(disable = FALSE,
                                        tabName = "county_profiles", 
                                        icon = icon("city")),
                               # menuItem("Credits",
-                              #          tabName = "credits", 
+                              #          tabName = "credits",
                               #          icon = icon("circle")),
                               # menuItem("Data",
-                              #          tabName = "data", 
+                              #          tabName = "data",
                               #          icon = icon("circle")),
                               actionButton("about", "About"),
                               actionButton("learn", "Learn More")
@@ -651,43 +659,56 @@ body <- dashboardBody(
     includeHTML(("google_analytics.html")),
     tags$script(HTML("$('body').addClass('fixed');")),
     tags$style(type = "text/css", "div.info.legend.leaflet-control br {clear: both;}"),
-    tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")  ),
+    tags$link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap")),
 
 # **Landing Page ----------------------------------------------------------
-
-  
-  tabItems(
+use_sever(),
+tabItems(
     tabItem(tabName = "intro",
       jumbotron("Texas COVID-19 Data Resource", 
                 "A Comprehensive Look At Our Current Moment",
                 button = FALSE),
-      hr(style="border-top: 48px solid #fff;"),
-      HTML("<i style='color:#F26852;display: block;text-align: center;margin-top:-82px;margin-bottom: 20px;font-size: 112px;}' class='fas fa-2x fa-hands-helping'></i>"),
+      # hr(style="border-top: 48px solid #fff;"),
+      # HTML("<i style='color:#F26852;display: block;text-align: center;margin-top:-82px;margin-bottom: 20px;font-size: 112px;}' class='fas fa-2x fa-hands-helping'></i>"),
+      hr(),
       br(),
       fluidRow(
         column(4, thumbnail_label(title="<i class='fas fa-door-open'></i>",
                                   label = 'Reopening Analysis',
                                   content = includeMarkdown("markdown/intro/reopening.md"),
-                                  button_link = '#shiny-tab-reopening', button_label = 'Explore')
-        ),
+                                  button_link ='explore_reopen', 
+                                  button_label = 'Explore')),
         column(4, thumbnail_label(title="<i class='fas fa-landmark'></i>", 
                                   label = 'State Explorer',
                                   content = includeMarkdown("markdown/intro/state.md"),
-                                  button_link = '#shiny-tab-state_profiles', button_label = 'Explore')),
+                                  button_link ='explore_state', 
+                                  button_label = 'Explore')),
         column(4, thumbnail_label(title="<i class='fas fa-city'></i>",
                                   label = 'County Explorer',
                                   content = includeMarkdown("markdown/intro/county.md"),
-                                  button_link = '#shiny-tab-county_profiles', button_label = 'Explore'))
+                                  button_link = 'explore_county', 
+                                  button_label = 'Explore'))
     )),
     tabItem(tabName = "reopening",
             fluidRow(
               HTML("<iframe width='100%' height=1200vh' style='border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://staging.convex.design/texas-2036/texas-covid-live-report/?currentCounty=Anderson'></iframe>"))),
     tabItem(tabName = "state_profiles",
-# **STATEWIDE PROFILE UI ----------------------------------------------------
-            h1(style="font-weight:800;", "STATEWIDE PROFILE", span="id='statewide-profile'"),      
+            use_waiter(),
+            use_hostess(),
+            # waiter_show_on_load(
+            #   color = "#f7fff7",
+            #   hostess_loader(
+            #     "loader", 
+            #     preset = "circle", 
+            #     text_color = "black",
+            #     class = "label-center",
+            #     center_page = TRUE
+            #   )
+            # ),
+  # **STATEWIDE PROFILE UI ----------------------------------------------------
+            h1(style="font-weight:800;", "STATEWIDE PROFILE", span="id='statewide-profile'"), 
 
 # ~~Public Health ---------------------------------------------------------
-
             
               h3(class="covid-topic", "Current Case Data"),
             fluidRow(
@@ -799,7 +820,7 @@ h3(class="covid-topic", "Current Hospital Data"),
                           paste0(tx_series$value)),
                         p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
                           paste0("Since: Mar 21, 2020")),
-                        p(style="text-align:center;font-size:.5em;font-weight:300","Jobless Claims"),
+                        p(style="text-align:center;font-size:.45em;font-weight:300","Jobless Claims"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
                           tags$a(href="https://fred.stlouisfed.org/series/TXICLAIMS","Source: BLS via FREDr")))),
               column(width = 2, class="economic-grid",
@@ -807,7 +828,7 @@ h3(class="covid-topic", "Current Hospital Data"),
                         p(style="text-align:center;font-size:1em;font-weight:800",paste0(tx_urn$value,"%")),
                         p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
                           paste0("As of: ", format(tx_urn$date, format="%b %d"))),
-                        p(style="text-align:center;font-size:.5em;font-weight:300","Unemployment Rate"),
+                        p(style="text-align:center;font-size:.45em;font-weight:300","Unemployment Rate"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
                           tags$a(href="https://fred.stlouisfed.org/series/TXURN","Source: BLS via FREDr")))),
                      column(width = 2, class="economic-grid",
@@ -815,7 +836,7 @@ h3(class="covid-topic", "Current Hospital Data"),
                         p(style="text-align:center;font-size:1em;font-weight:800",paste0(hb_businesses_open$pct,"%")),
                         p(style=paste0("text-align:center;font-size:.6em;font-weight:600;color:",hb_businesses_open$color,";"),
                           paste0(hb_businesses_open$change_lbl, hb_businesses_open$change, "% From ", format(hb_businesses_open$prev_day, format="%b %d"))),
-                        p(style="text-align:center;font-size:.5em;font-weight:300","Local Businesses Open"),
+                        p(style="text-align:center;font-size:.43em;font-weight:500","Est. Local Businesses Open"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
                           tags$a(href="https://joinhomebase.com/data/covid-19/","Source: Homebase")))),
               column(width = 2, class="economic-grid",
@@ -823,7 +844,7 @@ h3(class="covid-topic", "Current Hospital Data"),
                         p(style="text-align:center;font-size:1em;font-weight:800",paste0(hb_hours_worked$pct,"%")),
                         p(style=paste0("text-align:center;font-size:.6em;font-weight:600;color:",hb_hours_worked$color,";"),
                           paste0(hb_hours_worked$change_lbl, hb_hours_worked$change, "% From ", format(hb_hours_worked$prev_day, format="%b %d"))),
-                        p(style="text-align:center;font-size:.5em;font-weight:300","Reduction In Hours Worked"),
+                        p(style="text-align:center;font-size:.43em;font-weight:500","Est. Reduction In Hours Worked"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
                           tags$a(href="https://joinhomebase.com/data/covid-19/","Source: Homebase")))),
               column(width = 2, class="economic-grid",
@@ -831,14 +852,14 @@ h3(class="covid-topic", "Current Hospital Data"),
                         p(style="text-align:center;font-size:1em;font-weight:800",paste0(hb_employees_working$pct,"%")),
                         p(style=paste0("text-align:center;font-size:.6em;font-weight:600;color:",hb_employees_working$color,";"),
                           paste0(hb_employees_working$change_lbl, hb_employees_working$change, "% From ", format(hb_employees_working$prev_day, format="%b %d"))),
-                        p(style="text-align:center;font-size:.5em;font-weight:300","Hourly Employees Working"),
+                        p(style="text-align:center;font-size:.43em;font-weight:500","Est. Hourly Employees Working"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
                           tags$a(href="https://joinhomebase.com/data/covid-19/","Source: Homebase")))),
               column(width = 2, class="economic-grid",
                      h2(class="economic-tile",
                         p(style="text-align:center;font-size:1em;font-weight:800","TBD"),
                         p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;","TBD"),
-                        p(style="text-align:center;font-size:.5em;font-weight:300","Monthly $ Loss Per Employee"),
+                        p(style="text-align:center;font-size:.45em;font-weight:300","Monthly $ Loss Per Employee"),
                         p(style="text-align:center;font-size:.4em;font-weight:400","Source: Homebase")))
             ),
             fluidRow(
@@ -934,20 +955,26 @@ tabItem(tabName = "county_profiles",
                   collapsible = FALSE))
               )
             ),
+
+# **CREDITS PAGE ----------------------------------------------------------
+
     tabItem(tabName = "credits",
             fluidRow(class="collateral",
-              column(width=3),
-              column(width=6,
+              column(width=2),
+              column(width=8, class="collateral",
                      withMathJax(includeMarkdown("markdown/sidebar/credits.md"))
                      ),
-              column(width=3)
+              column(width=2)
               
               )
             ),
+
+# **DATA PAGE -------------------------------------------------------------
+
     tabItem(tabName = "data",
         fluidRow(class="collateral",
           column(width=2),
-          column(width=8,
+          column(width=8, class="collateral",
                  withMathJax(includeMarkdown("markdown/sidebar/data.md"))
                  ),
           column(width=2)
@@ -965,7 +992,6 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
                     header = header,
                     sidebar = sidebar,
                     body = body
-
 )
 
 
@@ -973,10 +999,74 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
 
 server <- function (input, output, session) {
   
+# Waiter + Waitress Functions ---------------------------------------------
+  
+  w <- Waiter$new(id = c("hc", "table"))
+  
+  dataset <- reactive({
+    input$draw
+    
+    w$show()
+    
+    Sys.sleep(3)
+    
+    head(cars)
+  })
+  
+  # host <- Hostess$new(n = 3)
+  # 
+  # w <- Waiter$new(
+  #   c("state_growth_rate_hchart", "ili_hchart", "cli_hchart"),
+  #   html = host$get_loader(stroke_color = "#F26852")
+  # )
+  # 
+  # dataset <- reactive({
+  #   input$btn
+  #   
+  #   w$show()
+  #   
+  #   for(i in 1:10){
+  #     Sys.sleep(.7)
+  #     host$set(i * 10)
+  #   }
+  #   
+  #   runif(100)
+  # })
+
+# App Disconnect Dialogue ----------------------------------------------------------
+
+  sever(html = disconnected, bg_color = "#3A4A9F", opacity = .92)
+
+# Tab Switching Functions -------------------------------------------------
+
+  observeEvent(input$explore_reopen, {
+    
+    
+    updateTabItems(session, "tabs", "reopening")
+    
+  })
+  
+  observeEvent(input$explore_state, {
+    
+
+    updateTabItems(session, "tabs", "state_profiles")
+    
+  })
+  
+  observeEvent(input$explore_county, {
+    
+    updateTabItems(session, "tabs", "county_profiles")    
+    
+    Sys.sleep(3) # do something that takes time
+    waiter_hide()
+    
+    
+  })
+  
   options(digits.secs = 0) # Include milliseconds in time display
-  
-  
-  
+
+
+
 
 # {Latest NYT Update Date} ----------------------------------------------------
     
@@ -1148,17 +1238,18 @@ server <- function (input, output, session) {
     
     tot_pos <- dshs_tsa_hosp_data %>%
       as_tibble() %>% 
-      select(tsa,tsa_counties,adult_icu,total_icu_beds) %>% 
-      # filter(tsa_counties==input$countyname) %>%
+      select(tsa,adult_icu,icu_beds_occupied) %>% 
       filter(tsa=="Total") %>%
-      mutate(bed_utilization=round((total_icu_beds-adult_icu)/total_icu_beds,digits=3)) %>%
-      mutate_at(vars(bed_utilization),scales::percent)
+      mutate(bed_avail=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
+      mutate_at(vars(bed_avail),scales::percent)
     
     infoBox(
-      title="ICU Beds Availability", value=paste0(tot_pos$bed_utilization), icon=icon("procedures"),
+      title="ICU Beds Availability", 
+      value=paste0(tot_pos$bed_avail),
+      # value="29%", 
+      icon=icon("procedures"),
       subtitle="of ICU Beds Available",
-      color = "navy", href=NULL
-    )
+      color = "navy", href=NULL)
   })
   
 # {Ventilators Availability - State}-------------------------------------------------
@@ -1175,8 +1266,7 @@ server <- function (input, output, session) {
     infoBox(
       title="Ventilator Availability", value=paste0(tot_pos$vent_availability), icon=icon("lungs"),
       subtitle="of Ventilators Available",
-      color = "navy", href=NULL
-    )
+      color = "navy", href=NULL)
   })
 
   
@@ -1205,9 +1295,6 @@ server <- function (input, output, session) {
   # {State Growth Rate Charts}  --------------------------------------------------
   
   output$state_growth_rate_hchart <- renderHighchart({
-    
-    # Make sure requirements are met
-    # req(input$countyname)
     
     hcoptslang <- getOption("highcharter.lang")
     hcoptslang$thousandsSep <- ","
@@ -1278,6 +1365,7 @@ server <- function (input, output, session) {
                                 tickColor = "#F3F3F3", 
                                 tickWidth = 1))))
     
+    dataset()
     nyt_tx_hchart
   })
   
@@ -1305,7 +1393,7 @@ server <- function (input, output, session) {
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text="Reported Cases of CLI"),
                min = 0, 
-               max = 3000) %>% 
+               max = 1000) %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
@@ -1344,6 +1432,9 @@ server <- function (input, output, session) {
                                 minorGridLineColor = "#F3F3F3", 
                                 tickColor = "#F3F3F3", 
                                 tickWidth = 1))))
+  
+    dataset()
+    
     
   })
   
@@ -1371,7 +1462,7 @@ server <- function (input, output, session) {
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="Reported Cases of ILI"),
                min = 0, 
-               max = 3000) %>% 
+               max = 1000) %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
@@ -1410,6 +1501,8 @@ server <- function (input, output, session) {
                                 minorGridLineColor = "#F3F3F3", 
                                 tickColor = "#F3F3F3", 
                                 tickWidth = 1))))
+    dataset()
+    
     
   })
   
@@ -1775,9 +1868,7 @@ server <- function (input, output, session) {
       hc_title(
         text ="Texas Jobless Claims",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="Claims Filed Weekly"),
-               min = mean(tx_series_all$min_new),
-               max = mean(tx_series_all$max_new)) %>% 
+      hc_yAxis(title = list(text ="Claims Filed Weekly")) %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
@@ -1846,19 +1937,17 @@ server <- function (input, output, session) {
              color = "#FFD100") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Change in Businesses Open",
+        text ="Estimated Change in Businesses Open",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="% Change in Business Open"),
-               min = mean(tx_series_all$min_new),
-               max = mean(tx_series_all$max_new)) %>% 
+      hc_yAxis(title = list(text ="% Change in Business Open")) %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
-                   Weekly Claims Filed: {point.y:,.0f}%") %>% 
+                   Businesses Open: {point.y:,.0f}%") %>% 
       hc_credits(
         enabled = TRUE,
         text = "Source: Homebase",
-        href = NULL) %>%
+        href = "https://joinhomebase.com/data/covid-19/") %>%
       hc_add_theme(
         hc_theme_merge(
           hc_theme_smpl(),
@@ -1918,11 +2007,9 @@ server <- function (input, output, session) {
              color = "#FFD100") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Change in Hours Worked By Hourly Employees",
+        text ="Estimated Change in Hours Worked By Hourly Employees",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="% Change in Hours Worked"),
-               min = mean(tx_series_all$min_new),
-               max = mean(tx_series_all$max_new)) %>% 
+      hc_yAxis(title = list(text ="% Change in Hours Worked")) %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
@@ -1930,7 +2017,7 @@ server <- function (input, output, session) {
       hc_credits(
         enabled = TRUE,
         text = "Source: Homebase",
-        href = NULL) %>%
+        href = "https://joinhomebase.com/data/covid-19/") %>%
       hc_add_theme(
         hc_theme_merge(
           hc_theme_smpl(),
@@ -1990,11 +2077,9 @@ server <- function (input, output, session) {
              color = "#FFD100") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text = "Change in Number of Hourly Employees Working",
+        text = "Estimated Change in Number of Hourly Employees Working",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="% Change in Employees Working"),
-               min = mean(tx_series_all$min_new),
-               max = mean(tx_series_all$max_new)) %>% 
+      hc_yAxis(title = list(text ="% Change in Employees Working")) %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
@@ -2002,7 +2087,7 @@ server <- function (input, output, session) {
       hc_credits(
         enabled = TRUE,
         text = "Source: Homebase",
-        href = NULL) %>%
+        href = "https://joinhomebase.com/data/covid-19/") %>%
       hc_add_theme(
         hc_theme_merge(
           hc_theme_smpl(),
@@ -2298,10 +2383,9 @@ output$county_mort_rate <- renderText({
       
       dshs_tsa_hosp_data %>%
         as_tibble() %>% 
-        select(tsa,tsa_counties,adult_icu,total_icu_beds) %>% 
+        select(tsa,tsa_counties,adult_icu,icu_beds_occupied) %>% 
         filter(tsa_counties==input$countyname) %>%
-        # filter(tsa_counties=="El Paso") %>%
-        mutate(bed_utilization=round((total_icu_beds-adult_icu)/total_icu_beds,digits=3)) %>%
+        mutate(bed_utilization=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
         mutate_at(vars(bed_utilization),scales::percent) %>% 
         distinct(adult_icu) %>% 
         as.character()
@@ -2663,22 +2747,6 @@ output$county_mort_rate <- renderText({
       
       
     })
-    
-# TEST CODE ---------------------------------------------------------------
-    # p <- c(0.5, 0.75, 0.9, .99, 1)
-    # 
-    # p_names <- map_chr(p, ~paste0(.x*100, "%"))
-    # 
-    # p_funs <- map(p, ~partial(quantile, probs = .x, na.rm = TRUE)) %>% 
-    #   set_names(nm = p_names)
-    # 
-    # avgs <- tx_today %>% 
-    #   group_by(date) %>% 
-    #   mutate(sqrt=sqrt(cases)) %>% 
-    #   summarize_at(vars(sqrt), funs(!!!p_funs)) %>% 
-    #   gather(percentile,value, 2:6) %>% 
-    #   mutate(size=round((value*value),digits = 0)) %>% 
-    #   mutate(label=as.character(size))
     
 # COUNTY MAP --------------------------------------------------------------
 
