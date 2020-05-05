@@ -352,7 +352,7 @@ dshs_state_ages <- read_excel(lcl, sheet = "Cases by Age Group", skip=1) %>%
   
 dshs_state_gender <- read_excel(lcl, sheet="Cases by Gender", skip=1) %>% 
   clean_names() %>% 
-  select(group=gender, cases=number, pct=percentage) %>% 
+  select(group=gender, cases=number, pct=percent) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
          report_type="cases",
@@ -361,7 +361,7 @@ dshs_state_gender <- read_excel(lcl, sheet="Cases by Gender", skip=1) %>%
 
 dshs_state_race <- read_excel(lcl, sheet="Cases by RaceEthnicity", skip=1) %>% 
   clean_names() %>% 
-  select(group=race_ethnicity, cases=number, pct=percentage) %>% 
+  select(group=race_ethnicity, cases=number, pct=percent) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
          report_type="cases",
@@ -379,7 +379,7 @@ dshs_state_ages_fates <- read_excel(lcl, sheet = "Fatalities by Age Group", skip
   
 dshs_state_gender_fates <- read_excel(lcl, sheet = "Fatalities by Gender", skip=1) %>% 
   clean_names() %>% 
-  select(group=gender, cases=number, pct=percentage) %>% 
+  select(group=gender, cases=number, pct=percent) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
          report_type="fatalities",
@@ -388,7 +388,7 @@ dshs_state_gender_fates <- read_excel(lcl, sheet = "Fatalities by Gender", skip=
 
 dshs_state_race_fates <- read_excel(lcl, sheet = "Fatalities by Race-Ethnicity", skip=1) %>% 
   clean_names() %>% 
-  select(group=race_ethnicity, cases=number, pct=percentage) %>% 
+  select(group=race_ethnicity, cases=number, pct=percent) %>% 
   filter(pct<1) %>% 
   mutate(cases=as.numeric(cases),
          report_type="fatalities",
@@ -462,7 +462,7 @@ crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", s
   summarise(tsa_counties = toString(county),
             geometry = st_union(geometry))
 
-  tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_04.28.20.xlsx", 
+tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.03.20.xlsx", 
                        sheet = "Bed Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -474,7 +474,7 @@ crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", s
   st_as_sf()
 
 
-tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_04.28.20.xlsx", 
+tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_05.03.20.xlsx", 
                        sheet = "Vent Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -486,8 +486,8 @@ tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_04.28.20.xlsx",
   st_as_sf()
 
   #Write Current & Timestamped CSVs of Bed/Vent Data
-  write_csv(tsa_data,"clean_data/dshs/hospitals/tsa_vent_data_with_counties_sf.csv")
-  write_csv(tsa_data_vents,"clean_data/dshs/hospitals/tsa_bed_data_with_counties_sf.csv")
+  write_csv(tsa_data,"clean_data/dshs/hospitals/tsa_bed_data_with_counties_sf.csv")
+  write_csv(tsa_data_vents,"clean_data/dshs/hospitals/tsa_vent_data_with_counties_sf.csv")
   write_csv(tsa_data,paste0("clean_data/dshs/hospitals/tsa_bed_data_with_counties_sf_",today,".csv"))
   write_csv(tsa_data_vents,paste0("clean_data/dshs/hospitals/tsa_vent_data_with_counties_sf_",today,".csv"))
   
@@ -504,17 +504,17 @@ tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_04.28.20.xlsx",
 
 ```{r}
 
-syndromic_tx <- read_excel("data/dshs/TxS2 Chart April 30 Dashboard.xlsx", sheet="Texas", skip=0) %>%
+syndromic_tx <- read_excel("data/dshs/TxS2 Chart May 3 Dashboard.xlsx", sheet="Texas", skip=0) %>%
   clean_names() %>% 
   mutate(date = ymd(date)) %>% 
   write_csv("clean_data/dshs/syndromic_tx.csv")
 
-syndromic_cli <- read_excel("data/dshs/TxS2 Chart April 30 Dashboard.xlsx", sheet="CLI Data", skip=0) %>%
+syndromic_cli <- read_excel("data/dshs/TxS2 Chart May 3 Dashboard.xlsx", sheet="CLI Data", skip=0) %>%
   clean_names() %>% 
   mutate(date = ymd(date)) %>% 
   write_csv("clean_data/dshs/syndromic_cli.csv")
 
-syndromic_ili <- read_excel("data/dshs/TxS2 Chart April 30 Dashboard.xlsx", sheet="ILI Data", skip=0) %>%
+syndromic_ili <- read_excel("data/dshs/TxS2 Chart May 3 Dashboard.xlsx", sheet="ILI Data", skip=0) %>%
   clean_names() %>% 
   mutate(date = ymd(date)) %>% 
   write_csv("clean_data/dshs/syndromic_ili.csv")

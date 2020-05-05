@@ -20,7 +20,6 @@ library(lubridate)
 library(janitor)
 library(waiter)
 library(sever)
-library(knitr)
 library(sf)
 library(zoo)
 
@@ -78,6 +77,7 @@ jhu_cases_state_us <- read_csv("https://raw.githubusercontent.com/CSSEGISandData
   mutate(cases_rank=dense_rank(desc(confirmed)),
          deaths_rank=dense_rank(desc(deaths)),
          recovered_rank=dense_rank(desc(recovered)),
+         active_rank=dense_rank(desc(active)),
          tested_rank=dense_rank(desc(people_tested)),
          hospitalized_rank=dense_rank(desc(people_hospitalized)),
          incident_rank=dense_rank(desc(incident_rate)),
@@ -223,23 +223,23 @@ tex_today_tests <- test_daily %>%
 # ~~DSHS Data ----
 
     
-dshs_state_case_and_fatalities <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv?token=AB6K4YWRCYOHXCJPGKVP7JC6VTSUI") %>% 
+dshs_state_case_and_fatalities <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv?token=AB6K4YTWO4IA3QJ22PPTBNK6XGHWU") %>% 
   mutate(state="Texas",
          fips="48")
 
-dshs_state_hospitalizations <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv?token=AB6K4YVDEHZTYS2MTMKM6RS6VTTDG") %>% 
+dshs_state_hospitalizations <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv?token=AB6K4YVX6BWDPJWLI54TA6C6XGI7Y") %>% 
   mutate(state="Texas",
          fips="48")
 
-dshs_state_tests <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/testing/state_tests.csv?token=AB6K4YUH4D2UGQDBONHNB226VTTFC") %>% 
+dshs_state_tests <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/testing/state_tests.csv?token=AB6K4YVS5R6HTYGRVERDJY26XGIZY") %>% 
   mutate(fips=as.character(fips))
 
-dshs_state_demographics <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/state_case_demographics.csv?token=AB6K4YSQ2E653FBQVK4UFHS6VTSSS") %>% 
+dshs_state_demographics <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/state_case_demographics.csv?token=AB6K4YQE2BFQBV4WL4OLTL26XGJE6") %>% 
   mutate(fips=as.character(fips))
 
-dshs_county_data <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/county_cases.csv?token=AB6K4YQQIQZPRY7XZZCOJCS6VTSRM")
+dshs_county_data <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/county_cases.csv?token=AB6K4YQWLX4TIDI34IKB3HK6XGJHU")
 
-dshs_county_test_data <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/testing/county_tests.csv?token=AB6K4YRPQNYC2TAXYYWBF226VTTE4")
+dshs_county_test_data <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/testing/county_tests.csv?token=AB6K4YSNKRV4L74H2U656L26XGI34")
 
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/tsa_bed_data_with_counties_sf.rds") %>% 
   st_transform(crs="+init=epsg:4326")
@@ -247,7 +247,7 @@ dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/tsa_bed_data_with_coun
 dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/tsa_vent_data_with_counties_sf.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/syndromic_tx.csv?token=AB6K4YRYQFKSNX2HEV2H2D26VTTWA")
+dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/syndromic_tx.csv?token=AB6K4YRFWFUVJ5AQPSKGTV26XGJO2")
 
 ## TODO - We need to automate this scraping to build a timeseries, and make sure that
 ##        We have the correct data associated with each spreadsheet. 
@@ -269,15 +269,15 @@ tsa_shps <- dshs_tsa_hosp_data %>%
 
 ## ** Crosswalk Data ----
 
-crosswalk_data = read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", skip=2) %>%
-  rename(
-    county_name=1,
-    public_health_region=2,
-    tsa=3
-  ) %>%
-  mutate(
-    tsa_clean = substring(tsa, 1, 1)
-  )
+# crosswalk_data = read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", skip=2) %>%
+#   rename(
+#     county_name=1,
+#     public_health_region=2,
+#     tsa=3
+#   ) %>%
+#   mutate(
+#     tsa_clean = substring(tsa, 1, 1)
+#   )
 
 # ** Economic Data -----------------------------------------------------------
 
@@ -448,7 +448,59 @@ hosp_capacity <- total_tests %>%
          icu_beds_to_hosp = avail_icu_beds/people_hospitalized,
          vents_to_hosp = avail_ventilators/people_hospitalized)
 
-# ^^^Case Growth Rate ----------------------------------------
+
+all_cases <- dshs_state_case_and_fatalities %>% 
+  group_by(state) %>% 
+  summarise(total_cases = sum(positive))
+
+
+hosp_rate <- dshs_tsa_hosp_data %>% 
+  as_tibble() %>% 
+  filter(tsa=="Total") %>% 
+  select(lab_con_covid19_gen, lab_con_covid19_icu) %>% 
+  mutate(state="Texas") %>% 
+  left_join(all_cases, by="state") %>% 
+  mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/total_cases)) %>% 
+  mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1))
+
+
+# **STATE EXPLORER METRICS ------------------------------------------------------
+
+
+# ~~Current Case Data -----------------------------------------------------
+
+
+tx_cases <- jhu_cases_state %>% 
+  select(confirmed, cases_rank) %>% 
+  mutate_at(vars(confirmed), scales::comma) %>% 
+  mutate_at(vars(cases_rank), scales::label_ordinal())
+
+tx_mort <- jhu_cases_state %>% 
+  select(mortality_rate,  mortality_rank) %>% 
+  mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
+  mutate_at(vars(mortality_rank), scales::label_ordinal())
+
+tx_active <- jhu_cases_state %>% 
+  select(active,  active_rank) %>% 
+  mutate_at(vars(active), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
+  mutate_at(vars(active_rank), scales::label_ordinal())
+
+tx_recover <-  jhu_cases_state %>% 
+  select(recovered,  recovered_rank) %>% 
+  mutate_at(vars(recovered), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
+  mutate_at(vars(recovered_rank), scales::label_ordinal())
+
+state_case_growth <- nyt_state_cases_tx %>% 
+  filter(date > as.Date("2020-03-06")) %>% 
+  arrange(date) %>% 
+  mutate(daily_growth_rate = round(((cases/lag(cases))-1)*100, digits=1)) %>%
+  mutate(daily_growth_rate_7day_avg = round(rollmean(daily_growth_rate, 7,
+                                                     fill=0, align = "right"), digits=1)) %>%
+  mutate(min_new = min(daily_growth_rate, na.rm = TRUE),
+         max_new = max(daily_growth_rate, na.rm = TRUE)) %>% 
+  mutate(min_new = as.numeric(min_new),
+         max_new = as.numeric(max_new)) %>% 
+  ungroup()
 
 daily_growth_rates <- nyt_state_cases %>%
   arrange(date) %>%
@@ -631,12 +683,12 @@ sidebar <- dashboardSidebar(disable = FALSE,
                               menuItem("County Explorer",
                                        tabName = "county_profiles", 
                                        icon = icon("city")),
-                              # menuItem("Credits",
-                              #          tabName = "credits",
-                              #          icon = icon("circle")),
-                              # menuItem("Data",
-                              #          tabName = "data",
-                              #          icon = icon("circle")),
+                              menuItem("Credits",
+                                       tabName = "credits",
+                                       icon = icon("circle")),
+                              menuItem("Data",
+                                       tabName = "data",
+                                       icon = icon("circle")),
                               actionButton("about", "About"),
                               actionButton("learn", "Learn More")
                               # actionButton("show", "Learn More", icon = icon("info-circle", class = "fa-pull-left"), style="color: #152934"),
@@ -689,7 +741,8 @@ tabItems(
     tabItem(tabName = "reopening",
             fluidRow(
               HTML("<iframe width='100%' height=1200vh' style='border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://staging.convex.design/texas-2036/texas-covid-live-report/?currentCounty=Anderson'></iframe>"))),
-    tabItem(tabName = "state_profiles",
+    
+  tabItem(tabName = "state_profiles",
             use_waiter(include_js = FALSE),
             use_hostess(),
             waiter_show_on_load(html = tagList(spin_flower(),h4("Thanks for being patient while we get everything set up.")),
@@ -705,22 +758,28 @@ tabItems(
             #     center_page = TRUE
             #   )
             # ),
-  # **STATEWIDE PROFILE UI ----------------------------------------------------
+
+# **STATEWIDE PROFILE UI ----------------------------------------------------
             h1(style="font-weight:800;", "STATEWIDE PROFILE", span="id='statewide-profile'"), 
 
-# ~~Public Health ---------------------------------------------------------
+
+
+# ~~Current Cases Data ---------------------------------------------------------
             
               h3(class="covid-topic", "Current Case Data"),
             fluidRow(
-              infoBoxOutput("tx_cases", width=4),
-              infoBoxOutput("tx_mort", width=4),
-              infoBoxOutput("tx_recover", width=4)
+              infoBoxOutput("tx_cases", width=3),
+              infoBoxOutput("tx_mort", width=3),
+              infoBoxOutput("tx_recover", width=3),
+              infoBoxOutput("tx_active", width=3)
               ),
             fluidRow(
               highchartOutput("state_growth_rate_hchart", height = 350)
               ),
 
 # ~~Population Health ---------------------------------------------------------
+
+
 
 
 # ~~Testing ---------------------------------------------------------
@@ -890,10 +949,15 @@ tabItem(tabName = "county_profiles",
               column(width = 6, 
                      # div(style = 'overflow-y: scroll; position: fixed; width: 700px',
                      h4("Data As of:",textOutput("currentTime", inline=TRUE)),
+                     # includeHTML("html/tx_diversity_map_alt.html")
                      leafletOutput("map", width = "100%", height = 600)
                     ),
               column(width = 6,
               # h3(style="font-weight:700;",textOutput("countyname", inline = TRUE)),
+
+# ~~Current Case Data -----------------------------------------------------
+
+              
               h3(class="covid-topic", "Public Health"),
               fluidRow( 
                 column(width = 3,
@@ -959,27 +1023,12 @@ tabItem(tabName = "county_profiles",
 # **CREDITS PAGE ----------------------------------------------------------
 
     tabItem(tabName = "credits",
-            fluidRow(class="collateral",
-              column(width=2),
-              column(width=8, class="collateral",
-                     withMathJax(includeMarkdown("markdown/sidebar/credits.md"))
-                     ),
-              column(width=2)
-              
-              )
-            ),
+            HTML("<iframe width='110%' height=1200vh' style='margin-left:-15px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://texas-2036.github.io/covid-pages/covid_credits_page.html'></iframe>")),
 
 # **DATA PAGE -------------------------------------------------------------
 
     tabItem(tabName = "data",
-        fluidRow(class="collateral",
-          column(width=2),
-          column(width=8, class="collateral",
-                 withMathJax(includeMarkdown("markdown/sidebar/data.md"))
-                 ),
-          column(width=2)
-          )
-        )
+            HTML("<iframe width='110%' height=1200vh' style='margin-left:-15px;border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://texas-2036.github.io/covid-pages/covid_data_page.html'></iframe>"))
 ),
 hr(),
 tags$footer(includeMarkdown("footer.md"), align = "center")
@@ -1005,7 +1054,7 @@ server <- function (input, output, session) {
 # Waiter + Waitress Functions ---------------------------------------------
   
   w <- Waiter$new(html = spin_facebook(), 
-                  id = c("tx_cases", "tx_mort", "tx_recover","state_growth_rate_hchart", "cli_hchart", "ili_hchart", "state_curves_hchart",
+                  id = c("state_growth_rate_hchart", "cli_hchart", "ili_hchart", "state_curves_hchart",
                          "state_new_cases_hchart", "state_new_deaths_hchart", "state_new_tests_hchart", "state_claims_hchart", 
                          "state_businesses_hchart", "state_hours_hchart", "state_employees_hchart", "cnty_new_deaths_hchart", 
                          "cnty_new_cases_hchart", "cnty_curves_hchart"))
@@ -1053,7 +1102,9 @@ server <- function (input, output, session) {
   options(digits.secs = 0) # Include milliseconds in time display
 
 
-
+  hcoptslang <- getOption("highcharter.lang")
+  hcoptslang$thousandsSep <- ","
+  options(highcharter.lang = hcoptslang)
 
 # {Latest NYT Update Date} ----------------------------------------------------
     
@@ -1075,7 +1126,7 @@ server <- function (input, output, session) {
       modalDialog(
         title = "Connect with Texas 2036",
         size = "l",
-        footer = HTML("<a href='http://www.unitedwayaustin.org/our-work/2gen/'>© United Way of Greater Austin</a>"),
+        footer = HTML("<a href='http://www.texas2036.org//'>© Texas 2036</a>"),
         includeHTML("markdown/sidebar/signup.html"),
         easyClose = TRUE
       ))
@@ -1086,9 +1137,9 @@ server <- function (input, output, session) {
   observeEvent(input$about, {
     showModal(
       modalDialog(
-      title = "About This Dashboard",
+      title = "About Texas 2036",
       size = "l",
-      footer = HTML("<a href='http://www.unitedwayaustin.org/our-work/2gen/'>© United Way of Greater Austin</a>"),
+      footer = HTML("<a href='http://www.texas2036.org//'>© Texas 2036</a>"),
       includeMarkdown("markdown/sidebar/learnmore.md"),
       easyClose = TRUE
     ))
@@ -1100,17 +1151,10 @@ server <- function (input, output, session) {
     
   output$tx_cases <- renderInfoBox({
 
-    dataset()
-    
-    tot_pos <- jhu_cases_state %>% 
-      select(confirmed, cases_rank) %>% 
-      mutate_at(vars(confirmed), scales::comma) %>% 
-      mutate_at(vars(cases_rank), scales::label_ordinal())
-    
     infoBox(
-       value=paste0(tot_pos$confirmed), title="Total Cases",
-       subtitle=paste0(tot_pos$cases_rank, " Most in US"),
-      icon = icon("lungs-virus"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+       value=paste0(tx_cases$confirmed), title="Total Cases",
+       subtitle=paste0(tx_cases$cases_rank, " Most in US"),
+      icon = icon("chart-line"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
@@ -1118,16 +1162,9 @@ server <- function (input, output, session) {
   
   output$tx_mort <- renderInfoBox({
     
-    dataset()
-    
-    tot_pos <- jhu_cases_state %>% 
-      select(mortality_rate,  mortality_rank) %>% 
-      mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
-      mutate_at(vars(mortality_rank), scales::label_ordinal())
-    
     infoBox(
-      title="Deaths (% of All Cases)", value=paste0(tot_pos$mortality_rate, "%"),
-      subtitle=paste0(tot_pos$mortality_rank, " Most in US"),
+      title="Deaths (% of All Cases)", value=paste0(tx_mort$mortality_rate, "%"),
+      subtitle=paste0(tx_mort$mortality_rank, " Most in US"),
       icon = icon("biohazard"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
@@ -1137,75 +1174,44 @@ server <- function (input, output, session) {
   
   output$tx_recover <- renderInfoBox({
     
-    dataset()
-    
-    tot_pos <- jhu_cases_state %>% 
-      select(recovered,  recovered_rank) %>% 
-      mutate_at(vars(recovered), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
-      mutate_at(vars(recovered_rank), scales::label_ordinal())
-    
     infoBox(
-      title="Recovered", value=paste0(tot_pos$recovered),
-      subtitle=paste0(tot_pos$recovered_rank, " Most in US"),
+      title="Recovered", value=paste0(tx_recover$recovered),
+      subtitle=paste0(tx_recover$recovered_rank, " Most in US"),
       icon = icon("hand-holding-medical"), color = "navy", href=NULL
     )
   })
   
-  # {InfoBox - TTD - Total Tests} -----------------------------------------------
+  # {InfoBox - PH - Active} -----------------------------------------------
   
-  output$test_rate <- renderText({
-    
-    tot_pos <- total_tests %>% 
-      select(tests_per_100k) %>% 
-      mutate_at(vars(tests_per_100k), scales::number_format(accuracy=.01, scale=1)) 
-    
-    test_rank <- jhu_cases_state %>% 
-      select(testrate_rank) %>% 
-      mutate_at(vars(testrate_rank), scales::label_ordinal())
+  output$tx_active <- renderInfoBox({
     
     infoBox(
-      title=paste0("Tests Per 100,000"), value=paste0(tot_pos$tests_per_100k),
-      subtitle=paste0(test_rank$testrate_rank, " Most in US"),
-      icon = icon("vials"), color = "navy", href="https://www.dshs.state.tx.us/coronavirus/additionaldata/"
+      title="Active", value=paste0(tx_active$active),
+      subtitle=paste0(tx_active$active_rank, " Most in US"),
+      icon = icon("lungs-virus"), color = "navy", href=NULL
     )
   })
   
   
-# {Total COVID-19 Tests} -----------------------------------------------
+  # {InfoBox - HC - Hospitalization Rate - State} -----------------------------------------------
   
-  output$tx_tests <- renderInfoBox({
+  output$hospitalized_rate <- renderInfoBox({
     
-    tot_pos <- hosp_capacity %>% 
-      select(total_tests, tested_rank) %>% 
-      mutate_at(vars(total_tests), scales::comma) %>% 
-      mutate_at(vars(tested_rank), scales::label_ordinal())
+    dataset()
+    
+    tot_pos <- hosp_rate
     
     infoBox(
-      title="Total People Tested", 
-      value=paste0(tot_pos$total_tests), 
-      icon = icon("microscope"),
-      subtitle=paste0(tot_pos$tested_rank, " in US"),
-      color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
-    )
-  })
-  
-# {Total Deaths} -----------------------------------------------
-  
-  output$tx_deaths <- renderInfoBox({
-    tot_pos <- jhu_cases_state %>% 
-      select(deaths, deaths_rank) %>% 
-      mutate_at(vars(deaths), scales::comma) %>% 
-      mutate_at(vars(deaths_rank), scales::label_ordinal())
-    
-    
-    infoBox(
-      title="Total Confirmed Deaths", value=paste0(tot_pos$deaths), icon=icon("heartbeat"),
-      subtitle=paste0(tot_pos$deaths_rank, " in US"),
-      color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+      title="% Hospitalized", 
+      # valuÇe="6.08%",
+      value=paste0(tot_pos$hospitalization_rate, "%"),
+      subtitle="Ranks NA Today",
+      # subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
+      icon = icon("hospital-user"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
 
-# {Hosp Beds Per Confirmed Case - State}-------------------------------------------------
+# {InfoBox - HC - Bed Availability - State}-------------------------------------------------
 
   output$tx_beds <- renderInfoBox({
     
@@ -1227,7 +1233,7 @@ server <- function (input, output, session) {
     )
   })
   
-# {ICU Beds Availability - State}-------------------------------------------------
+# {InfoBox - HC - ICU Beds Availability - State}-------------------------------------------------
   
   output$tx_icu_beds <- renderInfoBox({
     
@@ -1249,7 +1255,7 @@ server <- function (input, output, session) {
       color = "navy", href=NULL)
   })
   
-# {Ventilators Availability - State}-------------------------------------------------
+# {InfoBox - HC - Ventilators Availability - State}-------------------------------------------------
   
   output$tx_vents <- renderInfoBox({
     
@@ -1267,31 +1273,9 @@ server <- function (input, output, session) {
       subtitle="of Ventilators Available",
       color = "navy", href=NULL)
   })
+  
 
-  
-  # {Hospitalization Rate - State} -----------------------------------------------
-  
-  output$hospitalized_rate <- renderInfoBox({
-    
-    dataset()
-    
-    tot_pos <- hosp_capacity %>% 
-      select(hospitalization_rate, hosprate_rank) %>% 
-      mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
-      mutate_at(vars(hosprate_rank), scales::label_ordinal())
-    
-    
-    infoBox(
-      title="% Hospitalized", 
-      # value="6.17%",
-      value=paste0(tot_pos$hospitalization_rate, "%"),
-      subtitle="Ranks NA Today",
-      # subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
-      icon = icon("hospital-user"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
-    )
-  })
-  
-  
+# CHARTS - STATE ----------------------------------------------------------
   
   # {State Growth Rate Charts}  --------------------------------------------------
   
@@ -1301,22 +1285,10 @@ server <- function (input, output, session) {
     hcoptslang$thousandsSep <- ","
     options(highcharter.lang = hcoptslang)
     
-    nyt_tx_growth_rate_hchart <- nyt_state_cases_tx %>% 
-      filter(date > as.Date("2020-03-06")) %>% 
-      arrange(date) %>% 
-      mutate(daily_growth_rate = round(((cases/lag(cases))-1)*100, digits=1)) %>%
-      mutate(daily_growth_rate_7day_avg = round(rollmean(daily_growth_rate, 7,
-                                                   fill=0, align = "right"), digits=1)) %>%
-      mutate(min_new = min(daily_growth_rate, na.rm = TRUE),
-             max_new = max(daily_growth_rate, na.rm = TRUE)) %>% 
-      mutate(min_new = as.numeric(min_new),
-             max_new = as.numeric(max_new)) %>% 
-      ungroup()
-    
-    nyt_tx_hchart <- nyt_tx_growth_rate_hchart %>% 
+    state_case_growth %>% 
       hchart("column", hcaes(x = date, y = daily_growth_rate), animation=FALSE,
              color = "#fff") %>% 
-      hc_add_series(nyt_tx_growth_rate_hchart, type = "area", hcaes(x = date, y = daily_growth_rate_7day_avg),
+      hc_add_series(state_case_growth, type = "area", hcaes(x = date, y = daily_growth_rate_7day_avg),
                     tooltip = list(pointFormat = "<br>7-Day Avg.: {point.daily_growth_rate_7day_avg:,.0f}%"),
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
@@ -1324,8 +1296,8 @@ server <- function (input, output, session) {
         text ="Texas COVID-19 Case Growth Rate, By Day | <span style='color: #FFD100'>7-Day Rolling Avg.</span>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text = "Growth Rate From Previous Day"),
-               min = round(mean(nyt_tx_growth_rate_hchart$min_new), 2), 
-               max = round(mean(nyt_tx_growth_rate_hchart$max_new), 2),
+               min = round(mean(state_case_growth$min_new), 2), 
+               max = round(mean(state_case_growth$max_new), 2),
                format = "{value}%") %>% 
       hc_xAxis(title=NULL) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
@@ -1366,8 +1338,6 @@ server <- function (input, output, session) {
                                 tickColor = "#F3F3F3", 
                                 tickWidth = 1))))
     
-    dataset()
-    nyt_tx_hchart
   })
   
   # {State CLI Charts}  --------------------------------------------------
@@ -1375,12 +1345,6 @@ server <- function (input, output, session) {
   output$cli_hchart <- renderHighchart({
     
     dataset()
-    # Make sure requirements are met
-    # req(input$countyname)
-    
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
     
     nyt_tx_hchart <- dshs_syndromic_tx %>% 
       mutate(min = min(ili_from_syndromic_surveillance, na.rm = TRUE),
@@ -1443,12 +1407,6 @@ server <- function (input, output, session) {
   output$ili_hchart <- renderHighchart({
     
     dataset()
-    # Make sure requirements are met
-    # req(input$countyname)
-    
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
     
     nyt_tx_hchart <- dshs_syndromic_tx %>% 
       mutate(min = min(ili_from_syndromic_surveillance, na.rm = TRUE),
@@ -1509,22 +1467,6 @@ server <- function (input, output, session) {
   # {State Curve Charts}  --------------------------------------------------
   
   output$state_curves_hchart <- renderHighchart({
-    
-    # Make sure requirements are met
-    # req(input$countyname)
-    
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
-    
-    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
-    #               name = "Fit", id = "fit") 
-    
-    # min <- nyt_state_cases_tx %>% 
-    #   select(min) %>% 
-    #   distinct() %>% 
-    #   # filter(!is.na(1)) %>% 
-    #   as.character()
     
     nyt_tx_hchart <- nyt_state_cases_tx %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,
@@ -2443,75 +2385,7 @@ output$county_mort_rate <- renderText({
     })
 
 # CHARTS ------------------------------------------------------------------
-    
 
-# # {County Compare Chart} ----------------------------------------------------
-# 
-#     output$cnty_compare_hchart <- renderHighchart({
-#       
-#       # Make sure requirements are met
-#       req(input$countyname)
-#       
-#       nyt_county_cases_chart <- nyt_county_cases %>% 
-#         filter(county==input$countyname) %>% 
-#         mutate(date = ymd(date)) 
-#       
-#       nyt_county_cases_today <- nyt_county_cases %>%
-#         mutate(date = ymd(date)) %>% 
-#         group_by(state) %>% 
-#         filter(date == max(date)) %>% 
-#         ungroup()
-#       
-#       nyt_highlight_cnty <- nyt_county_cases_today %>% 
-#         filter(county==input$countyname)
-#       
-#       nyt_county_cases_today %>% 
-#         hchart(type="scatter", hcaes(x = cases, y = 0, name = county), animation=FALSE,
-#              color = "#fff",showInLegend=FALSE) %>%
-#         hc_add_series(data=nyt_highlight_cnty, type="scatter",  hcaes(x = cases, y = 0,name = county), 
-#                       color = "#FFD100", marker = list(radius=9, enabled=TRUE), animation = FALSE,
-#                       showInLegend=FALSE, dataLabels = list(enabled = TRUE,
-#                                                             padding=10,
-#                                                             format = '{point.name} County')) %>%
-#         hc_xAxis(labels=list(format = "{value:,.0f} Cases")) %>%
-#         hc_yAxis(title=FALSE,
-#           showFirstLabel = FALSE,
-#           showLastLabel = FALSE
-#         ) %>% 
-#         hc_tooltip(table = TRUE, sort = TRUE, borderWidth = 0,
-#                    pointFormat = "<b>{this.name}</b><br>
-#                                   Confirmed Cases: <b> {point.x:,.0f}</b>") %>%
-#         hc_add_theme(
-#           hc_theme_merge(
-#             hc_theme_smpl(),
-#             hc_theme(chart = list(backgroundColor = "#3A4A9F",
-#                                   style = list(fontFamily = "Montserrat")),
-#                      plotOptions = list(series = list(dataLabels = list(style = list(fontFamily = "Montserrat", 
-#                                                                                      color="#FFD100",
-#                                                                                      fontSize = "1.4em",
-#                                                                                      textOutline = FALSE)))),
-#                      yAxis = list(labels = list(style = list(fontFamily = "Montserrat", color="#fff")), 
-#                                   title = list(style = list(color = "#fff", fontSize = "12px", 
-#                                                             color="#fff",fontWeight="500")), 
-#                                   gridLineWidth = 0,
-#                                   gridLineColor = "#F3F3F3", 
-#                                   lineColor = "#fff", 
-#                                   minorGridLineColor = "#F3F3F3", 
-#                                   tickColor = "#F3F3F3", 
-#                                   tickWidth = 0),
-#                      xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
-#                                   title = list(enabled=FALSE),
-#                                   gridLineWidth = 0,
-#                                   gridLineColor = "#F3F3F3", 
-#                                   lineColor = "#fff", 
-#                                   minorGridLineColor = "transparent", 
-#                                   tickColor = "#F3F3F3", 
-#                                   tickWidth = .5)))
-#           )
-#       
-#     })
-#     
-    
 # {County Curve Charts}  --------------------------------------------------
     
     output$cnty_curves_hchart <- renderHighchart({
@@ -2526,10 +2400,6 @@ output$county_mort_rate <- renderText({
         mutate(min_new = min(cases, na.rm = TRUE),
                max_new = max(cases, na.rm = TRUE)) %>% 
         mutate(date = ymd(date))
-      
-      hcoptslang <- getOption("highcharter.lang")
-      hcoptslang$thousandsSep <- ","
-      options(highcharter.lang = hcoptslang)
       
       nyt_county_cases_chart %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,
@@ -2590,10 +2460,6 @@ output$county_mort_rate <- renderText({
       req(input$countyname)
       
       dataset()
-      
-      hcoptslang <- getOption("highcharter.lang")
-      hcoptslang$thousandsSep <- ","
-      options(highcharter.lang = hcoptslang)
       
       nyt_cnty_new_cases_hchart <- nyt_county_cases %>% 
         filter(county==input$countyname) %>%

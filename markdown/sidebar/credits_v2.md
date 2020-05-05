@@ -28,6 +28,10 @@ Homebase is a free scheduling and time tracking tool used by 100,000+ local busi
 
 Convex Design is a small data-driven digital studio with expertise on everything from bar charts to neural nets. Their founders have worked with some of the most cutting-edge organizations out there. This includes helping scientists at NASA/JPL, neuroscientists at HHMI Janelia, journalists at CNN, FiveThirtyEight, and the New Yorker. As well as enterprise teams at Fortune 500 companies like AIG.
 
+### [Safegraph](https://www.safegraph.com/blog/safegraph-provides-cdc-fed-and-1000-organizations-with-data-to-fight-the-covid-19-crisis)
+
+SafeGraph has provided free access to its various datasets to help researchers around the world through its SafeGraph COVID-19 Data Consortium. So far, 1,000+ organizations are already in the consortium and are using SafeGraph and partner company datasets at no-cost. The data includes aggregated and anonymized datasets on social distancing and foot traffic to businesses. More details on the datasets here.
+
 
 ## Open Source Data Credits
 
@@ -39,7 +43,7 @@ Convex Design is a small data-driven digital studio with expertise on everything
 
 ## Open Source Software Credits
 
-### [**`highcharter`**](http://jkunst.com/highcharter/index.html) by Joshua Kunst
+#### [`highcharter`](http://jkunst.com/highcharter/index.html) by Joshua Kunst
 `highcharter` is a R wrapper for [Highcharts javascript library](https://www.highcharts.com) and its modules. Highcharts is very mature and flexible javascript charting library and it has a great and powerful API. [See here for examples.](http://www.highcharts.com/demo). Texas 2036 holds a Not-for-Profit license of Highcharts and has permission to utilize the following product(s) through that license: Highcharts, Highcharts Maps, and Highcharts Gantt.
 
 #### [`janitor`](http://sfirke.github.io/janitor/) by Sam Firke

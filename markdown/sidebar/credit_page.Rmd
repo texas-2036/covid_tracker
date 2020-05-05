@@ -1,0 +1,332 @@
+---
+title: "CREDITS <a style='font-weight:300;color:#DBDCDD;text-decoration:none;'>| </a><a style='font-weight:300;color:#DBDCDD;text-decoration:none;'>Table of Contents</a>"
+output:
+  html_notebook:
+    code_folding: hide
+    highlight: haddock
+    css: credits.css
+    toc: yes
+    toc_depth: 3
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+***
+
+<div style="text-align:center;font-weight:800;text-transform:uppercase">    
+  <a style='font-weight:800' href="https://features.texas2036.org/caseforaction">Return to Interactive</a>
+  <a > | </a>
+  <a style='font-weight:800' href="https://www.texas2036.org/">Texas 2036 Home</a>
+  <a > | </a>
+  <a style='font-weight:800' href="https://texas2036.org/data/">Texas 2036 Data Resources</a>
+</div>
+
+<!-- ***  -->
+
+<!-- ### A Note About This Project -->
+
+<!-- Trying to tell the story of the future is difficult for a number of reasons. The first and obvious reason is that we aren't superhuman. We can't accurately predict the future and that's not what this experience attempts to do. Instead, it attempts to reasonably estimate the true challenges our state will face in the future whether it's related to public education, health and wellbeing, infrastructure, or natural resources. What we are after---however imperfect our estimates may end up being in 2036---is the truth. This leads to the second reason, which is that our method for estimating that truth---math---is always going to have limitations we must learn to live with. That said, we have worked to combine the most relevant data sources with modern data science tools to understand the challenges we will face as a state in the decades to come. We realize that we'll get it wrong from time-to-time, but we'll always be transparent about how we came to these conclusions instead of hiding everything we've done inside a black box. That said, below is an organized resource that explains where everything found in "Come and Make It" originated. We hope you feel comfortable reaching out with any concerns and questions you feel weren't addressed in this current iteration of documentation. -->
+
+<!-- -Matt Worthington, Manager of Data and Analytics -->
+<!-- [matt.worthington@texas2036.org](mailto:matt.worthington@texas2036.org) -->
+
+***
+
+### Data Credits
+
+[America's Health Rankings](https://www.americashealthrankings.org): The mission of America's Health Rankings (AHR) is to provide a wide variety of health and health-related information to help policymakers, advocates and individuals understand a population’s health in a holistic, inclusive manner. 
+
+  * **Where you can see this data:** It exists [here.](https://features.texas2036.org/caseforaction/intro/13)
+  * **How we used their data:** We used the latest version of each of the following three datasets in our narrative to compare Texas health outcomes to health outcomes in other states to understand where Texas fell in the bottom half of state rankings across the various measures that America's Health Rankings Reports on throughh their Annual Report, Health of Women and Children, and their Senior Report.
+    - [**The AHR 2018 Annual Report**](https://www.americashealthrankings.org/explore/annual/measure/Overall/state/TX) is the longest running annual assessment of the nation’s health on a state-by-state basis. For nearly three decades, America’s Health Rankings® Annual Report has analyzed a comprehensive set of behaviors, public and health policies, community and environmental conditions, and clinical care data to provide a holistic view of the health of the people in the nation. 
+      * The following measures came from AHR's Annual Report: _["Adverse Childhood Experiences"](https://www.americashealthrankings.org/explore/annual/measure/ACEs/state/TX), "[Cardiovascular Deaths"](https://www.americashealthrankings.org/explore/annual/measure/CVDDeaths/state/TX), ["Diabetes"](https://www.americashealthrankings.org/explore/annual/measure/Diabetes/state/TX), ["Infectious Disease"](https://www.americashealthrankings.org/explore/annual/measure/infectiousdisease/state/TX), ["Low Birthweight"](https://www.americashealthrankings.org/explore/annual/measure/birthweight/state/TX), ["Mental Health Providers"](https://www.americashealthrankings.org/explore/annual/measure/MHP/state/TX), ["Obesity"](https://www.americashealthrankings.org/explore/annual/measure/Obesity/state/TX), ["Preventable Hospitalizations"](https://www.americashealthrankings.org/explore/annual/measure/preventable/state/TX), ["Primary Care Physicians"](https://www.americashealthrankings.org/explore/annual/measure/PCP/state/TX), ["Stroke"](https://www.americashealthrankings.org/explore/annual/measure/Stroke/state/TX) and ["Uninsured"](https://www.americashealthrankings.org/explore/annual/measure/HealthInsurance/state/TX)_.
+    - [**The AHR 2018 Health of Women and Children Report**](https://www.americashealthrankings.org/explore/health-of-women-and-children/measure/overall_mch/state/TX?edition-year=2018) is the newest state rankings report. With a focus on women of reproductive age, infants and children under age 18, this report emphasizes the population groups where change can make generational differences.
+      * The following measures came from AHR's Health of Women and Children Report: _["Immunizations - Children"](https://www.americashealthrankings.org/explore/health-of-women-and-children/measure/Immunize/state/TX?edition-year=2018), ["Maternal Mortality"](https://www.americashealthrankings.org/explore/health-of-women-and-children/measure/maternal_mortality/state/TX?edition-year=2018), and ["Supportive Neighborhoods"](https://www.americashealthrankings.org/explore/health-of-women-and-children/measure/supportiveneighborhood/state/TX?edition-year=2018)_.  
+      * IMPORTANT NOTE: These datasets were pulled in during the first week of September. In the weeks since September 5th, the AHR 2019 Health of Women and Children Report was released. As we did not have sufficient time to include this recently released data, the 2019 AHR Health of Women and Children report will be integrated into these rankings as soon as possible: 
+    - [**The AHR 2019 Senior Report**](https://www.americashealthrankings.org/explore/senior/measure/overall_sr_2/state/TX) recently completed its fifth year of presenting a comparative health report for the U.S. population aged 65 and older. 
+      * The following measures came from AHR's Senior Report: _"[Frequent Mental Distress - Seniors"](https://www.americashealthrankings.org/explore/senior/measure/mental_disress_sr/state/TX)_.
+
+[Bureau of Economic Analysis](https://www.bea.gov/data/gdp/gdp-state): The Bureau of Economic Analysis (BEA) promotes a better understanding of the U.S. economy by providing the most timely, relevant, and accurate economic accounts data in an objective and cost-effective manner.
+
+  * **Where you can see this data:** It exists [here](https://features.texas2036.org/caseforaction/intro/3) and [here](https://features.texas2036.org/caseforaction/intro/4)
+  * **How we used their data:** We used their [GDP by State estimates](https://apps.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&major_area=0&area=48000&year=-1&tableid=505&category=1505&area_type=0&year_end=-1&classification=naics&state=0&statistic=1&yearbegin=-1&unit_of_measure=levels) to generate the historical GDP Charts for Texas. To generate the share of Total GDP by Urban and Rural Counties, we had to merge two datasets. The first was BEA's Prototype [GDP by County](https://www.bea.gov/data/gdp/gdp-county) released in December 2018 that provides County=Level estimates of GDP for 2012-2015 and the second was the U.S. Census Bureau's [County Rurality Level: 2010] dataset, which provides breakdowns of every US County's rurality based on the counts from the most recent Decennial Census in 2010. We then followed the Census Bureau's methodology of classifying counties as urban or rural with one exception. The Census [has two rural types](https://www2.census.gov/geo/pdfs/reference/ua/Defining_Rural.pdf) (mostly or all) and one type of urban (mostly). For the purposes of this interactive--which is aimed at a general audience---we classified counties using a modified version of their methodology, where a county is either mostly urban or mostly rural based on the greater share of a given population type within each county. After joining that classification for each county to the GDP by County datasets, we aggregated the values of "Mostly Urban GDP" and "Mostly Rural GDP" for each year and divided those values by the total GDP for each of those years.  What we found is that between 2012-2015, the distribution of GDP among Rural and Urban counties hardly varies. In Urban areas, it varied from 94.3% to 94.4% of GDP and 5.6% to 5.7% of GDP in Rural areas. We took the latest estimate from 2015, which was the 94.4% and 5.6% breakdown for the purposes of [this slide.](https://features.texas2036.org/caseforaction/intro/4).
+  
+```r
+library(tidyverse)      # Load the `tidyverse` package
+library(janitor)        # Load the `janitor` package
+library(readxl)         # Load the `readxl` package
+
+# CODE TO ANALYZE CENSUS BUREAU DATA & CLASSIFY COUNTIES AS MOSTLY URBAN OR MOSTLY RURAL
+county_import <- read_excel("Slide 9/County_Rural_Lookup.xlsx", skip=3) %>% 
+  clean_names() %>% 
+  filter(state=="TX") %>% 
+  rename(county_fips=1,county_name=3, tot_pop=5, `Mostly Urban`=6,`Mostly Rural`=7) %>% 
+  select(-2,-4,-8) %>% 
+  gather(pop_type, value, 4:5) %>% 
+  mutate(share=round(value/tot_pop, digits=3),
+         pct=share) %>%
+  mutate_at(vars(pct), scales::percent) %>% 
+  group_by(county_name) %>% 
+  slice(which.max(share)) %>% 
+  ungroup() %>% 
+  mutate(county_name=gsub(pattern=", Texas", replacement="", x=county_name),
+         county_fips=gsub(pattern="^48", replacement = "", x=county_fips)) 
+
+# IMPORT THE GDP BY COUNTY DATA FROM THE BUREAU OF ECONOMIC ANALYSIS
+
+county_gdp <- read_excel("Slide 4/data/GCP_Release_1.xlsx") %>% 
+  clean_names %>% 
+  filter(postal=="TX",
+         line_code=="1") %>% 
+  rename(gdp_2012=6,
+         gdp_2013=7,
+         gdp_2014=8,
+         gdp_2015=9) %>% 
+  separate(fips, into=c("state", "county_fips"), sep=2)
+
+# JOIN THE GDP BY COUNTY DATA FROM THE BUREAU OF ECONOMIC ANALYSIS
+# WITH THE URBAN/RURAL COUNTY CLASSIFICATIONS DERIVED FROM THE CENSUS 
+
+county_gdp_ur <- county_import %>% 
+  left_join(ur_classify, by="county_fips") %>% 
+  gather(year, gdp, 7:10) %>% 
+  mutate(year=gsub(pattern="gdp_", replacement="",x=year),
+         gdp=as.numeric(gdp))
+
+# GROUP BY EACH YEAR AND POPULATION TYPE (URBAN/RURAL), 
+# THEN SUMMARIZE GDP VALUES FOR EACH YEAR BY THAT POPULATION TYPE.
+
+avg_urb_rur_gdp <- county_gdp_ur %>% 
+  group_by(year, pop_type) %>% 
+  summarise(tot_gdp = sum(gdp)) %>% 
+  ungroup()
+
+# DIVIDE THE TOTAL OF EACH YEAR'S URBAN GDP AND RURAL GDP
+# FROM THE TOTAL GDP VALUES REPORTED BY BEA THAT YEAR IN
+# ORDER TO DERIVE URBAN + RURAL SHARES OF TOTAL GDP IN TEXAS.
+
+tot_urb_rur_gdp <- avg_urb_rur_gdp %>% 
+  spread(pop_type, tot_gdp) %>% 
+  mutate(tot_gdp=(`Mostly Urban`+`Mostly Rural`)) %>% 
+  gather(pop_type, group_gdp, 2:3) %>% 
+  select(1,3,4,2) %>% 
+  mutate(gdp_share=round(group_gdp/tot_gdp, digits=3)) 
+
+```
+
+  
+[County Health Rankings](https://www.countyhealthrankings.org/app/texas/2019/overview): The County Health Rankings & Roadmaps program is a collaboration between the Robert Wood Johnson Foundation and the University of Wisconsin Population Health Institute. The annual County Health Rankings measure vital health factors, including high school graduation rates, obesity, smoking, unemployment, access to healthy foods, the quality of air and water, income inequality, and teen births in nearly every county in America. The annual Rankings provide a revealing snapshot of how health is influenced by where we live, learn, work and play.
+
+  * **Where you can see this data:** It exists [in the data explorer, under "Health".](https://features.texas2036.org/caseforaction/explorer) 
+  * **How we used their data:** We used their county health rankings to provide data in the health explorer for each county on a handful of relevant statistics.
+
+[Federal Communications Commission](https://www.fcc.gov/): The Federal Communications Commission regulates interstate and international communications by radio, television, wire, satellite, and cable in all 50 states, the District of Columbia and U.S. territories. An independent U.S. government agency overseen by Congress, the Commission is the federal agency responsible for implementing and enforcing America’s communications law and regulations.
+
+  * **Where you can see this data:** It exists [here.](https://features.texas2036.org/caseforaction/intro/10) 
+  * **How we used their data:** We used their estimate of a 31% gap in Rural broadband access ([found here on page 48](https://docs.fcc.gov/public/attachments/FCC-19-44A1.pdf)), along with an analysis of their [Form 477 Broadband Deployment Data - December 2017 (version 2)](https://www.fcc.gov/form-477-broadband-deployment-data-december-2017-version-2) to create the map of Broadband Access in Texas. 
+  * **How we analyzed their Broadband Deployment Data**: The FCC data for Texas came in a [large CSV file](https://www.fcc.gov/form477/BroadbandData/Fixed/Dec17/Version%202/TX-Fixed-Dec2017.zip), which we read into RStudio using the `tidyverse`. Then, we converted all column headers to be machine readable using the `janitor` package, which speeds up analysis. In the raw format of the data provided by FCC, census blocks (all of which were tagged by county) were not initially classified as meeting the standard or not meeting the FCC's standard. They only had records of advertised speeds in each census block within each county. Our task was to take those speeds and determine whether or not a each census block in each of the 254 counties met the FCC's standard of 25mbps download speed and 3mbps upload speed. So we wrote the script below to reclassify each census block, and assigned value of 1 to each census block so we could get accurate counts of how many census blocks met the standard in a given county and how many did not meet the standard. Once we aggregated counts for the number of blocks meeting or not meeting the FCC Standard in each county, we took both of those figures and divided them by the total number of census blocks in each county. At this point, we were able to then map out the share of census blocks in each county with Broadband Access that met the FCC's standard of 25mbps download speed and 3mbps upload speed.
+  
+```r
+library(tidyverse) # Load the `tidyverse` package
+library(janitor)   # Load the `janitor` package
+
+# STEP 1: Read in the RAW FCC Data and Make Column Headers Machine Readable (Clean)
+
+fcc_TXterrestrial_raw <- read_csv("raw_data/TX-Fixed-Dec2017-v2.csv") %>%   # Read the Data
+  clean_names()                                                             # Clean Column Headers
+
+# STEP 2: Reclassify FCC's Advertised Data Speeds For Each Census Tract In A County
+#         And Determine Whether or Not It Meets FCC's 25/3 Standard. 
+
+fcc_TXterrestrial_county <- fcc_TXterrestrial_raw %>%         # Start with the Raw Data
+  mutate(blockcode=as.character(block_code),                  # Duplicate the Block Code Column To Extract FIPS Codes
+         block_code=as.character(block_code)) %>%      
+  separate(blockcode, into=c("state_id","other1"), sep=2) %>% # Extract States
+  separate(other1, into=c("county_id","other2"), sep=3) %>%   # Extract Counties
+  separate(other2, into=c("tract_id","block_id"), sep=6) %>%  # Extract Counties
+  select(-block_id) %>%                                       # Drop Duplicated Block Column
+  mutate(is_25_3=case_when(                                   # Create A New Column That Classifies A Census Blocks (1/2)
+    max_ad_down >= 25 & max_ad_up >= 3 ~ "Yes",               # As Meeting FCC's Standard or Not, Based on Advertised Speeds (2/2)
+    TRUE ~ "No"
+  )) %>% 
+  mutate(count=as.numeric(1)) %>%                             # Assign Each Census Block A Numeric Value of 1     
+  group_by(county_id, is_25_3) %>%                            # Group By The County ID and New Classification
+  summarise(sum=sum(count)) %>%                               # Summarize All Values of 1 Assigned To Census Blocks
+  spread(is_25_3,sum) %>%                                     # Create A Column for Each Summary County Type of "Yes" + "No" 
+  mutate(tot=Yes+No) %>%                                      # Sum Up The Values of All Census Blocks
+  mutate(with=round(Yes/tot, digits=3),                       # Create Estimates of Counties with Broadband Access
+         without=round(No/tot, digits=3))                     # Create Estimates of Counties without Broadband Access
+```
+  
+[Kaiser Family Foundation](https://www.kff.org/): A leader in health policy analysis, health journalism, and communication, the Kaiser Family Foundation is dedicated to filling the need for trusted information on national health issues. KFF is a non-profit organization focusing on the major health care issues facing the U.S., as well as the U.S. role in global health policy.
+
+  * **Where you can see this data:** It exists [here.](https://features.texas2036.org/caseforaction/intro/11)  
+  * **How we used their data:** We used their ["Total Health Spending"](https://www.kff.org/other/state-indicator/health-care-expenditures-by-state-of-residence-in-millions/?activeTab=map&currentTimeframe=0&selectedDistributions=total-health-spending&sortModel=%7B"colId":"Location","sort":"asc"%7D) estimate for the state of Texas in 2014, which attempts to estimate how much total money was spent on healthcare from public and privately funded sources.
+  
+[National Association of Education Progress (NAEP)](https://nces.ed.gov/nationsreportcard/) The National Assessment of Educational Progress (NAEP) is the largest nationally representative and continuing assessment of what America's students know and can do in various subject areas.
+
+ * **Where you can see this data:** It exists [here.](https://features.texas2036.org/caseforaction/intro/8) 
+  * **How we used their data:** We used their rankings of each state to understand where Texas ranked for the share of students scoring at or above proficiency [in 8th Grade Reading](https://www.nationsreportcard.gov/profiles/stateprofile/overview/TX?cti=PgTab_ScoreComparisons&chort=2&sub=RED&sj=TX&fs=Grade&st=AP&year=2017R3&sg=Gender%3A+Male+vs.+Female&sgv=Difference&ts=Single+Year&tss=2017R3-2017R3&sfj=NP) and [in 8th Grade Math](https://www.nationsreportcard.gov/profiles/stateprofile/overview/TX?cti=PgTab_ScoreComparisons&chort=2&sub=MAT&sj=TX&fs=Grade&st=AP&year=2017R3&sg=Gender%3A+Male+vs.+Female&sgv=Difference&ts=Single+Year&tss=2017R3-2017R3&sfj=NP) during 2017.
+
+[NHGIS - IPUMS](https://www.nhgis.org/): The National Historical Geographic Information System (NHGIS) at the University of Minnesota provides easy access to summary tables and time series of population, housing, agriculture, and economic data, along with GIS-compatible boundary files, for years from 1790 through the present and for all levels of U.S. census geography, including states, counties, tracts, and blocks.
+  
+  * **How we used their data:** We used their historical census files to generate the 1850 Map of Texas and to source estimates for the total Texas population in 1850.
+  * **Where you can see this data:** It exists [here.](https://features.texas2036.org/caseforaction/intro/1) 
+  
+[Texas A&M Transportation Institute](https://tti.tamu.edu): A member of The Texas A&M University System, TTI has a breadth and depth of programs, facilities and capabilities unsurpassed by any other higher-education-affiliated transportation research organization in the United States. The Institute’s research and development program has resulted in significant breakthroughs across all facets of transportation.
+
+  * **How we used their data:** We used their realibility index known as the "Planning Time Index", which is calculated in the following manner: 
+  
+  $$ \text{Planning Time Index}^{95} = \frac{95^{th} Percentile}{\text{Free-Flow Travel Time}}$$
+
+  * **Where you can see this data:** It exists [here](https://features.texas2036.org/caseforaction/intro/9) and in [the data explorer](https://features.texas2036.org/caseforaction/explorer) under "Traffic".
+
+[Texas State Demographic Center](https://demographics.texas.gov/): The Texas Demographic Center functions as a focal point for the production, interpretation, and distribution of demographic information for Texas. The Texas Demographic Center produces and disseminates population estimates and projections for Texas, as well as other demographic information. Special emphasis is placed on data that may be useful to policy makers in dealing with issues regarding the demand for State services.
+
+  * **How we used their data:** We used their Population Projections from 2010-2050 in a number of different ways on this project.
+  * **Where you can see this data:** Inside the narrative, data from the Texas Demographic Center exists [here](https://features.texas2036.org/caseforaction/intro/2), [here](https://features.texas2036.org/caseforaction/intro/6), [here](https://features.texas2036.org/caseforaction/intro/8),and [here](https://features.texas2036.org/caseforaction/intro/19). It also lives in [the data explorer](https://features.texas2036.org/caseforaction/explorer) under "Population by Age" and "Population by ethnicity" 
+  
+```r
+library(tidyverse)
+
+## LOAD THE TEXAS DEMOGRAPHIC CENTER PROJECTIONS DATA
+
+pop_proj_data <- read_csv("Slide 5/2018allcntyindage.csv") %>% 
+  clean_names() %>% 
+  filter(str_detect(year,"2019|2036")) %>% 
+  rename(county_fips=fips)
+
+```
+
+```r
+
+## CALCULATE THE INCREASE IN POPULATION 65+
+## BETWEEN 2019 AND 2036
+
+pop_65 <- pop_proj_data %>% 
+  filter(county_fips=="000",
+         age_in_yrs_num>=65) %>% 
+  group_by(year) %>% 
+  summarise(tot_pop_65plus=sum(total))
+
+```
+
+```r
+
+## CALCULATE THE INCREASE IN NON-WHITE POPULATION
+## BETWEEN 2019 AND 2036
+
+pop_non_white <- pop_proj_data %>% 
+  filter(county_fips=="000",
+         age_in_yrs_num==-1) %>% 
+  select(year, nh_white_total,nh_black_total,hispanic_total,nh_asian_total,nh_other_total) %>% 
+  gather(race_group, total, 2:6) %>% 
+  mutate(group=case_when(
+    race_group=="nh_white_total" ~ "White",
+    TRUE ~ "Non-White"
+  )) %>% 
+  group_by(year, group) %>% 
+  summarise(tot_pop_NW=sum(total))
+
+```
+
+```r
+
+## CALCULATE THE INCREASE IN POPULATION OF CURRENT URBAN AREAS
+## BETWEEN 2019 AND 2036
+
+pop_urb_rur <- pop_proj_data %>% 
+  left_join(ur_classify, by="county_fips") %>% 
+  filter(county_fips!="000",
+         age_in_yrs_num==-1) %>% 
+  group_by(year, pop_type) %>% 
+  summarise(tot_pop_UR=sum(total)) %>% 
+  spread(pop_type,tot_pop_UR) %>% 
+  clean_names() %>% 
+  mutate(tot_pop=mostly_urban+mostly_rural) %>% 
+  mutate(urb_share=mostly_urban/tot_pop,
+         rur_share=mostly_rural/tot_pop) %>% 
+  mutate_at(vars(urb_share, rur_share), scales::percent)
+
+```
+
+```r
+
+## CALCULATE THE INCREASE IN SCHOOL AGED STUDENTS (3-18)
+## BETWEEN 2019 AND 2036
+
+pop_age <- pop_proj_data %>%                        # Get 2019+2036 Data 
+  filter(county_fips=="000",                        # Filter for only Statewide Estimates
+         age_in_yrs_num %>% between(3,18)) %>%      # Filter for only Ages 3-18 (School-Aged Population)
+  group_by(year) %>%                                # Group By The Year    
+  summarise(tot_pop_SA=sum(total))                  # Summarize The Total for Ages 3-18
+
+```
+
+[Texas Water Development Board](http://www.twdb.texas.gov/about/index.asp#twdb-history): The mission of the Texas Water Development Board (TWDB) is to provide leadership, information, education, and support for planning, financial assistance, and outreach for the conservation and responsible development of water for Texas.
+
+  * **Where you can see this data:** This data exists [in the narrative](https://features.texas2036.org/caseforaction/intro/16) and in [the data explorer](https://features.texas2036.org/caseforaction/explorer). 
+  * **How we used their data:** We used their water [supply, demand, and need projections](https://2017.texasstatewaterplan.org/statewide) to create maps located [in the narrative](https://features.texas2036.org/caseforaction/intro/16) and in [the data explorer](https://features.texas2036.org/caseforaction/explorer) under "Water". 
+
+[U.S. Census Bureau](https://www.census.gov): The Census Bureau's mission is to serve as the nation's leading provider of quality data about its people and economy.
+
+  * **Where you can see this data:** It exists [in the narrative portion](https://features.texas2036.org/caseforaction/intro/5) and [data explorer](https://features.texas2036.org/caseforaction/explorer) under "Education".
+  * **How we used their data:** We used their Median Family Income Estimates from the American Community Survey 5-Year Series to understand disparities in incomes over time along with Educational Attainment Estimates for each county over time.NOTE: Given the length of the script for our parising of the Census Bureau's Educational Attainment data, we are not posting it here, but making it available upon request. We also used several of their TIGER/LINE Shapefiles.
+  
+```r
+years2 <- lst(2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017)
+
+mfi_vars <- c(All = "B19113_001",
+              White_NH = "B19113H_001",
+              Black = "B19113B_001",
+              Hispanic = "B19113I_001",
+              Asian = "B19113D_001",
+              Other = "B19113F_001")
+
+mfi <- map_dfr(years2,
+                     ~get_acs(geography = "state", variables = mfi_vars,
+                              state = "TX", survey="acs5", year = .x), .id = "year") 
+```
+
+
+***
+
+### Open Source Software Credits
+
+[`censusapi`](https://hrecht.github.io/censusapi/) by Hannah Recht: `censusapi` is an accessor for the United States Census Bureau’s APIs. More than 300 Census API endpoints are available, including Decennial Census, American Community Survey, Poverty Statistics, and Population Estimates APIs. This package is designed to let you get data from all of those APIs using the same main function—getCensus—and the same syntax for each dataset.
+
+[`janitor`](http://sfirke.github.io/janitor/) by Sam Firke: `janitor` has simple functions for examining and cleaning dirty data. It was built with beginning and intermediate R users in mind and is optimized for user-friendliness. Advanced R users can already do everything covered here, but with janitor they can do it faster and save their thinking for the fun stuff.
+
+[`rmarkdown`](https://rmarkdown.rstudio.com/docs/) by JJ Allaire, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone: The `rmarkdown` package helps you create dynamic analysis documents that combine code, rendered output (such as figures), and prose. You bring your data, code, and ideas, and R Markdown renders your content into a polished document that can be used to: do data science interactively within the RStudio IDE; Reproduce your analyses; Collaborate and share code with others; and communicate your results with others.
+
+[RStudio](https://www.rstudio.com/products/rstudio/) by RStudio - RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+
+[`sf`](http://r-spatial.github.io/sf/) by Edzer Pebesma: the `sf` package is a comprehensive resource for analyzing, manipulating, and visualizing spatial data files within R. It works seamlessly within the `tidyverse` syntax and, thus, is compatible with a number of different `tidyverse`-friendly tools. 
+
+[`tidycensus`](https://walkerke.github.io/tidycensus) & [`tigris`](https://github.com/walkerke/tigris) by Kyle Walker: `tidycensus` is an R package that allows users to interface with the US Census Bureau’s decennial Census and five-year American Community APIs and return `tidyverse`-ready data frames, optionally with simple feature geometry included. `tigris` is an R package that allows users to directly download and use [TIGER/Line shapefiles](https://www.census.gov/geo/maps-data/data/tiger-line.html) from the US Census Bureau.
+
+[`tidyverse`](https://tidyverse.tidyverse.org) by Hadley Wickham - The `tidyverse` is a set of packages that work in harmony because they share common data representations and API design. The `tidyverse` package is designed to make it easy to install and load core packages from the `tidyverse` in a single command. If you’d like to learn how to use the `tidyverse` effectively, the best place to start is [R for data science](http://r4ds.had.co.nz/).
+
+***
+
+### Production Credits
+
+This project was written by Matt Worthington and edited by Justin Coppedge, Sarah Kirkle, Katherine Teleki, and Emily Zalkovsky. Additional editing was provided by Luis Acuna, Margaret Spellings, Chris Walters.
+
+The interactive graphics were made by [Accurat](https://www.accurat.it).
+
+Charts by [Accurat](https://www.accurat.it) and Matt Worthington.
+
+Photography was licensed through [Shutterstock](https://www.shutterstock.com) and [Unsplash](https://unsplash.com). Special photography contributions came from Jose Arredondo, Gideon Tsang, and Matt Worthington.
+
+Creative direction by [Accurat](https://www.accurat.it).
+
+Design and art direction by [Accurat](https://www.accurat.it).
+
+Development by [Accurat](https://www.accurat.it). 

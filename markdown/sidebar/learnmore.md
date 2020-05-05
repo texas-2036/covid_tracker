@@ -1,4 +1,4 @@
-<img src="images/logo_full.png" style="margin-left:auto; margin-right:auto; display:block" alt="uwatxlogo" width="350px"/>
+<img src="images/logo_full.png" style="margin-left:auto; margin-top: -41px; margin-right:auto; display:block" alt="tx2036logo" width="200px"/>
 <div class="collateral"></div>
 
 This Dashboard was developed by Texas 2036. Texas 2036 is a nonprofit organization building long-term, data-driven strategies to secure Texas’ continued prosperity for years to come. We engage Texans and their leaders in an honest conversation about our future, focusing on the big challenges. We  offer non-partisan ideas and modern solutions that are grounded in research and data to break through the gridlock on issues that matter most to all Texans. Smart strategies and systematic changes are critical to prepare Texas for the future. 
