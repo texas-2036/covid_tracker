@@ -282,6 +282,20 @@ tsa_shps <- dshs_tsa_hosp_data %>%
 # ** Economic Data -----------------------------------------------------------
 
 
+# ^^^TWC County UI Claims Data ------------------------------------------------------
+
+twc_ui_by_county <- read_csv("https://lmci.state.tx.us/shared/dashboarddata/ui_by_county.csv") %>% 
+  janitor::clean_names() %>% 
+  rename(county=area_name)
+
+twc_claims_cnty <- read_csv("clean_data/twc/county_claims_data.csv") %>% 
+  filter(str_detect(date, "^2020"))
+
+twc_claims_cnty_summ <- read_csv("clean_data/twc/county_claims_data.csv") %>% 
+  filter(date >= as.Date("2020-03-21")) %>% 
+  group_by(county) %>% 
+  summarise(all_claims=sum(value))
+
 # ^^^Homebase Data -----------------------------------------------------
 
 
@@ -949,8 +963,42 @@ tabItem(tabName = "county_profiles",
               column(width = 6, 
                      # div(style = 'overflow-y: scroll; position: fixed; width: 700px',
                      h4("Data As of:",textOutput("currentTime", inline=TRUE)),
-                     # includeHTML("html/tx_diversity_map_alt.html")
-                     leafletOutput("map", width = "100%", height = 600)
+
+# ~~County + TSA Map --------------------------------------------------------
+
+                     leafletOutput("map", width = "100%", height = 600),
+
+# ~~Economic Data ---------------------------------------------------------
+
+
+                     h3(class="covid-topic", "Economic Data"),
+                     fluidRow(
+                       column(width = 4, class="economic-grid",
+                              h2(class="economic-tile",
+                                 p(style="text-align:center;font-size:1em;font-weight:800", 
+                                   textOutput("county_all_claims", inline = TRUE, container=span)),
+                                 p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
+                                   paste0("Since: Mar 21, 2020")),
+                                 p(style="text-align:center;font-size:.45em;font-weight:300","Jobless Claims"),
+                                 p(style="text-align:center;font-size:.4em;font-weight:400",
+                                   tags$a(href="https://www.twc.texas.gov/news/unemployment-claims-numbers#claimsByCounty","Source: Texas Workforce Commission")))),
+                       column(width = 4, class="economic-grid",
+                              h2(class="economic-tile",
+                                 p(style="text-align:center;font-size:1em;font-weight:800",paste0(tx_urn$value,"%")),
+                                 p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
+                                   paste0("As of: ", format(tx_urn$date, format="%b %d"))),
+                                 p(style="text-align:center;font-size:.45em;font-weight:300","Unemployment Rate"),
+                                 p(style="text-align:center;font-size:.4em;font-weight:400",
+                                   tags$a(href="https://fred.stlouisfed.org/series/TXURN","Source: BLS via FREDr")))),
+                       column(width = 4, class="economic-grid",
+                              h2(class="economic-tile",
+                                 p(style="text-align:center;font-size:1em;font-weight:800",paste0(hb_businesses_open$pct,"%")),
+                                 p(style=paste0("text-align:center;font-size:.6em;font-weight:600;color:",hb_businesses_open$color,";"),
+                                   paste0(hb_businesses_open$change_lbl, hb_businesses_open$change, "% From ", format(hb_businesses_open$prev_day, format="%b %d"))),
+                                 p(style="text-align:center;font-size:.43em;font-weight:500","Est. Local Businesses Open"),
+                                 p(style="text-align:center;font-size:.4em;font-weight:400",
+                                   tags$a(href="https://joinhomebase.com/data/covid-19/","Source: Homebase"))))
+                     ),
                     ),
               column(width = 6,
               # h3(style="font-weight:700;",textOutput("countyname", inline = TRUE)),
@@ -958,7 +1006,7 @@ tabItem(tabName = "county_profiles",
 # ~~Current Case Data -----------------------------------------------------
 
               
-              h3(class="covid-topic", "Public Health"),
+              h3(class="covid-topic", "Current Case Data"),
               fluidRow( 
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", 
@@ -967,7 +1015,7 @@ tabItem(tabName = "county_profiles",
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", 
                           textOutput("county_mort_rate")),
-                       p(style="text-align:center","Case Fatality Rate")),
+                       p(style="text-align:center","Deaths (as % of All Cases)")),
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", 
                           textOutput("county_test_text")),
@@ -977,7 +1025,11 @@ tabItem(tabName = "county_profiles",
                           textOutput("county_incident_text")),
                        p(style="text-align:center","Cases Per 100,000"))
                 ),
-              h3(class="covid-topic", "Hospital Capacity"),
+
+
+# ~~Current Hospital Data ---------------------------------------------------
+
+              h3(class="covid-topic", "Current Hospital Data"),
               fluidRow( 
                 column(width = 12,
                        tags$div( class="tsa-paragraph",
@@ -986,7 +1038,7 @@ tabItem(tabName = "county_profiles",
                        h4(style="font-weight:400;display:inline;", "is a part of "),
                        h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                        h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                       h4(style="font-weight:800;color:#FFD100;display:inline;", "On April 28th "),
+                       h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 5th"),
                        h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                        ))),
               fluidRow( 
@@ -1007,6 +1059,10 @@ tabItem(tabName = "county_profiles",
                           textOutput("hosp_lab_covid")),
                        p(style="text-align:center","Lab Confirmed COVID-19 Patients"))
               ),
+
+
+# ~~Trends Over Time ------------------------------------------------------
+
               h3(class="covid-topic", "Trends Over Time"),
               # highchartOutput("cnty_compare_hchart", height = 100),
               highchartOutput("cnty_curves_hchart", height = 350),
@@ -1469,6 +1525,8 @@ server <- function (input, output, session) {
   output$state_curves_hchart <- renderHighchart({
     
     nyt_tx_hchart <- nyt_state_cases_tx %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16")) %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,
              color = "#fff") %>% 
       hc_title(
@@ -1526,13 +1584,8 @@ server <- function (input, output, session) {
     
     # Make sure requirements are met
     # req(input$countyname)
-    
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
 
     nyt_tx_new_cases_hchart <- nyt_state_cases_tx %>% 
-      arrange(date) %>% 
       mutate(daily_growth_rate = (new_cases_1day/lag(new_cases_1day))) %>%
       mutate(daily_growth_rate_7day_avg = rollmean(new_cases_1day, 7, 
                                                fill=0, align = "right")) %>% 
@@ -1540,8 +1593,9 @@ server <- function (input, output, session) {
              max_new = max(new_cases_1day, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
              max_new = as.numeric(max_new)) %>% 
-
-      ungroup()
+      ungroup() %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"))
     
     nyt_tx_new_cases_hchart %>% 
      hchart("column", hcaes(x = date, y = new_cases_1day), 
@@ -1616,13 +1670,6 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
-    
-    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
-    #               name = "Fit", id = "fit") 
-    
     nyt_tx_new_cases_hchart <- nyt_state_cases_tx %>% 
       mutate(daily_death_growth_rate_7day_avg = rollmean(new_deaths_1day, 7, 
                                                fill=0, align = "right")) %>% 
@@ -1630,7 +1677,9 @@ server <- function (input, output, session) {
              max_new = max(new_deaths_1day, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
              max_new = as.numeric(max_new)) %>% 
-      ungroup()
+      ungroup() %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"))
 
     nyt_tx_new_cases_hchart %>% 
       hchart("column", hcaes(x = date, y = new_deaths_1day), 
@@ -1704,13 +1753,6 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
-    
-    # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
-    #               name = "Fit", id = "fit") 
-    
     tx_new_tests_hchart <- test_daily %>%
       arrange(date) %>%
       mutate(daily_test_growth_rate = (totalTestResultsIncrease/lag(totalTestResultsIncrease))) %>%
@@ -1721,7 +1763,8 @@ server <- function (input, output, session) {
              max_new = max(totalTestResultsIncrease, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
              max_new = as.numeric(max_new)) %>% 
-      ungroup()
+      ungroup() %>% 
+      filter(date >= as.Date("2020-03-16"))
     
     tx_new_tests_hchart %>% 
       hchart("column", hcaes(x = date, y = totalTestResultsIncrease), 
@@ -1800,10 +1843,6 @@ server <- function (input, output, session) {
     
     dataset()
     
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
-    
     tx_series_all %>% 
       hchart("column", hcaes(x = date, y = value), 
              animation=FALSE,
@@ -1873,11 +1912,6 @@ server <- function (input, output, session) {
     
     dataset()
     
-    
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
-    
     hb_businesses_open_all %>% 
       hchart("area", hcaes(x = date, y = pct), 
              animation=FALSE,
@@ -1946,10 +1980,6 @@ server <- function (input, output, session) {
     
     dataset()
     
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
-    
     hb_hours_worked_all %>% 
       hchart("area", hcaes(x = date, y = pct), 
              animation=FALSE,
@@ -2017,10 +2047,6 @@ server <- function (input, output, session) {
     # req(input$countyname)
     
     dataset()
-    
-    hcoptslang <- getOption("highcharter.lang")
-    hcoptslang$thousandsSep <- ","
-    options(highcharter.lang = hcoptslang)
     
     hb_employees_working_all %>% 
       hchart("area", hcaes(x = date, y = pct), 
@@ -2111,14 +2137,14 @@ output$map <- renderLeaflet({
         removeShape('hcounty') %>%
         removeShape('harea') %>%
         addPolygons(data=tx_highlight_shp_tsa,
-                    fill = TRUE,
-                    fillColor = "#2d2d2d",
-                    fillOpacity = .5,
+                    fill = FALSE,
+                    # fillColor = "#2d2d2d",
+                    # fillOpacity = .5,
                     stroke = TRUE,
-                    weight = 3,
+                    weight = 8,
                     highlightOptions = highlightOptions(bringToFront = FALSE),
                     color = '#5d5d5d', 
-                    opacity = .5, 
+                    opacity = .8, 
                     layerId = 'harea') %>% 
         addPolygons(data = tx_highlight_shp,
                     fill = FALSE,
@@ -2306,6 +2332,45 @@ output$county_mort_rate <- renderText({
         distinct(total_tests) %>% 
         as.character()
     })
+
+# County UI Claims --------------------------------------------------------
+
+output$county_all_claims <- renderText({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+  twc_claims_cnty_summ %>%
+        filter(county==input$countyname) %>% 
+        distinct(all_claims) %>% 
+        as.character()
+    })
+
+# County Top 5 Industries -------------------------------------------------
+
+ output$county_test_text <- renderText({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+      total_cnty_tests %>%
+        filter(county_name==input$countyname) %>% 
+        distinct(tests_per_100k) %>% 
+        as.character()
+    })
+
+# County, Claims by Gender ------------------------------------------------
+
+    output$county_test_text <- renderText({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+      total_cnty_tests %>%
+        filter(county_name==input$countyname) %>% 
+        distinct(tests_per_100k) %>% 
+        as.character()
+    })    
     
 # TSA Beds Occupation -----------------------------------------------------
     
@@ -2399,7 +2464,9 @@ output$county_mort_rate <- renderText({
         filter(county==input$countyname) %>% 
         mutate(min_new = min(cases, na.rm = TRUE),
                max_new = max(cases, na.rm = TRUE)) %>% 
-        mutate(date = ymd(date))
+        mutate(date = ymd(date)) %>% 
+        arrange(date) %>% 
+        filter(date >= as.Date("2020-03-16"))
       
       nyt_county_cases_chart %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,
@@ -2471,7 +2538,8 @@ output$county_mort_rate <- renderText({
                max_new = max(new_cases_1day, na.rm = TRUE)) %>% 
         mutate(min_new = as.numeric(min_new),
                max_new = as.numeric(max_new)) %>% 
-        ungroup()
+        ungroup() %>% 
+        filter(date >= as.Date("2020-03-16"))
       
       nyt_cnty_new_cases_hchart %>% 
         hchart("column", hcaes(x = date, y = new_cases_1day), 
@@ -2548,13 +2616,6 @@ output$county_mort_rate <- renderText({
       
       dataset()
       
-      hcoptslang <- getOption("highcharter.lang")
-      hcoptslang$thousandsSep <- ","
-      options(highcharter.lang = hcoptslang)
-      
-      # hc_add_series(fit, type = "line", hcaes(x = carat, y = .fitted),
-      #               name = "Fit", id = "fit") 
-      
       nyt_cnty_new_deaths_hchart <- nyt_county_cases %>% 
         filter(county==input$countyname) %>%
         arrange(date) %>% 
@@ -2564,7 +2625,8 @@ output$county_mort_rate <- renderText({
                max_new = max(new_deaths_1day, na.rm = TRUE)) %>% 
         mutate(min_new = as.numeric(min_new),
                max_new = as.numeric(max_new)) %>% 
-        ungroup()
+        ungroup() %>% 
+        filter(date >= as.Date("2020-03-16"))
       
       nyt_cnty_new_deaths_hchart %>% 
         hchart("column", hcaes(x = date, y = new_deaths_1day), 

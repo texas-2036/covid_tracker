@@ -462,7 +462,7 @@ crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", s
   summarise(tsa_counties = toString(county),
             geometry = st_union(geometry))
 
-tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.03.20.xlsx", 
+tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.05.20.xlsx", 
                        sheet = "Bed Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -474,7 +474,7 @@ tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.03.20.xlsx",
   st_as_sf()
 
 
-tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_05.03.20.xlsx", 
+tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_05.05.20.xlsx", 
                        sheet = "Vent Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -502,7 +502,7 @@ tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_05.03.20.xlsx",
 
 ### Syndromic Data
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 
 syndromic_tx <- read_excel("data/dshs/TxS2 Chart May 3 Dashboard.xlsx", sheet="Texas", skip=0) %>%
   clean_names() %>% 
@@ -521,6 +521,40 @@ syndromic_ili <- read_excel("data/dshs/TxS2 Chart May 3 Dashboard.xlsx", sheet="
 
 ```
 
+### Reopening Reports
+
+```{r}
+
+syndromic_tx <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
+    sheet = "Texas DASHBOARD", skip = 11) %>%
+  clean_names() %>% 
+  select(date=1,ili_from_syndromic_surveillance=8,cli_from_syndromic_surveillance=10) %>% 
+  mutate(date=as.numeric(date)) %>% 
+  mutate(date = as.Date(date, origin = "1899-12-30")) %>% 
+  filter(!is.na(ili_from_syndromic_surveillance)) %>% 
+  write_csv("clean_data/dshs/syndromic_tx.csv")
+
+syndromic_cli <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
+    sheet = "CLI Symptoms DASHBOARD", skip = 3) %>%
+  clean_names() %>% 
+  select(-1) %>% 
+  gather(date, value, 2:12) %>% 
+  mutate(date = gsub(pattern="^x", replacement="",x=date)) %>% 
+  mutate(date=as.numeric(date)) %>% 
+  mutate(date = as.Date(date, origin = "1899-12-30")) %>% 
+  write_csv("clean_data/dshs/syndromic_cli.csv")
+
+syndromic_ili <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
+    sheet = "ILI Symptoms DASHBOARD", skip = 3)  %>%
+  clean_names() %>% 
+  select(-1) %>% 
+  gather(date, value, 2:12) %>% 
+  mutate(date = gsub(pattern="^x", replacement="",x=date)) %>% 
+  mutate(date=as.numeric(date)) %>% 
+  mutate(date = as.Date(date, origin = "1899-12-30")) %>% 
+  write_csv("clean_data/dshs/syndromic_ili.csv")
+
+```
 
 ## NYT Time Series Data
 
@@ -841,7 +875,7 @@ lcl <- basename(src)
 download.file(url = src, destfile = paste0("data/twc/",today,"_", lcl))
 
 
-twc_claims_cnty <- read_excel(lcl, skip=2) %>%
+twc_claims_cnty <- read_excel(paste0("data/twc/",today,"_", lcl), skip=2) %>%
   slice(1:254) %>% 
   clean_names() %>% 
   filter(!is.na(county)) %>% 
@@ -849,8 +883,18 @@ twc_claims_cnty <- read_excel(lcl, skip=2) %>%
   # select_at(vars(county, ends_with("2020"))) %>% 
   pivot_longer(-county, names_to = "date", values_to = "value") %>% 
   mutate(date=gsub("^x","0",x=date),
-         date=gsub("_","-",x=date)) %>% 
+         date=gsub("_","-",x=date),
+         date=gsub("20202$","2020",x=date)) #%>% 
   mutate(date=lubridate::mdy(date))
+
+write_csv(twc_claims_cnty,paste0("clean_data/twc/county_claims_data_",today,".csv"))
+write_csv(twc_claims_cnty,paste0("clean_data/twc/county_claims_data.csv"))
+
+twc_claims_all_cnty <- twc_claims_cnty %>% 
+  mutate(state="TX") %>% 
+  group_by(state) %>% 
+  tally(value)
+
 
 twc_claims_cnty %>% 
   # group_by(state) %>% 
@@ -869,6 +913,17 @@ download.file(url = src, destfile = paste0("data/twc/", lcl))
 twc_claims_ind <- read_excel(lcl, skip=1) %>% 
   clean_names()
 ```
+
+## TWC UI by Zip & County 
+
+```{r}
+
+twc_ui_by_county <- read_csv("https://lmci.state.tx.us/shared/dashboarddata/ui_by_county.csv")
+
+twc_ui_by_zip <- read_csv("https://lmci.state.tx.us/shared/dashboarddata/ui_by_zipcode.csv")
+
+```
+
 
 ## Homebase Data
 
@@ -919,29 +974,54 @@ hb_employees_working <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX
   filter(!is.na(area))
 ```
 
-### NYT ggplot2 State Chart
-```{r, nyt state data}
+## Homebase S3 Bucket Data
+```{r}
+
+homebase_s3_raw <- read_csv("data/homebase/20200101_to_20200411_hours_data.csv") %>% 
+  filter(state=="tx")
+
+homebase_s3_tx <- homebase_s3_raw %>% 
+  separate(event_date, into=c("year", "month", "day"), sep="-") %>% 
+  unite("year_mo", c("year","month"),sep = "-") 
+
+tx_employees_by_county <- homebase_s3_tx %>%
+  filter(level=="Employee") %>% 
+  select(year_mo, county_code, user_id, total_wages_earned) %>% 
+  filter(!is.na(total_wages_earned)) %>% 
+  mutate(county_code = as.character(county_code),
+         user_id = as.character(user_id)) %>% 
+  group_by(year_mo, county_code) %>% 
+  count(user_id) %>% 
+  group_by(year_mo, county_code, user_id) %>% 
+  ungroup() %>% 
+  select(-n) %>% 
+  mutate(count=1) %>% 
+  group_by(year_mo, county_code) %>% 
+  summarise(employees=sum(count)) %>% 
+  arrange(year_mo, county_code) %>% 
+  ungroup()
 
 
-sf_states <- tidycensus::state_laea 
+tx_wages_by_county <- homebase_s3_tx %>%
+  filter(level=="Employee") %>% 
+  select(year_mo, county_code, level, total_wages_earned) %>%
+  filter(!is.na(total_wages_earned)) %>% 
+  mutate(county_code = as.character(county_code)) %>% 
+  group_by(year_mo, county_code) %>% 
+  summarise(county_tot_wages = sum(total_wages_earned)) %>% 
+  left_join(tx_employees_by_county, by =c("year_mo","county_code")) %>% 
+  filter(!is.na(employees)) %>% 
+  mutate(avg_wages = county_tot_wages/employees)
+  
 
-ts_state_cases_sf <- ts_state_cases %>% 
-  filter(date=="2020-03-26") %>% 
-  left_join(sf_states, by=c("fips"="GEOID")) %>% 
-  sf::st_as_sf()
+```
 
-hex <- "#2171b5"
-
-ts_state_cases_sf %>% 
-  ggplot() +
-  geom_sf(aes(fill=cases)) +
-  scale_fill_gradientn(colours = tinter(hex, steps = 5), labels = function(x) paste0(x,"Cases")) +
-  # coord_sf(datum=NA) +
-  labs(title="Confirmed COVID-19 Cases By State",
-       subtitle="As of March 26th, 2020",
-       caption="SOURCE: New York Times COVID-19 Database") +
-  theme_2036() +
-  ggsave("current_cases_by_state.png", device="png",width=15, height =10)
+```{r}
+tx_wages_by_county %>% 
+  ggplot(aes(x=year_mo, y=avg_wages)) +
+  geom_col() +
+  texas2036::theme_2036() +
+  facet_wrap(~county_code)
 ```
 
 
