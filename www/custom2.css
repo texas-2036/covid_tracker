@@ -752,12 +752,29 @@ letter-spacing: 3px;
   background: #F26852 !important;
 }
 
-/*path.mainline {
-fill: none;
-stroke-width: 4px;
-stroke: rgb(242, 104, 82);
-stroke-dasharray: 8px, 73px;
-}*/
+.economic-tile-cnty {
+  width: 100%;
+  background-color: #002D74;
+  margin: 0 2px;
+  padding: 17% 0;
+  max-height: 198px;
+}
+
+.gt_table {
+  background-color:#002D74 !important;
+  color:#fff !important;
+  width:100% !important;
+}
+
+.gt_title {
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+}
+.gt_col_headings {
+    background-color:#002D74 !important;
+    color:#fff !important;
+}
 
 /* MOBILE CSS CODE */
 
