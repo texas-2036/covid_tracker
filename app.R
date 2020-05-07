@@ -11,6 +11,7 @@ library(shinydashboard)
 library(shiny)
 library(shinyLP)
 library(readxl)
+library(gt)
 library(highcharter)
 library(tidyverse)
 library(magrittr)
@@ -284,9 +285,9 @@ tsa_shps <- dshs_tsa_hosp_data %>%
 
 # ^^^TWC County UI Claims Data ------------------------------------------------------
 
-twc_ui_by_county <- read_csv("https://lmci.state.tx.us/shared/dashboarddata/ui_by_county.csv") %>% 
-  janitor::clean_names() %>% 
-  rename(county=area_name)
+twc_ui_by_county <- read_csv("clean_data/twc/county_claims_by_industry_detail.csv") %>% 
+  filter(rank <= 3) %>% 
+  select(county,rank,naics_title,pct_label)
 
 twc_claims_cnty <- read_csv("clean_data/twc/county_claims_data.csv") %>% 
   filter(str_detect(date, "^2020"))
@@ -294,10 +295,10 @@ twc_claims_cnty <- read_csv("clean_data/twc/county_claims_data.csv") %>%
 twc_claims_cnty_summ <- read_csv("clean_data/twc/county_claims_data.csv") %>% 
   filter(date >= as.Date("2020-03-21")) %>% 
   group_by(county) %>% 
-  summarise(all_claims=sum(value))
+  summarise(all_claims=sum(value)) %>% 
+  mutate_at(vars(all_claims), scales::comma)
 
 # ^^^Homebase Data -----------------------------------------------------
-
 
 hb_hours_worked_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1930671010&single=true&output=csv", skip=2) %>% 
   fill(X2) %>%
@@ -456,25 +457,22 @@ total_tests <- dshs_state_tests %>%
   left_join(jhu_cases_state, by=c("state"="province_state","fips")) %>% 
   mutate(tests_per_100k = round((total_tests/total_population)*100000,digits=4))
 
-  
 hosp_capacity <- total_tests %>% 
   mutate(beds_to_active = avail_hospital_beds/active,
          icu_beds_to_hosp = avail_icu_beds/people_hospitalized,
          vents_to_hosp = avail_ventilators/people_hospitalized)
 
-
-all_cases <- dshs_state_case_and_fatalities %>% 
-  group_by(state) %>% 
-  summarise(total_cases = sum(positive))
-
+# all_cases <- active_cases #%>% 
+#   group_by(state) %>% 
+#   summarise(total_cases = sum(positive))
 
 hosp_rate <- dshs_tsa_hosp_data %>% 
   as_tibble() %>% 
   filter(tsa=="Total") %>% 
   select(lab_con_covid19_gen, lab_con_covid19_icu) %>% 
   mutate(state="Texas") %>% 
-  left_join(all_cases, by="state") %>% 
-  mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/total_cases)) %>% 
+  left_join(active_cases, by="state") %>% 
+  mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/active)) %>% 
   mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1))
 
 
@@ -494,8 +492,10 @@ tx_mort <- jhu_cases_state %>%
   mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
   mutate_at(vars(mortality_rank), scales::label_ordinal())
 
-tx_active <- jhu_cases_state %>% 
-  select(active,  active_rank) %>% 
+active_cases <- jhu_cases_state %>% 
+  select(state=province_state, active, active_rank) 
+
+tx_active <- active_cases %>% 
   mutate_at(vars(active), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
   mutate_at(vars(active_rank), scales::label_ordinal())
 
@@ -974,7 +974,7 @@ tabItem(tabName = "county_profiles",
                      h3(class="covid-topic", "Economic Data"),
                      fluidRow(
                        column(width = 4, class="economic-grid",
-                              h2(class="economic-tile",
+                              h2(class="economic-tile-cnty",
                                  p(style="text-align:center;font-size:1em;font-weight:800", 
                                    textOutput("county_all_claims", inline = TRUE, container=span)),
                                  p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
@@ -982,23 +982,9 @@ tabItem(tabName = "county_profiles",
                                  p(style="text-align:center;font-size:.45em;font-weight:300","Jobless Claims"),
                                  p(style="text-align:center;font-size:.4em;font-weight:400",
                                    tags$a(href="https://www.twc.texas.gov/news/unemployment-claims-numbers#claimsByCounty","Source: Texas Workforce Commission")))),
-                       column(width = 4, class="economic-grid",
-                              h2(class="economic-tile",
-                                 p(style="text-align:center;font-size:1em;font-weight:800",paste0(tx_urn$value,"%")),
-                                 p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
-                                   paste0("As of: ", format(tx_urn$date, format="%b %d"))),
-                                 p(style="text-align:center;font-size:.45em;font-weight:300","Unemployment Rate"),
-                                 p(style="text-align:center;font-size:.4em;font-weight:400",
-                                   tags$a(href="https://fred.stlouisfed.org/series/TXURN","Source: BLS via FREDr")))),
-                       column(width = 4, class="economic-grid",
-                              h2(class="economic-tile",
-                                 p(style="text-align:center;font-size:1em;font-weight:800",paste0(hb_businesses_open$pct,"%")),
-                                 p(style=paste0("text-align:center;font-size:.6em;font-weight:600;color:",hb_businesses_open$color,";"),
-                                   paste0(hb_businesses_open$change_lbl, hb_businesses_open$change, "% From ", format(hb_businesses_open$prev_day, format="%b %d"))),
-                                 p(style="text-align:center;font-size:.43em;font-weight:500","Est. Local Businesses Open"),
-                                 p(style="text-align:center;font-size:.4em;font-weight:400",
-                                   tags$a(href="https://joinhomebase.com/data/covid-19/","Source: Homebase"))))
-                     ),
+                       column(width = 8, class="economic-grid",
+                              gt_output(outputId = "county_claims_table"))
+                     )
                     ),
               column(width = 6,
               # h3(style="font-weight:700;",textOutput("countyname", inline = TRUE)),
@@ -1261,9 +1247,9 @@ server <- function (input, output, session) {
       title="% Hospitalized", 
       # valuÇe="6.08%",
       value=paste0(tot_pos$hospitalization_rate, "%"),
-      subtitle="Ranks NA Today",
+      subtitle="% of Active Cases",
       # subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
-      icon = icon("hospital-user"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+      icon = icon("hospital-user"), color = "navy", href=NULL
     )
   })
 
@@ -2347,15 +2333,64 @@ output$county_all_claims <- renderText({
     })
 
 # County Top 5 Industries -------------------------------------------------
+    
+output$county_claims_table <- gt::render_gt({
+  
+  req(input$countyname)
+  
+  gt_tbl <-  twc_ui_by_county %>%
+    filter(county==input$countyname) %>%
+    # filter(county=="Harris") %>%
+    gt() %>%
+    tab_header(title = paste0("Top Claims in ", input$countyname, " County")) %>%
+    cols_hide(contains("county")) %>% 
+    cols_label(rank=md("**Rank**"),
+               naics_title=md("**Industry**"),
+               pct_label=md("**% of All Claims**")) %>% 
+    cols_align(align="center",
+               columns=vars(rank, pct_label)) %>% 
+    tab_options(table.background.color = "#002D74",
+                table.font.color = "#fff",
+                table.border.top.color = "#002D74",
+                table.border.left.color = "#002D74",
+                table.border.right.color = "#002D74",
+                table.border.bottom.color = "#002D74",
+                table_body.border.bottom.color = "#002D74")
+  
+  gt_tbl
+                                        })
+  
 
- output$county_test_text <- renderText({
+ output$county_ui_1 <- renderText({
       
       # Make sure requirements are met
       req(input$countyname)
       
-      total_cnty_tests %>%
-        filter(county_name==input$countyname) %>% 
-        distinct(tests_per_100k) %>% 
+      twc_ui_by_county %>%
+        filter(county==input$countyname) %>% 
+        distinct(naics_title1) %>% 
+        as.character()
+    })
+    
+output$county_ui_2 <- renderText({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+      twc_ui_by_county %>%
+        filter(county==input$countyname) %>% 
+        distinct(naics_title2) %>% 
+        as.character()
+    })
+    
+output$county_ui_3 <- renderText({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+      twc_ui_by_county %>%
+        filter(county==input$countyname) %>% 
+        distinct(naics_title3) %>% 
         as.character()
     })
 
