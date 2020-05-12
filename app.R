@@ -12,6 +12,7 @@ library(shiny)
 library(shinyLP)
 library(readxl)
 library(gt)
+library(metathis)
 library(highcharter)
 library(tidyverse)
 library(magrittr)
@@ -224,23 +225,23 @@ tex_today_tests <- test_daily %>%
 # ~~DSHS Data ----
 
     
-dshs_state_case_and_fatalities <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv?token=AB6K4YTWO4IA3QJ22PPTBNK6XGHWU") %>% 
+dshs_state_case_and_fatalities <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv") %>% 
   mutate(state="Texas",
          fips="48")
 
-dshs_state_hospitalizations <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv?token=AB6K4YVX6BWDPJWLI54TA6C6XGI7Y") %>% 
+dshs_state_hospitalizations <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv") %>% 
   mutate(state="Texas",
          fips="48")
 
-dshs_state_tests <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/testing/state_tests.csv?token=AB6K4YVS5R6HTYGRVERDJY26XGIZY") %>% 
+dshs_state_tests <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/state_tests.csv") %>% 
   mutate(fips=as.character(fips))
 
-dshs_state_demographics <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/state_case_demographics.csv?token=AB6K4YQE2BFQBV4WL4OLTL26XGJE6") %>% 
+dshs_state_demographics <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/state_case_demographics.csv") %>% 
   mutate(fips=as.character(fips))
 
-dshs_county_data <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/cases/county_cases.csv?token=AB6K4YQWLX4TIDI34IKB3HK6XGJHU")
+dshs_county_data <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/county_cases.csv")
 
-dshs_county_test_data <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/testing/county_tests.csv?token=AB6K4YSNKRV4L74H2U656L26XGI34")
+dshs_county_test_data <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/county_tests.csv")
 
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/tsa_bed_data_with_counties_sf.rds") %>% 
   st_transform(crs="+init=epsg:4326")
@@ -248,7 +249,7 @@ dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/tsa_bed_data_with_coun
 dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/tsa_vent_data_with_counties_sf.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/mrworthington/covid_tracker/master/clean_data/dshs/syndromic_tx.csv?token=AB6K4YRFWFUVJ5AQPSKGTV26XGJO2")
+dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/syndromic_tx.csv")
 
 ## TODO - We need to automate this scraping to build a timeseries, and make sure that
 ##        We have the correct data associated with each spreadsheet. 
@@ -466,6 +467,9 @@ hosp_capacity <- total_tests %>%
 #   group_by(state) %>% 
 #   summarise(total_cases = sum(positive))
 
+active_cases <- jhu_cases_state %>% 
+  select(state=province_state, active, active_rank) 
+
 hosp_rate <- dshs_tsa_hosp_data %>% 
   as_tibble() %>% 
   filter(tsa=="Total") %>% 
@@ -491,9 +495,6 @@ tx_mort <- jhu_cases_state %>%
   select(mortality_rate,  mortality_rank) %>% 
   mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
   mutate_at(vars(mortality_rank), scales::label_ordinal())
-
-active_cases <- jhu_cases_state %>% 
-  select(state=province_state, active, active_rank) 
 
 tx_active <- active_cases %>% 
   mutate_at(vars(active), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
@@ -664,6 +665,8 @@ waiting_screen <- tagList(
   h4("Pulling the latest data from 6 different sources...")
   )
 
+
+
 # HEADER CODE-----------------------------------------------------------
 
 header <- dashboardHeader(disable = FALSE,
@@ -719,6 +722,7 @@ body <- dashboardBody(
     tags$script(src="https://kit.fontawesome.com/5272d94c6c.js", crossorigin="anonymous"),
     tags$link(rel="shortcut icon", href="favicon.png"),
     tags$link(rel = "stylesheet", type = "text/css", href = "custom2.css"),
+    # includeHTML("social_tags.html"),
     includeHTML(("google_analytics.html")),
     tags$script(HTML("$('body').addClass('fixed');")),
     tags$style(type = "text/css", "div.info.legend.leaflet-control br {clear: both;}"),
@@ -726,6 +730,17 @@ body <- dashboardBody(
 
 # **Landing Page ----------------------------------------------------------
 use_sever(),
+meta() %>%
+  meta_social(
+    title = "Texas 2036 | Texas COVID-19 Data Resource",
+    description = "A comprehensive look at Texas COVID-19 Health and Economic Data",
+    url = "http://covid19.texas2036.org",
+    image = "https://texas-2036.github.io/covid-pages/images/trends_cover.png",
+    image_alt = "Texas 2036 | Texas COVID-19 Data Resource",
+    twitter_creator = "@mrworthington",
+    twitter_card_type = "summary",
+    twitter_site = "@texas2036"
+  ),
 tabItems(
     tabItem(tabName = "intro",
       jumbotron("Texas COVID-19 Data Resource", 
@@ -1024,14 +1039,14 @@ tabItem(tabName = "county_profiles",
                        h4(style="font-weight:400;display:inline;", "is a part of "),
                        h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                        h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                       h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 5th"),
+                       h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 9th"),
                        h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                        ))),
               fluidRow( 
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", 
                           textOutput("hosp_beds_tsa")),
-                       p(style="text-align:center","Beds Occupied (%)")),
+                       p(style="text-align:center","Beds Available (%)")),
                 column(width = 3,
                        h2(style="font-weight:800;text-align:center;", 
                           textOutput("hosp_covid_er_visits")),
@@ -1207,7 +1222,7 @@ server <- function (input, output, session) {
     infoBox(
       title="Deaths (% of All Cases)", value=paste0(tx_mort$mortality_rate, "%"),
       subtitle=paste0(tx_mort$mortality_rank, " Most in US"),
-      icon = icon("biohazard"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+      icon = icon("virus"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
@@ -1217,7 +1232,7 @@ server <- function (input, output, session) {
   output$tx_recover <- renderInfoBox({
     
     infoBox(
-      title="Recovered", value=paste0(tx_recover$recovered),
+      title="Est. Recovered", value=paste0(tx_recover$recovered),
       subtitle=paste0(tx_recover$recovered_rank, " Most in US"),
       icon = icon("hand-holding-medical"), color = "navy", href=NULL
     )
@@ -1228,7 +1243,7 @@ server <- function (input, output, session) {
   output$tx_active <- renderInfoBox({
     
     infoBox(
-      title="Active", value=paste0(tx_active$active),
+      title="Est. Active", value=paste0(tx_active$active),
       subtitle=paste0(tx_active$active_rank, " Most in US"),
       icon = icon("lungs-virus"), color = "navy", href=NULL
     )
@@ -2407,7 +2422,7 @@ output$county_ui_3 <- renderText({
         as.character()
     })    
     
-# TSA Beds Occupation -----------------------------------------------------
+# TSA Beds Availability -----------------------------------------------------
     
     output$hosp_beds_tsa <- renderText({
       
@@ -2432,12 +2447,13 @@ output$county_ui_3 <- renderText({
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data %>%
+      dfdshs_tsa_hosp_data %>%
         as_tibble() %>% 
         select(tsa,tsa_counties,adult_icu,icu_beds_occupied) %>% 
-        filter(tsa_counties==input$countyname) %>%
+        # filter(tsa_counties==input$countyname) %>%
+        # filter(tsa_counties=="Harris")
         mutate(bed_utilization=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
-        mutate_at(vars(bed_utilization),scales::percent) %>% 
+        mutate_at(vars(bed_utilization),scales::percent) #%>% 
         distinct(adult_icu) %>% 
         as.character()
     })
