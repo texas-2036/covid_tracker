@@ -462,7 +462,7 @@ crosswalk_data <- read_excel("data/dshs/Crosswalk TX Counties RACs PHRs.xlsx", s
   summarise(tsa_counties = toString(county),
             geometry = st_union(geometry))
 
-tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.05.20.xlsx", 
+tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.10.20.xlsx", 
                        sheet = "Bed Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -474,7 +474,7 @@ tsa_data <- read_excel("data/dshs/TSA COVID Bed Reports_05.05.20.xlsx",
   st_as_sf()
 
 
-tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_05.05.20.xlsx", 
+tsa_data_vents <- read_excel("data/dshs/TSA COVID Bed Reports_05.10.20.xlsx", 
                        sheet = "Vent Availability",
                        skip=0) %>%
   clean_names() %>% 
@@ -525,7 +525,7 @@ syndromic_ili <- read_excel("data/dshs/TxS2 Chart May 3 Dashboard.xlsx", sheet="
 
 ```{r}
 
-syndromic_tx <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
+syndromic_tx <- read_excel("data/dshs/NEW 5.10.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
     sheet = "Texas DASHBOARD", skip = 11) %>%
   clean_names() %>% 
   select(date=1,ili_from_syndromic_surveillance=8,cli_from_syndromic_surveillance=10) %>% 
@@ -534,7 +534,7 @@ syndromic_tx <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recov
   filter(!is.na(ili_from_syndromic_surveillance)) %>% 
   write_csv("clean_data/dshs/syndromic_tx.csv")
 
-syndromic_cli <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
+syndromic_cli <- read_excel("data/dshs/NEW 5.10.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
     sheet = "CLI Symptoms DASHBOARD", skip = 3) %>%
   clean_names() %>% 
   select(-1) %>% 
@@ -544,7 +544,7 @@ syndromic_cli <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Reco
   mutate(date = as.Date(date, origin = "1899-12-30")) %>% 
   write_csv("clean_data/dshs/syndromic_cli.csv")
 
-syndromic_ili <- read_excel("data/dshs/NEW 5.5.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
+syndromic_ili <- read_excel("data/dshs/NEW 5.10.2020.3PM COVID-19 Roadmap to Recovery Dashboard.xlsx", 
     sheet = "ILI Symptoms DASHBOARD", skip = 3)  %>%
   clean_names() %>% 
   select(-1) %>% 
@@ -649,6 +649,21 @@ ts_county_cases %>%
 google_mobility <- read_csv("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv") %>% 
   filter(sub_region_1=="Texas")
 
+```
+
+## SafeGraph Data
+
+```{r}
+library(aws.s3)
+Sys.setenv(
+  "AWS_ACCESS_KEY_ID"     = "AKIAWWZ7POZOPTKH2WSQ",
+  "AWS_SECRET_ACCESS_KEY" = "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",
+  "AWS_DEFAULT_REGION"    = "us-west-2")
+
+safegraph_raw <- s3read_using(read.csv,
+                     object = "s3://sg-c19-response/weekly-patterns/v1/main-file/2020-03-15-weekly-patterns.csv.gz") 
+
+safegraph_raw <- data
 ```
 
 # Derived Metrics
@@ -884,8 +899,14 @@ twc_claims_cnty <- read_excel(paste0("data/twc/",today,"_", lcl), skip=2) %>%
   pivot_longer(-county, names_to = "date", values_to = "value") %>% 
   mutate(date=gsub("^x","0",x=date),
          date=gsub("_","-",x=date),
-         date=gsub("20202$","2020",x=date)) #%>% 
+         date=gsub("20202$","2020",x=date)) %>% 
   mutate(date=lubridate::mdy(date))
+
+twc_claims_all_cnty <- twc_claims_cnty %>% 
+  filter(str_detect(date,"^2020")) %>% 
+  mutate(state="TX") %>% 
+  group_by(state) %>% 
+  tally(value)
 
 write_csv(twc_claims_cnty,paste0("clean_data/twc/county_claims_data_",today,".csv"))
 write_csv(twc_claims_cnty,paste0("clean_data/twc/county_claims_data.csv"))
@@ -919,6 +940,53 @@ twc_claims_ind <- read_excel(lcl, skip=1) %>%
 ```{r}
 
 twc_ui_by_county <- read_csv("https://lmci.state.tx.us/shared/dashboarddata/ui_by_county.csv")
+
+twc_cnty_naics1 <- twc_ui_by_county %>% 
+  select(1:17) %>% 
+  select(-naics1,-naics2,-naics3,-naics4,-naics5) %>% 
+  select(1:2, 3:4) %>% 
+  rename(naics_title=3, naics_count=4) %>% 
+  mutate(rank=1)
+
+twc_cnty_naics2 <- twc_ui_by_county %>% 
+  select(1:17) %>% 
+  select(-naics1,-naics2,-naics3,-naics4,-naics5) %>% 
+  select(1:2, 5:6) %>% 
+  rename(naics_title=3, naics_count=4) %>% 
+  mutate(rank=2)
+
+twc_cnty_naics3 <- twc_ui_by_county %>% 
+  select(1:17) %>% 
+  select(-naics1,-naics2,-naics3,-naics4,-naics5) %>% 
+  select(1:2, 7:8) %>% 
+  rename(naics_title=3, naics_count=4) %>% 
+  mutate(rank=3)
+
+twc_cnty_naics4 <- twc_ui_by_county %>% 
+  select(1:17) %>% 
+  select(-naics1,-naics2,-naics3,-naics4,-naics5) %>% 
+  select(1:2, 9:10) %>% 
+  rename(naics_title=3, naics_count=4) %>% 
+  mutate(rank=4)
+
+twc_cnty_naics5 <- twc_ui_by_county %>% 
+  select(1:17) %>% 
+  select(-naics1,-naics2,-naics3,-naics4,-naics5) %>% 
+  select(1:2, 11:12) %>% 
+  rename(naics_title=3, naics_count=4) %>% 
+  mutate(rank=5)
+
+twc_cnty_claims_long <- bind_rows(twc_cnty_naics1,
+                                  twc_cnty_naics2,
+                                  twc_cnty_naics3,
+                                  twc_cnty_naics4,
+                                  twc_cnty_naics5) %>% 
+  mutate(pct_of_all=naics_count/ui_count,
+         pct_label=naics_count/ui_count) %>% 
+  select(1:3,rank,naics_count,pct_of_all,pct_label) %>% 
+  mutate_at(vars(pct_label),scales::percent_format(scale=100,accuracy=.1)) %>% 
+  select(-ui_count,-naics_count,-pct_of_all) %>% 
+  write_csv("clean_data/twc/county_claims_by_industry_detail.csv")
 
 twc_ui_by_zip <- read_csv("https://lmci.state.tx.us/shared/dashboarddata/ui_by_zipcode.csv")
 
@@ -1033,16 +1101,13 @@ tx_wages_by_county %>%
 
 tx_series_all <-fredr(
   series_id = "TXICLAIMS",
-  observation_start = as.Date("2020-01-01")
-) %>% 
+  observation_start = as.Date("2020-01-01")) %>% 
   mutate(date=as.character(date)) %>%
-  add_row(date="2020-04-18", series_id="TXICLAIMS", value=273567) %>%
-  add_row(date="2020-04-25", series_id="TXICLAIMS", value=437300) %>%
+  # add_row(date="2020-04-18", series_id="TXICLAIMS", value=273567) %>%
+  add_row(date="2020-05-02", series_id="TXICLAIMS", value=247179) %>%
   mutate(date=as.Date(date)) %>%
   arrange(date) %>% 
   write_rds("clean_data/fredr/ui_claims_ts.rds")
-
-
 
 tx_series <- tx_series_all %>%
   filter(date >= as.Date("2020-03-21")) %>% 
