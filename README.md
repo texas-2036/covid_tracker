@@ -11,3 +11,29 @@ This app is built using `shiny`, an interactive data visualization
 library built in R that allows people to create powerful tools. To
 replicate our product, you’ll need to run the `app.R` file inside of
 [RStudio](https://rstudio.com).
+
+Terms of Use
+------------
+
+1.  This website and its contents herein, including all data, mapping,
+    and analysis (“Website”), copyright 2020, Texas 2036, all rights
+    reserved, is provided solely for non-profit public health,
+    educational, and academic research purposes. You should not rely on
+    this Website for medical advice or guidance.
+2.  Use of the Website by commercial parties and/or in commerce is
+    strictly prohibited. Redistribution of the Website or the aggregated
+    data set underlying the Website is strictly prohibited.
+3.  When linking to the website, attribute the Website as the “Texas
+    COVID-19 Data Resource by Texas 2036”.
+4.  The Website relies upon publicly available data from multiple
+    sources that do not always agree. Texas 2036 hereby disclaims any
+    and all representations and warranties with respect to the Website,
+    or any content or data thereon, including accuracy, fitness for use,
+    reliability, completeness, and non-infringement of third party
+    rights.
+5.  Any use of Texas 2036 names, logos, trademarks, and/or trade dress
+    in a factually inaccurate manner or for marketing, promotional or
+    commercial purposes is strictly prohibited.
+6.  These terms and conditions are subject to change. Your use of the
+    Website constitutes your acceptance of these terms and conditions
+    and any future modifications thereof.
