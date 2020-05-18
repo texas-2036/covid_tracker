@@ -197,13 +197,14 @@ tex_today_tests <- test_daily %>%
   mutate(per_capita = round((totalTestResults/27885195)*100000, digits=2),
          per_capita_per_day = round((totalTestResultsIncrease/27885195)*100000, digits=2),
          daily_test_pos_rate = round(positiveIncrease/totalTestResultsIncrease, digits=4),
-         daily_test_pos_rate_7day_avg = rollmean(daily_test_pos_rate, 5, 
+         daily_test_pos_rate_7day_avg = rollmean(daily_test_pos_rate, 7, 
                                                  fill=0, align = "right"),
          test_pos_label = daily_test_pos_rate,
          test_pos_7day_label = daily_test_pos_rate_7day_avg) %>% 
-  mutate_at(vars(totalTestResults,per_capita), scales::comma) %>% 
-  mutate_at(vars(test_pos_label,test_pos_7day_label),scales::percent_format(accuracy = .11, scale=100)) %>% 
-  filter(totalTestResultsIncrease!=0) %>% 
+  mutate_at(vars(totalTestResults), scales::comma_format(accuracy=1)) %>% 
+  mutate_at(vars(per_capita), scales::comma_format(accuracy = .1)) %>%
+  mutate_at(vars(test_pos_label,test_pos_7day_label),scales::percent_format(accuracy = .01, scale=100)) %>%
+  filter(totalTestResultsIncrease!=0) %>%
   filter(date==max(date))
 
 
@@ -936,7 +937,7 @@ body <- dashboardBody(
                                         h4(style="font-weight:400;display:inline;", "is a part of "),
                                         h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 16th"),
+                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 17th"),
                                         h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                               ))),
                      fluidRow( 
