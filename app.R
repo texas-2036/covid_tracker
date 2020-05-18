@@ -147,7 +147,7 @@ nyt_state_cases <- read_csv("https://raw.githubusercontent.com/nytimes/covid-19-
 nyt_state_cases_tx <- nyt_state_cases %>% 
   filter(state=="Texas")
 
-tx_counties <- read_rds("data/population/county_pop.rds")
+tx_counties <- read_rds("clean_data/population/county_pop.rds")
 
 county_list <- nyt_county_cases %>% 
   as_tibble() %>% 
@@ -238,7 +238,7 @@ dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/texas-2036/covi
 
 # ** Population Data ---------------------------------------------------------
 
-state_pop <- read_rds("data/population/state_pop.rds")
+state_pop <- read_rds("clean_data/population/state_pop.rds")
 
 tsa_shps <- dshs_tsa_hosp_data %>%
   filter(tsa!="Total") %>% 
@@ -936,7 +936,7 @@ body <- dashboardBody(
                                         h4(style="font-weight:400;display:inline;", "is a part of "),
                                         h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 15th"),
+                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 16th"),
                                         h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                               ))),
                      fluidRow( 
@@ -2652,7 +2652,7 @@ server <- function (input, output, session) {
       tx_county_cases %>%
         filter(county==input$countyname) %>% 
         distinct(incident_rate) %>% 
-        round(digits=2) %>% 
+        round(digits=1) %>% 
         as.character()
     })
     
@@ -2680,7 +2680,7 @@ server <- function (input, output, session) {
         filter(date == max(date)) %>% 
         filter(county==input$countyname) %>%
         mutate(mort_rate=round(deaths/cases,digits=4)) %>% 
-        mutate_at(vars(mort_rate),scales::percent) %>% 
+        mutate_at(vars(mort_rate),scales::percent_format(accuracy=.01)) %>% 
         distinct(mort_rate) %>% 
         as.character()
     })
@@ -2799,7 +2799,7 @@ server <- function (input, output, session) {
         select(tsa,tsa_counties,available_beds,bed_capacity) %>% 
         filter(tsa_counties==input$countyname) %>%
         mutate(bed_utilization=round(available_beds/bed_capacity,digits=3)) %>%
-        mutate_at(vars(bed_utilization),scales::percent) %>% 
+        mutate_at(vars(bed_utilization), scales::percent_format(accuracy=.1)) %>% 
         distinct(bed_utilization) %>% 
         as.character()
     })
@@ -2816,7 +2816,7 @@ server <- function (input, output, session) {
         select(tsa,tsa_counties,adult_icu,icu_beds_occupied) %>% 
         filter(tsa_counties==input$countyname) %>%
         mutate(bed_avail=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
-        mutate_at(vars(bed_avail),scales::percent) %>% 
+        mutate_at(vars(bed_avail), scales::percent_format(accuracy=.1)) %>% 
         distinct(bed_avail) %>% 
         as.character()
       
@@ -2831,11 +2831,11 @@ server <- function (input, output, session) {
       
       dshs_tsa_vent_data %>% 
         as_tibble() %>% 
-        # filter(tsa_counties==input$countyname) %>%
-        filter(tsa_counties=="Harris") %>%
-        mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=2)) %>% 
+        filter(tsa_counties==input$countyname) %>%
+        # filter(tsa_counties=="Harris") %>%
+        mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=3)) %>% 
         select(vent_availability) %>% 
-        mutate_at(vars(vent_availability), scales::percent_format(accuracy=1)) %>% 
+        mutate_at(vars(vent_availability), scales::percent_format(accuracy=.1)) %>% 
         distinct(vent_availability) %>% 
         as.character()
     })
@@ -2850,6 +2850,7 @@ server <- function (input, output, session) {
       dshs_tsa_hosp_data %>%
         as_tibble() %>% 
         filter(tsa_counties==input$countyname) %>% 
+        mutate_at(vars(covid19_er_visits_24h), scales::comma) %>% 
         distinct(covid19_er_visits_24h) %>% 
         as.character()
     })
