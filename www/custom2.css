@@ -776,6 +776,16 @@ letter-spacing: 3px;
     color:#fff !important;
 }
 
+.leaflet-bar button, .leaflet-bar button:hover {
+background-color: #3A4A9F !important;
+color: #fff !important;
+}
+
+.ion-arrow-shrink:before {
+content: "\f37d";
+font-size: 21px;
+}
+
 /* MOBILE CSS CODE */
 
 @media (max-width: 800px) {
