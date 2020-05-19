@@ -756,8 +756,8 @@ letter-spacing: 3px;
   width: 100%;
   background-color: #002D74;
   margin: 0 2px;
-  padding: 17% 0;
-  max-height: 198px;
+  padding: 34% 0;
+  max-height: 275px;  
 }
 
 .gt_table {
@@ -774,6 +774,10 @@ letter-spacing: 3px;
 .gt_col_headings {
     background-color:#002D74 !important;
     color:#fff !important;
+}
+
+.gt_row .gt_left {
+  font-size: .9em;
 }
 
 .leaflet-bar button, .leaflet-bar button:hover {
