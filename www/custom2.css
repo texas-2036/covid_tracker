@@ -786,6 +786,15 @@ content: "\f37d";
 font-size: 21px;
 }
 
+.mobility-icon {
+  color:#DBDCDD;
+  opacity:.5;
+  font-size:6em;
+  position:absolute;
+  top: -2vh;
+  right: -39vw;
+}
+
 /* MOBILE CSS CODE */
 
 @media (max-width: 800px) {
@@ -873,5 +882,15 @@ color: #fff;
 margin-top: 20px;
 margin-bottom: 20px;
 }
+
+.mobility-icon {
+color: #DBDCDD;
+opacity: .5;
+font-size: 4em;
+position: absolute;
+top: -2vh;
+right: -89vw;
+}
+
 
 }
