@@ -1,1271 +1,1271 @@
-county,naics_title,rank,pct_label
-Dallas,Full-service restaurants,1,7.2%
-Howard,Support activities for oil and gas operations,1,14.4%
-Foard,Accessories and other apparel manufacturing,1,17.9%
-Floyd,Drilling oil and gas wells,1,16.3%
-Brewster,"Hotels and motels, except casino hotels",1,23.6%
-Franklin,Full-service restaurants,1,11.4%
-Hunt,Full-service restaurants,1,8.7%
-Newton,Oil and gas pipeline construction,1,8.1%
-Starr,Oil and gas pipeline construction,1,13.9%
-Kinney,Support activities for oil and gas operations,1,10.7%
-Collingsworth,Scheduled passenger air transportation,1,8.0%
-Tom Green,Full-service restaurants,1,11.2%
-Coleman,Drilling oil and gas wells,1,9.0%
-Brazoria,Full-service restaurants,1,6.9%
-Leon,Other heavy construction,1,7.7%
-Duval,Support activities for oil and gas operations,1,30.5%
-Lamb,Support activities for oil and gas operations,1,9.0%
-Morris,Travel trailer and camper manufacturing,1,8.5%
-Smith,HVAC equip. merchant wholesalers,1,14.1%
-Jackson,Offices of dentists,1,7.0%
-Medina,Jewelry stores,1,15.2%
-Wheeler,Oil and gas pipeline construction,1,11.8%
-Dallam,Drilling oil and gas wells,1,10.3%
-Callahan,Drilling oil and gas wells,1,11.8%
-Lamar,Truck trailer manufacturing,1,10.3%
-Coryell,Frozen specialty food manufacturing,1,6.5%
-Gaines,Support activities for oil and gas operations,1,35.9%
-Kendall,Jewelry stores,1,9.3%
-Nacogdoches,Full-service restaurants,1,9.2%
-Milam,Full-service restaurants,1,8.0%
-Hays,Full-service restaurants,1,10.1%
-Willacy,Support activities for oil and gas operations,1,5.5%
-Johnson,Full-service restaurants,1,8.4%
-Reagan,Support activities for oil and gas operations,1,61.0%
-Webb,Support activities for oil and gas operations,1,6.3%
-Shackelford,Support activities for oil and gas operations,1,42.0%
-Bowie,Full-service restaurants,1,11.2%
-Scurry,Support activities for oil and gas operations,1,48.4%
-Kenedy,Full-service restaurants,1,37.5%
-Somervell,General medical and surgical hospitals,1,13.2%
-Oldham,General medical and surgical hospitals,1,11.8%
-Taylor,Full-service restaurants,1,15.5%
+area_name,naics_title,rank,pct_label
+Dallas,Full-service restaurants,1,5.8%
+Howard,Support activities for oil and gas operations,1,19.1%
+Foard,Support activities for oil and gas operations,1,8.0%
+Floyd,Drilling oil and gas wells,1,19.7%
+Brewster,"Hotels and motels, except casino hotels",1,13.0%
+Franklin,Full-service restaurants,1,9.5%
+Hunt,Plastics material and resin manufacturing,1,8.7%
+Newton,Miscellaneous wood product manufacturing,1,7.6%
+Starr,Oil and gas pipeline construction,1,16.1%
+Kinney,Support activities for oil and gas operations,1,8.3%
+Collingsworth,Scheduled passenger air transportation,1,6.7%
+Tom Green,Support activities for oil and gas operations,1,10.1%
+Coleman,Support activities for oil and gas operations,1,10.8%
+Brazoria,Full-service restaurants,1,5.6%
+Leon,Other heavy construction,1,6.8%
+Duval,Support activities for oil and gas operations,1,24.5%
+Lamb,Support activities for oil and gas operations,1,7.6%
+Morris,General medical and surgical hospitals,1,6.6%
+Smith,Full-service restaurants,1,6.3%
+Jackson,Support activities for oil and gas operations,1,11.0%
+Medina,Support activities for oil and gas operations,1,8.3%
+Wheeler,Oil and gas pipeline construction,1,12.3%
+Dallam,Oil and gas pipeline construction,1,9.6%
+Callahan,Drilling oil and gas wells,1,12.7%
+Lamar,Full-service restaurants,1,6.1%
+Coryell,Full-service restaurants,1,5.2%
+Gaines,Support activities for oil and gas operations,1,33.1%
+Kendall,Full-service restaurants,1,5.5%
+Nacogdoches,General medical and surgical hospitals,1,10.9%
+Milam,Natural Gas Extraction,1,4.4%
+Hays,Full-service restaurants,1,8.9%
+Willacy,Support activities for oil and gas operations,1,8.5%
+Johnson,Full-service restaurants,1,6.7%
+Reagan,Support activities for oil and gas operations,1,50.9%
+Webb,Elementary and secondary schools,1,7.2%
+Shackelford,Support activities for oil and gas operations,1,32.1%
+Bowie,Full-service restaurants,1,8.7%
+Scurry,Support activities for oil and gas operations,1,45.3%
+Kenedy,Full-service restaurants,1,27.3%
+Somervell,General medical and surgical hospitals,1,13.9%
+Oldham,Full-service restaurants,1,16.7%
+Taylor,Full-service restaurants,1,11.2%
 King,NA,1,NA
-Borden,Support activities for oil and gas operations,1,7.3%
-Walker,Full-service restaurants,1,12.7%
-Stephens,Support activities for oil and gas operations,1,13.1%
+Borden,Scheduled passenger air transportation,1,9.1%
+Walker,Full-service restaurants,1,9.7%
+Stephens,"Manufactured home, mobile home, manufacturing",1,24.5%
 Deaf Smith,Full-service restaurants,1,4.3%
-Roberts,Support activities for oil and gas operations,1,16.7%
-Tyler,Oil and gas pipeline construction,1,9.1%
-Val Verde,Support activities for oil and gas operations,1,13.2%
-Brown,Full-service restaurants,1,8.8%
-Parker,Full-service restaurants,1,8.6%
-Harris,Full-service restaurants,1,7.7%
-Zapata,Support activities for oil and gas operations,1,22.4%
-Red River,"Broom, brush, and mop manufacturing",1,5.6%
-Karnes,Support activities for oil and gas operations,1,24.3%
-Palo Pinto,Full-service restaurants,1,13.0%
-Glasscock,Support activities for oil and gas operations,1,8.2%
-Shelby,Drilling oil and gas wells,1,4.8%
-Wood,Full-service restaurants,1,9.2%
-Crosby,Oil and gas pipeline construction,1,4.9%
-Refugio,Support activities for oil and gas operations,1,11.7%
-Burnet,"Hotels and motels, except casino hotels",1,9.2%
-Sterling,Support activities for oil and gas operations,1,20.0%
-Montgomery,Full-service restaurants,1,7.9%
-San Augustine,Oil and gas pipeline construction,1,6.4%
-Rains,Full-service restaurants,1,11.9%
-Nueces,Full-service restaurants,1,11.7%
-Jack,Support activities for oil and gas operations,1,21.0%
-Swisher,Full-service restaurants,1,10.0%
-Camp,Full-service restaurants,1,5.6%
-Brazos,Full-service restaurants,1,8.1%
-Orange,Full-service restaurants,1,6.9%
-Colorado,Full-service restaurants,1,11.5%
-Pecos,Support activities for oil and gas operations,1,18.8%
-Cochran,Drilling oil and gas wells,1,19.5%
-Parmer,General medical and surgical hospitals,1,14.3%
-Freestone,Support activities for oil and gas operations,1,6.1%
-Winkler,Support activities for oil and gas operations,1,21.8%
-Wichita,Full-service restaurants,1,12.0%
-Gray,Air and gas compressor manufacturing,1,7.2%
-Schleicher,Support activities for oil and gas operations,1,27.3%
-Hardeman,Support activities for oil and gas operations,1,19.0%
-Travis,Full-service restaurants,1,8.3%
-Gillespie,Full-service restaurants,1,13.2%
-Yoakum,Support activities for oil and gas operations,1,59.7%
-Fayette,Full-service restaurants,1,9.1%
-Uvalde,All other professional and technical services,1,11.4%
-Grimes,Support activities for oil and gas operations,1,4.9%
-Van Zandt,Full-service restaurants,1,10.0%
-Throckmorton,Drilling oil and gas wells,1,16.7%
-Falls,Support activities for oil and gas operations,1,5.3%
-Grayson,Full-service restaurants,1,7.9%
-Ellis,Full-service restaurants,1,6.7%
-Hall,All other personal services,1,10.8%
-Dickens,Oil and gas pipeline construction,1,9.1%
-Trinity,Full-service restaurants,1,4.7%
-Reeves,Support activities for oil and gas operations,1,20.6%
-Marion,Full-service restaurants,1,7.7%
-Terrell,"Hotels and motels, except casino hotels",1,33.3%
-Lynn,Support activities for oil and gas operations,1,10.5%
-La Salle,"Hotels and motels, except casino hotels",1,13.4%
-Jasper,Full-service restaurants,1,6.9%
-Jones,Support activities for oil and gas operations,1,13.3%
-Castro,Drilling oil and gas wells,1,14.6%
-Victoria,Full-service restaurants,1,8.7%
-Kleberg,Full-service restaurants,1,14.2%
-Briscoe,Support activities for oil and gas operations,1,24.4%
-Clay,Support activities for oil and gas operations,1,9.0%
-Matagorda,Industrial building construction,1,5.9%
-Brooks,Support activities for oil and gas operations,1,13.6%
-Runnels,Used household and office goods moving,1,12.8%
-Carson,Support activities for oil and gas operations,1,7.0%
-Liberty,Oil and gas pipeline construction,1,5.4%
-Lee,Full-service restaurants,1,6.6%
-Hale,Full-service restaurants,1,11.2%
-Bexar,Full-service restaurants,1,10.7%
-Garza,Support activities for oil and gas operations,1,21.1%
+Roberts,Power and communication system construction,1,25.0%
+Tyler,Oil and gas pipeline construction,1,7.0%
+Val Verde,Support activities for oil and gas operations,1,13.1%
+Brown,General medical and surgical hospitals,1,5.7%
+Parker,Full-service restaurants,1,6.4%
+Harris,Full-service restaurants,1,5.9%
+Zapata,Support activities for oil and gas operations,1,21.2%
+Red River,Commercial building construction,1,6.6%
+Karnes,Support activities for oil and gas operations,1,22.3%
+Palo Pinto,Mining machinery and equipment manufacturing,1,7.7%
+Glasscock,Support activities for oil and gas operations,1,11.7%
+Shelby,Poultry processing,1,7.5%
+Wood,Full-service restaurants,1,7.4%
+Crosby,Support activities for oil and gas operations,1,5.8%
+Refugio,Full-service restaurants,1,11.1%
+Burnet,"Hotels and motels, except casino hotels",1,7.8%
+Sterling,Support activities for oil and gas operations,1,23.5%
+Montgomery,Full-service restaurants,1,6.4%
+San Augustine,Poultry processing,1,7.3%
+Rains,Full-service restaurants,1,5.0%
+Nueces,Full-service restaurants,1,9.3%
+Jack,Support activities for oil and gas operations,1,25.2%
+Swisher,Full-service restaurants,1,13.0%
+Camp,General medical and surgical hospitals,1,5.4%
+Brazos,Full-service restaurants,1,6.5%
+Orange,Full-service restaurants,1,4.9%
+Colorado,Scheduled passenger air transportation,1,5.1%
+Pecos,Support activities for oil and gas operations,1,21.3%
+Cochran,Drilling oil and gas wells,1,20.1%
+Parmer,General medical and surgical hospitals,1,14.7%
+Freestone,Support activities for oil and gas operations,1,8.7%
+Winkler,Support activities for oil and gas operations,1,19.7%
+Wichita,Full-service restaurants,1,9.6%
+Gray,Air and gas compressor manufacturing,1,7.1%
+Schleicher,Support activities for oil and gas operations,1,23.9%
+Hardeman,Support activities for oil and gas operations,1,12.0%
+Travis,Full-service restaurants,1,7.2%
+Gillespie,Full-service restaurants,1,13.9%
+Yoakum,Support activities for oil and gas operations,1,55.4%
+Fayette,Support activities for oil and gas operations,1,8.7%
+Uvalde,Full-service restaurants,1,8.2%
+Grimes,Fabricated pipe and pipe fitting mfg.,1,6.9%
+Van Zandt,Full-service restaurants,1,8.3%
+Throckmorton,Industrial machinery merchant wholesalers,1,16.7%
+Falls,Support activities for oil and gas operations,1,6.9%
+Grayson,General medical and surgical hospitals,1,7.0%
+Ellis,Full-service restaurants,1,5.9%
+Hall,All other personal services,1,10.5%
+Dickens,Support activities for oil and gas operations,1,10.1%
+Trinity,Limited-service restaurants,1,4.1%
+Reeves,Support activities for oil and gas operations,1,16.9%
+Marion,Support activities for oil and gas operations,1,8.1%
+Terrell,"Executive and legislative offices, combined",1,25.0%
+Lynn,Support activities for oil and gas operations,1,8.9%
+La Salle,Support activities for oil and gas operations,1,11.5%
+Jasper,Miscellaneous wood product manufacturing,1,8.7%
+Jones,Support activities for oil and gas operations,1,13.0%
+Castro,Drilling oil and gas wells,1,14.1%
+Victoria,Construction equipment merchant wholesalers,1,10.6%
+Kleberg,Full-service restaurants,1,10.6%
+Briscoe,Support activities for oil and gas operations,1,23.8%
+Clay,Support activities for oil and gas operations,1,13.3%
+Matagorda,Engineering services,1,5.9%
+Brooks,Support activities for oil and gas operations,1,14.9%
+Runnels,Support activities for oil and gas operations,1,13.9%
+Carson,Drilling oil and gas wells,1,5.7%
+Liberty,Oil and gas pipeline construction,1,5.7%
+Lee,Oil and gas pipeline construction,1,5.7%
+Hale,Full-service restaurants,1,9.3%
+Bexar,Full-service restaurants,1,7.9%
+Garza,Support activities for oil and gas operations,1,21.4%
 Montague,Support activities for oil and gas operations,1,11.2%
-Upton,Support activities for oil and gas operations,1,27.9%
-Hamilton,Full-service restaurants,1,22.2%
-Fisher,Support activities for oil and gas operations,1,14.9%
-Dawson,Support activities for oil and gas operations,1,16.0%
-Dimmit,Support activities for oil and gas operations,1,14.6%
-Limestone,Full-service restaurants,1,7.8%
-Hutchinson,Oil and gas pipeline construction,1,14.2%
-Llano,"Hotels and motels, except casino hotels",1,10.5%
-Presidio,"Hotels and motels, except casino hotels",1,13.9%
-Eastland,Full-service restaurants,1,12.5%
-Sabine,Oil and gas pipeline construction,1,9.4%
-Wharton,Support activities for oil and gas operations,1,9.7%
-Rusk,Support activities for oil and gas operations,1,7.1%
-Tarrant,Full-service restaurants,1,7.6%
-Lavaca,Drilling oil and gas wells,1,8.1%
-Childress,Drilling oil and gas wells,1,8.5%
-Hidalgo,Full-service restaurants,1,6.2%
-Kaufman,Full-service restaurants,1,6.4%
-Moore,"Animal, except poultry, slaughtering",1,10.3%
-Menard,Civic and social organizations,1,21.9%
-Edwards,Support activities for oil and gas operations,1,18.8%
-San Patricio,Full-service restaurants,1,10.4%
-Terry,Support activities for oil and gas operations,1,25.0%
-Crockett,Support activities for oil and gas operations,1,10.7%
-Houston,Full-service restaurants,1,8.0%
-Waller,"AC, refrigeration, and forced air heating",1,7.0%
-Coke,Full-service restaurants,1,8.0%
-Ward,Support activities for oil and gas operations,1,24.5%
-Titus,Travel trailer and camper manufacturing,1,13.8%
-Lampasas,Frozen specialty food manufacturing,1,24.5%
-Haskell,Support activities for oil and gas operations,1,18.5%
-Martin,Support activities for oil and gas operations,1,16.5%
-Atascosa,Support activities for oil and gas operations,1,9.2%
-Hemphill,Fitness and recreational sports centers,1,11.1%
-Hartley,Offices of dentists,1,23.1%
-Young,Motor vehicle body manufacturing,1,11.8%
-Burleson,Support activities for oil and gas operations,1,6.5%
-Hardin,Full-service restaurants,1,5.5%
-Gonzales,Support activities for oil and gas operations,1,15.2%
-McMullen,Nonresidential electrical contractors,1,12.5%
-Erath,Full-service restaurants,1,11.8%
-Galveston,Full-service restaurants,1,10.4%
-Hopkins,Travel trailer and camper manufacturing,1,7.0%
-McLennan,Full-service restaurants,1,10.0%
-Madison,Full-service restaurants,1,6.8%
-McCulloch,Prefabricated metal buildings and components,1,17.3%
-Donley,Oil and gas pipeline construction,1,10.1%
-Kent,Water and sewer system construction,1,25.0%
-Real,Support activities for oil and gas operations,1,12.9%
-Sutton,Support activities for oil and gas operations,1,29.9%
-Midland,Support activities for oil and gas operations,1,18.3%
-Hudspeth,Full-service restaurants,1,11.9%
-Zavala,Support activities for oil and gas operations,1,11.0%
-Harrison,Full-service restaurants,1,9.0%
-Comanche,Oil and gas field machinery and equipment,1,7.2%
-Mitchell,Support activities for oil and gas operations,1,24.4%
-Navarro,Paper bag and coated and treated paper mfg.,1,6.6%
-Crane,Support activities for oil and gas operations,1,26.9%
-Lubbock,Full-service restaurants,1,13.3%
-Wise,General medical and surgical hospitals,1,6.9%
-Washington,Full-service restaurants,1,7.4%
-Jeff Davis,"Hotels and motels, except casino hotels",1,43.8%
-El Paso,Full-service restaurants,1,12.1%
-Gregg,Full-service restaurants,1,8.6%
-Williamson,Full-service restaurants,1,7.2%
-Lipscomb,Support activities for oil and gas operations,1,16.7%
-Mason,Full-service restaurants,1,24.4%
-Henderson,Full-service restaurants,1,9.0%
+Upton,Support activities for oil and gas operations,1,19.3%
+Hamilton,Full-service restaurants,1,8.7%
+Fisher,Support activities for oil and gas operations,1,13.7%
+Dawson,Support activities for oil and gas operations,1,17.6%
+Dimmit,Support activities for oil and gas operations,1,13.0%
+Limestone,Full-service restaurants,1,5.2%
+Hutchinson,Oil and gas pipeline construction,1,12.4%
+Llano,"Hotels and motels, except casino hotels",1,8.7%
+Presidio,Support activities for oil and gas operations,1,10.9%
+Eastland,Support activities for oil and gas operations,1,7.0%
+Sabine,Oil and gas pipeline construction,1,7.1%
+Wharton,Support activities for oil and gas operations,1,9.4%
+Rusk,Support activities for oil and gas operations,1,10.5%
+Tarrant,Full-service restaurants,1,6.2%
+Lavaca,Drilling oil and gas wells,1,10.8%
+Childress,Drilling oil and gas wells,1,13.4%
+Hidalgo,Support activities for oil and gas operations,1,4.7%
+Kaufman,Full-service restaurants,1,5.4%
+Moore,"Animal, except poultry, slaughtering",1,17.9%
+Menard,Other durable goods merchant wholesalers,1,8.3%
+Edwards,Support activities for oil and gas operations,1,21.1%
+San Patricio,Full-service restaurants,1,7.5%
+Terry,Support activities for oil and gas operations,1,29.5%
+Crockett,Support activities for oil and gas operations,1,8.5%
+Houston,Poultry processing,1,5.8%
+Waller,"AC, refrigeration, and forced air heating",1,7.5%
+Coke,Full-service restaurants,1,11.4%
+Ward,Support activities for oil and gas operations,1,18.5%
+Titus,Travel trailer and camper manufacturing,1,10.7%
+Lampasas,Full-service restaurants,1,4.5%
+Haskell,Support activities for oil and gas operations,1,17.0%
+Martin,Support activities for oil and gas operations,1,19.5%
+Atascosa,Support activities for oil and gas operations,1,10.7%
+Hemphill,Fitness and recreational sports centers,1,11.4%
+Hartley,Residential electrical contractors,1,11.1%
+Young,Motor vehicle body manufacturing,1,10.6%
+Burleson,Support activities for oil and gas operations,1,9.6%
+Hardin,Full-service restaurants,1,5.0%
+Gonzales,Support activities for oil and gas operations,1,12.8%
+McMullen,Support activities for oil and gas operations,1,8.3%
+Erath,Oil and gas field machinery and equipment,1,8.0%
+Galveston,Full-service restaurants,1,8.8%
+Hopkins,Full-service restaurants,1,4.9%
+McLennan,Full-service restaurants,1,8.2%
+Madison,Mushroom production,1,3.8%
+McCulloch,Kaolin and ball clay mining,1,12.3%
+Donley,Drilling oil and gas wells,1,12.3%
+Kent,Other petroleum merchant wholesalers,1,33.3%
+Real,Support activities for oil and gas operations,1,14.8%
+Sutton,Support activities for oil and gas operations,1,24.6%
+Midland,Support activities for oil and gas operations,1,20.2%
+Hudspeth,Support activities for oil and gas operations,1,9.6%
+Zavala,Support activities for oil and gas operations,1,10.7%
+Harrison,Support activities for oil and gas operations,1,8.5%
+Comanche,Oil and gas field machinery and equipment,1,7.7%
+Mitchell,Support activities for oil and gas operations,1,23.8%
+Navarro,Paper bag and coated and treated paper mfg.,1,9.8%
+Crane,Support activities for oil and gas operations,1,24.3%
+Lubbock,Full-service restaurants,1,10.7%
+Wise,General medical and surgical hospitals,1,8.7%
+Washington,Full-service restaurants,1,6.6%
+Jeff Davis,"Hotels and motels, except casino hotels",1,17.6%
+El Paso,Full-service restaurants,1,9.3%
+Gregg,Support activities for oil and gas operations,1,8.1%
+Williamson,Full-service restaurants,1,6.3%
+Lipscomb,Testing laboratories,1,17.6%
+Mason,Full-service restaurants,1,17.5%
+Henderson,Full-service restaurants,1,6.0%
 Hansford,Support activities for oil and gas operations,1,9.7%
-Chambers,Full-service restaurants,1,6.3%
-Hill,Industrial machinery merchant wholesalers,1,8.0%
-Potter,General medical and surgical hospitals,1,15.0%
-Jim Wells,Support activities for oil and gas operations,1,25.6%
-Delta,Support activities for oil and gas operations,1,9.8%
+Chambers,Oil and gas pipeline construction,1,5.6%
+Hill,Industrial machinery merchant wholesalers,1,7.9%
+Potter,General medical and surgical hospitals,1,18.7%
+Jim Wells,Support activities for oil and gas operations,1,26.8%
+Delta,Support activities for oil and gas operations,1,11.2%
 Stonewall,Support activities for oil and gas operations,1,42.9%
-Ector,Support activities for oil and gas operations,1,17.7%
-Cameron,Full-service restaurants,1,7.9%
-Maverick,Support activities for oil and gas operations,1,13.1%
-Collin,Full-service restaurants,1,7.5%
-Baylor,Drilling oil and gas wells,1,20.0%
-Panola,Support activities for oil and gas operations,1,10.5%
-Guadalupe,Full-service restaurants,1,7.6%
-Bastrop,Full-service restaurants,1,5.8%
-Austin,Support activities for oil and gas operations,1,6.5%
-Andrews,Support activities for oil and gas operations,1,24.0%
-Anderson,Support activities for oil and gas operations,1,12.0%
-Blanco,Support activities for oil and gas operations,1,5.4%
-DeWitt,Support activities for oil and gas operations,1,9.4%
-Bandera,Oil and gas pipeline construction,1,6.6%
-Bell,Full-service restaurants,1,7.8%
-Aransas,Full-service restaurants,1,17.4%
-Archer,Support activities for oil and gas operations,1,8.8%
-Armstrong,Oil and gas pipeline construction,1,7.0%
-Bee,Support activities for oil and gas operations,1,11.9%
-Angelina,Full-service restaurants,1,7.7%
-Bailey,Support activities for oil and gas operations,1,13.2%
-Jefferson,Full-service restaurants,1,7.6%
-Frio,Support activities for oil and gas operations,1,11.1%
-Fannin,Full-service restaurants,1,6.0%
-Goliad,Support activities for oil and gas operations,1,9.7%
-Loving,"Other specialized trucking, local",1,50.0%
-Cass,Support activities for oil and gas operations,1,6.8%
-Fort Bend,Full-service restaurants,1,6.9%
-Bosque,Full-service restaurants,1,5.5%
-Hockley,Support activities for oil and gas operations,1,28.7%
-San Saba,Frozen specialty food manufacturing,1,14.9%
-Kerr,Jewelry stores,1,26.6%
-Mills,Elementary and secondary schools,1,9.3%
-Cooke,Motor vehicle seating and interior trim mfg.,1,20.6%
-Wilbarger,Meat processed from carcasses,1,7.5%
-Irion,Support activities for oil and gas operations,1,34.5%
-Caldwell,Support activities for oil and gas operations,1,9.6%
-Jim Hogg,Support activities for oil and gas operations,1,21.2%
-Culberson,Support activities for oil and gas operations,1,14.1%
-Upshur,Full-service restaurants,1,8.1%
-Cherokee,Department Stores,1,16.8%
-Denton,Full-service restaurants,1,7.5%
-Concho,Support activities for oil and gas operations,1,10.1%
-Randall,General medical and surgical hospitals,1,18.0%
-Kimble,Offices of dentists,1,12.5%
-Knox,Support activities for oil and gas operations,1,43.2%
-Polk,Full-service restaurants,1,4.9%
-Hood,Full-service restaurants,1,8.3%
-San Jacinto,Full-service restaurants,1,6.5%
-Robertson,Support activities for oil and gas operations,1,6.6%
-Wilson,Support activities for oil and gas operations,1,7.7%
-Nolan,Support activities for oil and gas operations,1,15.7%
-Cottle,Support activities for oil and gas operations,1,12.4%
-Calhoun,Full-service restaurants,1,6.7%
-Rockwall,Full-service restaurants,1,6.7%
-Live Oak,Full-service restaurants,1,8.7%
-Motley,Drilling oil and gas wells,1,30.0%
-Sherman,"General freight trucking, long-distance LTL",1,60.0%
-Ochiltree,Support activities for oil and gas operations,1,16.3%
-Comal,Full-service restaurants,1,10.2%
-Dallas,"Hotels and motels, except casino hotels",2,3.9%
-Howard,Full-service restaurants,2,6.6%
-Foard,Automobile manufacturing,2,10.3%
-Floyd,Support activities for oil and gas operations,2,10.5%
-Brewster,Full-service restaurants,2,7.5%
-Franklin,Travel trailer and camper manufacturing,2,4.3%
-Hunt,Offices of dentists,2,5.2%
-Newton,Elementary and secondary schools,2,3.5%
-Starr,Support activities for oil and gas operations,2,8.4%
-Kinney,Oil and gas pipeline construction,2,7.1%
-Collingsworth,Drilling oil and gas wells,2,5.7%
-Tom Green,Support activities for oil and gas operations,2,7.2%
-Coleman,Support activities for oil and gas operations,2,8.6%
-Brazoria,Oil and gas pipeline construction,2,3.4%
-Leon,Limited-service restaurants,2,4.2%
-Duval,Drilling oil and gas wells,2,5.7%
-Lamb,Full-service restaurants,2,7.7%
-Morris,General medical and surgical hospitals,2,7.9%
-Smith,Full-service restaurants,2,7.9%
-Jackson,Support activities for oil and gas operations,2,6.7%
-Medina,Full-service restaurants,2,6.8%
-Wheeler,Support activities for oil and gas operations,2,8.8%
-Dallam,Oil and gas pipeline construction,2,9.8%
-Callahan,Support activities for oil and gas operations,2,6.7%
-Lamar,Full-service restaurants,2,7.4%
-Coryell,Full-service restaurants,2,5.9%
-Gaines,Engineering services,2,3.7%
-Kendall,Full-service restaurants,2,6.9%
-Nacogdoches,General medical and surgical hospitals,2,8.7%
-Milam,Offices of dentists,2,5.5%
-Hays,"Offices of physicians, except mental health",2,3.1%
-Willacy,Cotton ginning,2,5.0%
-Johnson,Offices of dentists,2,4.1%
+Ector,Support activities for oil and gas operations,1,17.9%
+Cameron,Full-service restaurants,1,6.3%
+Maverick,Support activities for oil and gas operations,1,14.2%
+Collin,Full-service restaurants,1,6.3%
+Baylor,Drilling oil and gas wells,1,25.9%
+Panola,Support activities for oil and gas operations,1,12.4%
+Guadalupe,Motor vehicle electric equipment mfg.,1,8.0%
+Bastrop,Full-service restaurants,1,4.5%
+Austin,Support activities for oil and gas operations,1,8.9%
+Andrews,Support activities for oil and gas operations,1,23.5%
+Anderson,Support activities for oil and gas operations,1,13.0%
+Blanco,Support activities for oil and gas operations,1,7.0%
+DeWitt,Support activities for oil and gas operations,1,11.1%
+Bandera,Support activities for oil and gas operations,1,6.0%
+Bell,Full-service restaurants,1,6.6%
+Aransas,Full-service restaurants,1,10.1%
+Archer,Support activities for oil and gas operations,1,9.2%
+Armstrong,Scheduled passenger air transportation,1,7.3%
+Bee,Support activities for oil and gas operations,1,13.9%
+Angelina,General medical and surgical hospitals,1,5.7%
+Bailey,Support activities for oil and gas operations,1,13.6%
+Jefferson,Full-service restaurants,1,6.2%
+Frio,Support activities for oil and gas operations,1,9.4%
+Fannin,General medical and surgical hospitals,1,5.3%
+Goliad,Support activities for oil and gas operations,1,8.6%
+Loving,NA,1,NA
+Cass,Support activities for oil and gas operations,1,8.3%
+Fort Bend,Full-service restaurants,1,5.6%
+Bosque,Support activities for oil and gas operations,1,6.3%
+Hockley,Support activities for oil and gas operations,1,29.5%
+San Saba,Industrial sand mining,1,9.8%
+Kerr,Full-service restaurants,1,11.8%
+Mills,Elementary and secondary schools,1,10.0%
+Cooke,Motor vehicle seating and interior trim mfg.,1,28.5%
+Wilbarger,Support activities for oil and gas operations,1,8.4%
+Irion,Support activities for oil and gas operations,1,25.0%
+Caldwell,Support activities for oil and gas operations,1,9.8%
+Jim Hogg,Support activities for oil and gas operations,1,23.0%
+Culberson,Support activities for oil and gas operations,1,16.7%
+Upshur,Support activities for oil and gas operations,1,6.6%
+Cherokee,Drilling oil and gas wells,1,9.0%
+Denton,Full-service restaurants,1,6.2%
+Concho,Scheduled passenger air transportation,1,11.9%
+Randall,General medical and surgical hospitals,1,24.2%
+Kimble,Full-service restaurants,1,11.4%
+Knox,Support activities for oil and gas operations,1,37.8%
+Polk,Oil and gas pipeline construction,1,3.8%
+Hood,General medical and surgical hospitals,1,8.1%
+San Jacinto,Full-service restaurants,1,4.4%
+Robertson,Support activities for oil and gas operations,1,8.3%
+Wilson,Support activities for oil and gas operations,1,10.0%
+Nolan,Support activities for oil and gas operations,1,13.2%
+Cottle,Support activities for oil and gas operations,1,11.9%
+Calhoun,Full-service restaurants,1,6.0%
+Rockwall,Full-service restaurants,1,5.5%
+Live Oak,Support activities for oil and gas operations,1,8.5%
+Motley,Power and communication system construction,1,33.3%
+Sherman,"General freight trucking, long-distance LTL",1,62.5%
+Ochiltree,Support activities for oil and gas operations,1,11.1%
+Comal,Full-service restaurants,1,7.2%
+Dallas,Temporary help services,2,4.6%
+Howard,Full-service restaurants,2,5.6%
+Foard,Kaolin and ball clay mining,2,4.0%
+Floyd,Support activities for oil and gas operations,2,10.8%
+Brewster,Full-service restaurants,2,5.9%
+Franklin,Limited-service restaurants,2,4.1%
+Hunt,Full-service restaurants,2,5.8%
+Newton,Oil and gas pipeline construction,2,4.2%
+Starr,Support activities for oil and gas operations,2,10.0%
+Kinney,Power and communication system construction,2,4.2%
+Collingsworth,Drilling oil and gas wells,2,4.5%
+Tom Green,Full-service restaurants,2,7.9%
+Coleman,Drilling oil and gas wells,2,10.3%
+Brazoria,Oil and gas pipeline construction,2,4.4%
+Leon,Limited-service restaurants,2,5.5%
+Duval,Drilling oil and gas wells,2,8.3%
+Lamb,Full-service restaurants,2,6.9%
+Morris,"Iron, steel pipe and tube from purchase steel",2,5.8%
+Smith,General medical and surgical hospitals,2,5.9%
+Jackson,General medical and surgical hospitals,2,5.9%
+Medina,Full-service restaurants,2,5.7%
+Wheeler,Support activities for oil and gas operations,2,4.6%
+Dallam,Drilling oil and gas wells,2,9.0%
+Callahan,Support activities for oil and gas operations,2,6.6%
+Lamar,Commercial building construction,2,5.3%
+Coryell,Support activities for oil and gas operations,2,4.1%
+Gaines,Nonresidential electrical contractors,2,3.7%
+Kendall,Support activities for oil and gas operations,2,3.0%
+Nacogdoches,Full-service restaurants,2,7.0%
+Milam,Full-service restaurants,2,3.8%
+Hays,Family clothing stores,2,2.7%
+Willacy,Cotton ginning,2,4.1%
+Johnson,Commercial machinery repair and maintenance,2,3.4%
 Reagan,Full-service restaurants,2,5.7%
-Webb,Elementary and secondary schools,2,6.2%
-Shackelford,Full-service restaurants,2,12.0%
-Bowie,General medical and surgical hospitals,2,6.5%
-Scurry,"Hotels and motels, except casino hotels",2,4.3%
-Kenedy,Beef cattle ranching and farming,2,12.5%
-Somervell,Full-service restaurants,2,8.6%
-Oldham,Full-service restaurants,2,11.8%
-Taylor,Limited-service restaurants,2,4.1%
+Webb,Support activities for oil and gas operations,2,7.1%
+Shackelford,Full-service restaurants,2,7.1%
+Bowie,General medical and surgical hospitals,2,5.4%
+Scurry,Full-service restaurants,2,3.0%
+Kenedy,Beef cattle ranching and farming,2,9.1%
+Somervell,Full-service restaurants,2,6.6%
+Oldham,General medical and surgical hospitals,2,11.1%
+Taylor,Limited-service restaurants,2,3.9%
 King,NA,2,NA
-Borden,Scheduled passenger air transportation,2,5.8%
-Walker,Food service contractors,2,4.3%
-Stephens,"Manufactured home, mobile home, manufacturing",2,9.5%
-Deaf Smith,Nail salons,2,4.3%
-Roberts,Oil and gas pipeline construction,2,16.7%
-Tyler,Full-service restaurants,2,5.6%
-Val Verde,Full-service restaurants,2,7.6%
-Brown,General medical and surgical hospitals,2,7.5%
-Parker,Offices of dentists,2,5.1%
-Harris,Temporary help services,2,3.0%
-Zapata,Drilling oil and gas wells,2,8.8%
-Red River,Commercial building construction,2,5.1%
-Karnes,Full-service restaurants,2,11.2%
-Palo Pinto,Support activities for oil and gas operations,2,6.1%
-Glasscock,Scheduled passenger air transportation,2,6.6%
-Shelby,Support activities for oil and gas operations,2,4.1%
-Wood,General medical and surgical hospitals,2,5.5%
-Crosby,Elementary and secondary schools,2,4.9%
-Refugio,Full-service restaurants,2,9.4%
-Burnet,Full-service restaurants,2,8.1%
-Sterling,Industrial building construction,2,6.7%
-Montgomery,Offices of dentists,2,3.5%
-San Augustine,Support activities for oil and gas operations,2,4.8%
-Rains,Offices of dentists,2,5.3%
-Nueces,"Offices of physicians, except mental health",2,4.2%
-Jack,Full-service restaurants,2,12.1%
-Swisher,Department Stores,2,6.7%
-Camp,General medical and surgical hospitals,2,4.8%
-Brazos,Limited-service restaurants,2,3.5%
-Orange,Oil and gas pipeline construction,2,4.5%
-Colorado,Oil and gas pipeline construction,2,3.5%
-Pecos,Full-service restaurants,2,9.6%
-Cochran,Support activities for oil and gas operations,2,13.5%
-Parmer,"Animal, except poultry, slaughtering",2,11.4%
-Freestone,Oil and gas pipeline construction,2,4.5%
-Winkler,Oil and gas pipeline construction,2,8.0%
-Wichita,Food service contractors,2,4.0%
-Gray,Full-service restaurants,2,7.0%
-Schleicher,Drilling oil and gas wells,2,6.8%
-Hardeman,Full-service restaurants,2,6.9%
-Travis,"Hotels and motels, except casino hotels",2,4.9%
-Gillespie,Jewelry stores,2,12.7%
-Yoakum,"Other specialized trucking, local",2,3.5%
-Fayette,Support activities for oil and gas operations,2,8.5%
-Uvalde,Full-service restaurants,2,9.0%
-Grimes,Full-service restaurants,2,4.2%
-Van Zandt,Offices of dentists,2,5.6%
-Throckmorton,Full-service restaurants,2,16.7%
-Falls,Full-service restaurants,2,5.3%
-Grayson,"Offices of physicians, except mental health",2,7.8%
-Ellis,Offices of dentists,2,3.9%
-Hall,Oil and gas pipeline construction,2,5.4%
-Dickens,Support activities for oil and gas operations,2,7.7%
-Trinity,Limited-service restaurants,2,4.7%
-Reeves,"Hotels and motels, except casino hotels",2,8.6%
-Marion,Reconstituted wood product manufacturing,2,7.3%
-Terrell,Drilling oil and gas wells,2,16.7%
-Lynn,Offices of dentists,2,8.4%
-La Salle,Support activities for oil and gas operations,2,9.4%
-Jasper,Oil and gas pipeline construction,2,6.6%
-Jones,Full-service restaurants,2,9.2%
-Castro,Support activities for oil and gas operations,2,9.2%
-Victoria,Construction equipment merchant wholesalers,2,6.8%
-Kleberg,Support activities for oil and gas operations,2,8.2%
-Briscoe,Drilling oil and gas wells,2,5.6%
-Clay,Oil and gas pipeline construction,2,5.7%
-Matagorda,Engineering services,2,5.7%
-Brooks,Full-service restaurants,2,7.8%
-Runnels,Support activities for oil and gas operations,2,10.6%
-Carson,Oil and gas pipeline construction,2,5.0%
-Liberty,Full-service restaurants,2,4.8%
-Lee,Offices of dentists,2,5.0%
-Hale,Support activities for oil and gas operations,2,10.0%
-Bexar,"Hotels and motels, except casino hotels",2,4.3%
-Garza,Full-service restaurants,2,10.5%
-Montague,Motor vehicle seating and interior trim mfg.,2,8.1%
-Upton,"General freight trucking, local",2,8.2%
-Hamilton,"Hotels and motels, except casino hotels",2,5.6%
-Fisher,All other nonresidential trade contractors,2,9.0%
-Dawson,Drilling oil and gas wells,2,9.4%
-Dimmit,Drilling oil and gas wells,2,10.3%
-Limestone,Elementary and secondary schools,2,5.7%
-Hutchinson,Nonresidential electrical contractors,2,4.2%
-Llano,Full-service restaurants,2,10.2%
-Presidio,Support activities for oil and gas operations,2,8.7%
-Eastland,Support activities for oil and gas operations,2,8.2%
-Sabine,Commercial machinery repair and maintenance,2,6.0%
-Wharton,Offices of dentists,2,6.0%
-Rusk,Full-service restaurants,2,7.1%
-Tarrant,Automobile manufacturing,2,3.9%
-Lavaca,Support activities for oil and gas operations,2,7.4%
-Childress,Offices of dentists,2,7.7%
-Hidalgo,Family clothing stores,2,3.8%
-Kaufman,Offices of dentists,2,4.5%
-Moore,Full-service restaurants,2,8.4%
-Menard,Full-service restaurants,2,15.6%
-Edwards,Oil and gas pipeline construction,2,11.2%
-San Patricio,Industrial building construction,2,6.0%
-Terry,Office administrative services,2,4.5%
-Crockett,Industrial building construction,2,9.8%
+Borden,Support activities for oil and gas operations,2,6.3%
+Walker,Limited-service restaurants,2,3.5%
+Stephens,Support activities for oil and gas operations,2,12.6%
+Deaf Smith,Drilling oil and gas wells,2,3.8%
+Roberts,Residential plumbing and HVAC contractors,2,25.0%
+Tyler,Full-service restaurants,2,4.8%
+Val Verde,Automatic environmental control manufacturing,2,11.0%
+Brown,Drilling oil and gas wells,2,5.1%
+Parker,Support activities for oil and gas operations,2,3.8%
+Harris,Temporary help services,2,3.5%
+Zapata,Drilling oil and gas wells,2,9.1%
+Red River,General medical and surgical hospitals,2,5.3%
+Karnes,Full-service restaurants,2,9.8%
+Palo Pinto,Full-service restaurants,2,7.5%
+Glasscock,Scheduled passenger air transportation,2,11.7%
+Shelby,Drilling oil and gas wells,2,5.7%
+Wood,General medical and surgical hospitals,2,5.6%
+Crosby,Oil and gas pipeline construction,2,5.0%
+Refugio,Support activities for oil and gas operations,2,10.4%
+Burnet,Full-service restaurants,2,6.4%
+Sterling,Residential remodelers,2,5.9%
+Montgomery,Support activities for oil and gas operations,2,2.6%
+San Augustine,"Nursing care facilities, skilled nursing",2,6.5%
+Rains,Plastics material and resin manufacturing,2,4.4%
+Nueces,Support activities for oil and gas operations,2,3.5%
+Jack,Full-service restaurants,2,7.9%
+Swisher,Tire dealers,2,4.3%
+Camp,Support activities for oil and gas operations,2,4.9%
+Brazos,Limited-service restaurants,2,3.7%
+Orange,Industrial building construction,2,4.3%
+Colorado,Support activities for oil and gas operations,2,4.1%
+Pecos,Oil and gas pipeline construction,2,5.8%
+Cochran,Support activities for oil and gas operations,2,12.1%
+Parmer,"Animal, except poultry, slaughtering",2,11.8%
+Freestone,Other heavy construction,2,3.4%
+Winkler,Oil and gas pipeline construction,2,7.8%
+Wichita,Aircraft engine and engine parts mfg.,2,6.7%
+Gray,Professional employer organizations,2,5.8%
+Schleicher,Drilling oil and gas wells,2,6.5%
+Hardeman,Temporary help services,2,6.0%
+Travis,"Hotels and motels, except casino hotels",2,3.5%
+Gillespie,"Gift, novelty, and souvenir stores",2,5.4%
+Yoakum,"Other specialized trucking, local",2,4.4%
+Fayette,Drilling oil and gas wells,2,5.8%
+Uvalde,Support activities for oil and gas operations,2,7.5%
+Grimes,Support activities for oil and gas operations,2,4.9%
+Van Zandt,Drilling oil and gas wells,2,4.4%
+Throckmorton,NA,2,8.3%
+Falls,Oil and gas pipeline construction,2,4.0%
+Grayson,Plate work manufacturing,2,6.9%
+Ellis,Temporary help services,2,3.4%
+Hall,Limited-service restaurants,2,5.3%
+Dickens,Scheduled passenger air transportation,2,8.0%
+Trinity,"Cafeterias, grill buffets, and buffets",2,4.1%
+Reeves,"Hotels and motels, except casino hotels",2,5.4%
+Marion,Reconstituted wood product manufacturing,2,7.7%
+Terrell,Drilling oil and gas wells,2,12.5%
+Lynn,Cotton farming,2,3.3%
+La Salle,"Hotels and motels, except casino hotels",2,10.1%
+Jasper,Full-service restaurants,2,6.1%
+Jones,Full-service restaurants,2,5.6%
+Castro,Support activities for oil and gas operations,2,7.0%
+Victoria,Full-service restaurants,2,7.1%
+Kleberg,Support activities for oil and gas operations,2,10.0%
+Briscoe,Drilling oil and gas wells,2,7.3%
+Clay,Drilling oil and gas wells,2,6.2%
+Matagorda,Oil and gas pipeline construction,2,5.3%
+Brooks,Full-service restaurants,2,8.8%
+Runnels,General medical and surgical hospitals,2,5.6%
+Carson,Support activities for oil and gas operations,2,5.7%
+Liberty,Industrial building construction,2,3.4%
+Lee,Support activities for oil and gas operations,2,5.3%
+Hale,Support activities for oil and gas operations,2,9.0%
+Bexar,Temporary help services,2,3.1%
+Garza,Nonresidential site preparation contractors,2,9.8%
+Montague,Motor vehicle seating and interior trim mfg.,2,11.2%
+Upton,"General freight trucking, local",2,8.8%
+Hamilton,Support activities for oil and gas operations,2,4.8%
+Fisher,All other nonresidential trade contractors,2,10.5%
+Dawson,Kaolin and ball clay mining,2,11.5%
+Dimmit,Drilling oil and gas wells,2,10.1%
+Limestone,Employment placement agencies,2,4.9%
+Hutchinson,Nonresidential electrical contractors,2,4.4%
+Llano,Full-service restaurants,2,6.9%
+Presidio,Oil and gas pipeline construction,2,10.0%
+Eastland,Full-service restaurants,2,6.3%
+Sabine,Commercial machinery repair and maintenance,2,5.7%
+Wharton,Full-service restaurants,2,3.5%
+Rusk,Full-service restaurants,2,5.2%
+Tarrant,Temporary help services,2,3.8%
+Lavaca,Support activities for oil and gas operations,2,8.8%
+Childress,Support activities for oil and gas operations,2,8.5%
+Hidalgo,Full-service restaurants,2,4.6%
+Kaufman,Temporary help services,2,2.7%
+Moore,Full-service restaurants,2,4.7%
+Menard,"Hobby, toy, and game stores",2,8.3%
+Edwards,Drilling oil and gas wells,2,12.2%
+San Patricio,Industrial building construction,2,7.1%
+Terry,Crude Petroleum Extraction,2,3.3%
+Crockett,Oil and gas pipeline construction,2,7.0%
 Houston,Support activities for oil and gas operations,2,5.0%
-Waller,Full-service restaurants,2,5.2%
-Coke,Support activities for oil and gas operations,2,4.9%
-Ward,Full-service restaurants,2,10.1%
-Titus,General medical and surgical hospitals,2,6.8%
-Lampasas,Offices of dentists,2,3.6%
-Haskell,Supermarkets and other grocery stores,2,5.6%
-Martin,"Hotels and motels, except casino hotels",2,8.8%
-Atascosa,Full-service restaurants,2,6.6%
-Hemphill,Limited-service restaurants,2,11.1%
-Hartley,Full-service restaurants,2,15.4%
-Young,Support activities for oil and gas operations,2,8.4%
-Burleson,Full-service restaurants,2,5.3%
-Hardin,Oil and gas pipeline construction,2,5.4%
-Gonzales,Full-service restaurants,2,5.0%
-McMullen,Industrial machinery merchant wholesalers,2,12.5%
-Erath,Oil and gas field machinery and equipment,2,5.8%
-Galveston,"Hotels and motels, except casino hotels",2,4.0%
-Hopkins,Full-service restaurants,2,6.6%
-McLennan,Offices of real estate agents and brokers,2,5.8%
-Madison,Support activities for oil and gas operations,2,4.9%
-McCulloch,Industrial sand mining,2,7.9%
-Donley,Drilling oil and gas wells,2,9.1%
-Kent,Other residential exterior contractors,2,25.0%
-Real,Recreational and vacation camps,2,9.7%
-Sutton,Gasoline stations with convenience stores,2,9.0%
-Midland,Full-service restaurants,2,7.1%
-Hudspeth,Support activities for oil and gas operations,2,7.9%
-Zavala,Elementary and secondary schools,2,8.5%
-Harrison,Support activities for oil and gas operations,2,7.1%
+Waller,Full-service restaurants,2,3.9%
+Coke,Support activities for oil and gas operations,2,7.0%
+Ward,Full-service restaurants,2,7.0%
+Titus,General medical and surgical hospitals,2,9.9%
+Lampasas,Limited-service restaurants,2,4.5%
+Haskell,Other nonresidential exterior contractors,2,6.4%
+Martin,Full-service restaurants,2,5.7%
+Atascosa,Full-service restaurants,2,4.4%
+Hemphill,Limited-service restaurants,2,8.6%
+Hartley,Offices of real estate agents and brokers,2,11.1%
+Young,Support activities for oil and gas operations,2,9.4%
+Burleson,Full-service restaurants,2,4.4%
+Hardin,General medical and surgical hospitals,2,4.2%
+Gonzales,Oil and gas pipeline construction,2,4.2%
+McMullen,Industrial machinery merchant wholesalers,2,8.3%
+Erath,Full-service restaurants,2,7.2%
+Galveston,"Hotels and motels, except casino hotels",2,2.8%
+Hopkins,Travel trailer and camper manufacturing,2,4.5%
+McLennan,Limited-service restaurants,2,4.0%
+Madison,Support activities for oil and gas operations,2,3.8%
+McCulloch,Industrial sand mining,2,10.0%
+Donley,Support activities for oil and gas operations,2,11.1%
+Kent,Water and sewer system construction,2,16.7%
+Real,Natural Gas Extraction,2,7.4%
+Sutton,Gasoline stations with convenience stores,2,10.5%
+Midland,Full-service restaurants,2,4.6%
+Hudspeth,Full-service restaurants,2,5.8%
+Zavala,Elementary and secondary schools,2,7.6%
+Harrison,Full-service restaurants,2,5.4%
 Comanche,Support activities for oil and gas operations,2,5.4%
-Mitchell,Drilling oil and gas wells,2,6.7%
-Navarro,General medical and surgical hospitals,2,5.9%
-Crane,Drilling oil and gas wells,2,3.9%
-Lubbock,Limited-service restaurants,2,4.8%
-Wise,Full-service restaurants,2,5.0%
-Washington,Offices of dentists,2,5.0%
-Jeff Davis,Full-service restaurants,2,9.4%
-El Paso,Family clothing stores,2,3.5%
-Gregg,Support activities for oil and gas operations,2,5.7%
-Williamson,"Offices of physicians, except mental health",2,4.6%
-Lipscomb,Testing laboratories,2,16.7%
-Mason,Support activities for oil and gas operations,2,9.8%
-Henderson,Offices of dentists,2,4.4%
-Hansford,Drilling oil and gas wells,2,6.5%
-Chambers,Industrial building construction,2,6.1%
-Hill,Full-service restaurants,2,4.9%
-Potter,Full-service restaurants,2,14.4%
-Jim Wells,Full-service restaurants,2,5.2%
-Delta,Drilling oil and gas wells,2,4.9%
-Stonewall,Industrial machinery merchant wholesalers,2,21.4%
-Ector,Full-service restaurants,2,6.5%
-Cameron,Temporary help services,2,3.5%
-Maverick,Department Stores,2,7.2%
-Collin,Department Stores,2,4.3%
-Baylor,Oil and gas pipeline construction,2,8.2%
-Panola,Full-service restaurants,2,5.7%
-Guadalupe,Motor vehicle electric equipment mfg.,2,3.8%
-Bastrop,"Hotels and motels, except casino hotels",2,5.7%
-Austin,Offices of dentists,2,3.5%
-Andrews,Small electrical appliance manufacturing,2,6.1%
-Anderson,Full-service restaurants,2,5.7%
-Blanco,Full-service restaurants,2,5.1%
-DeWitt,General medical and surgical hospitals,2,6.0%
-Bandera,Support activities for oil and gas operations,2,5.7%
-Bell,Limited-service restaurants,2,3.5%
-Aransas,"Hotels and motels, except casino hotels",2,5.1%
-Archer,Offices of dentists,2,5.6%
-Armstrong,Scheduled passenger air transportation,2,6.6%
-Bee,Drilling oil and gas wells,2,3.9%
-Angelina,General medical and surgical hospitals,2,5.9%
-Bailey,Full-service restaurants,2,5.2%
-Jefferson,General medical and surgical hospitals,2,4.2%
-Frio,Elementary and secondary schools,2,5.9%
-Fannin,Offices of dentists,2,5.7%
+Mitchell,Crude Petroleum Extraction,2,5.9%
+Navarro,General medical and surgical hospitals,2,6.7%
+Crane,Scheduled passenger air transportation,2,4.7%
+Lubbock,Support activities for oil and gas operations,2,4.4%
+Wise,Support activities for oil and gas operations,2,7.0%
+Washington,Mattress manufacturing,2,3.1%
+Jeff Davis,Snack and nonalcoholic beverage bars,2,11.8%
+El Paso,Temporary help services,2,3.7%
+Gregg,Full-service restaurants,2,6.4%
+Williamson,"Offices of physicians, except mental health",2,4.0%
+Lipscomb,Support activities for oil and gas operations,2,14.7%
+Mason,Support activities for oil and gas operations,2,7.5%
+Henderson,"Manufactured home, mobile home, manufacturing",2,4.7%
+Hansford,Construction sand and gravel mining,2,6.5%
+Chambers,Industrial building construction,2,5.4%
+Hill,Oil and gas field machinery and equipment,2,4.6%
+Potter,Full-service restaurants,2,9.2%
+Jim Wells,Full-service restaurants,2,3.7%
+Delta,Drilling oil and gas wells,2,6.0%
+Stonewall,Industrial machinery merchant wholesalers,2,28.6%
+Ector,Full-service restaurants,2,4.1%
+Cameron,Temporary help services,2,3.9%
+Maverick,Elementary and secondary schools,2,7.1%
+Collin,Temporary help services,2,2.7%
+Baylor,Support activities for oil and gas operations,2,10.9%
+Panola,Oil and gas pipeline construction,2,4.4%
+Guadalupe,Construction equipment merchant wholesalers,2,6.4%
+Bastrop,"Hotels and motels, except casino hotels",2,3.9%
+Austin,Drilling oil and gas wells,2,4.1%
+Andrews,Small electrical appliance manufacturing,2,5.7%
+Anderson,Poultry processing,2,5.4%
+Blanco,Scheduled passenger air transportation,2,5.5%
+DeWitt,Drilling oil and gas wells,2,7.5%
+Bandera,Oil and gas pipeline construction,2,5.9%
+Bell,Limited-service restaurants,2,4.1%
+Aransas,"Hotels and motels, except casino hotels",2,4.0%
+Archer,Drilling oil and gas wells,2,6.8%
+Armstrong,Support activities for oil and gas operations,2,5.6%
+Bee,Drilling oil and gas wells,2,3.7%
+Angelina,Full-service restaurants,2,5.5%
+Bailey,Drilling oil and gas wells,2,6.0%
+Jefferson,Limited-service restaurants,2,3.9%
+Frio,"Other specialized trucking, local",2,7.4%
+Fannin,Full-service restaurants,2,4.6%
 Goliad,General medical and surgical hospitals,2,6.5%
-Loving,"Drinking places, alcoholic beverages",2,50.0%
-Cass,Full-service restaurants,2,6.5%
-Fort Bend,Offices of dentists,2,3.6%
-Bosque,Support activities for oil and gas operations,2,5.4%
-Hockley,Drilling oil and gas wells,2,5.3%
-San Saba,Offices of dentists,2,8.5%
-Kerr,Full-service restaurants,2,11.7%
-Mills,Full-service restaurants,2,9.3%
-Cooke,Full-service restaurants,2,6.3%
-Wilbarger,Full-service restaurants,2,6.2%
-Irion,Full-service restaurants,2,10.3%
-Caldwell,Full-service restaurants,2,5.8%
-Jim Hogg,Drilling oil and gas wells,2,5.1%
-Culberson,Scheduled passenger air transportation,2,4.9%
-Upshur,Support activities for oil and gas operations,2,5.3%
-Cherokee,Drilling oil and gas wells,2,6.0%
-Denton,Offices of dentists,2,3.2%
-Concho,Scheduled passenger air transportation,2,8.4%
-Randall,Full-service restaurants,2,12.2%
-Kimble,Full-service restaurants,2,9.4%
-Knox,Full-service restaurants,2,9.1%
-Polk,Oil and gas pipeline construction,2,4.0%
-Hood,General medical and surgical hospitals,2,6.8%
-San Jacinto,Offices of dentists,2,4.0%
-Robertson,Full-service restaurants,2,6.6%
-Wilson,Full-service restaurants,2,4.5%
-Nolan,"Hotels and motels, except casino hotels",2,6.6%
-Cottle,Drilling oil and gas wells,2,7.7%
-Calhoun,Support activities for oil and gas operations,2,4.6%
-Rockwall,Offices of dentists,2,6.3%
-Live Oak,Support activities for oil and gas operations,2,6.5%
-Motley,Offices of dentists,2,20.0%
-Sherman,Gasoline stations with convenience stores,2,20.0%
-Ochiltree,Testing laboratories,2,8.9%
-Comal,Offices of dentists,2,3.5%
-Dallas,Temporary help services,3,3.8%
-Howard,"Hotels and motels, except casino hotels",3,3.6%
-Foard,Industrial sand mining,3,5.1%
-Floyd,Crude Petroleum Extraction,3,5.2%
-Brewster,Commercial building construction,3,5.4%
-Franklin,Limited-service restaurants,3,4.3%
-Hunt,General medical and surgical hospitals,3,3.5%
-Newton,Home health care services,3,3.5%
-Starr,Industrial building construction,3,5.2%
-Kinney,Offices of dentists,3,7.1%
-Collingsworth,Support activities for oil and gas operations,3,3.4%
-Tom Green,General medical and surgical hospitals,3,4.9%
-Coleman,Full-service restaurants,3,8.6%
-Brazoria,Industrial building construction,3,3.4%
-Leon,Professional employer organizations,3,3.8%
-Duval,Elementary and secondary schools,3,3.6%
-Lamb,Elementary and secondary schools,3,5.8%
-Morris,"Iron, steel pipe and tube from purchase steel",3,7.2%
-Smith,General medical and surgical hospitals,3,6.7%
-Jackson,General medical and surgical hospitals,3,5.7%
-Medina,Support activities for oil and gas operations,3,5.4%
-Wheeler,NA,3,7.4%
-Dallam,Support activities for oil and gas operations,3,6.5%
-Callahan,Full-service restaurants,3,5.6%
-Lamar,Travel trailer and camper manufacturing,3,5.3%
-Coryell,Support activities for oil and gas operations,3,3.4%
-Gaines,Nonresidential electrical contractors,3,3.4%
-Kendall,"Hotels and motels, except casino hotels",3,4.7%
-Nacogdoches,Motor home manufacturing,3,6.4%
-Milam,Support activities for oil and gas operations,3,3.4%
-Hays,"Hotels and motels, except casino hotels",3,2.8%
-Willacy,"Offices of physicians, except mental health",3,3.9%
-Johnson,"Offices of physicians, except mental health",3,3.4%
-Reagan,Oil and gas pipeline construction,3,3.8%
-Webb,Full-service restaurants,3,6.2%
-Shackelford,All Other General Merchandise Stores,3,4.0%
-Bowie,Department Stores,3,3.4%
-Scurry,Full-service restaurants,3,3.5%
-Kenedy,Support activities for oil and gas operations,3,12.5%
-Somervell,"Hotels and motels, except casino hotels",3,7.7%
-Oldham,Support activities for oil and gas operations,3,5.9%
-Taylor,Department Stores,3,3.9%
+Loving,NA,2,NA
+Cass,Full-service restaurants,2,4.4%
+Fort Bend,Support activities for oil and gas operations,2,3.8%
+Bosque,Drilling oil and gas wells,2,5.1%
+Hockley,Drilling oil and gas wells,2,3.6%
+San Saba,Support activities for oil and gas operations,2,7.3%
+Kerr,"Hotels and motels, except casino hotels",2,4.9%
+Mills,Drilling oil and gas wells,2,6.7%
+Cooke,Support activities for oil and gas operations,2,5.5%
+Wilbarger,Drilling oil and gas wells,2,5.6%
+Irion,Crude Petroleum Extraction,2,9.4%
+Caldwell,Full-service restaurants,2,4.6%
+Jim Hogg,Gasoline stations with convenience stores,2,5.3%
+Culberson,Scheduled passenger air transportation,2,6.7%
+Upshur,Full-service restaurants,2,5.6%
+Cherokee,Department Stores,2,6.2%
+Denton,Temporary help services,2,3.0%
+Concho,Support activities for oil and gas operations,2,9.6%
+Randall,Full-service restaurants,2,8.2%
+Kimble,"Hotels and motels, except casino hotels",2,8.6%
+Knox,Other petroleum merchant wholesalers,2,4.4%
+Polk,Full-service restaurants,2,3.3%
+Hood,Full-service restaurants,2,6.6%
+San Jacinto,Elementary and secondary schools,2,3.6%
+Robertson,Temporary help services,2,5.7%
+Wilson,Temporary help services,2,3.3%
+Nolan,Support activities for rail transportation,2,6.9%
+Cottle,Drilling oil and gas wells,2,8.1%
+Calhoun,Support activities for oil and gas operations,2,4.4%
+Rockwall,Limited-service restaurants,2,3.0%
+Live Oak,Industrial building construction,2,6.1%
+Motley,Other heavy construction,2,33.3%
+Sherman,Hog and pig farming,2,12.5%
+Ochiltree,Testing laboratories,2,10.3%
+Comal,General medical and surgical hospitals,2,2.7%
+Dallas,"Hotels and motels, except casino hotels",3,2.7%
+Howard,Other chemicals merchant wholesalers,3,3.7%
+Foard,Commercial building construction,3,4.0%
+Floyd,Office administrative services,3,3.8%
+Brewster,Support activities for oil and gas operations,3,5.0%
+Franklin,Drilling oil and gas wells,3,3.6%
+Hunt,General medical and surgical hospitals,3,3.4%
+Newton,Industrial building construction,3,3.5%
+Starr,Industrial building construction,3,5.9%
+Kinney,"Highway, street, and bridge construction",3,4.2%
+Collingsworth,Support activities for oil and gas operations,3,4.5%
+Tom Green,Collection agencies,3,4.8%
+Coleman,Oil and gas pipeline construction,3,3.6%
+Brazoria,Industrial building construction,3,3.8%
+Leon,Support activities for oil and gas operations,3,3.8%
+Duval,Elementary and secondary schools,3,3.9%
+Lamb,Elementary and secondary schools,3,4.9%
+Morris,Iron and steel mills and ferroalloy mfg.,3,3.5%
+Smith,Support activities for oil and gas operations,3,3.8%
+Jackson,Temporary help services,3,3.5%
+Medina,Elementary and secondary schools,3,4.2%
+Wheeler,NA,3,3.1%
+Dallam,Support activities for oil and gas operations,3,8.4%
+Callahan,Full-service restaurants,3,4.0%
+Lamar,Travel trailer and camper manufacturing,3,4.3%
+Coryell,Elementary and secondary schools,3,3.4%
+Gaines,Engineering services,3,3.5%
+Kendall,Offices of dentists,3,3.0%
+Nacogdoches,Poultry processing,3,5.6%
+Milam,Support activities for oil and gas operations,3,2.9%
+Hays,Limited-service restaurants,3,2.6%
+Willacy,Temporary help services,3,3.3%
+Johnson,Support activities for oil and gas operations,3,3.2%
+Reagan,Drilling oil and gas wells,3,4.7%
+Webb,Freight transportation arrangement,3,4.7%
+Shackelford,Drilling oil and gas wells,3,3.6%
+Bowie,Limited-service restaurants,3,3.3%
+Scurry,Oil and gas field machinery and equipment,3,2.4%
+Kenedy,Support activities for oil and gas operations,3,9.1%
+Somervell,Environment and conservation organizations,3,4.0%
+Oldham,Support activities for oil and gas operations,3,5.6%
+Taylor,General medical and surgical hospitals,3,3.7%
 King,NA,3,NA
-Borden,Commercial building construction,3,3.8%
-Walker,Offices of dentists,3,3.6%
-Stephens,Full-service restaurants,3,7.3%
-Deaf Smith,Drilling oil and gas wells,3,3.4%
-Roberts,Power and communication system construction,3,16.7%
-Tyler,Support activities for oil and gas operations,3,3.8%
-Val Verde,Drilling oil and gas wells,3,4.9%
-Brown,Support activities for oil and gas operations,3,4.2%
-Parker,"Offices of physicians, except mental health",3,3.6%
-Harris,Offices of dentists,3,2.6%
-Zapata,Other heavy machinery rental and leasing,3,8.1%
-Red River,General medical and surgical hospitals,3,4.1%
-Karnes,Limited-service restaurants,3,5.4%
-Palo Pinto,Mining machinery and equipment manufacturing,3,3.8%
-Glasscock,Family clothing stores,3,4.9%
-Shelby,Oil and gas pipeline construction,3,3.9%
-Wood,Offices of dentists,3,4.9%
+Borden,Temporary help services,3,4.1%
+Walker,Food service contractors,3,2.8%
+Stephens,Temporary help services,3,3.5%
+Deaf Smith,Support activities for oil and gas operations,3,3.3%
+Roberts,Oil and gas field machinery and equipment,3,25.0%
+Tyler,Support activities for oil and gas operations,3,4.2%
+Val Verde,Full-service restaurants,3,5.6%
+Brown,Support activities for oil and gas operations,3,4.9%
+Parker,Elementary and secondary schools,3,2.3%
+Harris,Limited-service restaurants,3,2.2%
+Zapata,Other heavy machinery rental and leasing,3,5.5%
+Red River,Folding paperboard box manufacturing,3,4.0%
+Karnes,Limited-service restaurants,3,4.5%
+Palo Pinto,Support activities for oil and gas operations,3,5.7%
+Glasscock,Temporary help services,3,8.3%
+Shelby,Support activities for oil and gas operations,3,4.2%
+Wood,Support activities for oil and gas operations,3,4.9%
 Crosby,Drilling oil and gas wells,3,4.1%
-Refugio,Nonresidential site preparation contractors,3,5.8%
-Burnet,Offices of dentists,3,6.6%
-Sterling,Power and communication system construction,3,6.7%
-Montgomery,"Offices of physicians, except mental health",3,3.0%
-San Augustine,"Nursing care facilities, skilled nursing",3,4.8%
-Rains,Furniture stores,3,4.1%
-Nueces,"Hotels and motels, except casino hotels",3,3.5%
-Jack,General medical and surgical hospitals,3,3.2%
-Swisher,Offices of dentists,3,5.0%
-Camp,Travel trailer and camper manufacturing,3,4.3%
-Brazos,General medical and surgical hospitals,3,3.4%
-Orange,General medical and surgical hospitals,3,3.8%
-Colorado,Support activities for oil and gas operations,3,3.4%
-Pecos,"Hotels and motels, except casino hotels",3,9.2%
-Cochran,Oil and gas pipeline construction,3,10.4%
-Parmer,Drilling oil and gas wells,3,5.7%
-Freestone,Full-service restaurants,3,4.2%
-Winkler,Industrial sand mining,3,5.3%
-Wichita,Offices of dentists,3,3.9%
-Gray,Professional employer organizations,3,5.3%
-Schleicher,Petroleum bulk stations and terminals,3,4.5%
-Hardeman,Accessories and other apparel manufacturing,3,5.2%
-Travis,"Offices of physicians, except mental health",3,3.1%
-Gillespie,Offices of dentists,3,4.2%
-Yoakum,Full-service restaurants,3,3.2%
-Fayette,Offices of dentists,3,4.7%
-Uvalde,Support activities for oil and gas operations,3,5.7%
-Grimes,Offices of dentists,3,3.1%
-Van Zandt,Drilling oil and gas wells,3,3.2%
-Throckmorton,NA,3,8.3%
-Falls,Employment placement agencies,3,4.1%
-Grayson,General medical and surgical hospitals,3,6.5%
-Ellis,"Offices of physicians, except mental health",3,2.9%
-Hall,Full-service restaurants,3,5.4%
-Dickens,Limited-service restaurants,3,7.0%
-Trinity,Civic and social organizations,3,4.3%
-Reeves,Oil and gas pipeline construction,3,5.5%
-Marion,Support activities for oil and gas operations,3,6.0%
-Terrell,Nonresidential site preparation contractors,3,16.7%
-Lynn,Cotton farming,3,3.2%
-La Salle,Full-service restaurants,3,8.1%
-Jasper,Industrial building construction,3,3.2%
-Jones,Offices of dentists,3,3.3%
-Castro,Industrial building construction,3,4.3%
-Victoria,General medical and surgical hospitals,3,5.6%
-Kleberg,Elementary and secondary schools,3,3.2%
-Briscoe,Oil and gas pipeline construction,3,4.5%
-Clay,Full-service restaurants,3,4.9%
-Matagorda,Oil and gas pipeline construction,3,5.3%
-Brooks,Drilling oil and gas wells,3,4.7%
-Runnels,Full-service restaurants,3,9.9%
-Carson,Commercial machinery repair and maintenance,3,5.0%
-Liberty,Industrial building construction,3,3.6%
-Lee,Support activities for oil and gas operations,3,4.4%
-Hale,Ethyl alcohol manufacturing,3,5.0%
-Bexar,Limited-service restaurants,3,2.8%
-Garza,Nonresidential site preparation contractors,3,8.8%
-Montague,Full-service restaurants,3,7.1%
-Upton,Full-service restaurants,3,4.9%
-Hamilton,Support activities for oil and gas operations,3,4.9%
-Fisher,Oil and gas pipeline construction,3,4.5%
-Dawson,Kaolin and ball clay mining,3,5.0%
-Dimmit,Full-service restaurants,3,5.9%
-Limestone,Offices of dentists,3,3.9%
-Hutchinson,General medical and surgical hospitals,3,4.2%
-Llano,Offices of dentists,3,3.3%
-Presidio,Full-service restaurants,3,8.3%
-Eastland,Drilling oil and gas wells,3,5.2%
-Sabine,Support activities for oil and gas operations,3,4.5%
-Wharton,Full-service restaurants,3,5.4%
-Rusk,General medical and surgical hospitals,3,4.8%
-Tarrant,Temporary help services,3,3.1%
-Lavaca,Offices of dentists,3,5.5%
-Childress,Full-service restaurants,3,7.7%
-Hidalgo,Support activities for oil and gas operations,3,3.5%
-Kaufman,"Offices of physicians, except mental health",3,3.9%
-Moore,Offices of dentists,3,7.9%
-Menard,Drilling oil and gas wells,3,6.2%
-Edwards,Drilling oil and gas wells,3,7.5%
-San Patricio,Support activities for oil and gas operations,3,3.7%
-Terry,Drilling oil and gas wells,3,4.0%
-Crockett,Oil and gas pipeline construction,3,6.8%
-Houston,Men’s and boys’ cut and sew apparel mfg,3,4.2%
-Waller,Offices of dentists,3,3.5%
-Coke,Industrial building construction,3,4.2%
-Ward,Other heavy machinery rental and leasing,3,4.3%
-Titus,Full-service restaurants,3,6.5%
-Lampasas,Full-service restaurants,3,3.0%
-Haskell,Other gasoline stations,3,5.6%
-Martin,Full-service restaurants,3,8.8%
-Atascosa,Family clothing stores,3,3.0%
-Hemphill,Oil and gas pipeline construction,3,6.7%
-Hartley,Industrial machinery merchant wholesalers,3,7.7%
-Young,Full-service restaurants,3,5.8%
-Burleson,Oil and gas pipeline construction,3,2.8%
-Hardin,General medical and surgical hospitals,3,4.1%
-Gonzales,Limited-service restaurants,3,4.1%
-McMullen,"Other specialized trucking, local",3,12.5%
-Erath,Limited-service restaurants,3,4.1%
-Galveston,Offices of dentists,3,2.7%
-Hopkins,Offices of dentists,3,5.8%
-McLennan,Limited-service restaurants,3,3.8%
-Madison,Offices of dentists,3,3.4%
-McCulloch,Oil and gas field machinery and equipment,3,7.9%
-Donley,Support activities for oil and gas operations,3,8.1%
-Kent,Professional employer organizations,3,25.0%
-Real,Elementary and secondary schools,3,6.5%
-Sutton,Full-service restaurants,3,7.5%
-Midland,Crude Petroleum Extraction,3,2.7%
-Hudspeth,"Offices of physicians, except mental health",3,4.0%
-Zavala,Full-service restaurants,3,8.5%
-Harrison,General medical and surgical hospitals,3,4.6%
-Comanche,Offices of dentists,3,5.0%
-Mitchell,Crude Petroleum Extraction,3,5.6%
-Navarro,Department Stores,3,5.2%
-Crane,Industrial machinery merchant wholesalers,3,3.3%
-Lubbock,Offices of dentists,3,3.8%
-Wise,Support activities for oil and gas operations,3,4.9%
-Washington,Coffee and tea manufacturing,3,3.1%
-Jeff Davis,Supermarkets and other grocery stores,3,6.2%
-El Paso,Temporary help services,3,3.1%
-Gregg,General medical and surgical hospitals,3,4.8%
-Williamson,Offices of dentists,3,4.4%
-Lipscomb,Crude Petroleum Extraction,3,6.7%
-Mason,Industrial sand mining,3,4.9%
-Henderson,"Manufactured home, mobile home, manufacturing",3,4.0%
+Refugio,Nonresidential site preparation contractors,3,5.2%
+Burnet,Offices of dentists,3,2.2%
+Sterling,Power and communication system construction,3,5.9%
+Montgomery,Oil and gas field machinery and equipment,3,2.0%
+San Augustine,Oil and gas pipeline construction,3,4.8%
+Rains,Furniture stores,3,4.4%
+Nueces,Industrial building construction,3,3.2%
+Jack,General medical and surgical hospitals,3,4.6%
+Swisher,Department Stores,3,4.3%
+Camp,Oil and gas pipeline construction,3,4.3%
+Brazos,Support activities for oil and gas operations,3,3.2%
+Orange,Oil and gas pipeline construction,3,3.8%
+Colorado,Full-service restaurants,3,4.1%
+Pecos,Full-service restaurants,3,5.2%
+Cochran,Oil and gas pipeline construction,3,7.7%
+Parmer,Other animal food manufacturing,3,5.9%
+Freestone,Oil and gas pipeline construction,3,3.1%
+Winkler,Marketing consulting services,3,6.1%
+Wichita,Food service contractors,3,4.3%
+Gray,Full-service restaurants,3,5.2%
+Schleicher,"Other specialized trucking, local",3,6.5%
+Hardeman,NA,3,4.0%
+Travis,"Offices of physicians, except mental health",3,3.0%
+Gillespie,Limited-service restaurants,3,4.1%
+Yoakum,Testing laboratories,3,2.7%
+Fayette,Full-service restaurants,3,5.8%
+Uvalde,Elementary and secondary schools,3,3.1%
+Grimes,Temporary help services,3,2.4%
+Van Zandt,Support activities for oil and gas operations,3,3.7%
+Throckmorton,Beef cattle ranching and farming,3,8.3%
+Falls,Full-service restaurants,3,3.6%
+Grayson,Full-service restaurants,3,6.0%
+Ellis,Mattress manufacturing,3,2.7%
+Hall,NA,3,2.6%
+Dickens,Oil and gas pipeline construction,3,6.5%
+Trinity,Full-service restaurants,3,3.7%
+Reeves,Oil and gas pipeline construction,3,4.8%
+Marion,Gasoline stations with convenience stores,3,4.3%
+Terrell,New car dealers,3,12.5%
+Lynn,Crushed and broken limestone mining,3,3.3%
+La Salle,Drilling oil and gas wells,3,5.0%
+Jasper,Oil and gas pipeline construction,3,5.6%
+Jones,Temporary help services,3,3.7%
+Castro,Scheduled passenger air transportation,3,3.8%
+Victoria,Support activities for oil and gas operations,3,6.5%
+Kleberg,Industrial building construction,3,3.7%
+Briscoe,Oil and gas pipeline construction,3,3.8%
+Clay,Oil and gas pipeline construction,3,3.8%
+Matagorda,Industrial building construction,3,5.0%
+Brooks,Drilling oil and gas wells,3,5.4%
+Runnels,Drilling oil and gas wells,3,4.6%
+Carson,Scheduled passenger air transportation,3,5.3%
+Liberty,Full-service restaurants,3,3.3%
+Lee,Full-service restaurants,3,4.1%
+Hale,Ethyl alcohol manufacturing,3,3.6%
+Bexar,Limited-service restaurants,3,2.9%
+Garza,Crude Petroleum Extraction,3,5.4%
+Montague,Full-service restaurants,3,5.7%
+Upton,Industrial machinery merchant wholesalers,3,5.3%
+Hamilton,"Hotels and motels, except casino hotels",3,3.8%
+Fisher,Scheduled passenger air transportation,3,7.4%
+Dawson,Drilling oil and gas wells,3,9.3%
+Dimmit,Full-service restaurants,3,3.1%
+Limestone,Elementary and secondary schools,3,3.0%
+Hutchinson,All other nonresidential trade contractors,3,4.1%
+Llano,Limited-service restaurants,3,2.2%
+Presidio,Full-service restaurants,3,5.4%
+Eastland,Drilling oil and gas wells,3,4.7%
+Sabine,Full-service restaurants,3,4.2%
+Wharton,General medical and surgical hospitals,3,2.9%
+Rusk,General medical and surgical hospitals,3,4.2%
+Tarrant,Scheduled passenger air transportation,3,2.7%
+Lavaca,General medical and surgical hospitals,3,3.6%
+Childress,Limited-service restaurants,3,4.2%
+Hidalgo,Oil and gas pipeline construction,3,2.9%
+Kaufman,"Offices of physicians, except mental health",3,2.6%
+Moore,Support activities for oil and gas operations,3,3.7%
+Menard,Civic and social organizations,3,8.3%
+Edwards,Oil and gas pipeline construction,3,12.2%
+San Patricio,Support activities for oil and gas operations,3,4.7%
+Terry,"Other specialized trucking, local",3,3.3%
+Crockett,Industrial building construction,3,6.2%
+Houston,Oil and gas pipeline construction,3,3.8%
+Waller,Temporary help services,3,2.5%
+Coke,Scheduled passenger air transportation,3,5.5%
+Ward,Other heavy machinery rental and leasing,3,3.9%
+Titus,Farm machinery and equipment manufacturing,3,4.6%
+Lampasas,Elementary and secondary schools,3,3.4%
+Haskell,Supermarkets and other grocery stores,3,6.4%
+Martin,Crude Petroleum Extraction,3,4.6%
+Atascosa,Office administrative services,3,2.5%
+Hemphill,Drilling oil and gas wells,3,5.7%
+Hartley,Offices of dentists,3,11.1%
+Young,Drilling oil and gas wells,3,4.7%
+Burleson,Scheduled passenger air transportation,3,3.3%
+Hardin,Professional employer organizations,3,3.6%
+Gonzales,Motor vehicle electric equipment mfg.,3,3.9%
+McMullen,Other gasoline stations,3,8.3%
+Erath,Abrasive product manufacturing,3,5.9%
+Galveston,Elementary and secondary schools,3,2.3%
+Hopkins,General medical and surgical hospitals,3,4.5%
+McLennan,Janitorial services,3,2.7%
+Madison,Full-service restaurants,3,3.8%
+McCulloch,Support activities for oil and gas operations,3,6.9%
+Donley,Oil and gas pipeline construction,3,6.2%
+Kent,Other residential exterior contractors,3,16.7%
+Real,General medical and surgical hospitals,3,7.4%
+Sutton,Crude Petroleum Extraction,3,7.0%
+Midland,Crude Petroleum Extraction,3,3.4%
+Hudspeth,Temporary help services,3,4.8%
+Zavala,Employment placement agencies,3,6.5%
+Harrison,Limited-service restaurants,3,3.3%
+Comanche,Abrasive product manufacturing,3,5.4%
+Mitchell,Gasoline stations with convenience stores,3,5.0%
+Navarro,Confectionery mfg. from purchased chocolate,3,5.3%
+Crane,Oil and gas pipeline construction,3,3.3%
+Lubbock,Limited-service restaurants,3,4.2%
+Wise,Full-service restaurants,3,3.6%
+Washington,"Nursing care facilities, skilled nursing",3,2.3%
+Jeff Davis,Beef cattle ranching and farming,3,5.9%
+El Paso,Support activities for oil and gas operations,3,3.4%
+Gregg,General medical and surgical hospitals,3,3.8%
+Williamson,Limited-service restaurants,3,2.5%
+Lipscomb,Payroll services,3,8.8%
+Mason,Oil and gas field machinery and equipment,3,5.0%
+Henderson,Surgical and medical instrument manufacturing,3,4.2%
 Hansford,Oil and gas pipeline construction,3,6.5%
-Chambers,Oil and gas pipeline construction,3,5.8%
-Hill,All other rubber product manufacturing,3,4.7%
-Potter,"Offices of physicians, except mental health",3,5.5%
-Jim Wells,Home health care services,3,3.0%
-Delta,Temporary help services,3,3.8%
-Stonewall,Tire dealers,3,7.1%
-Ector,Oil and gas pipeline construction,3,2.8%
-Cameron,Department Stores,3,3.1%
-Maverick,Elementary and secondary schools,3,6.3%
-Collin,Offices of dentists,3,4.0%
-Baylor,Support activities for oil and gas operations,3,5.9%
-Panola,Oil and gas pipeline construction,3,5.0%
-Guadalupe,Offices of dentists,3,3.3%
-Bastrop,Offices of dentists,3,3.3%
-Austin,Drilling oil and gas wells,3,3.4%
-Andrews,Oil and gas pipeline construction,3,3.1%
-Anderson,Oil and gas pipeline construction,3,3.6%
-Blanco,Drilling oil and gas wells,3,4.4%
-DeWitt,Drilling oil and gas wells,3,5.7%
-Bandera,Full-service restaurants,3,5.1%
-Bell,Offices of dentists,3,2.9%
-Aransas,Nonresidential electrical contractors,3,2.6%
-Archer,Drilling oil and gas wells,3,5.4%
-Armstrong,Support activities for oil and gas operations,3,5.7%
-Bee,Full-service restaurants,3,3.7%
-Angelina,"Offices of physicians, except mental health",3,3.6%
-Bailey,Drilling oil and gas wells,3,4.8%
-Jefferson,All other nonresidential trade contractors,3,3.9%
-Frio,"Other specialized trucking, local",3,5.6%
-Fannin,"Offices of physicians, except mental health",3,5.2%
-Goliad,Nonresidential electrical contractors,3,5.1%
+Chambers,Full-service restaurants,3,5.1%
+Hill,Full-service restaurants,3,4.0%
+Potter,"Offices of physicians, except mental health",3,3.6%
+Jim Wells,Drilling oil and gas wells,3,3.6%
+Delta,Scheduled passenger air transportation,3,5.6%
+Stonewall,Crude Petroleum Extraction,3,7.1%
+Ector,Industrial machinery merchant wholesalers,3,3.1%
+Cameron,Elementary and secondary schools,3,3.5%
+Maverick,"Executive and legislative offices, combined",3,3.7%
+Collin,Department Stores,3,2.5%
+Baylor,Oil and gas pipeline construction,3,5.7%
+Panola,Full-service restaurants,3,3.2%
+Guadalupe,Full-service restaurants,3,5.1%
+Bastrop,"Offices of physicians, except mental health",3,2.4%
+Austin,Oil and gas pipeline construction,3,3.3%
+Andrews,Scheduled passenger air transportation,3,3.7%
+Anderson,Full-service restaurants,3,3.9%
+Blanco,Drilling oil and gas wells,3,4.8%
+DeWitt,General medical and surgical hospitals,3,4.3%
+Bandera,"Hotels and motels, except casino hotels",3,3.5%
+Bell,Temporary help services,3,2.9%
+Aransas,Support activities for oil and gas operations,3,3.5%
+Archer,Scheduled passenger air transportation,3,3.3%
+Armstrong,Drilling oil and gas wells,3,5.1%
+Bee,Oil and gas pipeline construction,3,3.1%
+Angelina,"Manufactured home, mobile home, manufacturing",3,3.8%
+Bailey,Full-service restaurants,3,4.9%
+Jefferson,General medical and surgical hospitals,3,3.8%
+Frio,Elementary and secondary schools,3,5.1%
+Fannin,Plate work manufacturing,3,2.6%
+Goliad,Elementary and secondary schools,3,3.8%
 Loving,NA,3,NA
-Cass,Reconstituted wood product manufacturing,3,3.6%
-Fort Bend,Department Stores,3,2.7%
-Bosque,Drilling oil and gas wells,3,3.3%
-Hockley,Full-service restaurants,3,3.4%
-San Saba,Industrial sand mining,3,4.3%
-Kerr,"Hotels and motels, except casino hotels",3,6.5%
-Mills,"Commercial printing, except screen and books",3,7.0%
-Cooke,Support activities for oil and gas operations,3,4.9%
-Wilbarger,Support activities for oil and gas operations,3,5.5%
-Irion,Collection agencies,3,6.9%
-Caldwell,Offices of dentists,3,3.1%
-Jim Hogg,Temporary help services,3,4.2%
-Culberson,Crude Petroleum Extraction,3,4.3%
-Upshur,General medical and surgical hospitals,3,4.4%
-Cherokee,Sign manufacturing,3,4.7%
-Denton,Department Stores,3,3.1%
-Concho,"Hotels and motels, except casino hotels",3,4.8%
-Randall,"Offices of physicians, except mental health",3,6.7%
-Kimble,Gasoline stations with convenience stores,3,6.2%
-Knox,Offices of dentists,3,6.8%
-Polk,Offices of dentists,3,3.5%
-Hood,Offices of dentists,3,4.2%
-San Jacinto,Elementary and secondary schools,3,3.3%
-Robertson,General medical and surgical hospitals,3,5.5%
-Wilson,Offices of dentists,3,3.6%
-Nolan,Full-service restaurants,3,5.1%
-Cottle,Oil and gas pipeline construction,3,5.3%
-Calhoun,Industrial building construction,3,3.9%
-Rockwall,"Offices of physicians, except mental health",3,4.2%
-Live Oak,Industrial building construction,3,6.1%
-Motley,Crude Petroleum Extraction,3,10.0%
-Sherman,Veterinary services,3,20.0%
-Ochiltree,Industrial machinery merchant wholesalers,3,8.1%
-Comal,General medical and surgical hospitals,3,3.0%
-Dallas,Offices of dentists,4,2.9%
-Howard,Offices of dentists,4,3.5%
-Foard,Support activities for oil and gas operations,4,5.1%
-Floyd,Scheduled passenger air transportation,4,5.2%
-Brewster,Support activities for oil and gas operations,4,4.6%
-Franklin,Drilling oil and gas wells,4,3.3%
-Hunt,Limited-service restaurants,4,2.5%
-Newton,Full-service restaurants,4,3.5%
-Starr,Home health care services,4,3.3%
-Kinney,"Highway, street, and bridge construction",4,3.6%
-Collingsworth,Oil and gas pipeline construction,4,3.4%
-Tom Green,"Offices of physicians, except mental health",4,4.1%
-Coleman,Oil and gas pipeline construction,4,4.1%
-Brazoria,Offices of dentists,4,3.3%
-Leon,Support activities for oil and gas operations,4,3.5%
-Duval,Home health care services,4,3.1%
-Lamb,Limited-service restaurants,4,5.2%
-Morris,Full-service restaurants,4,6.0%
-Smith,Offices of dentists,4,3.3%
-Jackson,Industrial building construction,4,5.1%
-Medina,Offices of dentists,4,3.0%
-Wheeler,Other miscellaneous chemical product mfg.,4,5.9%
-Dallam,All other professional and technical services,4,4.3%
-Callahan,Oil and gas pipeline construction,4,2.9%
-Lamar,Commercial building construction,4,5.0%
-Coryell,Administrative management consulting services,4,3.0%
-Gaines,Full-service restaurants,4,2.9%
-Kendall,Offices of dentists,4,4.4%
-Nacogdoches,Offices of dentists,4,3.5%
-Milam,Child day care services,4,3.0%
-Hays,Family clothing stores,4,2.7%
-Willacy,Full-service restaurants,4,3.9%
-Johnson,Automobile manufacturing,4,3.3%
-Reagan,Drilling oil and gas wells,4,2.9%
-Webb,Family clothing stores,4,5.3%
-Shackelford,Drilling oil and gas wells,4,2.0%
-Bowie,"Offices of physicians, except mental health",4,3.2%
-Scurry,Commercial machinery repair and maintenance,4,2.3%
-Kenedy,Gasoline stations with convenience stores,4,12.5%
-Somervell,Environment and conservation organizations,4,6.4%
-Oldham,Other heavy construction,4,5.9%
-Taylor,General medical and surgical hospitals,4,2.9%
+Cass,Reconstituted wood product manufacturing,3,3.8%
+Fort Bend,Temporary help services,3,2.6%
+Bosque,Scheduled passenger air transportation,3,3.7%
+Hockley,Full-service restaurants,3,3.2%
+San Saba,"Pottery, ceramics, and plumbing fixture mfg",3,4.9%
+Kerr,Jewelry stores,3,4.4%
+Mills,Professional employer organizations,3,6.7%
+Cooke,Full-service restaurants,3,4.2%
+Wilbarger,Other human resource programs administration,3,4.7%
+Irion,Offices of other holding companies,3,6.2%
+Caldwell,Drilling oil and gas wells,3,2.8%
+Jim Hogg,Elementary and secondary schools,3,5.3%
+Culberson,Drilling oil and gas wells,3,6.2%
+Upshur,General medical and surgical hospitals,3,3.8%
+Cherokee,Support activities for oil and gas operations,3,5.8%
+Denton,Limited-service restaurants,3,2.1%
+Concho,Oil and gas pipeline construction,3,4.6%
+Randall,"Offices of physicians, except mental health",3,4.8%
+Kimble,Other management consulting services,3,5.7%
+Knox,Temporary help services,3,4.4%
+Polk,Elementary and secondary schools,3,2.8%
+Hood,Support activities for oil and gas operations,3,3.6%
+San Jacinto,Oil and gas pipeline construction,3,2.7%
+Robertson,General medical and surgical hospitals,3,3.9%
+Wilson,Professional employer organizations,3,2.7%
+Nolan,Full-service restaurants,3,6.3%
+Cottle,Oil and gas pipeline construction,3,6.9%
+Calhoun,Engineering services,3,3.0%
+Rockwall,Elementary and secondary schools,3,3.0%
+Live Oak,Full-service restaurants,3,4.1%
+Motley,Offices of dentists,3,33.3%
+Sherman,Department Stores,3,12.5%
+Ochiltree,Industrial machinery merchant wholesalers,3,8.5%
+Comal,Limited-service restaurants,3,2.5%
+Dallas,Limited-service restaurants,4,2.3%
+Howard,"Hotels and motels, except casino hotels",4,2.7%
+Foard,Oil and gas pipeline construction,4,4.0%
+Floyd,Full-service restaurants,4,3.8%
+Brewster,Drilling oil and gas wells,4,4.0%
+Franklin,Support activities for oil and gas operations,4,3.6%
+Hunt,Elementary and secondary schools,4,2.0%
+Newton,Commercial building construction,4,3.1%
+Starr,Home health care services,4,3.9%
+Kinney,Oil and gas field machinery and equipment,4,4.2%
+Collingsworth,Industrial building construction,4,3.4%
+Tom Green,General medical and surgical hospitals,4,4.1%
+Coleman,Scheduled passenger air transportation,4,3.6%
+Brazoria,Engineering services,4,2.7%
+Leon,Oil and gas pipeline construction,4,3.4%
+Duval,Home health care services,4,3.5%
+Lamb,Limited-service restaurants,4,3.5%
+Morris,Full-service restaurants,4,3.5%
+Smith,Limited-service restaurants,4,3.2%
+Jackson,Oil and gas pipeline construction,4,2.7%
+Medina,Limited-service restaurants,4,3.1%
+Wheeler,NA,4,3.1%
+Dallam,Commercial machinery repair and maintenance,4,4.5%
+Callahan,Scheduled passenger air transportation,4,3.6%
+Lamar,Truck trailer manufacturing,4,4.1%
+Coryell,Temporary help services,4,3.1%
+Gaines,Crude Petroleum Extraction,4,2.3%
+Kendall,"Hotels and motels, except casino hotels",4,3.0%
+Nacogdoches,Reconstituted wood product manufacturing,4,3.6%
+Milam,Limited-service restaurants,4,2.6%
+Hays,"Offices of physicians, except mental health",4,2.5%
+Willacy,Home health care services,4,3.1%
+Johnson,Temporary help services,4,2.2%
+Reagan,Other gasoline stations,4,3.8%
+Webb,Full-service restaurants,4,4.7%
+Shackelford,All Other General Merchandise Stores,4,3.6%
+Bowie,"Aluminum sheet, plate, and foil manufacturing",4,2.8%
+Scurry,Industrial building construction,4,2.2%
+Kenedy,Oil and gas pipeline construction,4,9.1%
+Somervell,Support activities for oil and gas operations,4,3.3%
+Oldham,Power and communication system construction,4,5.6%
+Taylor,Support activities for oil and gas operations,4,2.9%
 King,NA,4,NA
-Borden,Full-service restaurants,4,3.8%
-Walker,Limited-service restaurants,4,3.0%
-Stephens,Offices of dentists,4,5.1%
-Deaf Smith,Support activities for oil and gas operations,4,3.4%
-Roberts,Residential plumbing and HVAC contractors,4,16.7%
-Tyler,Professional employer organizations,4,3.8%
-Val Verde,Department Stores,4,4.8%
-Brown,Drilling oil and gas wells,4,4.1%
-Parker,Support activities for oil and gas operations,4,3.0%
-Harris,Department Stores,4,2.2%
-Zapata,Elementary and secondary schools,4,6.2%
-Red River,Full-service restaurants,4,4.1%
-Karnes,Elementary and secondary schools,4,3.6%
-Palo Pinto,Land subdivision,4,2.5%
-Glasscock,Employment placement agencies,4,4.9%
-Shelby,Offices of dentists,4,3.9%
-Wood,Support activities for oil and gas operations,4,3.3%
-Crosby,Support activities for oil and gas operations,4,4.1%
-Refugio,"Other specialized trucking, long-distance",4,5.8%
-Burnet,Civic and social organizations,4,4.7%
-Sterling,Other concrete product manufacturing,4,6.7%
-Montgomery,Department Stores,4,2.5%
-San Augustine,Limited-service restaurants,4,4.8%
-Rains,General medical and surgical hospitals,4,3.3%
-Nueces,Department Stores,4,2.8%
-Jack,Drilling oil and gas wells,4,2.5%
-Swisher,"Independent artists, writers, and performers",4,5.0%
-Camp,Oil and gas pipeline construction,4,3.9%
-Brazos,Food service contractors,4,3.3%
-Orange,Industrial building construction,4,3.7%
-Colorado,Temporary help services,4,2.5%
-Pecos,Oil and gas pipeline construction,4,4.3%
-Cochran,Industrial building construction,4,5.0%
-Parmer,"Other specialized trucking, local",4,5.7%
-Freestone,Other heavy construction,4,3.1%
-Winkler,Crushed and broken limestone mining,4,4.4%
-Wichita,Aircraft engine and engine parts mfg.,4,3.7%
-Gray,Support activities for oil and gas operations,4,4.3%
-Schleicher,Gasoline stations with convenience stores,4,4.5%
-Hardeman,Offices of dentists,4,5.2%
-Travis,Offices of dentists,4,2.6%
-Gillespie,"Hotels and motels, except casino hotels",4,3.6%
-Yoakum,Other nonresidential exterior contractors,4,2.0%
-Fayette,Limited-service restaurants,4,4.0%
-Uvalde,Jewelry stores,4,4.6%
-Grimes,Limited-service restaurants,4,2.8%
-Van Zandt,General medical and surgical hospitals,4,3.1%
-Throckmorton,Beef cattle ranching and farming,4,8.3%
-Falls,Nonferrous metal die-casting foundries,4,3.5%
-Grayson,Offices of dentists,4,4.8%
-Ellis,Automobile manufacturing,4,2.6%
-Hall,Limited-service restaurants,4,5.4%
-Dickens,Scheduled passenger air transportation,4,4.9%
-Trinity,Elementary and secondary schools,4,3.4%
+Borden,Full-service restaurants,4,4.1%
+Walker,Elementary and secondary schools,4,2.4%
+Stephens,Other basic inorganic chemical manufacturing,4,2.8%
+Deaf Smith,Commercial machinery repair and maintenance,4,3.3%
+Roberts,"Data processing, hosting and related services",4,25.0%
+Tyler,Commercial machinery repair and maintenance,4,3.4%
+Val Verde,Drilling oil and gas wells,4,5.5%
+Brown,Full-service restaurants,4,4.7%
+Parker,General medical and surgical hospitals,4,2.2%
+Harris,Support activities for oil and gas operations,4,1.6%
+Zapata,Elementary and secondary schools,4,5.5%
+Red River,"Nursing care facilities, skilled nursing",4,4.0%
+Karnes,"Hotels and motels, except casino hotels",4,4.2%
+Palo Pinto,Miscellaneous general purpose machinery mfg.,4,3.3%
+Glasscock,Employment placement agencies,4,5.0%
+Shelby,Office supplies and stationery stores,4,3.3%
+Wood,Limited-service restaurants,4,2.6%
+Crosby,Residential masonry contractors,4,3.3%
+Refugio,"Other specialized trucking, long-distance",4,5.2%
+Burnet,Scheduled passenger air transportation,4,2.1%
+Sterling,Industrial machinery merchant wholesalers,4,5.9%
+Montgomery,Elementary and secondary schools,4,2.0%
+San Augustine,Full-service restaurants,4,4.8%
+Rains,Elementary and secondary schools,4,4.4%
+Nueces,"Hotels and motels, except casino hotels",4,2.6%
+Jack,Crude Petroleum Extraction,4,2.6%
+Swisher,Deep sea passenger transportation,4,4.3%
+Camp,Full-service restaurants,4,4.3%
+Brazos,General medical and surgical hospitals,4,2.9%
+Orange,Limited-service restaurants,4,3.3%
+Colorado,Temporary help services,4,3.7%
+Pecos,"Hotels and motels, except casino hotels",4,4.8%
+Cochran,Industrial building construction,4,4.2%
+Parmer,Full-service restaurants,4,5.9%
+Freestone,Full-service restaurants,4,2.8%
+Winkler,Other heavy machinery rental and leasing,4,4.9%
+Wichita,NA,4,3.6%
+Gray,Oil and gas field machinery and equipment,4,4.7%
+Schleicher,Crude Petroleum Extraction,4,4.3%
+Hardeman,Drilling oil and gas wells,4,4.0%
+Travis,Temporary help services,4,2.8%
+Gillespie,"Drinking places, alcoholic beverages",4,3.4%
+Yoakum,Full-service restaurants,4,2.7%
+Fayette,Limited-service restaurants,4,3.4%
+Uvalde,All other professional and technical services,4,2.3%
+Grimes,Elementary and secondary schools,4,2.4%
+Van Zandt,General medical and surgical hospitals,4,2.9%
+Throckmorton,Drilling oil and gas wells,4,8.3%
+Falls,Office administrative services,4,3.3%
+Grayson,"Offices of physicians, except mental health",4,3.4%
+Ellis,Limited-service restaurants,4,2.2%
+Hall,Support activities for oil and gas operations,4,2.6%
+Dickens,Limited-service restaurants,4,4.3%
+Trinity,Drilling oil and gas wells,4,2.7%
 Reeves,Full-service restaurants,4,4.0%
-Marion,Elementary and secondary schools,4,3.6%
-Terrell,Warehouse Clubs and Supercenters,4,16.7%
-Lynn,Industrial building construction,4,3.2%
-La Salle,Drilling oil and gas wells,4,5.4%
-Jasper,General medical and surgical hospitals,4,3.2%
-Jones,Limited-service restaurants,4,3.3%
-Castro,Crude Petroleum Extraction,4,3.2%
-Victoria,Support activities for oil and gas operations,4,5.2%
-Kleberg,Department Stores,4,2.7%
-Briscoe,Industrial building construction,4,3.0%
-Clay,Drilling oil and gas wells,4,4.4%
-Matagorda,Full-service restaurants,4,4.8%
-Brooks,Oil and gas pipeline construction,4,3.1%
-Runnels,General medical and surgical hospitals,4,5.0%
-Carson,Drilling oil and gas wells,4,3.7%
-Liberty,Elementary and secondary schools,4,3.0%
-Lee,Oil and gas pipeline construction,4,4.4%
-Hale,Department Stores,4,2.8%
-Bexar,Offices of dentists,4,2.6%
-Garza,Crude Petroleum Extraction,4,4.4%
-Montague,Footwear manufacturing,4,5.2%
-Upton,Crude Petroleum Extraction,4,3.3%
-Hamilton,General medical and surgical hospitals,4,4.9%
-Fisher,Scheduled passenger air transportation,4,4.5%
-Dawson,Full-service restaurants,4,5.0%
-Dimmit,Nonresidential site preparation contractors,4,3.8%
-Limestone,Oil and gas pipeline construction,4,3.6%
-Hutchinson,Full-service restaurants,4,4.2%
-Llano,Offices of real estate agents and brokers,4,2.8%
-Presidio,Oil and gas pipeline construction,4,5.6%
-Eastland,"Laminated plastics plate, sheet, and shapes",4,3.5%
-Sabine,Other heavy construction,4,4.5%
-Wharton,General medical and surgical hospitals,4,4.0%
-Rusk,Boat building,4,4.5%
-Tarrant,Offices of dentists,4,2.6%
-Lavaca,Limited-service restaurants,4,5.2%
-Childress,Oil and gas pipeline construction,4,6.2%
-Hidalgo,Department Stores,4,2.9%
-Kaufman,Professional employer organizations,4,2.3%
-Moore,Child day care services,4,5.9%
-Menard,Other durable goods merchant wholesalers,4,6.2%
-Edwards,Professional employer organizations,4,5.0%
-San Patricio,"Offices of physicians, except mental health",4,3.4%
-Terry,"Hotels and motels, except casino hotels",4,3.5%
-Crockett,Commercial machinery repair and maintenance,4,6.8%
-Houston,Drilling oil and gas wells,4,3.1%
-Waller,Family clothing stores,4,2.5%
-Coke,Drilling oil and gas wells,4,3.8%
-Ward,"Hotels and motels, except casino hotels",4,3.8%
-Titus,Truck trailer manufacturing,4,3.6%
-Lampasas,Limited-service restaurants,4,3.0%
-Haskell,Offices of dentists,4,5.6%
-Martin,Crude Petroleum Extraction,4,4.4%
-Atascosa,Temporary help services,4,2.6%
-Hemphill,Water and sewer system construction,4,4.4%
-Hartley,Office administrative services,4,7.7%
-Young,"Hotels and motels, except casino hotels",4,5.5%
-Burleson,Offices of dentists,4,2.6%
-Hardin,Professional employer organizations,4,3.7%
-Gonzales,Offices of dentists,4,3.8%
-McMullen,Other heavy machinery rental and leasing,4,12.5%
-Erath,Offices of dentists,4,3.1%
-Galveston,Elementary and secondary schools,4,2.0%
-Hopkins,Temporary help services,4,3.9%
-McLennan,Offices of dentists,4,2.4%
-Madison,Mushroom production,4,2.4%
-McCulloch,Full-service restaurants,4,6.5%
-Donley,Industrial building construction,4,5.1%
+Marion,Full-service restaurants,4,3.4%
+Terrell,Warehouse Clubs and Supercenters,4,12.5%
+Lynn,Nonresidential electrical contractors,4,3.3%
+La Salle,Professional employer organizations,4,3.6%
+Jasper,General medical and surgical hospitals,4,4.1%
+Jones,Drilling oil and gas wells,4,3.3%
+Castro,Industrial building construction,4,3.2%
+Victoria,General medical and surgical hospitals,4,6.0%
+Kleberg,Oil and gas pipeline construction,4,3.6%
+Briscoe,Scheduled passenger air transportation,4,3.1%
+Clay,Temporary help services,4,3.3%
+Matagorda,Full-service restaurants,4,3.8%
+Brooks,Scheduled passenger air transportation,4,3.4%
+Runnels,Full-service restaurants,4,4.6%
+Carson,Commercial machinery repair and maintenance,4,5.3%
+Liberty,Support activities for oil and gas operations,4,3.1%
+Lee,Child day care services,4,2.4%
+Hale,Temporary help services,4,3.2%
+Bexar,"Hotels and motels, except casino hotels",4,2.6%
+Garza,Full-service restaurants,4,4.5%
+Montague,Drilling oil and gas wells,4,3.7%
+Upton,Full-service restaurants,4,5.3%
+Hamilton,Limited-service restaurants,4,3.8%
+Fisher,Oil and gas pipeline construction,4,3.2%
+Dawson,Industrial building construction,4,3.7%
+Dimmit,Other heavy machinery rental and leasing,4,2.9%
+Limestone,Support activities for oil and gas operations,4,2.7%
+Hutchinson,General medical and surgical hospitals,4,4.1%
+Llano,Oil and gas pipeline construction,4,1.8%
+Presidio,"Hotels and motels, except casino hotels",4,4.6%
+Eastland,"Laminated plastics plate, sheet, and shapes",4,4.1%
+Sabine,Industrial building construction,4,3.8%
+Wharton,"Offices of physicians, except mental health",4,2.7%
+Rusk,Oil and gas pipeline construction,4,3.0%
+Tarrant,Limited-service restaurants,4,2.4%
+Lavaca,Full-service restaurants,4,3.6%
+Childress,Oil and gas pipeline construction,4,3.5%
+Hidalgo,Elementary and secondary schools,4,2.8%
+Kaufman,Limited-service restaurants,4,2.5%
+Moore,General medical and surgical hospitals,4,3.7%
+Menard,Industrial sand mining,4,4.2%
+Edwards,Commercial machinery repair and maintenance,4,4.4%
+San Patricio,"Executive and legislative offices, combined",4,4.6%
+Terry,Office administrative services,4,3.3%
+Crockett,Commercial machinery repair and maintenance,4,5.8%
+Houston,General medical and surgical hospitals,4,3.5%
+Waller,Support activities for oil and gas operations,4,2.3%
+Coke,Oil and gas pipeline construction,4,3.7%
+Ward,"Other specialized trucking, local",4,3.4%
+Titus,Full-service restaurants,4,4.0%
+Lampasas,Rubber product mfg. for mechanical use,4,2.6%
+Haskell,Drilling oil and gas wells,4,4.3%
+Martin,Oil and gas pipeline construction,4,4.6%
+Atascosa,Temporary help services,4,2.5%
+Hemphill,Water and sewer system construction,4,5.7%
+Hartley,Offices of specialty therapists,4,11.1%
+Young,Full-service restaurants,4,4.7%
+Burleson,Natural Gas Extraction,4,3.1%
+Hardin,Limited-service restaurants,4,3.6%
+Gonzales,Full-service restaurants,4,3.3%
+McMullen,"Other specialized trucking, local",4,8.3%
+Erath,Support activities for oil and gas operations,4,3.9%
+Galveston,Limited-service restaurants,4,2.0%
+Hopkins,Temporary help services,4,3.4%
+McLennan,Temporary help services,4,2.6%
+Madison,Crude Petroleum Extraction,4,2.9%
+McCulloch,"General freight trucking, long-distance TL",4,5.4%
+Donley,Full-service restaurants,4,4.9%
 Kent,NA,4,NA
-Real,Full-service restaurants,4,6.5%
-Sutton,Crude Petroleum Extraction,4,4.5%
-Midland,Offices of dentists,4,2.4%
-Hudspeth,Limited-service restaurants,4,4.0%
-Zavala,"Hotels and motels, except casino hotels",4,5.0%
-Harrison,Limited-service restaurants,4,3.5%
-Comanche,Full-service restaurants,4,5.0%
-Mitchell,Full-service restaurants,4,5.6%
-Navarro,Full-service restaurants,4,5.1%
-Crane,Oil and gas pipeline construction,4,3.0%
-Lubbock,"Hotels and motels, except casino hotels",4,2.8%
-Wise,Plate work manufacturing,4,4.6%
-Washington,"Offices of physicians, except mental health",4,2.8%
-Jeff Davis,Snack and nonalcoholic beverage bars,4,6.2%
-El Paso,Limited-service restaurants,4,2.8%
-Gregg,"Bolt, nut, screw, rivet, and washer mfg.",4,3.9%
-Williamson,Civic and social organizations,4,2.9%
-Lipscomb,Drilling oil and gas wells,4,6.7%
-Mason,Gasoline stations with convenience stores,4,4.9%
-Henderson,General medical and surgical hospitals,4,4.0%
-Hansford,Offices of dentists,4,6.5%
-Chambers,Engineering services,4,3.6%
-Hill,General medical and surgical hospitals,4,2.6%
-Potter,Offices of dentists,4,3.2%
-Jim Wells,Drilling oil and gas wells,4,2.9%
-Delta,Scheduled passenger air transportation,4,3.4%
-Stonewall,General medical and surgical hospitals,4,7.1%
-Ector,Industrial machinery merchant wholesalers,4,2.6%
-Cameron,Limited-service restaurants,4,2.9%
-Maverick,Family clothing stores,4,4.5%
-Collin,"Offices of physicians, except mental health",4,3.2%
-Baylor,Commercial building construction,4,2.9%
-Panola,Offices of dentists,4,2.5%
-Guadalupe,Temporary help services,4,2.5%
-Bastrop,"Offices of physicians, except mental health",4,2.7%
-Austin,Elementary and secondary schools,4,2.6%
-Andrews,Drilling oil and gas wells,4,2.1%
-Anderson,Department Stores,4,3.6%
-Blanco,Scheduled passenger air transportation,4,3.9%
-DeWitt,Full-service restaurants,4,5.1%
-Bandera,"Hotels and motels, except casino hotels",4,4.5%
-Bell,Elementary and secondary schools,4,2.8%
-Aransas,Professional employer organizations,4,2.6%
-Archer,Oil and gas pipeline construction,4,3.9%
-Armstrong,General medical and surgical hospitals,4,3.3%
-Bee,Elementary and secondary schools,4,3.2%
-Angelina,Temporary help services,4,2.9%
-Bailey,Industrial building construction,4,3.8%
-Jefferson,Industrial building construction,4,3.1%
-Frio,"Hotels and motels, except casino hotels",4,4.1%
-Fannin,General medical and surgical hospitals,4,4.8%
-Goliad,Offices of dentists,4,5.1%
+Real,Oil and gas pipeline construction,4,3.7%
+Sutton,Temporary help services,4,7.0%
+Midland,Oil and gas field machinery and equipment,4,2.9%
+Hudspeth,"Offices of physicians, except mental health",4,4.8%
+Zavala,Full-service restaurants,4,5.0%
+Harrison,General medical and surgical hospitals,4,3.1%
+Comanche,Full-service restaurants,4,3.2%
+Mitchell,Industrial supplies merchant wholesalers,4,3.0%
+Navarro,Full-service restaurants,4,4.8%
+Crane,Industrial machinery merchant wholesalers,4,3.3%
+Lubbock,Temporary help services,4,2.4%
+Wise,"Offices of physicians, except mental health",4,2.2%
+Washington,Coffee and tea manufacturing,4,2.1%
+Jeff Davis,Oil and gas pipeline construction,4,5.9%
+El Paso,General medical and surgical hospitals,4,2.5%
+Gregg,Limited-service restaurants,4,2.7%
+Williamson,Child day care services,4,2.1%
+Lipscomb,Drilling oil and gas wells,4,5.9%
+Mason,Gasoline stations with convenience stores,4,5.0%
+Henderson,General medical and surgical hospitals,4,3.6%
+Hansford,All other professional and technical services,4,6.5%
+Chambers,Support activities for oil and gas operations,4,3.6%
+Hill,General medical and surgical hospitals,4,3.5%
+Potter,"Animal, except poultry, slaughtering",4,3.6%
+Jim Wells,Home health care services,4,2.6%
+Delta,Other support activities for air transport.,4,4.1%
+Stonewall,Tire dealers,4,7.1%
+Ector,Oil and gas pipeline construction,4,2.6%
+Cameron,Limited-service restaurants,4,2.7%
+Maverick,Department Stores,4,3.7%
+Collin,"Offices of physicians, except mental health",4,2.2%
+Baylor,Commercial building construction,4,3.4%
+Panola,"Nursing care facilities, skilled nursing",4,2.7%
+Guadalupe,Support activities for oil and gas operations,4,3.3%
+Bastrop,Limited-service restaurants,4,2.4%
+Austin,Temporary help services,4,2.2%
+Andrews,Full-service restaurants,4,2.5%
+Anderson,Oil and gas pipeline construction,4,3.5%
+Blanco,Full-service restaurants,4,4.0%
+DeWitt,Full-service restaurants,4,4.3%
+Bandera,Full-service restaurants,4,3.3%
+Bell,Elementary and secondary schools,4,2.7%
+Aransas,Elementary and secondary schools,4,2.5%
+Archer,Oil and gas pipeline construction,4,3.0%
+Armstrong,Oil and gas pipeline construction,4,5.1%
+Bee,Industrial building construction,4,3.0%
+Angelina,Drilling oil and gas wells,4,3.3%
+Bailey,Scheduled passenger air transportation,4,3.2%
+Jefferson,Industrial building construction,4,3.5%
+Frio,"Hotels and motels, except casino hotels",4,4.3%
+Fannin,Elementary and secondary schools,4,1.9%
+Goliad,Full-service restaurants,4,3.8%
 Loving,NA,4,NA
-Cass,General medical and surgical hospitals,4,3.2%
-Fort Bend,Child day care services,4,2.7%
-Bosque,Industrial machinery merchant wholesalers,4,3.0%
-Hockley,Commercial machinery repair and maintenance,4,3.3%
-San Saba,Support activities for oil and gas operations,4,4.3%
-Kerr,Department Stores,4,3.0%
-Mills,"Hobby, toy, and game stores",4,7.0%
-Cooke,Offices of dentists,4,4.2%
-Wilbarger,Offices of dentists,4,5.5%
-Irion,Drilling oil and gas wells,4,3.4%
-Caldwell,Limited-service restaurants,4,3.1%
-Jim Hogg,Elementary and secondary schools,4,4.2%
-Culberson,Drilling oil and gas wells,4,4.3%
-Upshur,"Bolt, nut, screw, rivet, and washer mfg.",4,3.0%
-Cherokee,Support activities for oil and gas operations,4,4.1%
-Denton,"Offices of physicians, except mental health",4,3.0%
-Concho,Drilling oil and gas wells,4,3.1%
-Randall,Offices of dentists,4,5.4%
-Kimble,Jewelry stores,4,6.2%
-Knox,"General freight trucking, long-distance TL",4,4.5%
-Polk,"Offices of physicians, except mental health",4,3.3%
-Hood,Support activities for oil and gas operations,4,3.0%
-San Jacinto,Professional employer organizations,4,3.1%
-Robertson,Temporary help services,4,3.7%
-Wilson,Temporary help services,4,3.2%
-Nolan,Department Stores,4,4.0%
-Cottle,Industrial building construction,4,4.1%
-Calhoun,Department Stores,4,2.9%
-Rockwall,Elementary and secondary schools,4,3.2%
-Live Oak,Professional employer organizations,4,4.3%
-Motley,Power and communication system construction,4,10.0%
-Sherman,NA,4,NA
-Ochiltree,Department Stores,4,8.1%
-Comal,Limited-service restaurants,4,2.3%
-Dallas,Department Stores,5,2.7%
-Howard,Drilling oil and gas wells,5,3.1%
-Foard,Department Stores,5,5.1%
-Floyd,Oil and gas pipeline construction,5,3.3%
-Brewster,Oil and gas pipeline construction,5,3.9%
-Franklin,Elementary and secondary schools,5,3.3%
-Hunt,"Offices of physicians, except mental health",5,2.5%
-Newton,Commercial machinery repair and maintenance,5,3.5%
-Starr,Services for the elderly and disabled,5,2.9%
-Kinney,Other heavy construction,5,3.6%
+Cass,Oil and gas pipeline construction,4,3.0%
+Fort Bend,Child day care services,4,2.0%
+Bosque,Temporary help services,4,3.4%
+Hockley,Commercial machinery repair and maintenance,4,3.1%
+San Saba,Correctional institutions,4,4.9%
+Kerr,Department Stores,4,2.3%
+Mills,Full-service restaurants,4,6.7%
+Cooke,Drilling oil and gas wells,4,2.9%
+Wilbarger,Elementary and secondary schools,4,3.7%
+Irion,Collection agencies,4,6.2%
+Caldwell,Limited-service restaurants,4,2.6%
+Jim Hogg,Drilling oil and gas wells,4,4.4%
+Culberson,Temporary help services,4,3.2%
+Upshur,Limited-service restaurants,4,2.5%
+Cherokee,Sign manufacturing,4,3.9%
+Denton,"Offices of physicians, except mental health",4,2.0%
+Concho,Drilling oil and gas wells,4,3.2%
+Randall,Limited-service restaurants,4,2.0%
+Kimble,Offices of dentists,4,5.7%
+Knox,Home health care services,4,4.4%
+Polk,Offices of dentists,4,2.6%
+Hood,Elementary and secondary schools,4,2.1%
+San Jacinto,Industrial building construction,4,2.2%
+Robertson,Full-service restaurants,4,3.9%
+Wilson,Full-service restaurants,4,2.4%
+Nolan,Gasoline stations with convenience stores,4,4.8%
+Cottle,Commercial machinery repair and maintenance,4,3.8%
+Calhoun,Industrial building construction,4,2.9%
+Rockwall,"Offices of physicians, except mental health",4,2.5%
+Live Oak,Oil and gas pipeline construction,4,3.7%
+Motley,NA,4,NA
+Sherman,Scheduled passenger air transportation,4,12.5%
+Ochiltree,Rubber product mfg. for mechanical use,4,6.8%
+Comal,Support activities for oil and gas operations,4,2.5%
+Dallas,Department Stores,5,2.2%
+Howard,Temporary help services,5,2.2%
+Foard,Nonresidential plumbing and HVAC contractors,5,4.0%
+Floyd,Scheduled passenger air transportation,5,3.2%
+Brewster,Oil and gas pipeline construction,5,4.0%
+Franklin,Travel trailer and camper manufacturing,5,3.6%
+Hunt,Industrial machinery merchant wholesalers,5,1.9%
+Newton,Elementary and secondary schools,5,3.1%
+Starr,Nonresidential electrical contractors,5,2.8%
+Kinney,Supermarkets and other grocery stores,5,4.2%
 Collingsworth,Industrial machinery merchant wholesalers,5,3.4%
-Tom Green,Offices of dentists,5,4.0%
-Coleman,Industrial building construction,5,3.3%
-Brazoria,Department Stores,5,2.7%
-Leon,Full-service restaurants,5,3.5%
-Duval,Full-service restaurants,5,2.4%
-Lamb,Office administrative services,5,3.9%
-Morris,Support activities for oil and gas operations,5,2.8%
-Smith,"Offices of physicians, except mental health",5,2.7%
-Jackson,Oil and gas pipeline construction,5,3.8%
-Medina,"Hotels and motels, except casino hotels",5,2.8%
-Wheeler,NA,5,4.4%
-Dallam,Commercial machinery repair and maintenance,5,3.8%
-Callahan,Industrial building construction,5,2.4%
-Lamar,All other transportation equipment mfg.,5,4.2%
-Coryell,Elementary and secondary schools,5,3.0%
-Gaines,All other plastics product manufacturing,5,2.3%
-Kendall,Snack and nonalcoholic beverage bars,5,2.7%
-Nacogdoches,"Hotels and motels, except casino hotels",5,3.5%
-Milam,Limited-service restaurants,5,2.5%
-Hays,Limited-service restaurants,5,2.7%
-Willacy,Limited-service restaurants,5,3.7%
-Johnson,Commercial machinery repair and maintenance,5,2.7%
-Reagan,"Hotels and motels, except casino hotels",5,2.9%
-Webb,Freight transportation arrangement,5,4.3%
-Shackelford,Lime manufacturing,5,2.0%
-Bowie,Limited-service restaurants,5,3.2%
-Scurry,Oil and gas pipeline construction,5,1.7%
-Kenedy,NA,5,NA
-Somervell,Offices of dentists,5,4.5%
-Oldham,Office administrative services,5,5.9%
-Taylor,Offices of dentists,5,2.7%
+Tom Green,"Offices of physicians, except mental health",5,2.7%
+Coleman,Full-service restaurants,5,3.1%
+Brazoria,Temporary help services,5,2.4%
+Leon,Drilling oil and gas wells,5,3.0%
+Duval,"General freight trucking, long-distance TL",5,2.5%
+Lamb,Commercial machinery repair and maintenance,5,3.5%
+Morris,Frozen specialty food manufacturing,5,3.1%
+Smith,Iron foundries,5,2.5%
+Jackson,Full-service restaurants,5,2.7%
+Medina,"Hotels and motels, except casino hotels",5,2.2%
+Wheeler,Cattle feedlots,5,3.1%
+Dallam,Scheduled passenger air transportation,5,2.8%
+Callahan,Oil and gas pipeline construction,5,3.2%
+Lamar,Temporary help services,5,3.7%
+Coryell,Limited-service restaurants,5,2.9%
+Gaines,Industrial machinery merchant wholesalers,5,2.0%
+Kendall,Elementary and secondary schools,5,2.7%
+Nacogdoches,Drilling oil and gas wells,5,3.2%
+Milam,"Laminated plastics plate, sheet, and shapes",5,2.3%
+Hays,"Hotels and motels, except casino hotels",5,2.2%
+Willacy,Limited-service restaurants,5,3.1%
+Johnson,Oil and gas field machinery and equipment,5,1.9%
+Reagan,"Hotels and motels, except casino hotels",5,3.8%
+Webb,Family clothing stores,5,3.3%
+Shackelford,Elementary and secondary schools,5,3.6%
+Bowie,Department Stores,5,2.7%
+Scurry,Power and communication system construction,5,1.9%
+Kenedy,Power and communication system construction,5,9.1%
+Somervell,"Hotels and motels, except casino hotels",5,3.3%
+Oldham,Other heavy construction,5,5.6%
+Taylor,Department Stores,5,2.5%
 King,NA,5,NA
 Borden,Oil and gas pipeline construction,5,3.5%
-Walker,Department Stores,5,2.9%
-Stephens,Land subdivision,5,4.4%
-Deaf Smith,Offices of dentists,5,3.4%
-Roberts,Industrial machinery merchant wholesalers,5,16.7%
-Tyler,Elementary and secondary schools,5,3.8%
-Val Verde,Limited-service restaurants,5,4.4%
-Brown,Offices of dentists,5,3.0%
-Parker,Child day care services,5,2.3%
-Harris,Limited-service restaurants,5,2.2%
-Zapata,Nonresidential site preparation contractors,5,4.8%
-Red River,"Offices of physicians, except mental health",5,3.0%
-Karnes,"Hotels and motels, except casino hotels",5,3.3%
-Palo Pinto,Temporary help services,5,2.5%
-Glasscock,Temporary help services,5,4.9%
-Shelby,Poultry processing,5,3.2%
-Wood,Limited-service restaurants,5,2.5%
-Crosby,Offices of dentists,5,4.1%
-Refugio,Oil and gas pipeline construction,5,4.1%
-Burnet,Limited-service restaurants,5,1.9%
-Sterling,Industrial machinery merchant wholesalers,5,6.7%
-Montgomery,Professional employer organizations,5,2.5%
-San Augustine,"Offices of physicians, except mental health",5,4.0%
-Rains,"Offices of physicians, except mental health",5,2.9%
-Nueces,Support activities for oil and gas operations,5,2.8%
-Jack,Commercial building construction,5,1.9%
-Swisher,Other personal care services,5,5.0%
-Camp,Metal merchant wholesalers,5,3.9%
-Brazos,Offices of dentists,5,2.8%
-Orange,Offices of dentists,5,3.1%
-Colorado,Limited-service restaurants,5,2.5%
-Pecos,Industrial building construction,5,3.2%
-Cochran,Crude Petroleum Extraction,5,3.1%
-Parmer,"Nursing care facilities, skilled nursing",5,5.7%
-Freestone,Caterers,5,3.1%
-Winkler,Full-service restaurants,5,4.4%
-Wichita,Department Stores,5,2.8%
-Gray,"Hobby, toy, and game stores",5,3.6%
-Schleicher,"General freight trucking, local",5,4.5%
-Hardeman,NA,5,3.4%
-Travis,Limited-service restaurants,5,2.4%
-Gillespie,All other miscellaneous manufacturing,5,3.2%
-Yoakum,Oil and gas pipeline construction,5,1.7%
-Fayette,Drilling oil and gas wells,5,3.6%
-Uvalde,Testing laboratories,5,2.6%
-Grimes,Elementary and secondary schools,5,2.6%
-Van Zandt,Support activities for oil and gas operations,5,2.7%
-Throckmorton,Residential poured foundation contractors,5,8.3%
-Falls,Offices of dentists,5,3.2%
-Grayson,Department Stores,5,2.7%
-Ellis,Department Stores,5,2.6%
-Hall,"Crop harvesting, primarily by machine",5,2.7%
-Dickens,Drilling oil and gas wells,5,3.5%
-Trinity,"Cafeterias, grill buffets, and buffets",5,3.4%
-Reeves,"Other specialized trucking, local",5,3.4%
-Marion,Gasoline stations with convenience stores,5,3.2%
-Terrell,NA,5,NA
-Lynn,Full-service restaurants,5,3.2%
-La Salle,Crude Petroleum Extraction,5,3.4%
-Jasper,Commercial machinery repair and maintenance,5,3.1%
-Jones,Drilling oil and gas wells,5,2.9%
-Castro,Commercial building construction,5,3.2%
-Victoria,Department Stores,5,3.9%
-Kleberg,Industrial building construction,5,2.5%
-Briscoe,Commercial machinery repair and maintenance,5,3.0%
-Clay,Commercial building construction,5,3.4%
-Matagorda,Offices of dentists,5,2.5%
-Brooks,Scheduled passenger air transportation,5,2.5%
-Runnels,Drilling oil and gas wells,5,3.5%
-Carson,"Offices of physicians, except mental health",5,3.7%
-Liberty,Support activities for oil and gas operations,5,2.9%
-Lee,Limited-service restaurants,5,2.8%
-Hale,Temporary help services,5,2.8%
-Bexar,Department Stores,5,2.5%
-Garza,Oil and gas pipeline construction,5,3.5%
-Montague,Drilling oil and gas wells,5,4.1%
-Upton,Oil and gas pipeline construction,5,3.3%
-Hamilton,Limited-service restaurants,5,4.2%
-Fisher,Automobile manufacturing,5,3.0%
-Dawson,Industrial building construction,5,3.9%
-Dimmit,Oil and gas pipeline construction,5,3.5%
-Limestone,Kaolin and ball clay mining,5,2.4%
-Hutchinson,All other nonresidential trade contractors,5,3.4%
-Llano,Limited-service restaurants,5,2.8%
-Presidio,Professional employer organizations,5,4.8%
-Eastland,Limited-service restaurants,5,3.0%
-Sabine,Industrial building construction,5,4.2%
-Wharton,"Offices of physicians, except mental health",5,3.2%
-Rusk,Offices of dentists,5,3.7%
-Tarrant,"Offices of physicians, except mental health",5,2.5%
-Lavaca,General medical and surgical hospitals,5,4.4%
-Childress,Support activities for oil and gas operations,5,5.4%
-Hidalgo,"Offices of physicians, except mental health",5,2.8%
-Kaufman,Temporary help services,5,2.3%
-Moore,Department Stores,5,4.9%
-Menard,"Hobby, toy, and game stores",5,6.2%
-Edwards,Commercial machinery repair and maintenance,5,5.0%
-San Patricio,"Hotels and motels, except casino hotels",5,3.4%
-Terry,Full-service restaurants,5,3.5%
-Crockett,Other nonresidential exterior contractors,5,4.2%
-Houston,General medical and surgical hospitals,5,3.1%
-Waller,Child day care services,5,2.5%
-Coke,General medical and surgical hospitals,5,3.8%
-Ward,"Other specialized trucking, local",5,3.0%
-Titus,Farm machinery and equipment manufacturing,5,3.3%
-Lampasas,Rubber product mfg. for mechanical use,5,2.3%
-Haskell,Other nonresidential exterior contractors,5,3.7%
-Martin,Drilling oil and gas wells,5,3.3%
-Atascosa,"Hotels and motels, except casino hotels",5,2.4%
-Hemphill,"Hotels and motels, except casino hotels",5,4.4%
-Hartley,Landscaping services,5,7.7%
-Young,Limited-service restaurants,5,5.2%
-Burleson,Scheduled passenger air transportation,5,2.1%
-Hardin,Limited-service restaurants,5,3.5%
-Gonzales,Oil and gas pipeline construction,5,3.5%
-McMullen,Offices of certified public accountants,5,12.5%
-Erath,Other performing arts companies,5,2.9%
-Galveston,Limited-service restaurants,5,2.0%
-Hopkins,General medical and surgical hospitals,5,3.9%
-McLennan,Department Stores,5,2.2%
-Madison,Oil and gas pipeline construction,5,2.4%
-McCulloch,Support activities for oil and gas operations,5,5.8%
-Donley,Commercial building construction,5,4.0%
+Walker,Colleges and universities,5,2.0%
+Stephens,Geophysical surveying and mapping services,5,2.8%
+Deaf Smith,Scheduled passenger air transportation,5,2.8%
+Roberts,NA,5,NA
+Tyler,Industrial building construction,5,2.8%
+Val Verde,Footwear manufacturing,5,2.9%
+Brown,Limited-service restaurants,5,2.9%
+Parker,Offices of dentists,5,2.0%
+Harris,Professional employer organizations,5,1.5%
+Zapata,"Other specialized trucking, long-distance",5,4.6%
+Red River,"Offices of physicians, except mental health",5,3.3%
+Karnes,"Other specialized trucking, long-distance",5,3.5%
+Palo Pinto,Elementary and secondary schools,5,2.6%
+Glasscock,Full-service restaurants,5,5.0%
+Shelby,Elementary and secondary schools,5,2.6%
+Wood,Drilling oil and gas wells,5,2.4%
+Crosby,Temporary help services,5,3.3%
+Refugio,Oil and gas pipeline construction,5,3.7%
+Burnet,Limited-service restaurants,5,1.7%
+Sterling,All other professional and technical services,5,5.9%
+Montgomery,"Offices of physicians, except mental health",5,2.0%
+San Augustine,Marketing consulting services,5,4.0%
+Rains,General medical and surgical hospitals,5,4.4%
+Nueces,Elementary and secondary schools,5,2.5%
+Jack,Drilling oil and gas wells,5,2.6%
+Swisher,General medical and surgical hospitals,5,4.3%
+Camp,Drilling oil and gas wells,5,3.8%
+Brazos,Colleges and universities,5,2.8%
+Orange,General medical and surgical hospitals,5,3.2%
+Colorado,"Gasket, packing, and sealing device mfg.",5,3.1%
+Pecos,"Executive and legislative offices, combined",5,3.9%
+Cochran,Commercial machinery repair and maintenance,5,3.8%
+Parmer,Commercial machinery repair and maintenance,5,5.9%
+Freestone,Drilling oil and gas wells,5,2.5%
+Winkler,Industrial sand mining,5,4.5%
+Wichita,Elementary and secondary schools,5,2.4%
+Gray,Support activities for oil and gas operations,5,3.3%
+Schleicher,Gasoline stations with convenience stores,5,4.3%
+Hardeman,Other heavy construction,5,4.0%
+Travis,Limited-service restaurants,5,2.5%
+Gillespie,Jewelry stores,5,2.8%
+Yoakum,Crude Petroleum Extraction,5,2.4%
+Fayette,"Gasket, packing, and sealing device mfg.",5,2.7%
+Uvalde,"Hotels and motels, except casino hotels",5,2.3%
+Grimes,Full-service restaurants,5,2.4%
+Van Zandt,Limited-service restaurants,5,2.4%
+Throckmorton,"Manufactured home, mobile home, manufacturing",5,8.3%
+Falls,Temporary help services,5,3.3%
+Grayson,Motor vehicle seating and interior trim mfg.,5,3.4%
+Ellis,Department Stores,5,2.0%
+Hall,Water and sewer system construction,5,2.6%
+Dickens,Drilling oil and gas wells,5,3.6%
+Trinity,Support activities for oil and gas operations,5,2.3%
+Reeves,Power and communication system construction,5,3.2%
+Marion,Elementary and secondary schools,5,3.0%
+Terrell,"Hotels and motels, except casino hotels",5,12.5%
+Lynn,Other chemicals merchant wholesalers,5,3.3%
+La Salle,Natural Gas Extraction,5,2.9%
+Jasper,Commercial machinery repair and maintenance,5,4.1%
+Jones,General medical and surgical hospitals,5,3.3%
+Castro,General medical and surgical hospitals,5,3.2%
+Victoria,General warehousing and storage,5,3.3%
+Kleberg,Elementary and secondary schools,5,3.6%
+Briscoe,Temporary help services,5,3.1%
+Clay,Scheduled passenger air transportation,5,3.0%
+Matagorda,Temporary help services,5,3.0%
+Brooks,"Cafeterias, grill buffets, and buffets",5,2.9%
+Runnels,Collection agencies,5,3.7%
+Carson,Oil and gas pipeline construction,5,3.5%
+Liberty,Elementary and secondary schools,5,2.5%
+Lee,Natural Gas Extraction,5,2.0%
+Hale,Scheduled passenger air transportation,5,2.5%
+Bexar,General medical and surgical hospitals,5,2.5%
+Garza,Power and communication system construction,5,3.6%
+Montague,General medical and surgical hospitals,5,3.5%
+Upton,Crude Petroleum Extraction,5,3.5%
+Hamilton,Oil and gas pipeline construction,5,2.9%
+Fisher,Gypsum product manufacturing,5,3.2%
+Dawson,Full-service restaurants,5,3.4%
+Dimmit,Elementary and secondary schools,5,2.9%
+Limestone,Oil and gas pipeline construction,5,2.7%
+Hutchinson,Support activities for oil and gas operations,5,3.8%
+Llano,Offices of real estate agents and brokers,5,1.8%
+Presidio,Professional employer organizations,5,3.3%
+Eastland,Limited-service restaurants,5,4.1%
+Sabine,Support activities for oil and gas operations,5,2.8%
+Wharton,Gasoline stations with convenience stores,5,2.4%
+Rusk,Drilling oil and gas wells,5,1.9%
+Tarrant,Department Stores,5,1.7%
+Lavaca,"Hotels and motels, except casino hotels",5,2.8%
+Childress,All other travel arrangement services,5,3.5%
+Hidalgo,Temporary help services,5,2.4%
+Kaufman,Elementary and secondary schools,5,2.2%
+Moore,Industrial building construction,5,3.2%
+Menard,Drilling oil and gas wells,5,4.2%
+Edwards,Crude Petroleum Extraction,5,2.2%
+San Patricio,Elementary and secondary schools,5,2.6%
+Terry,Other chemicals merchant wholesalers,5,2.9%
+Crockett,Drilling oil and gas wells,5,4.7%
+Houston,Drilling oil and gas wells,5,2.7%
+Waller,Oil and gas field machinery and equipment,5,2.1%
+Coke,Drilling oil and gas wells,5,3.3%
+Ward,Nonresidential electrical contractors,5,3.1%
+Titus,Elementary and secondary schools,5,2.7%
+Lampasas,New car dealers,5,1.9%
+Haskell,Other petroleum merchant wholesalers,5,4.3%
+Martin,Other heavy machinery rental and leasing,5,3.4%
+Atascosa,General medical and surgical hospitals,5,2.3%
+Hemphill,Elementary and secondary schools,5,5.7%
+Hartley,General medical and surgical hospitals,5,11.1%
+Young,Limited-service restaurants,5,4.7%
+Burleson,Oil and gas pipeline construction,5,2.2%
+Hardin,Oil and gas pipeline construction,5,3.3%
+Gonzales,Construction equipment merchant wholesalers,5,3.0%
+McMullen,Other heavy machinery rental and leasing,5,8.3%
+Erath,Scheduled passenger air transportation,5,2.8%
+Galveston,Temporary help services,5,1.8%
+Hopkins,Support activities for oil and gas operations,5,2.6%
+McLennan,Poultry processing,5,2.4%
+Madison,Oil and gas pipeline construction,5,2.9%
+McCulloch,Offices of dentists,5,3.1%
+Donley,Commercial machinery repair and maintenance,5,4.9%
 Kent,NA,5,NA
-Real,Natural Gas Extraction,5,3.2%
-Sutton,"Other specialized trucking, local",5,4.5%
-Midland,Department Stores,5,2.2%
-Hudspeth,General medical and surgical hospitals,5,3.2%
-Zavala,All other professional and technical services,5,3.5%
-Harrison,Offices of dentists,5,3.5%
-Comanche,Limited-service restaurants,5,3.6%
-Mitchell,Gasoline stations with convenience stores,5,4.4%
-Navarro,Confectionery mfg. from purchased chocolate,5,4.5%
-Crane,Scheduled passenger air transportation,5,3.0%
-Lubbock,Support activities for oil and gas operations,5,2.7%
-Wise,Offices of dentists,5,3.7%
-Washington,Support activities for oil and gas operations,5,2.6%
-Jeff Davis,Beef cattle ranching and farming,5,3.1%
-El Paso,Support activities for oil and gas operations,5,2.4%
-Gregg,Department Stores,5,3.6%
-Williamson,Child day care services,5,2.4%
-Lipscomb,Payroll services,5,6.7%
-Mason,"Offices of physicians, except mental health",5,4.9%
-Henderson,Surgical and medical instrument manufacturing,5,3.0%
-Hansford,Full-service restaurants,5,6.5%
-Chambers,Temporary help services,5,3.1%
-Hill,Snack and nonalcoholic beverage bars,5,2.6%
-Potter,Department Stores,5,3.1%
-Jim Wells,Oil and gas field machinery and equipment,5,2.7%
-Delta,Other support activities for air transport.,5,3.0%
+Real,Residential electrical contractors,5,3.7%
+Sutton,Oil and gas pipeline construction,5,5.3%
+Midland,Industrial machinery merchant wholesalers,5,2.1%
+Hudspeth,General medical and surgical hospitals,5,4.8%
+Zavala,Crude Petroleum Extraction,5,4.6%
+Harrison,Temporary help services,5,2.6%
+Comanche,Oil and gas pipeline construction,5,2.7%
+Mitchell,Beauty salons,5,3.0%
+Navarro,Temporary help services,5,4.0%
+Crane,Full-service restaurants,5,2.7%
+Lubbock,"Hotels and motels, except casino hotels",5,1.7%
+Wise,Plate work manufacturing,5,1.9%
+Washington,Vocational rehabilitation services,5,2.1%
+Jeff Davis,Residential site preparation contractors,5,5.9%
+El Paso,Limited-service restaurants,5,2.5%
+Gregg,Temporary help services,5,2.3%
+Williamson,Temporary help services,5,2.1%
+Lipscomb,Industrial machinery merchant wholesalers,5,5.9%
+Mason,Industrial sand mining,5,2.5%
+Henderson,Support activities for oil and gas operations,5,2.6%
+Hansford,Drilling oil and gas wells,5,3.2%
+Chambers,Temporary help services,5,3.4%
+Hill,Commercial machinery repair and maintenance,5,2.6%
+Potter,Limited-service restaurants,5,2.7%
+Jim Wells,Industrial building construction,5,2.6%
+Delta,Plastics material and resin manufacturing,5,2.6%
 Stonewall,General automotive repair,5,7.1%
-Ector,Oil and gas field machinery and equipment,5,1.9%
-Cameron,Family clothing stores,5,2.8%
-Maverick,Full-service restaurants,5,3.2%
-Collin,Child day care services,5,2.7%
-Baylor,Nonresidential electrical contractors,5,2.9%
-Panola,Limited-service restaurants,5,2.5%
-Guadalupe,General medical and surgical hospitals,5,2.5%
-Bastrop,Limited-service restaurants,5,2.4%
-Austin,Full-service restaurants,5,2.6%
-Andrews,Scheduled passenger air transportation,5,2.1%
-Anderson,Offices of dentists,5,3.5%
-Blanco,"Hotels and motels, except casino hotels",5,2.2%
-DeWitt,"Hotels and motels, except casino hotels",5,4.7%
-Bandera,Offices of dentists,5,2.4%
-Bell,General medical and surgical hospitals,5,2.1%
-Aransas,Elementary and secondary schools,5,2.2%
-Archer,Industrial building construction,5,2.7%
-Armstrong,Commercial machinery repair and maintenance,5,3.3%
-Bee,Industrial building construction,5,3.1%
-Angelina,Offices of dentists,5,2.8%
-Bailey,Automobile manufacturing,5,3.5%
-Jefferson,Limited-service restaurants,5,3.0%
-Frio,Full-service restaurants,5,2.9%
-Fannin,Truck trailer manufacturing,5,3.7%
-Goliad,Full-service restaurants,5,5.1%
+Ector,Oil and gas field machinery and equipment,5,2.6%
+Cameron,Support activities for oil and gas operations,5,2.4%
+Maverick,Oil and gas pipeline construction,5,3.2%
+Collin,Limited-service restaurants,5,2.2%
+Baylor,Industrial machinery merchant wholesalers,5,2.3%
+Panola,Miscellaneous wood product manufacturing,5,2.5%
+Guadalupe,Temporary help services,5,2.7%
+Bastrop,Elementary and secondary schools,5,2.3%
+Austin,Other heavy machinery rental and leasing,5,2.1%
+Andrews,Oil and gas pipeline construction,5,2.3%
+Anderson,Drilling oil and gas wells,5,3.4%
+Blanco,Poultry processing,5,2.4%
+DeWitt,Oil and gas pipeline construction,5,4.0%
+Bandera,Commercial machinery repair and maintenance,5,2.6%
+Bell,General line grocery merchant wholesalers,5,2.1%
+Aransas,Drilling oil and gas wells,5,2.4%
+Archer,Full-service restaurants,5,3.0%
+Armstrong,General medical and surgical hospitals,5,3.8%
+Bee,Elementary and secondary schools,5,2.8%
+Angelina,Support activities for oil and gas operations,5,3.1%
+Bailey,Industrial building construction,5,2.8%
+Jefferson,All other nonresidential trade contractors,5,3.3%
+Frio,Full-service restaurants,5,4.0%
+Fannin,"Nursing care facilities, skilled nursing",5,1.9%
+Goliad,Drilling oil and gas wells,5,3.2%
 Loving,NA,5,NA
-Cass,Drilling oil and gas wells,5,3.0%
-Fort Bend,Support activities for oil and gas operations,5,2.7%
-Bosque,"Hotels and motels, except casino hotels",5,2.9%
-Hockley,Offices of dentists,5,2.4%
-San Saba,Shoe stores,5,4.3%
-Kerr,Offices of dentists,5,2.1%
-Mills,Landscaping services,5,4.7%
-Cooke,"Offices of physicians, except mental health",5,2.7%
-Wilbarger,New car dealers,5,4.1%
-Irion,Cut and sew apparel contractors,5,3.4%
-Caldwell,"Offices of physicians, except mental health",5,2.1%
-Jim Hogg,Home health care services,5,4.2%
-Culberson,Administrative management consulting services,5,3.5%
-Upshur,Department Stores,5,2.9%
-Cherokee,Full-service restaurants,5,3.9%
-Denton,Child day care services,5,2.6%
-Concho,"Other specialized trucking, long-distance",5,2.6%
-Randall,Department Stores,5,2.4%
-Kimble,Other management consulting services,5,6.2%
-Knox,All other amusement and recreation industries,5,4.5%
-Polk,Limited-service restaurants,5,2.6%
-Hood,"Offices of physicians, except mental health",5,2.0%
-San Jacinto,Oil and gas pipeline construction,5,3.0%
-Robertson,Offices of dentists,5,3.7%
-Wilson,Elementary and secondary schools,5,2.5%
-Nolan,Testing laboratories,5,3.5%
-Cottle,Full-service restaurants,5,3.0%
-Calhoun,Commercial building construction,5,2.6%
-Rockwall,New car dealers,5,2.3%
-Live Oak,Limited-service restaurants,5,3.9%
-Motley,Other heavy construction,5,10.0%
+Cass,General medical and surgical hospitals,5,3.0%
+Fort Bend,Elementary and secondary schools,5,1.9%
+Bosque,Full-service restaurants,5,3.4%
+Hockley,Elementary and secondary schools,5,2.2%
+San Saba,Kaolin and ball clay mining,5,2.4%
+Kerr,Home health care services,5,2.3%
+Mills,Industrial sand mining,5,3.3%
+Cooke,General medical and surgical hospitals,5,2.4%
+Wilbarger,Full-service restaurants,5,3.7%
+Irion,Natural Gas Extraction,5,3.1%
+Caldwell,Elementary and secondary schools,5,1.9%
+Jim Hogg,Commercial machinery repair and maintenance,5,3.5%
+Culberson,Office administrative services,5,2.9%
+Upshur,Oil and gas pipeline construction,5,2.0%
+Cherokee,Oil and gas pipeline construction,5,3.2%
+Denton,All other home furnishings stores,5,2.0%
+Concho,"Other specialized trucking, long-distance",5,3.2%
+Randall,Oil and gas field machinery and equipment,5,1.9%
+Kimble,Industrial building construction,5,2.9%
+Knox,All other amusement and recreation industries,5,4.4%
+Polk,General medical and surgical hospitals,5,2.4%
+Hood,Industrial sand mining,5,1.7%
+San Jacinto,Support activities for oil and gas operations,5,2.1%
+Robertson,Limited-service restaurants,5,3.1%
+Wilson,Construction equipment merchant wholesalers,5,2.3%
+Nolan,"Hotels and motels, except casino hotels",5,4.8%
+Cottle,Full-service restaurants,5,3.1%
+Calhoun,Oil and gas pipeline construction,5,2.9%
+Rockwall,Offices of dentists,5,2.4%
+Live Oak,Limited-service restaurants,5,3.3%
+Motley,NA,5,NA
 Sherman,NA,5,NA
-Ochiltree,Full-service restaurants,5,5.2%
-Comal,"Hotels and motels, except casino hotels",5,2.3%
+Ochiltree,Drilling oil and gas wells,5,5.1%
+Comal,"Hotels and motels, except casino hotels",5,1.6%
