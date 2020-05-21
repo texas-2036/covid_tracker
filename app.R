@@ -937,7 +937,7 @@ body <- dashboardBody(
                                         h4(style="font-weight:400;display:inline;", "is a part of "),
                                         h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 17th"),
+                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 20th"),
                                         h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                               ))),
                      fluidRow( 
