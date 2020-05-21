@@ -756,7 +756,7 @@ letter-spacing: 3px;
   width: 100%;
   background-color: #002D74;
   margin: 0 2px;
-  padding: 34% 0;
+  padding: 20% 0;
   max-height: 275px;  
 }
 
@@ -764,6 +764,7 @@ letter-spacing: 3px;
   background-color:#002D74 !important;
   color:#fff !important;
   width:100% !important;
+  line-height:1.55 !important;
 }
 
 .gt_title {
@@ -776,8 +777,24 @@ letter-spacing: 3px;
     color:#fff !important;
 }
 
+.gt_table_body {
+  font-size: .9em;
+}
+
 .gt_row .gt_left {
   font-size: .9em;
+}
+
+.cnty_latest_date {
+  text-align: center;
+  font-size: .45em;
+  font-weight: 500;
+  background-color: #F26852;
+  width: 72%;
+  height: 21px;
+  padding-top: 4px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .leaflet-bar button, .leaflet-bar button:hover {
