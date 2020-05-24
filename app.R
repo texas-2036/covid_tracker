@@ -972,7 +972,7 @@ body <- dashboardBody(
                                         h4(style="font-weight:400;display:inline;", "is a part of "),
                                         h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 21st"),
+                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 23rd"),
                                         h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                               ))),
                      fluidRow( 
@@ -1040,6 +1040,27 @@ body <- dashboardBody(
               column(width=6,
                      highchartOutput("cnty_new_deaths_hchart", height = 350))
             ),
+            
+
+# ~~ Hospital Capacity Trends ---------------------------------------------
+
+            
+            h3(class="covid-topic", "Hospital Capacity Trends"),
+column(width = 12,
+       tags$div(class="tsa-paragraph",
+                 br(),
+                 h4(style="font-weight:700;display:inline;","IMPORTANT NOTE:"),
+                 h4(style="font-weight:400;display:inline;","As described above, county-level hospital capacity data is represented at the Trauma Service Area level instead of the county. Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. The trend data shown below represents data for this county's assigned Trauma Service Area."),
+                 ),
+       br(),
+       br()
+       ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_ers_hchart", height = 300)),
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_of_total_er_hchart", height = 300))
+            ),
             # ~~Mobility Trends Data --------------------------------------------------
             
             h3(class="covid-topic", "Mobility Trends", span="id='cnty_mob"),
@@ -1104,6 +1125,8 @@ server <- function (input, output, session) {
                          "state_employees_hchart", "state_grocery_hchart", "state_parks_hchart",
                          "state_transit_hchart", "state_retail_rec_hchart", "state_workplace_hchart",
                          "state_residential_hchart", "cnty_new_deaths_hchart", "cnty_new_cases_hchart", 
+                         "daily_covid_ers_hchart","daily_covid_of_total_er_hchart",
+                         "cnty_daily_covid_of_total_er_hchart","cnty_daily_covid_ers_hchart",
                          "cnty_curves_hchart", "cnty_grocery_hchart", "cnty_parks_hchart",
                          "cnty_transit_hchart", "cnty_retail_rec_hchart", "cnty_workplace_hchart", 
                          "cnty_residential_hchart","cnty_claims_hchart"))
@@ -1115,7 +1138,7 @@ server <- function (input, output, session) {
     
     Sys.sleep(3)
     
-    head(cars)
+    # head(cars)
   })
   
   # App Disconnect Dialogue ----------------------------------------------------------
@@ -1342,7 +1365,10 @@ server <- function (input, output, session) {
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Texas COVID-19 Case Growth Rate, By Day | <span style='color: #FFD100'>7-Day Rolling Avg.</span>",
+        text ="Texas COVID-19 Case Growth Rate, By Day",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="Last 30-Days of Data Shown Here | LEGEND - <span style='color: #FFD100'>7-DAY ROLLING AVG.</span>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text = "Growth Rate From Previous Day"),
                min = round(mean(state_case_growth$min_new), 2), 
@@ -1364,6 +1390,10 @@ server <- function (input, output, session) {
                                              color="#fff",fontWeight="500", textTransform="uppercase")),
                    title = list(style = list(fontFamily = "Montserrat", fontWeight = "bold",color="white"),
                                 align = "left"), 
+                   subtitle = list(style = list(fontFamily = "Montserrat", 
+                                                color="#fff",
+                                                fontSize = "13px"),
+                                   align = "left"), 
                    legend = list(align = "right", 
                                  style = list(fontFamily = "Montserrat", color="white"), 
                                  verticalAlign = "bottom"),
@@ -1914,10 +1944,10 @@ server <- function (input, output, session) {
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Texas COVID-19-Related Daily ER Visits",
+        text ="COVID-19-Related Daily ER Visits",
         useHTML = TRUE) %>% 
       hc_subtitle(
-        text ="Total number of ER visits in the last 24 hours for suspected COVID-19 related illness <br>LEGEND - <span style='color: #FFD100'>7-Day Rolling Avg.</span>",
+        text ="Covering all of Texas, this shows the total number of ER visits in the last 24 hours for suspected COVID-19 related illness <br>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="New Visits Per Day"),
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
@@ -1930,7 +1960,7 @@ server <- function (input, output, session) {
       hc_credits(
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
-        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html#chart-7-total-confirmed-covid-19-in-icu-beds") %>%
+        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
       hc_add_theme(
         hc_theme_merge(
           hc_theme_smpl(),
@@ -1943,7 +1973,9 @@ server <- function (input, output, session) {
                                 align = "left"), 
                    subtitle = list(style = list(fontFamily = "Montserrat", 
                                                 color="#fff",
-                                                fontSize = "12px"),
+                                                textTransform="initial",
+                                                fontWeight="400",
+                                                fontSize = "14px"),
                                    align = "left"), 
                    legend = list(align = "right", 
                                  style = list(fontFamily = "Montserrat", color="white"), 
@@ -1997,10 +2029,10 @@ server <- function (input, output, session) {
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Texas COVID-19-Related ER Visits As % of Total New ER Visits",
+        text ="COVID-19-Related ER Visits As % of Total New ER Visits",
         useHTML = TRUE) %>% 
       hc_subtitle(
-        text ="Total number of ER visits in the last 24 hours for suspected COVID-19 related illness as a share of all ER visits that day.<br/>LEGEND - <span style='color: #FFD100'>7-Day Rolling Avg.</span>",
+        text ="Covering all of Texas, this shows the total number of ER visits in the last 24 hours for suspected COVID-19 related illness as a share of all ER visits that day.<br/>LEGEND - <span style='color: #FFD100;;font-weight:bold'>7-DAY ROLLING AVG.</span>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="Daily COVID-19 Share of All ER Visits"),
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
@@ -2013,7 +2045,7 @@ server <- function (input, output, session) {
       hc_credits(
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
-        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html#chart-7-total-confirmed-covid-19-in-icu-beds") %>%
+        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
       hc_add_theme(
         hc_theme_merge(
           hc_theme_smpl(),
@@ -2026,7 +2058,9 @@ server <- function (input, output, session) {
                                 align = "left"), 
                    subtitle = list(style = list(fontFamily = "Montserrat", 
                                                 color="#fff",
-                                                fontSize = "12px"),
+                                                textTransform="initial",
+                                                fontWeight="400",
+                                                fontSize = "14px"),
                                    align = "left"), 
                    legend = list(align = "right", 
                                  style = list(fontFamily = "Montserrat", color="white"), 
@@ -3137,6 +3171,184 @@ server <- function (input, output, session) {
     })
     
     # CHARTS - COUNTY------------------------------------------------------------------
+    
+    # {TSA New COVID-Related ER Visits}  --------------------------------------------------
+    
+    output$cnty_daily_covid_ers_hchart <- renderHighchart({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+      dataset()
+      
+      dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>% 
+        as_tibble() %>% 
+        filter(tsa_counties==input$countyname) %>%
+        mutate(min_new = min(covid19_er_visits_24h, na.rm = TRUE),
+               max_new = max(covid19_er_visits_24h, na.rm = TRUE)) %>% 
+        mutate(min_new = as.numeric(min_new),
+               max_new = as.numeric(max_new)) %>% 
+        ungroup() %>% 
+        arrange(date)
+      
+      dshs_tsa_24hr_data_hchart %>% 
+        hchart("column", hcaes(x = date, y = covid19_er_visits_24h), 
+               animation=FALSE,
+               color = "#fff") %>% 
+        hc_add_series(dshs_tsa_24hr_data_hchart, type = "area", hcaes(x = date, y = covid19_er_visits_24h_7day_avg),
+                      tooltip = list(pointFormat = "<br>7-Day Avg.: {point.covid19_er_visits_24h_7day_avg:,.0f}"),
+                      color = "#FFD100", name="7-Day Avg.") %>%
+        hc_plotOptions(area = list(fillOpacity=.3)) %>% 
+        hc_title(
+          text = paste0(input$countyname," County | COVID-19-Related Daily ER Visits"),
+          useHTML = TRUE) %>% 
+        hc_subtitle(
+          text ="Covering all of Texas, this shows the total number of ER visits in the last 24 hours for suspected COVID-19 related illness <br>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
+          useHTML = TRUE) %>% 
+        hc_yAxis(title = list(text ="New Visits Per Day"),
+                 min = mean(dshs_tsa_24hr_data_hchart$min_new),
+                 max = mean(dshs_tsa_24hr_data_hchart$max_new),
+                 format = "{value:,.0f}") %>% 
+        hc_xAxis(title=NULL) %>% 
+        hc_tooltip(table = TRUE, sort = TRUE,
+                   pointFormat = "<b>{point.name}</b><br>
+                   New Visits: {point.y:,.0f}") %>% 
+        hc_credits(
+          enabled = TRUE,
+          text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+          href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
+        hc_add_theme(
+          hc_theme_merge(
+            hc_theme_smpl(),
+            hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                  style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                               color="#fff",fontWeight="500", textTransform="uppercase")),
+                     title = list(style = list(fontFamily = "Montserrat", 
+                                               fontWeight = "bold",
+                                               color="white"),
+                                  align = "left"), 
+                     subtitle = list(style = list(fontFamily = "Montserrat", 
+                                                  color="#fff",
+                                                  textTransform="initial",
+                                                  fontWeight="400",
+                                                  fontSize = "14px"),
+                                     align = "left"), 
+                     legend = list(align = "right", 
+                                   style = list(fontFamily = "Montserrat", color="white"), 
+                                   verticalAlign = "bottom"),
+                     credits = list(style = list(color = "#fff")),
+                     xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                  title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                            color="#fff",fontWeight="500")),
+                                  gridLineWidth = 0,
+                                  gridLineColor = "#F3F3F3", 
+                                  lineColor = "#fff", 
+                                  minorGridLineColor = "#F3F3F3", 
+                                  tickColor = "#F3F3F3", 
+                                  tickWidth = .5), 
+                     yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                  title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                            color="#fff",fontWeight="500")), 
+                                  gridLineWidth = .5,
+                                  gridLineColor = "#F3F3F3", 
+                                  lineColor = "#fff", 
+                                  minorGridLineColor = "#F3F3F3", 
+                                  tickColor = "#F3F3F3", 
+                                  tickWidth = 1))))
+      
+      
+    })
+    
+    
+    # {TSA COVID-Related ER Visits of All ER Visits Charts} ----------------------------------------------
+    
+    output$cnty_daily_covid_of_total_er_hchart <- renderHighchart({
+      
+      # Make sure requirements are met
+      req(input$countyname)
+      
+      dataset()
+      
+      dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
+        as_tibble() %>% 
+        filter(tsa_counties==input$countyname) %>%
+        mutate(covid_share_of_new_er_visits=round(covid_share_of_new_er_visits*100, digits=1),
+               covid_share_of_new_er_visits_7day_avg=round(covid_share_of_new_er_visits_7day_avg*100, digits=1)) %>% 
+        mutate(min_new = min(covid_share_of_new_er_visits, na.rm = TRUE),
+               max_new = max(covid_share_of_new_er_visits, na.rm = TRUE)) %>% 
+        mutate(min_new = as.numeric(min_new),
+               max_new = as.numeric(max_new)) %>% 
+        ungroup() %>% 
+        arrange(date) %>% 
+        filter(date >= as.Date("2020-03-16"))
+      
+      dshs_tsa_24hr_data_hchart %>% 
+        hchart("column", hcaes(x = date, y = covid_share_of_new_er_visits), 
+               animation=FALSE,
+               color = "#fff") %>% 
+        hc_add_series(dshs_tsa_24hr_data_hchart, type = "area", hcaes(x = date, y = covid_share_of_new_er_visits_7day_avg),
+                      tooltip = list(pointFormat = "<br>7-Day Avg.: {point.covid_share_of_new_er_visits_7day_avg}%"),
+                      color = "#FFD100", name="7-Day Avg.") %>%
+        hc_plotOptions(area = list(fillOpacity=.3)) %>% 
+        hc_title(
+          text = paste0(input$countyname," County | COVID-19-Related ER Visits (% of All Visits)"),
+          useHTML = TRUE) %>% 
+        hc_subtitle(
+          text ="Covering all of Texas, this shows the total number of ER visits in the last 24 hours for suspected COVID-19 related illness as a share of all ER visits that day.<br/>LEGEND - <span style='color: #FFD100;;font-weight:bold'>7-DAY ROLLING AVG.</span>",
+          useHTML = TRUE) %>% 
+        hc_yAxis(title = list(text ="Daily COVID-19 Share of All ER Visits"),
+                 min = mean(dshs_tsa_24hr_data_hchart$min_new),
+                 max = mean(dshs_tsa_24hr_data_hchart$max_new),
+                 format = "{value}%") %>% 
+        hc_xAxis(title=NULL) %>% 
+        hc_tooltip(table = TRUE, sort = TRUE,
+                   pointFormat = "<b>{point.name}</b><br>
+                   Today's Share: {point.y}%") %>% 
+        hc_credits(
+          enabled = TRUE,
+          text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+          href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
+        hc_add_theme(
+          hc_theme_merge(
+            hc_theme_smpl(),
+            hc_theme(chart = list(backgroundColor = "#3A4A9F", 
+                                  style = list(fontFamily = "Montserrat", fontSize = "28px", 
+                                               color="#fff",fontWeight="500", textTransform="uppercase")),
+                     title = list(style = list(fontFamily = "Montserrat", 
+                                               fontWeight = "bold",
+                                               color="white"),
+                                  align = "left"), 
+                     subtitle = list(style = list(fontFamily = "Montserrat", 
+                                                  color="#fff",
+                                                  textTransform="initial",
+                                                  fontWeight="400",
+                                                  fontSize = "14px"),
+                                     align = "left"), 
+                     legend = list(align = "right", 
+                                   style = list(fontFamily = "Montserrat", color="white"), 
+                                   verticalAlign = "bottom"),
+                     credits = list(style = list(color = "#fff")),
+                     xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                  title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                            color="#fff",fontWeight="500")),
+                                  gridLineWidth = 0,
+                                  gridLineColor = "#F3F3F3", 
+                                  lineColor = "#fff", 
+                                  minorGridLineColor = "#F3F3F3", 
+                                  tickColor = "#F3F3F3", 
+                                  tickWidth = .5), 
+                     yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
+                                  title = list(style = list(color = "#fff", fontSize = "12px", 
+                                                            color="#fff",fontWeight="500")), 
+                                  gridLineWidth = .5,
+                                  gridLineColor = "#F3F3F3", 
+                                  lineColor = "#fff", 
+                                  minorGridLineColor = "#F3F3F3", 
+                                  tickColor = "#F3F3F3", 
+                                  tickWidth = 1))))
+      
+    })
+    
     
     # {County Google Mobility - Grocery Chart} -------------------------------------------------
     
