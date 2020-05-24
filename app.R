@@ -235,8 +235,10 @@ dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data
 dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_vent_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_tsa_24hr_data <- read_csv("clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
+dshs_tsa_24hr_data <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
   ungroup()
+
+dshs_test_pos <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/test_pos_tx_ts.csv")
 
 dshs_syndromic_tx <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/syndromic_tx.csv")
 
@@ -444,7 +446,8 @@ tx_urn <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/m
 # 
 # ** State -----------------------------------
 
-# Tests Per 100,000
+
+# ~~Testing Metrics ----------------------------------------------------------
 
 total_population <- state_pop %>%
   clean_names() %>% 
@@ -477,6 +480,11 @@ hosp_rate <- dshs_tsa_hosp_data %>%
   left_join(active_cases, by="state") %>% 
   mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/active)) %>% 
   mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1))
+
+test_pos_today <- dshs_test_pos %>% 
+  filter(date==max(date)) %>% 
+  mutate(test_pos_label=test_pos/100) %>% 
+  mutate_at(vars(test_pos_label),scales::percent_format(accuracy=.01, scale=100))
 
 # **STATE EXPLORER METRICS ------------------------------------------------------
 
@@ -775,11 +783,11 @@ body <- dashboardBody(
                      h2(class="economic-tile",
                         p(class="tile-header", "Test Positive Rate"),
                         hr(),
-                        p(style = "text-align:center;font-size:1em;font-weight:800", paste0(tex_today_tests$test_pos_label)),
+                        p(style = "text-align:center;font-size:1em;font-weight:800", paste0(test_pos_today$test_pos_label)),
                         p(style = "text-align:center;font-size:.6em;font-weight:600;color:#DBDCDD;", 
-                          paste0("Tests Were Positive (", format(tex_today_tests$date, format="%b %d"),")")),
+                          paste0("Last 7 Days From ", format(test_pos_today$date, format="%b %d"))),
                         p(style = "text-align:center;font-size:.4em;font-weight:400", 
-                          tags$a(href="https://github.com/COVID19Tracking/covid-tracking-data","Source: COVID-Tracking Project"))))),
+                          tags$a(href="https://www.dshs.state.tx.us/coronavirus/additionaldata/","Source: Texas Department of State Health Services"))))),
             
             # ~~Syndromic Data ---------------------------------------------------------
             
