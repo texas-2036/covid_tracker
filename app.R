@@ -1187,7 +1187,11 @@ server <- function (input, output, session) {
                          "state_transit_hchart", "state_retail_rec_hchart", "state_workplace_hchart",
                          "state_residential_hchart", "cnty_new_deaths_hchart", "cnty_new_cases_hchart", 
                          "daily_covid_ers_hchart","daily_covid_of_total_er_hchart",
+                         "daily_covid_gen_admits_hchart","daily_covid_icu_admits_hchart",
+                         "total_conf_covid_gen_hchart","total_conf_covid_icu_hchart",
                          "cnty_daily_covid_of_total_er_hchart","cnty_daily_covid_ers_hchart",
+                         "cnty_daily_covid_gen_admits_hchart","cnty_daily_covid_icu_admits_hchart",
+                         "cnty_total_conf_covid_gen_hchart","cnty_total_conf_covid_icu_hchart",
                          "cnty_curves_hchart", "cnty_grocery_hchart", "cnty_parks_hchart",
                          "cnty_transit_hchart", "cnty_retail_rec_hchart", "cnty_workplace_hchart", 
                          "cnty_residential_hchart","cnty_claims_hchart"))
