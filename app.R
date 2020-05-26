@@ -523,7 +523,7 @@ hosp_rate <- dshs_tsa_hosp_data %>%
 
 test_pos_today <- dshs_test_pos %>% 
   filter(date==max(date)) %>% 
-  mutate(test_pos_label=test_pos/100) %>% 
+  mutate(test_pos_label=test_pos) %>% 
   mutate_at(vars(test_pos_label),scales::percent_format(accuracy=.01, scale=100))
 
 # **STATE EXPLORER METRICS ------------------------------------------------------
@@ -852,11 +852,12 @@ body <- dashboardBody(
               infoBoxOutput("tx_icu_beds", width=3),
               infoBoxOutput("tx_vents", width=3)
             ),
+            hr(),
             fluidRow(
               column(width = 6,
-                     highchartOutput("daily_covid_ers_hchart", height = 350)),
+                     highchartOutput("total_conf_covid_gen_hchart", height = 350)),
               column(width = 6,
-                     highchartOutput("daily_covid_of_total_er_hchart", height = 350))
+                     highchartOutput("total_conf_covid_icu_hchart", height = 350))
             ),
             fluidRow(
               column(width = 6,
@@ -866,9 +867,9 @@ body <- dashboardBody(
             ),
             fluidRow(
               column(width = 6,
-                     highchartOutput("total_conf_covid_gen_hchart", height = 350)),
+                     highchartOutput("daily_covid_ers_hchart", height = 350)),
               column(width = 6,
-                     highchartOutput("total_conf_covid_icu_hchart", height = 350))
+                     highchartOutput("daily_covid_of_total_er_hchart", height = 350))
             ),
             
             # ~~Mobility ---------------------------------------------------------
@@ -1101,27 +1102,27 @@ column(width = 12,
                  h4(style="font-weight:400;display:inline;","As described above, county-level hospital capacity data is represented at the Trauma Service Area level instead of the county. Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. The trend data shown below represents data for this county's assigned Trauma Service Area."),
                  ),
        br(),
-       br()
+       hr()
        ),
-            fluidRow(
-              column(width = 6,
-                     highchartOutput("cnty_daily_covid_ers_hchart", height = 350)),
-              column(width = 6,
-                     highchartOutput("cnty_daily_covid_of_total_er_hchart", height = 350))
-            ),
-            fluidRow(
-              column(width = 6,
-                     highchartOutput("cnty_daily_covid_gen_admits_hchart", height = 350)),
-              column(width = 6,
-                     highchartOutput("cnty_daily_covid_icu_admits_hchart", height = 350))
-            ),
             fluidRow(
               column(width = 6,
                      highchartOutput("cnty_total_conf_covid_gen_hchart", height = 350)),
               column(width = 6,
                      highchartOutput("cnty_total_conf_covid_icu_hchart", height = 350))
             ),
-
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_gen_admits_hchart", height = 350)),
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_icu_admits_hchart", height = 350))
+            ),            
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_ers_hchart", height = 350)),
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_of_total_er_hchart", height = 350))
+            ),
+  
             # ~~Mobility Trends Data --------------------------------------------------
             
             h3(class="covid-topic", "Mobility Trends", span="id='cnty_mob"),
