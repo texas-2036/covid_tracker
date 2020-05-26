@@ -1,5 +1,5 @@
 date,tsa,location,tsa_counties,lab_con_covid_icu_tot_7day_avg,covid_share_of_new_er_visits,covid_share_of_new_er_visits_7day_avg,covid19_admitted_gen_24h,covid19_admitted_gen_24h_7day_avg,covid19_admitted_icu_24h,covid19_admitted_icu_24h_7day_avg,covid19_er_visits_24h,covid19_er_visits_24h_7day_avg,lab_con_covid_gen_tot_7day_avg,lab_con_covid19_gen,lab_con_covid19_icu,total_er_visits_24h,total_er_visits_24h_7day_avg
-2020-05-25,total,Texas,NA,0,0.092,0,586,0,184,0,1865,0,0,887,647,20328,0
+2020-05-25,Total,Texas,NA,667.4285714285714,0.092,0.11,586,712.714,184,201.857,1865,2444.714,950.714,887,647,20328,22139.571
 2020-05-24,Total,Texas,NA,671.4285714285714,0.1,0.112,629,719.571,185,204.857,2063,2498.571,975,854,657,20655,22234.714
 2020-05-23,Total,Texas,NA,665.8571428571429,0.105,0.113,695,711.571,193,201.857,2321,2487.571,986.286,929,643,22006,21971.857
 2020-05-22,Total,Texas,NA,660.2857142857143,0.114,0.116,744,696,200,199.143,2619,2507.429,983.286,985,676,22975,21643.714
