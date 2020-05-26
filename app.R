@@ -288,7 +288,7 @@ state_pop <- read_rds("clean_data/population/state_pop.rds")
 
 tsa_shps <- dshs_tsa_hosp_data %>%
   filter(date==max(date)) %>% 
-  filter(tsa!="Total") %>% 
+  filter(!str_detect(tsa,"Total|total")) %>%
   select(tsa,tsa_counties,geometry) %>% 
   group_by(tsa) %>% 
   summarise(tsa_counties = toString(tsa_counties)) %>% 
@@ -514,7 +514,7 @@ active_cases <- jhu_cases_state %>%
 hosp_rate <- dshs_tsa_hosp_data %>% 
   as_tibble() %>% 
   filter(date==max(date)) %>% 
-  filter(tsa=="Total") %>% 
+  filter(str_detect(tsa,"Total|total")) %>% 
   select(lab_con_covid19_gen, lab_con_covid19_icu) %>% 
   mutate(state="Texas") %>% 
   left_join(active_cases, by="state") %>% 
@@ -1341,10 +1341,8 @@ server <- function (input, output, session) {
     
     infoBox(
       title="% Hospitalized", 
-      # valuÇe="6.08%",
       value=paste0(tot_pos$hospitalization_rate, "%"),
       subtitle="% of Active Cases",
-      # subtitle=paste0(tot_pos$hosprate_rank, " Most in US"),
       icon = icon("hospital-user"), color = "navy", href=NULL
     )
   })
@@ -1359,7 +1357,7 @@ server <- function (input, output, session) {
       as_tibble() %>% 
       filter(date==max(date)) %>% 
       select(tsa,tsa_counties,available_beds,bed_capacity) %>% 
-      filter(tsa=="Total") %>%
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(bed_utilization=round(available_beds/bed_capacity,digits=3)) %>%
       mutate_at(vars(bed_utilization),scales::percent)
     
@@ -1381,7 +1379,7 @@ server <- function (input, output, session) {
       as_tibble() %>%
       filter(date==max(date)) %>% 
       select(tsa,adult_icu,icu_beds_occupied) %>% 
-      filter(tsa=="Total") %>%
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(bed_avail=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
       mutate_at(vars(bed_avail),scales::percent)
     
@@ -1401,7 +1399,7 @@ server <- function (input, output, session) {
     
     tot_pos <- dshs_tsa_vent_data %>%
       filter(date==max(date)) %>% 
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=2)) %>% 
       select(vent_availability) %>% 
       mutate_at(vars(vent_availability), scales::percent_format(accuracy=.1))
@@ -1745,7 +1743,7 @@ server <- function (input, output, session) {
     # req(input$countyname)
     
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>% 
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(min_new = min(covid19_er_visits_24h, na.rm = TRUE),
              max_new = max(covid19_er_visits_24h, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
@@ -1791,7 +1789,7 @@ server <- function (input, output, session) {
   output$daily_covid_of_total_er_hchart <- renderHighchart({
 
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(covid_share_of_new_er_visits=round(covid_share_of_new_er_visits*100, digits=1),
              covid_share_of_new_er_visits_7day_avg=round(covid_share_of_new_er_visits_7day_avg*100, digits=1)) %>% 
       mutate(min_new = min(covid_share_of_new_er_visits, na.rm = TRUE),
@@ -1837,7 +1835,7 @@ server <- function (input, output, session) {
   output$daily_covid_gen_admits_hchart <- renderHighchart({
 
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(covid_share_of_new_er_visits=covid19_admitted_gen_24h,
              covid_share_of_new_er_visits_7day_avg=covid19_admitted_gen_24h_7day_avg) %>% 
       mutate(min_new = min(covid19_admitted_gen_24h, na.rm = TRUE),
@@ -1883,7 +1881,7 @@ server <- function (input, output, session) {
   output$daily_covid_icu_admits_hchart <- renderHighchart({
 
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(covid_share_of_new_er_visits=covid19_admitted_icu_24h,
              covid_share_of_new_er_visits_7day_avg=covid19_admitted_icu_24h_7day_avg) %>% 
       mutate(min_new = min(covid19_admitted_icu_24h, na.rm = TRUE),
@@ -1929,7 +1927,7 @@ server <- function (input, output, session) {
   output$total_conf_covid_gen_hchart <- renderHighchart({
 
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(covid_share_of_new_er_visits=lab_con_covid19_gen,
              covid_share_of_new_er_visits_7day_avg=lab_con_covid_gen_tot_7day_avg) %>% 
       mutate(min_new = min(lab_con_covid19_gen, na.rm = TRUE),
@@ -1975,7 +1973,7 @@ server <- function (input, output, session) {
   output$total_conf_covid_icu_hchart <- renderHighchart({
 
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
-      filter(tsa=="Total") %>% 
+      filter(str_detect(tsa,"Total|total")) %>%
       mutate(covid_share_of_new_er_visits=lab_con_covid19_icu,
              covid_share_of_new_er_visits_7day_avg=lab_con_covid_icu_tot_7day_avg) %>% 
       mutate(min_new = min(lab_con_covid19_icu, na.rm = TRUE),
@@ -2710,7 +2708,6 @@ server <- function (input, output, session) {
         filter(date==max(date)) %>% 
         as_tibble() %>% 
         filter(tsa_counties==input$countyname) %>%
-        # filter(tsa_counties=="Harris") %>%
         mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=3)) %>% 
         select(vent_availability) %>% 
         mutate_at(vars(vent_availability), scales::percent_format(accuracy=.1)) %>% 
