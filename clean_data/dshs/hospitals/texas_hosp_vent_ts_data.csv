@@ -1,4 +1,259 @@
 date,sheet,tsa,location,tsa_counties,pedi_vent_avail,pedi_vents_in_use,adult_vents_avail,adult_vents_in_use,total_vents_avail,total_vents_in_use,pedi_bi_pap_avail,pedi_bi_pap_in_use,adult_bi_pap_avail,adult_bi_pap_in_use,total_bi_pap_avail,total_bi_pap_in_use,total_anesthesia_vents_in_use,total_covid_on_vents,anesthsia_vents_avail
+2020-05-26,Vent Availability,TSA-A,Amarillo,Armstrong,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Briscoe,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Carson,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Childress,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Collingsworth,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Dallam,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Deaf Smith,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Donley,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Gray,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Hall,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Hansford,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Hartley,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Hemphill,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Hutchinson,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Lipscomb,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Moore,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Ochiltree,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Oldham,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Parmer,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Potter,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Randall,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Roberts,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Sherman,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Swisher,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-A,Amarillo,Wheeler,28,4,88,26,116,30,0,0,49,19,49,19,0,0,25
+2020-05-26,Vent Availability,TSA-B,Lubbock,Bailey,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Borden,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Castro,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Cochran,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Cottle,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Crosby,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Dawson,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Dickens,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Floyd,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Gaines,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Garza,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Hale,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Hockley,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Kent,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,King,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Lamb,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Lubbock,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Lynn,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Motley,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Scurry,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Terry,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-B,Lubbock,Yoakum,2,4,166,40,168,44,1,0,54,35,55,35,0,5,30
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Archer,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Baylor,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Clay,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Foard,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Hardeman,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Jack,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Montague,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Wichita,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Wilbarger,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-C,Witchita Falls,Young,2,0,49,8,51,8,0,0,10,4,10,4,0,0,25
+2020-05-26,Vent Availability,TSA-D,Abilene,Brown,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Callahan,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Coleman,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Comanche,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Eastland,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Fisher,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Haskell,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Jones,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Knox,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Mitchell,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Nolan,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Shackelford,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Stephens,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Stonewall,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Taylor,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-D,Abilene,Throckmorton,9,0,48,2,57,2,0,0,20,2,20,2,0,0,29
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Collin,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Cooke,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Dallas,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Denton,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Ellis,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Erath,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Fannin,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Grayson,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Hood,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Hunt,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Johnson,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Kaufman,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Navarro,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Palo Pinto,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Parker,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Rockwall,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Somervell,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Tarrant,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-E,Dallas/Ft. Worth,Wise,287,152,978,601,1265,753,73,22,722,277,795,299,174,139,344
+2020-05-26,Vent Availability,TSA-F,Paris,Bowie,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Cass,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Delta,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Hopkins,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Lamar,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Morris,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Red River,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-F,Paris,Titus,12,0,81,13,93,13,0,0,58,20,58,20,0,2,38
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Anderson,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Camp,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Cherokee,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Franklin,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Freestone,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Gregg,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Harrison,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Henderson,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Houston,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Marion,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Panola,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Rains,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Rusk,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Shelby,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Smith,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Trinity,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Upshur,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Van Zandt,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-G,Longview/Tyler,Wood,64,6,157,74,221,80,26,0,147,56,173,56,0,20,23
+2020-05-26,Vent Availability,TSA-H,Lufkin,Angelina,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-H,Lufkin,Nacogdoches,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-H,Lufkin,Polk,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-H,Lufkin,Sabine,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-H,Lufkin,San Augustine,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-H,Lufkin,San Jacinto,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-H,Lufkin,Tyler,25,0,50,33,75,33,0,0,33,10,33,10,3,2,28
+2020-05-26,Vent Availability,TSA-I,El Paso,Culberson,207,5,191,76,398,81,5,0,93,46,98,46,2,29,44
+2020-05-26,Vent Availability,TSA-I,El Paso,El Paso,207,5,191,76,398,81,5,0,93,46,98,46,2,29,44
+2020-05-26,Vent Availability,TSA-I,El Paso,Hudspeth,207,5,191,76,398,81,5,0,93,46,98,46,2,29,44
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Andrews,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Brewster,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Crane,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Ector,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Glasscock,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Howard,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Jeff Davis,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Loving,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Martin,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Midland,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Pecos,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Presidio,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Reeves,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Terrell,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Upton,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Ward,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-J,Midland/Odessa,Winkler,38,2,180,18,218,20,13,0,52,11,65,11,0,0,33
+2020-05-26,Vent Availability,TSA-K,San Angelo,Coke,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Concho,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Crockett,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Irion,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Kimble,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Mason,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,McCulloch,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Menard,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Reagan,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Runnels,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Schleicher,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Sterling,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Sutton,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-K,San Angelo,Tom Green,4,0,37,0,41,0,0,0,0,0,0,0,0,0,15
+2020-05-26,Vent Availability,TSA-L,Belton/Killeen,Bell,24,0,106,33,130,33,5,0,86,4,91,4,0,3,36
+2020-05-26,Vent Availability,TSA-L,Belton/Killeen,Coryell,24,0,106,33,130,33,5,0,86,4,91,4,0,3,36
+2020-05-26,Vent Availability,TSA-L,Belton/Killeen,Hamilton,24,0,106,33,130,33,5,0,86,4,91,4,0,3,36
+2020-05-26,Vent Availability,TSA-L,Belton/Killeen,Lampasas,24,0,106,33,130,33,5,0,86,4,91,4,0,3,36
+2020-05-26,Vent Availability,TSA-L,Belton/Killeen,Milam,24,0,106,33,130,33,5,0,86,4,91,4,0,3,36
+2020-05-26,Vent Availability,TSA-L,Belton/Killeen,Mills,24,0,106,33,130,33,5,0,86,4,91,4,0,3,36
+2020-05-26,Vent Availability,TSA-M,Waco,Bosque,0,0,64,10,64,10,0,0,52,9,52,9,0,0,9
+2020-05-26,Vent Availability,TSA-M,Waco,Falls,0,0,64,10,64,10,0,0,52,9,52,9,0,0,9
+2020-05-26,Vent Availability,TSA-M,Waco,Hill,0,0,64,10,64,10,0,0,52,9,52,9,0,0,9
+2020-05-26,Vent Availability,TSA-M,Waco,Limestone,0,0,64,10,64,10,0,0,52,9,52,9,0,0,9
+2020-05-26,Vent Availability,TSA-M,Waco,McLennan,0,0,64,10,64,10,0,0,52,9,52,9,0,0,9
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Brazos,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Burleson,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Grimes,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Leon,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Madison,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Robertson,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-N,Bryan/College Station,Washington,7,0,51,8,58,8,2,0,27,7,29,7,0,1,28
+2020-05-26,Vent Availability,TSA-O,Austin,Bastrop,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Blanco,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Burnet,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Caldwell,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Fayette,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Hays,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Lee,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Llano,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,San Saba,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Travis,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-O,Austin,Williamson,106,22,328,93,434,115,19,0,166,57,185,57,3,18,106
+2020-05-26,Vent Availability,TSA-P,San Antonio,Atascosa,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Bandera,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Bexar,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Comal,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Dimmit,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Edwards,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Frio,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Gillespie,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Gonzales,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Guadalupe,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Karnes,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Kendall,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Kerr,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Kinney,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,La Salle,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Maverick,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Medina,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Real,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Uvalde,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Val Verde,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Wilson,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-P,San Antonio,Zavala,73,32,816,171,889,203,14,7,316,70,330,77,17,43,183
+2020-05-26,Vent Availability,TSA-Q,Houston,Austin,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Colorado,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Fort Bend,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Harris,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Matagorda,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Montgomery,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Walker,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Waller,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-Q,Houston,Wharton,296,123,969,567,1265,690,91,12,658,317,749,329,191,116,198
+2020-05-26,Vent Availability,TSA-R,Galveston,Brazoria,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Chambers,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Galveston,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Hardin,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Jasper,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Jefferson,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Liberty,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Newton,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-R,Galveston,Orange,31,6,162,71,193,77,22,0,135,47,157,47,9,29,120
+2020-05-26,Vent Availability,TSA-S,Victoria,Calhoun,3,1,42,11,45,12,0,0,24,3,24,3,0,1,26
+2020-05-26,Vent Availability,TSA-S,Victoria,De Witt,3,1,42,11,45,12,0,0,24,3,24,3,0,1,26
+2020-05-26,Vent Availability,TSA-S,Victoria,Goliad,3,1,42,11,45,12,0,0,24,3,24,3,0,1,26
+2020-05-26,Vent Availability,TSA-S,Victoria,Jackson,3,1,42,11,45,12,0,0,24,3,24,3,0,1,26
+2020-05-26,Vent Availability,TSA-S,Victoria,Lavaca,3,1,42,11,45,12,0,0,24,3,24,3,0,1,26
+2020-05-26,Vent Availability,TSA-S,Victoria,Victoria,3,1,42,11,45,12,0,0,24,3,24,3,0,1,26
+2020-05-26,Vent Availability,TSA-T,Laredo,Jim Hogg,21,0,55,23,76,23,8,3,29,15,37,18,0,5,6
+2020-05-26,Vent Availability,TSA-T,Laredo,Webb,21,0,55,23,76,23,8,3,29,15,37,18,0,5,6
+2020-05-26,Vent Availability,TSA-T,Laredo,Zapata,21,0,55,23,76,23,8,3,29,15,37,18,0,5,6
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Aransas,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Bee,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Brooks,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Duval,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Jim Wells,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Kenedy,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Kleberg,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Live Oak,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,McMullen,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Nueces,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,Refugio,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-U,Corpus Christi,San Patricio,52,20,108,36,160,56,5,0,86,57,91,57,0,1,16
+2020-05-26,Vent Availability,TSA-V,Lower Rio Grande Valley,Cameron,34,1,208,82,242,83,11,0,139,75,150,75,0,8,49
+2020-05-26,Vent Availability,TSA-V,Lower Rio Grande Valley,Hidalgo,34,1,208,82,242,83,11,0,139,75,150,75,0,8,49
+2020-05-26,Vent Availability,TSA-V,Lower Rio Grande Valley,Starr,34,1,208,82,242,83,11,0,139,75,150,75,0,8,49
+2020-05-26,Vent Availability,TSA-V,Lower Rio Grande Valley,Willacy,34,1,208,82,242,83,11,0,139,75,150,75,0,8,49
+2020-05-26,Vent Availability,Total,Texas,NA,1325,378,4934,1996,6259,2374,295,44,2956,1141,3251,1185,399,422,1411
 2020-05-25,Vent Availability,TSA-A,Amarillo,Armstrong,28,4,87,28,115,32,0,0,48,20,48,20,0,0,25
 2020-05-25,Vent Availability,TSA-A,Amarillo,Briscoe,28,4,87,28,115,32,0,0,48,20,48,20,0,0,25
 2020-05-25,Vent Availability,TSA-A,Amarillo,Carson,28,4,87,28,115,32,0,0,48,20,48,20,0,0,25
