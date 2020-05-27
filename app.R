@@ -1021,7 +1021,7 @@ body <- dashboardBody(
                                         h4(style="font-weight:400;display:inline;", "is a part of "),
                                         h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
-                                        h4(style="font-weight:800;color:#FFD100;display:inline;", "On May 24th"),
+                                        h4(style="font-weight:800;color:#FFD100;display:inline;", textOutput("tsa_date",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                               ))),
                      fluidRow( 
@@ -2478,13 +2478,12 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      tsa_name <- dshs_tsa_hosp_data %>%
+      tsa_date <- dshs_tsa_24hr_data %>%
         as_tibble() %>%
-        filter(tsa_counties==input$countyname) %>%
-        distinct(date) %>% 
-        as.character()
+        filter(date==max(date)) %>% 
+        distinct(date)
       
-      paste0("Trauma Service Area ",tsa_name, ".")
+      paste0("On ",format(tsa_date$date, format="%b %d"),",")
     })   
     
     # County Confirmed Cases --------------------------------------------------
