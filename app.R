@@ -1022,7 +1022,7 @@ body <- dashboardBody(
                                         h4(style="font-weight:800;text-align:left;display:inline;color:#FFD100;", textOutput("tsa_name",inline=TRUE)),
                                         h4(style="font-weight:400;display:inline;"," Trauma Service Areas are geographical clusters defined by where people are most likely to receive trauma care when they need it. For COVID-19 patients, it's the area where they are most likely to receive care. "),
                                         h4(style="font-weight:800;color:#FFD100;display:inline;", textOutput("tsa_date",inline=TRUE)),
-                                        h4(style="font-weight:400;display:inline;", ", the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
+                                        h4(style="font-weight:400;display:inline;", "the latest date for which we have data, hospitals in this Trauma Service Area reported the following:"),
                               ))),
                      fluidRow( 
                        column(width = 4,
@@ -1358,12 +1358,12 @@ server <- function (input, output, session) {
       filter(date==max(date)) %>% 
       select(tsa,tsa_counties,available_beds,bed_capacity) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
-      mutate(bed_utilization=round(available_beds/bed_capacity,digits=3)) %>%
-      mutate_at(vars(bed_utilization),scales::percent)
+      mutate(bed_availability=round(available_beds/bed_capacity,digits=3)) %>%
+      mutate_at(vars(bed_availability),scales::percent)
     
     
     infoBox(
-      title="All Beds Availability", value=paste0(tot_pos$bed_utilization), icon=icon("bed"),
+      title="All Beds Availability", value=paste0(tot_pos$bed_availability), icon=icon("bed"),
       subtitle="of All Beds Available",
       color = "navy", href=NULL
     )
