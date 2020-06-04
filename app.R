@@ -272,6 +272,8 @@ dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/cov
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
+dshs_tsa_hosp_data_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
+
 dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_vent_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
@@ -1353,17 +1355,16 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_tsa_hosp_data %>%
+    tot_pos <- dshs_tsa_hosp_data_ts %>%
       as_tibble() %>% 
       filter(date==max(date)) %>% 
-      select(tsa,tsa_counties,available_beds,bed_capacity) %>% 
+      select(tsa,tsa_counties,bed_avail_rate) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
-      mutate(bed_availability=round(available_beds/bed_capacity,digits=3)) %>%
-      mutate_at(vars(bed_availability),scales::percent)
+      mutate_at(vars(bed_avail_rate),scales::percent)
     
     
     infoBox(
-      title="All Beds Availability", value=paste0(tot_pos$bed_availability), icon=icon("bed"),
+      title="All Beds Availability", value=paste0(tot_pos$bed_avail_rate), icon=icon("bed"),
       subtitle="of All Beds Available",
       color = "navy", href=NULL
     )
@@ -1375,17 +1376,16 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_tsa_hosp_data %>%
+    tot_pos <- dshs_tsa_hosp_data_ts %>%
       as_tibble() %>%
       filter(date==max(date)) %>% 
-      select(tsa,adult_icu,icu_beds_occupied) %>% 
+      select(tsa,tsa_counties,icu_avail_rate) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
-      mutate(bed_avail=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
-      mutate_at(vars(bed_avail),scales::percent)
+      mutate_at(vars(icu_avail_rate),scales::percent)
     
     infoBox(
       title="ICU Beds Availability", 
-      value=paste0(tot_pos$bed_avail),
+      value=paste0(tot_pos$icu_avail_rate),
       icon=icon("procedures"),
       subtitle="of ICU Beds Available",
       color = "navy", href=NULL)
@@ -1397,16 +1397,15 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_tsa_vent_data %>%
+    tot_pos <- dshs_tsa_hosp_data_ts %>%
       filter(date==max(date)) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
-      mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=2)) %>% 
-      select(vent_availability) %>% 
-      mutate_at(vars(vent_availability), scales::percent_format(accuracy=.1))
+      select(tsa,tsa_counties, vent_avail_rate) %>% 
+      mutate_at(vars(vent_avail_rate), scales::percent_format(accuracy=.1))
     
     
     infoBox(
-      title="Ventilator Availability", value=paste0(tot_pos$vent_availability), icon=icon("lungs"),
+      title="Ventilator Availability", value=paste0(tot_pos$vent_avail_rate), icon=icon("lungs"),
       subtitle="of Ventilators Available",
       color = "navy", href=NULL)
   })
