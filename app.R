@@ -2665,14 +2665,13 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data %>%
+      dshs_tsa_hosp_data_ts %>%
         filter(date==max(date)) %>% 
         as_tibble() %>% 
-        select(tsa,tsa_counties,available_beds,bed_capacity) %>% 
+        select(tsa,tsa_counties,bed_avail_rate) %>% 
         filter(tsa_counties==input$countyname) %>%
-        mutate(bed_utilization=round(available_beds/bed_capacity,digits=3)) %>%
-        mutate_at(vars(bed_utilization), scales::percent_format(accuracy=.1)) %>% 
-        distinct(bed_utilization) %>% 
+        mutate_at(vars(bed_avail_rate), scales::percent_format(accuracy=.1)) %>% 
+        distinct(bed_avail_rate) %>% 
         as.character()
     })
     
@@ -2683,14 +2682,13 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data %>%
+      dshs_tsa_hosp_data_ts %>%
         filter(date==max(date)) %>% 
         as_tibble() %>%
-        select(tsa,tsa_counties,adult_icu,icu_beds_occupied) %>% 
+        select(tsa,tsa_counties,icu_avail_rate) %>% 
         filter(tsa_counties==input$countyname) %>%
-        mutate(bed_avail=round((icu_beds_occupied-adult_icu)/icu_beds_occupied,digits=3)) %>%
-        mutate_at(vars(bed_avail), scales::percent_format(accuracy=.1)) %>% 
-        distinct(bed_avail) %>% 
+        mutate_at(vars(icu_avail_rate), scales::percent_format(accuracy=.1)) %>% 
+        distinct(icu_avail_rate) %>% 
         as.character()
       
     })
@@ -2702,15 +2700,15 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_vent_data %>% 
+      dshs_tsa_hosp_data_ts %>% 
         filter(date==max(date)) %>% 
         as_tibble() %>% 
+        select(tsa,tsa_counties,vent_avail_rate) %>% 
         filter(tsa_counties==input$countyname) %>%
-        mutate(vent_availability=round(total_vents_avail/(total_vents_avail+total_vents_in_use), digits=3)) %>% 
-        select(vent_availability) %>% 
-        mutate_at(vars(vent_availability), scales::percent_format(accuracy=.1)) %>% 
-        distinct(vent_availability) %>% 
+        mutate_at(vars(vent_avail_rate), scales::percent_format(accuracy=.1)) %>% 
+        distinct(vent_avail_rate) %>% 
         as.character()
+      
     })
     
     # TSA Hosp Covid ER Visits -----------------------------------------------------
