@@ -796,7 +796,7 @@ body <- dashboardBody(
                    tags$div(class="tsa-paragraph",
                             br(),
                             h4(style="font-weight:700;display:inline;","NOTE:"),
-                            h4(style="font-weight:400;display:inline;","These charts were developed by recording each day's value from the DSHS daily report published on their 'Accessible Dashboard Data' report posted on their site everyday, saving a copy of that information in a timestamped file on our github, and then organizing each of the individual timestamped files into a single time-series dataset that allows us to track trends in population health as the completes more cases and fatality investigations."),
+                            h4(style="font-weight:400;display:inline;","These charts were developed by recording each day's value from the DSHS daily report published on their 'Accessible Dashboard Data' report posted on their site every day, saving a copy of that information in a timestamped file on our github, and then organizing each of the individual timestamped files into a single time-series dataset that allows us to track trends in population health as the completes more cases and fatality investigations."),
                    ),
                    br(),
                    hr()
