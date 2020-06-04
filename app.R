@@ -267,6 +267,8 @@ dshs_state_demographics <- vroom("https://raw.githubusercontent.com/texas-2036/c
 
 dshs_county_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/county_cases.csv")
 
+dshs_county_active <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/cnty_active.csv")
+
 dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/county_tests.csv")
 
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
@@ -2506,7 +2508,7 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      tx_county_cases %>%
+      dshs_county_active %>%
         filter(county==input$countyname) %>% 
         mutate_at(vars(active), scales::comma) %>% 
         distinct(active) %>% 
