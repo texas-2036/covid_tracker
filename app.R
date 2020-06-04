@@ -57,8 +57,10 @@ tx2036_hc <- hc_theme_merge(
                                         fontSize = "14px"),
                            align = "left"), 
            legend = list(align = "right", 
-                         style = list(fontFamily = "Montserrat", color="white"), 
-                         verticalAlign = "bottom"),
+                         style = list(fontFamily = "Montserrat", color="white"),
+                         itemStyle = list(fontFamily = 'Montserrat', color = 'white'),
+                         itemHoverStyle = list(color = 'gray'),   
+                         verticalAlign = "top"),
            credits = list(style = list(color = "#fff")),
            xAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
                         title = list(style = list(color = "#fff", fontSize = "12px", 
@@ -262,7 +264,7 @@ dshs_state_hospitalizations <- vroom("https://raw.githubusercontent.com/texas-20
 dshs_state_tests <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/state_tests.csv") %>% 
   mutate(fips=as.character(fips))
 
-dshs_state_demographics <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/state_case_demographics.csv") %>% 
+dshs_state_demographics <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/time_series_demographics.csv") %>% 
   mutate(fips=as.character(fips))
 
 dshs_county_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/county_cases.csv")
@@ -789,7 +791,34 @@ body <- dashboardBody(
 
             
             # ~~Population Health ---------------------------------------------------------
-            
+            h3(class="covid-topic", "Population Health", span="id='pop_health"),
+            column(width = 12,
+                   tags$div(class="tsa-paragraph",
+                            br(),
+                            h4(style="font-weight:700;display:inline;","NOTE:"),
+                            h4(style="font-weight:400;display:inline;","These charts were developed by recording each day's value from the DSHS daily report published on their 'Accessible Dashboard Data' report posted on their site everyday, saving a copy of that information in a timestamped file on our github, and then organizing each of the individual timestamped files into a single time-series dataset that allows us to track trends in population health as the completes more cases and fatality investigations."),
+                   ),
+                   br(),
+                   hr()
+            ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("state_cases_race", height = 350)),
+              column(width = 6,
+                     highchartOutput("state_fatalities_race", height = 350))
+            ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("state_cases_age", height = 350)),
+              column(width = 6,
+                     highchartOutput("state_fatalities_age", height = 350))
+            ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("state_cases_gender", height = 350)),
+              column(width = 6,
+                     highchartOutput("state_fatalities_gender", height = 350))
+            ),
             
             # ~~Testing ---------------------------------------------------------
             
@@ -1185,8 +1214,10 @@ server <- function (input, output, session) {
   # Waiter + Waitress Functions ---------------------------------------------
   
   w <- Waiter$new(html = spin_facebook(), 
-                  id = c("state_growth_rate_hchart", "cli_hchart", "ili_hchart", "state_curves_hchart",
-                         "state_new_cases_hchart", "state_new_deaths_hchart", "state_new_tests_hchart", 
+                  id = c("tx_cases","state_growth_rate_hchart", "cli_hchart", "ili_hchart", "state_curves_hchart",
+                         "state_new_cases_hchart", "state_new_deaths_hchart", "state_new_tests_hchart",
+                         "state_cases_race", "state_fatalities_race", "state_cases_age",
+                         "state_fatalities_age", "state_cases_gender", "state_fatalities_gender",
                          "state_claims_hchart", "state_businesses_hchart", "state_hours_hchart", 
                          "state_employees_hchart", "state_grocery_hchart", "state_parks_hchart",
                          "state_transit_hchart", "state_retail_rec_hchart", "state_workplace_hchart",
@@ -1524,6 +1555,8 @@ server <- function (input, output, session) {
   
   output$state_curves_hchart <- renderHighchart({
     
+    dataset()
+    
     nyt_tx_hchart <- nyt_state_cases_tx %>% 
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16")) %>% 
@@ -1547,6 +1580,204 @@ server <- function (input, output, session) {
       hc_add_theme(tx2036_hc)
     
     nyt_tx_hchart
+    
+  })
+  
+  # {State Race - Cases}  --------------------------------------------------
+  
+  output$state_cases_race <- renderHighchart({
+    
+    dataset()
+    
+    dshs_state_demographics %>% 
+      mutate(pct=round(pct*100,digits=2)) %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"),
+             report_type=="cases",
+             demographic_type=="race") %>% 
+      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+      hc_title(
+        text ="Texas COVID-19 Cases, by Race",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Total, By Race")) %>%
+      hc_xAxis(title=NULL) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.5),
+                     series = list(stacking = "percent")) %>%
+      hc_colors(colors = list("#FEDA26","#CCB233", "#CCBE7A", "#D9D2AD", "#6CB6D9", "#3091BF","#0072A6","#DBDCDD")) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Race - Fatalities}  --------------------------------------------------
+  
+  output$state_fatalities_race <- renderHighchart({
+    
+    dataset()
+    
+    dshs_state_demographics %>% 
+      mutate(pct=round(pct*100,digits=2)) %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"),
+             report_type=="fatalities",
+             demographic_type=="race") %>% 
+      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+      hc_title(
+        text ="Texas COVID-19 Fatalities, by Race",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Total, By Race")) %>%
+      hc_xAxis(title=NULL) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.5),
+                     series = list(stacking = "percent")) %>%
+      hc_colors(colors = list("#FEDA26","#CCB233", "#CCBE7A", "#D9D2AD", "#6CB6D9", "#3091BF","#0072A6","#DBDCDD")) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Age - Cases}  --------------------------------------------------
+  
+  output$state_cases_age <- renderHighchart({
+    
+    dataset()
+    
+    dshs_state_demographics %>% 
+      mutate(pct=round(pct*100,digits=2)) %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"),
+             report_type=="cases",
+             demographic_type=="ages") %>% 
+      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+      hc_title(
+        text ="Texas COVID-19 Cases, by Age",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Total, By Age")) %>%
+      hc_xAxis(title=NULL) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.5),
+                     series = list(stacking = "percent")) %>%
+      # hc_colors(colors = list("#002D74","#2A7DE1","#DBDCDD")) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Age - Fatalities}  --------------------------------------------------
+  
+  output$state_fatalities_age <- renderHighchart({
+    
+    dataset()
+    
+    dshs_state_demographics %>% 
+      mutate(pct=round(pct*100,digits=2)) %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"),
+             report_type=="fatalities",
+             demographic_type=="ages") %>% 
+      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+      hc_title(
+        text ="Texas COVID-19 Fatalities, by Age",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Total, By Age")) %>%
+      hc_xAxis(title=NULL) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.5),
+                     series = list(stacking = "percent")) %>%
+      # hc_colors(colors = list("#002D74","#2A7DE1","#DBDCDD")) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Gender - Cases}  --------------------------------------------------
+  
+  output$state_cases_gender <- renderHighchart({
+    
+    dataset()
+    
+    dshs_state_demographics %>% 
+      mutate(pct=round(pct*100,digits=2)) %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"),
+             report_type=="cases",
+             demographic_type=="gender") %>% 
+      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+      hc_title(
+        text ="Texas COVID-19 Cases, by Gender",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Total, By Gender")) %>%
+      hc_xAxis(title=NULL) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.5),
+                     series = list(stacking = "percent")) %>%
+      hc_colors(colors = list("#002D74","#2A7DE1","#DBDCDD")) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Gender - Fatalities}  --------------------------------------------------
+  
+  output$state_fatalities_gender <- renderHighchart({
+    
+    dataset()
+    
+    dshs_state_demographics %>% 
+      mutate(pct=round(pct*100,digits=2)) %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16"),
+             report_type=="fatalities",
+             demographic_type=="gender") %>% 
+      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
+              tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+      hc_title(
+        text ="Texas COVID-19 Fatalities, by Gender",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Total, By Gender")) %>%
+      hc_xAxis(title=NULL) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.5),
+                     series = list(stacking = "percent")) %>%
+      hc_colors(colors = list("#002D74","#2A7DE1","#DBDCDD")) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
     
   })
   
@@ -2509,7 +2740,8 @@ server <- function (input, output, session) {
       req(input$countyname)
       
       dshs_county_active %>%
-        filter(county==input$countyname) %>% 
+        filter(county==input$countyname,
+               date==max(date)) %>% 
         mutate_at(vars(active), scales::comma) %>% 
         distinct(active) %>% 
         as.character()
