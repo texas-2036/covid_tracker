@@ -1,26 +1,26 @@
 state,fips,report_type,demographic_type,group,count,pct
 Texas,48,cases,ages,<1 year,38,0.003
-Texas,48,cases,ages,1-9 years,173,0.012
+Texas,48,cases,ages,1-9 years,173,0.0114996011699
 Texas,48,cases,ages,10-19 years,445,0.03
-Texas,48,cases,ages,20-29 years,2317,0.155
-Texas,48,cases,ages,30-39 years,2749,0.183
-Texas,48,cases,ages,40-49 years,2806,0.1871789740511
-Texas,48,cases,ages,50-59 years,2759,0.184
-Texas,48,cases,ages,60-64 years,1164,0.078
-Texas,48,cases,ages,65-69 years,846,0.056
-Texas,48,cases,ages,70-74 years,552,0.037
-Texas,48,cases,ages,75-79 years,367,0.024
+Texas,48,cases,ages,20-29 years,2323,0.154
+Texas,48,cases,ages,30-39 years,2757,0.183
+Texas,48,cases,ages,40-49 years,2819,0.187
+Texas,48,cases,ages,50-59 years,2774,0.1843924488168
+Texas,48,cases,ages,60-64 years,1169,0.078
+Texas,48,cases,ages,65-69 years,850,0.057
+Texas,48,cases,ages,70-74 years,553,0.037
+Texas,48,cases,ages,75-79 years,368,0.024
 Texas,48,cases,ages,80+ years,652,0.043
 Texas,48,cases,ages,Unknown,123,0.008
-Texas,48,cases,gender,Female,6760,0.451
-Texas,48,cases,gender,Male,7948,0.53
-Texas,48,cases,gender,Unknown,283,0.019
-Texas,48,cases,race,Asian,500,0.033
-Texas,48,cases,race,Black,2369,0.158
-Texas,48,cases,race,Hispanic,5963,0.398
+Texas,48,cases,gender,Female,6763,0.45
+Texas,48,cases,gender,Male,7997,0.532
+Texas,48,cases,gender,Unknown,284,0.0188779579899
+Texas,48,cases,race,Asian,501,0.033
+Texas,48,cases,race,Black,2389,0.159
+Texas,48,cases,race,Hispanic,5981,0.398
 Texas,48,cases,race,Other,96,0.006
-Texas,48,cases,race,White,4121,0.275
-Texas,48,cases,race,Unknown,1942,0.13
+Texas,48,cases,race,White,4130,0.275
+Texas,48,cases,race,Unknown,1947,0.129
 Texas,48,fatalities,ages,<1 year,0,0
 Texas,48,fatalities,ages,1-9 years,0,0
 Texas,48,fatalities,ages,10-19 years,2,0.0040404040404
