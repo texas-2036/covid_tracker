@@ -1,0 +1,9 @@
+state,fips,report_type,demographic_type,group,count,pct
+Texas,48,cases,ages,<1 year,38,0.2504943968
+Texas,48,cases,ages,Unknown,123,0.8108108108
+Texas,48,cases,race,Other,97,0.6394199077
+Texas,48,fatalities,ages,<1 year,0,0
+Texas,48,fatalities,ages,1-9 years,0,0
+Texas,48,fatalities,ages,10-19 years,2,0.3012048193
+Texas,48,fatalities,ages,Unknown,2,0.3012048193
+Texas,48,fatalities,race,Other,5,0.7530120482

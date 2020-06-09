@@ -1,45 +1,9 @@
 state,fips,report_type,demographic_type,group,count,pct
-Texas,48,cases,ages,<1 year,38,0.003
-Texas,48,cases,ages,1-9 years,174,0.011
-Texas,48,cases,ages,10-19 years,452,0.03
-Texas,48,cases,ages,20-29 years,2333,0.1537903757416
-Texas,48,cases,ages,30-39 years,2784,0.184
-Texas,48,cases,ages,40-49 years,2835,0.187
-Texas,48,cases,ages,50-59 years,2801,0.185
-Texas,48,cases,ages,60-64 years,1181,0.078
-Texas,48,cases,ages,65-69 years,861,0.057
-Texas,48,cases,ages,70-74 years,559,0.037
-Texas,48,cases,ages,75-79 years,374,0.0246539222149
-Texas,48,cases,ages,80+ years,655,0.043
-Texas,48,cases,ages,Unknown,123,0.008
-Texas,48,cases,gender,Female,6778,0.447
-Texas,48,cases,gender,Male,8108,0.534
-Texas,48,cases,gender,Unknown,284,0.019
-Texas,48,cases,race,Asian,503,0.033
-Texas,48,cases,race,Black,2413,0.159
-Texas,48,cases,race,Hispanic,6034,0.3977587343441
-Texas,48,cases,race,Other,97,0.006
-Texas,48,cases,race,White,4174,0.275
-Texas,48,cases,race,Unknown,1949,0.128
+Texas,48,cases,ages,<1 year,38,0.2504943968
+Texas,48,cases,ages,Unknown,123,0.8108108108
+Texas,48,cases,race,Other,97,0.6394199077
 Texas,48,fatalities,ages,<1 year,0,0
 Texas,48,fatalities,ages,1-9 years,0,0
-Texas,48,fatalities,ages,10-19 years,2,0.003
-Texas,48,fatalities,ages,20-29 years,11,0.017
-Texas,48,fatalities,ages,30-39 years,13,0.02
-Texas,48,fatalities,ages,40-49 years,26,0.039
-Texas,48,fatalities,ages,50-59 years,72,0.108
-Texas,48,fatalities,ages,60-64 years,60,0.09
-Texas,48,fatalities,ages,65-69 years,74,0.111
-Texas,48,fatalities,ages,70-74 years,69,0.1039156626506
-Texas,48,fatalities,ages,75-79 years,70,0.105
-Texas,48,fatalities,ages,80+ years,265,0.399
-Texas,48,fatalities,ages,Unknown,2,0.003
-Texas,48,fatalities,gender,Female,272,0.41
-Texas,48,fatalities,gender,Male,364,0.548
-Texas,48,fatalities,gender,Unknown,28,0.0421686746988
-Texas,48,fatalities,race,Asian,13,0.02
-Texas,48,fatalities,race,Black,85,0.128
-Texas,48,fatalities,race,Hispanic,171,0.258
-Texas,48,fatalities,race,Other,5,0.008
-Texas,48,fatalities,race,White,269,0.405
-Texas,48,fatalities,race,Unknown,121,0.182
+Texas,48,fatalities,ages,10-19 years,2,0.3012048193
+Texas,48,fatalities,ages,Unknown,2,0.3012048193
+Texas,48,fatalities,race,Other,5,0.7530120482
