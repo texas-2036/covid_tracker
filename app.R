@@ -355,8 +355,9 @@ twc_claims_cnty_summ <- twc_claims_cnty_raw %>%
 
 # ^^^Homebase Data -----------------------------------------------------
 
-hb_hours_worked_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1930671010&single=true&output=csv", skip=2) %>% 
-  fill(X2) %>%
+hb_hours_worked_all <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1930671010&single=true&output=csv", skip=2) %>% 
+  fill(...2) %>%
+  rename(X2=...2) %>% 
   slice(-1,-3,-4) %>%
   select(-1) %>%
   mutate(
@@ -367,7 +368,7 @@ hb_hours_worked_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-
       TRUE ~ "Nationwide"
     )
   ) %>%
-  select(geo_type, area = X3, everything(),-X2) %>%
+  select(geo_type, area = ...3, everything(),-X2) %>%
   filter(!is.na(area)) %>% 
   filter(area == "Texas") %>%
   select(-geo_type) %>% 
@@ -397,8 +398,9 @@ hb_hours_worked_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-
 hb_hours_worked <- hb_hours_worked_all %>%
   filter(date == max(date))
 
-hb_businesses_open_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1102464531&single=true&output=csv", skip=2) %>% 
-  fill(X2) %>% 
+hb_businesses_open_all <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1102464531&single=true&output=csv", skip=2) %>% 
+  fill(...2) %>% 
+  rename(X2=...2) %>% 
   slice(-1,-3,-4) %>% 
   select(-1) %>% 
   mutate(geo_type=case_when(
@@ -407,7 +409,7 @@ hb_businesses_open_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PA
     str_detect(X2, "state") ~ "State",
     TRUE ~ "Nationwide"
   )) %>% 
-  select(geo_type, area=X3,everything(),-X2) %>% 
+  select(geo_type, area=...3,everything(),-X2) %>% 
   filter(!is.na(area)) %>% 
   filter(area == "Texas") %>%
   select(-geo_type) %>% 
@@ -437,8 +439,9 @@ hb_businesses_open_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PA
 hb_businesses_open <- hb_businesses_open_all %>%
   filter(date == max(date))
 
-hb_employees_working_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1658358543&single=true&output=csv", skip=2) %>% 
-  fill(X2) %>% 
+hb_employees_working_all <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1658358543&single=true&output=csv", skip=2) %>% 
+  fill(...2) %>% 
+  rename(X2=...2) %>% 
   slice(-1,-3,-4) %>% 
   select(-1) %>% 
   mutate(geo_type=case_when(
@@ -447,7 +450,7 @@ hb_employees_working_all <- read_csv("https://docs.google.com/spreadsheets/d/e/2
     str_detect(X2, "state") ~ "State",
     TRUE ~ "Nationwide"
   )) %>% 
-  select(geo_type, area=X3,everything(),-X2) %>% 
+  select(geo_type, area=...3,everything(),-X2) %>% 
   filter(!is.na(area)) %>% 
   filter(area == "Texas") %>%
   select(-geo_type) %>% 
@@ -481,7 +484,7 @@ hb_employees_working <- hb_employees_working_all %>%
 
 tx_series_all <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/ui_claims_ts.csv")
 
-tx_series <- read_csv("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/tx_series_summ.csv") %>% 
+tx_series <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/tx_series_summ.csv", delim=",") %>% 
   mutate_at(vars(value),scales::comma)
 
 tx_urn <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/unemploy_rate.csv")
