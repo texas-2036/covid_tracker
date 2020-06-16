@@ -13,14 +13,14 @@ Bastrop,295,4
 Baylor,1,0
 Bee,31,0
 Bell,629,6
-Bexar,4242,88
+Bexar,4393,88
 Blanco,11,1
 Borden,0,0
 Bosque,7,0
-Bowie,373,7
-Brazoria,850,12
-Brazos,781,25
-Brewster,7,0
+Bowie,372,7
+Brazoria,864,13
+Brazos,803,25
+Brewster,11,0
 Briscoe,1,0
 Brooks,2,0
 Brown,60,10
@@ -30,20 +30,20 @@ Caldwell,147,0
 Calhoun,46,3
 Callahan,13,2
 Cameron,1138,44
-Camp,106,1
+Camp,108,1
 Carson,6,0
 Cass,34,2
 Castro,42,1
-Chambers,106,0
+Chambers,109,0
 Cherokee,54,2
 Childress,6,0
 Clay,5,0
 Cochran,1,0
 Coke,4,0
 Coleman,3,0
-Collin,1647,37
+Collin,1667,37
 Collingsworth,5,0
-Colorado,33,0
+Colorado,34,0
 Comal,159,7
 Comanche,12,1
 Concho,1,0
@@ -55,12 +55,12 @@ Crockett,5,0
 Crosby,4,1
 Culberson,0,0
 Dallam,35,0
-Dallas,13930,283
+Dallas,14232,284
 Dawson,45,1
 DeWitt,28,1
 Deaf Smith,212,14
 Delta,2,0
-Denton,1719,36
+Denton,1736,36
 Dickens,2,0
 Dimmit,1,0
 Donley,28,0
@@ -68,7 +68,7 @@ Duval,5,0
 Eastland,7,0
 Ector,238,6
 Edwards,0,0
-El Paso,3834,100
+El Paso,3911,102
 Ellis,448,19
 Erath,36,1
 Falls,17,0
@@ -82,14 +82,14 @@ Franklin,27,0
 Freestone,15,0
 Frio,79,0
 Gaines,14,0
-Galveston,1237,40
+Galveston,1255,40
 Garza,6,0
 Gillespie,6,0
 Glasscock,2,0
 Goliad,7,0
 Gonzales,166,4
 Gray,111,3
-Grayson,433,4
+Grayson,438,4
 Gregg,278,11
 Grimes,274,2
 Guadalupe,171,0
@@ -99,14 +99,14 @@ Hamilton,11,1
 Hansford,21,2
 Hardeman,4,0
 Hardin,146,5
-Harris,16568,275
-Harrison,269,28
+Harris,16778,275
+Harrison,270,28
 Hartley,13,2
 Haskell,4,0
 Hays,673,5
 Hemphill,1,0
 Henderson,80,3
-Hidalgo,967,12
+Hidalgo,1050,12
 Hill,36,1
 Hockley,28,1
 Hood,35,4
@@ -121,7 +121,7 @@ Jack,4,0
 Jackson,21,1
 Jasper,32,1
 Jeff Davis,0,0
-Jefferson,1235,31
+Jefferson,1242,31
 Jim Hogg,4,0
 Jim Wells,18,0
 Johnson,232,4
@@ -144,22 +144,22 @@ Lampasas,9,0
 Lavaca,22,1
 Lee,35,2
 Leon,11,0
-Liberty,122,3
+Liberty,127,3
 Limestone,39,1
 Lipscomb,7,0
 Live Oak,9,0
 Llano,4,0
 Loving,0,0
-Lubbock,847,51
+Lubbock,857,51
 Lynn,19,1
 Madison,20,0
-Marion,19,1
-Martin,3,1
+Marion,21,1
+Martin,4,1
 Mason,33,0
-Matagorda,80,5
+Matagorda,81,5
 Maverick,160,2
 McCulloch,3,0
-McLennan,158,4
+McLennan,163,4
 McMullen,0,0
 Medina,221,2
 Menard,0,0
@@ -181,7 +181,7 @@ Ochiltree,53,2
 Oldham,4,1
 Orange,106,2
 Palo Pinto,14,2
-Panola,219,23
+Panola,221,23
 Parker,112,1
 Parmer,120,0
 Pecos,107,0
@@ -199,7 +199,7 @@ Roberts,2,0
 Robertson,17,0
 Rockwall,204,14
 Runnels,2,0
-Rusk,70,2
+Rusk,128,2
 Sabine,15,1
 San Augustine,55,4
 San Jacinto,20,0
@@ -208,34 +208,34 @@ San Saba,2,0
 Schleicher,1,0
 Scurry,28,0
 Shackelford,1,0
-Shelby,229,8
+Shelby,230,8
 Sherman,28,0
 Smith,271,4
 Somervell,2,0
-Starr,112,0
+Starr,119,0
 Stephens,5,0
 Sterling,0,0
 Stonewall,0,0
 Sutton,0,0
 Swisher,21,1
-Tarrant,7253,194
+Tarrant,7334,197
 Taylor,255,5
 Terrell,0,0
 Terry,13,0
 Throckmorton,0,0
-Titus,627,2
-Tom Green,104,1
-Travis,4461,104
+Titus,629,2
+Tom Green,106,1
+Travis,4545,104
 Trinity,22,0
 Tyler,16,0
-Upshur,37,0
-Upton,0,0
-Uvalde,25,0
+Upshur,38,0
+Upton,1,0
+Uvalde,26,0
 Val Verde,21,0
 Van Zandt,46,1
 Victoria,199,8
-Walker,1871,27
-Waller,88,0
+Walker,1878,27
+Waller,90,0
 Ward,4,0
 Washington,218,26
 Webb,675,20
@@ -243,8 +243,8 @@ Wharton,94,1
 Wheeler,15,0
 Wichita,99,2
 Wilbarger,7,0
-Willacy,56,3
-Williamson,862,30
+Willacy,59,3
+Williamson,904,30
 Wilson,52,5
 Winkler,4,0
 Wise,56,5
@@ -253,4 +253,4 @@ Yoakum,9,0
 Young,15,1
 Zapata,15,0
 Zavala,13,0
-Total,87854,1976
+Total,89108,1983
