@@ -1951,12 +1951,12 @@ clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,ages
 clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,gender,Female,7006,0.44649799247976546,2020-06-16
 clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,gender,Male,8395,0.5350200752023453,2020-06-16
 clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,gender,Unknown,290,0.018481932317889235,2020-06-16
-clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Asian,519,NA,2020-06-16
-clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Black,2555,NA,2020-06-16
-clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Hispanic,6287,NA,2020-06-16
-clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Other,99,NA,2020-06-16
-clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,White,4262,NA,2020-06-16
-clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Unknown,1969,NA,2020-06-16
+clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Asian,519,0.033,2020-06-16
+clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Black,2555,0.16,2020-06-16
+clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Hispanic,6287,0.4,2020-06-16
+clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Other,99,0.006,2020-06-16
+clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,White,4262,0.27,2020-06-16
+clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,cases,race,Unknown,1969,0.13,2020-06-16
 clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,fatalities,ages,<1 year,0,0,2020-06-16
 clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,fatalities,ages,1-9 years,0,0,2020-06-16
 clean_data/dshs/cases/state_case_demographics_2020-06-16.csv,Texas,48,fatalities,ages,10-19 years,2,0.0030120481927710845,2020-06-16
