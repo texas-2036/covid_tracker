@@ -1007,7 +1007,7 @@ body <- dashboardBody(
                      h2(style="font-weight:800;","COUNTY PROFILE", span="id='county-profile'")),
               column(width = 6,
                      selectizeInput(inputId = "countyname", label =NULL, choices = county_list,
-                                    selected="Dallas", multiple = FALSE, width="100%",
+                                    selected="Harris", multiple = FALSE, width="100%",
                                     options = list(maxItems=1,placeholder = 'Select Your County...')))
             ),
             fluidRow(
