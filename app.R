@@ -324,7 +324,38 @@ google_mobil_tx_cnties <- google_mobility %>%
 # ** Economic Data -----------------------------------------------------------
 
 
-# ^^^TWC County UI Claims Data ------------------------------------------------------
+# ~~Homebase Data ---------------------------------------------------------
+
+hb_state_only <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/homebase/hb_metrics_by_state_tx.csv", na = " ") %>% 
+  filter(!is.na(prev_day)) %>% 
+  mutate(change=as.numeric(change),
+         change=round(change,digits=1)) %>% 
+  mutate(prev_day=as_date(prev_day))
+
+hb_state_industry <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/homebase/hb_metrics_by_state_industry_tx.csv")
+
+hb_hours_worked_all <- hb_state_only %>%
+  filter(variable=="hours_worked")
+
+hb_businesses_open_all <- hb_state_only %>%
+  filter(variable=="businesses_open")
+
+hb_employees_working_all <- hb_state_only %>%
+  filter(variable=="employees_working")
+
+hb_hours_worked <- hb_state_only %>%
+  filter(variable=="hours_worked",
+         date == max(date))
+
+hb_businesses_open <- hb_state_only %>%
+  filter(variable=="businesses_open",
+         date == max(date))
+
+hb_employees_working <- hb_state_only %>%
+  filter(variable=="employees_working",
+         date == max(date))
+
+# ~~TWC County UI Claims Data ------------------------------------------------------
 
 twc_ui_by_county <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/twc/county_claims_by_industry_detail.csv") %>% 
   filter(rank <= 5) %>% 
@@ -353,136 +384,13 @@ twc_claims_cnty_summ <- twc_claims_cnty_raw %>%
   summarise(all_claims=sum(value)) %>% 
   mutate_at(vars(all_claims), scales::comma_format(accuracy=1))
 
-# ^^^Homebase Data -----------------------------------------------------
-
-hb_hours_worked_all <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1930671010&single=true&output=csv", skip=2) %>% 
-  fill(...2) %>%
-  rename(X2=...2) %>% 
-  slice(-1,-3,-4) %>%
-  select(-1) %>%
-  mutate(
-    geo_type = case_when(
-      str_detect(X2, "MSA") ~ "MSA",
-      str_detect(X2, "industry") ~ "US Industry",
-      str_detect(X2, "state") ~ "State",
-      TRUE ~ "Nationwide"
-    )
-  ) %>%
-  select(geo_type, area = ...3, everything(),-X2) %>%
-  filter(!is.na(area)) %>% 
-  filter(area == "Texas") %>%
-  select(-geo_type) %>% 
-  pivot_longer(-area,
-               names_to="date",
-               values_to = "pct") %>% 
-  mutate(date=gsub(pattern="/",replacement="-",x=date),
-         pct=gsub(pattern="%",replacement="",x=pct),
-         pct=as.numeric(pct),
-         date=paste0("2020-",date),
-         date=ymd(date)) %>% 
-  arrange(date) %>% 
-  mutate(prev_date=lag(pct,7),
-         prev_day=lag(date,7),
-         change=pct-prev_date,
-         change_lbl=case_when(
-           change > 0 ~ "+",
-           change < 0 ~ "",
-           TRUE ~ ""
-         ),
-         color=case_when(
-           change > 0 ~ "#66E8C6",
-           change < 0 ~ "#F26852",
-           TRUE ~ "#FFD100"
-         )) 
-
-hb_hours_worked <- hb_hours_worked_all %>%
-  filter(date == max(date))
-
-hb_businesses_open_all <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1102464531&single=true&output=csv", skip=2) %>% 
-  fill(...2) %>% 
-  rename(X2=...2) %>% 
-  slice(-1,-3,-4) %>% 
-  select(-1) %>% 
-  mutate(geo_type=case_when(
-    str_detect(X2, "MSA") ~ "MSA",
-    str_detect(X2, "industry") ~ "US Industry",
-    str_detect(X2, "state") ~ "State",
-    TRUE ~ "Nationwide"
-  )) %>% 
-  select(geo_type, area=...3,everything(),-X2) %>% 
-  filter(!is.na(area)) %>% 
-  filter(area == "Texas") %>%
-  select(-geo_type) %>% 
-  pivot_longer(-area,
-               names_to="date",
-               values_to = "pct") %>% 
-  mutate(date=gsub(pattern="/",replacement="-",x=date),
-         pct=gsub(pattern="%",replacement="",x=pct),
-         pct=as.numeric(pct),
-         date=paste0("2020-",date),
-         date=ymd(date)) %>% 
-  arrange(date) %>% 
-  mutate(prev_date=lag(pct,7),
-         prev_day=lag(date,7),
-         change=pct-prev_date,
-         change_lbl=case_when(
-           change > 0 ~ "+",
-           change < 0 ~ "",
-           TRUE ~ ""
-         ),
-         color=case_when(
-           change > 0 ~ "#66E8C6",
-           change < 0 ~ "#F26852",
-           TRUE ~ "#FFD100"
-         )) 
-
-hb_businesses_open <- hb_businesses_open_all %>%
-  filter(date == max(date))
-
-hb_employees_working_all <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vS6_JK5zktVQr6JwkYUPvzlwcw0YAawSVC7ldWZVfg9hvTjBxl2z4xWaWCrzb9JZ0Go07KhLgbzw5DW/pub?gid=1658358543&single=true&output=csv", skip=2) %>% 
-  fill(...2) %>% 
-  rename(X2=...2) %>% 
-  slice(-1,-3,-4) %>% 
-  select(-1) %>% 
-  mutate(geo_type=case_when(
-    str_detect(X2, "MSA") ~ "MSA",
-    str_detect(X2, "industry") ~ "US Industry",
-    str_detect(X2, "state") ~ "State",
-    TRUE ~ "Nationwide"
-  )) %>% 
-  select(geo_type, area=...3,everything(),-X2) %>% 
-  filter(!is.na(area)) %>% 
-  filter(area == "Texas") %>%
-  select(-geo_type) %>% 
-  pivot_longer(-area,
-               names_to="date",
-               values_to = "pct") %>% 
-  mutate(date=gsub(pattern="/",replacement="-",x=date),
-         pct=gsub(pattern="%",replacement="",x=pct),
-         pct=as.numeric(pct),
-         date=paste0("2020-",date),
-         date=ymd(date)) %>% 
-  arrange(date) %>% 
-  mutate(prev_date=lag(pct,7),
-         prev_day=lag(date,7),
-         change=pct-prev_date,
-         change_lbl=case_when(
-           change > 0 ~ "+",
-           change < 0 ~ "",
-           TRUE ~ ""
-         ),
-         color=case_when(
-           change > 0 ~ "#52F2A9",
-           change < 0 ~ "#F26852",
-           TRUE ~ "#FFD100"
-         )) 
-
-hb_employees_working <- hb_employees_working_all %>%
-  filter(date == max(date))
-
-# ^^^FREDR Data -----------------------------------------------------
+# ~~FREDR Data -----------------------------------------------------
 
 tx_series_all <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/ui_claims_ts.csv")
+
+tx_cont_series <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/cont_claims_ts.csv", delim=",") %>% 
+  mutate_at(vars(value),scales::comma) %>% 
+  filter(date==max(date))
 
 tx_series <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/tx_series_summ.csv", delim=",") %>% 
   mutate_at(vars(value),scales::comma)
@@ -490,11 +398,7 @@ tx_series <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/m
 tx_urn <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/unemploy_rate.csv")
 
 
-# **DERIVED METRICS -----------------------------------
-
-# 
-# ** State -----------------------------------
-
+# DERIVED METRICS -----------------------------------
 
 # ~~Testing Metrics ----------------------------------------------------------
 
@@ -539,7 +443,6 @@ test_pos_today <- dshs_test_pos %>%
 
 
 # ~~Current Case Data -----------------------------------------------------
-
 
 tx_cases <- jhu_cases_state %>% 
   select(confirmed, cases_rank) %>% 
@@ -943,10 +846,19 @@ body <- dashboardBody(
                         p(style="text-align:center;font-size:1em;font-weight:800",
                           paste0(tx_series$value)),
                         p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
-                          paste0("Since: Mar 21, 2020")),
+                          paste0("Since: Mar 21")),
                         p(style="text-align:center;font-size:.45em;font-weight:300","Jobless Claims"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
                           tags$a(href="https://fred.stlouisfed.org/series/TXICLAIMS","Source: BLS via FREDr")))),
+              column(width = 2, class="economic-grid",
+                     h2(class="economic-tile",
+                        p(style="text-align:center;font-size:1em;font-weight:800",
+                          paste0(tx_cont_series$value)),
+                        p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;",
+                          paste0("As of: ", format(tx_cont_series$date, format="%b %d"))),
+                        p(style="text-align:center;font-size:.45em;font-weight:300","Continued Claims"),
+                        p(style="text-align:center;font-size:.4em;font-weight:400",
+                          tags$a(href="https://fred.stlouisfed.org/series/TXCCLAIMS","Source: BLS via FREDr")))),
               column(width = 2, class="economic-grid",
                      h2(class="economic-tile",
                         p(style="text-align:center;font-size:1em;font-weight:800",paste0(tx_urn$value,"%")),
@@ -978,13 +890,7 @@ body <- dashboardBody(
                           paste0(hb_employees_working$change_lbl, hb_employees_working$change, "% From ", format(hb_employees_working$prev_day, format="%b %d"))),
                         p(style="text-align:center;font-size:.43em;font-weight:500","Est. Hourly Employees Working"),
                         p(style="text-align:center;font-size:.4em;font-weight:400",
-                          tags$a(href="https://joinhomebase.com/data/","Source: Homebase")))),
-              column(width = 2, class="economic-grid",
-                     h2(class="economic-tile",
-                        p(style="text-align:center;font-size:1em;font-weight:800","TBD"),
-                        p(style="text-align:center;font-size:.6em;font-weight:600;color:#00A9C5;","TBD"),
-                        p(style="text-align:center;font-size:.45em;font-weight:300","Monthly $ Loss Per Employee"),
-                        p(style="text-align:center;font-size:.4em;font-weight:400","Source: Homebase")))
+                          tags$a(href="https://joinhomebase.com/data/","Source: Homebase"))))
             ),
             fluidRow(
               column(width = 6,
