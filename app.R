@@ -252,7 +252,6 @@ tex_today_tests <- test_daily %>%
 
 # ~~DSHS Data ----
 
-
 dshs_state_case_and_fatalities <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv") %>% 
   mutate(state="Texas",
          fips="48")
@@ -276,13 +275,17 @@ dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/cov
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_tsa_hosp_data_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
+dshs_tsa_hosp_data_ts <- vroom("clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
 
 dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_vent_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_tsa_24hr_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
-  ungroup()
+dshs_tsa_24hr_data <- vroom("clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
+  ungroup() %>% 
+  mutate(date=ymd(date),
+         date=as.Date(date))
+
+dshs_hosp_rate_ts <- vroom("clean_data/dshs/hospitals/hosp_rate_ts.csv")
 
 dshs_test_pos <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/test_pos_tx_ts.csv")
 
@@ -297,7 +300,7 @@ tsa_shps <- dshs_tsa_hosp_data %>%
   filter(!str_detect(tsa,"Total|total")) %>%
   select(tsa,tsa_counties,geometry) %>% 
   group_by(tsa) %>% 
-  summarise(tsa_counties = toString(tsa_counties)) %>% 
+  summarise(tsa_counties = toString(tsa_counties)) %>%
   ungroup()
 
 # ** NPI Data ----------------------------------------------------------------
@@ -326,13 +329,13 @@ google_mobil_tx_cnties <- google_mobility %>%
 
 # ~~Homebase Data ---------------------------------------------------------
 
-hb_state_only <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/homebase/hb_metrics_by_state_tx.csv", na = " ") %>% 
+hb_state_only <- vroom("https://texas-2036.github.io/covid-data/homebase_state_summary.csv", na = " ") %>% 
   filter(!is.na(prev_day)) %>% 
   mutate(change=as.numeric(change),
          change=round(change,digits=1)) %>% 
   mutate(prev_day=as_date(prev_day))
 
-hb_state_industry <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/homebase/hb_metrics_by_state_industry_tx.csv")
+# hb_state_industry <- vroom("https://texas-2036.github.io/covid-data/homebase_state_industry_breakdown.csv")
 
 hb_hours_worked_all <- hb_state_only %>%
   filter(variable=="hours_worked")
@@ -424,15 +427,17 @@ hosp_capacity <- total_tests %>%
 active_cases <- jhu_cases_state %>% 
   select(state=province_state, active, active_rank) 
 
-hosp_rate <- dshs_tsa_hosp_data %>% 
-  as_tibble() %>% 
-  filter(date==max(date)) %>% 
-  filter(str_detect(tsa,"Total|total")) %>% 
-  select(lab_con_covid19_gen, lab_con_covid19_icu) %>% 
-  mutate(state="Texas") %>% 
-  left_join(active_cases, by="state") %>% 
-  mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/active)) %>% 
-  mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1))
+hosp_rate <- dshs_hosp_rate_ts 
+
+#%>% 
+  # as_tibble() %>% 
+  # filter(date==max(date)) %>% 
+  # filter(str_detect(tsa,"Total|total")) %>% 
+  # select(lab_con_covid19_gen, lab_con_covid19_icu) %>% 
+  # mutate(state="Texas") %>% 
+  # left_join(dshs_hosp, by="state") %>% 
+  # mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/active)) %>% 
+  # mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1))
 
 test_pos_today <- dshs_test_pos %>% 
   filter(date==max(date)) %>% 
@@ -1281,11 +1286,12 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- hosp_rate
+    tot_pos <- dshs_hosp_rate_ts %>% 
+      filter(date==max(date))
     
     infoBox(
       title="% Hospitalized", 
-      value=paste0(tot_pos$hospitalization_rate, "%"),
+      value=paste0(tot_pos$hosp_rate, "%"),
       subtitle="% of Active Cases",
       icon = icon("hospital-user"), color = "navy", href=NULL
     )
@@ -1299,7 +1305,7 @@ server <- function (input, output, session) {
     
     tot_pos <- dshs_tsa_hosp_data_ts %>%
       as_tibble() %>% 
-      filter(date==max(date)) %>% 
+      filter(date==max(date)) %>%
       select(tsa,tsa_counties,bed_avail_rate) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
       mutate_at(vars(bed_avail_rate),scales::percent)
@@ -1977,8 +1983,8 @@ server <- function (input, output, session) {
 
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
       filter(str_detect(tsa,"Total|total")) %>%
-      mutate(covid_share_of_new_er_visits=covid19_admitted_gen_24h,
-             covid_share_of_new_er_visits_7day_avg=covid19_admitted_gen_24h_7day_avg) %>% 
+      # mutate(covid_share_of_new_er_visits=covid19_admitted_gen_24h,
+      #        covid_share_of_new_er_visits_7day_avg=covid19_admitted_gen_24h_7day_avg) %>% 
       mutate(min_new = min(covid19_admitted_gen_24h, na.rm = TRUE),
              max_new = max(covid19_admitted_gen_24h, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
@@ -1994,9 +2000,9 @@ server <- function (input, output, session) {
       hc_add_series(dshs_tsa_24hr_data_hchart, type = "area", hcaes(x = date, y = covid19_admitted_gen_24h_7day_avg),
                     tooltip = list(pointFormat = "<br>7-Day Avg.: {point.covid19_admitted_gen_24h_7day_avg}"),
                     color = "#FFD100", name="7-Day Avg.") %>%
-      hc_plotOptions(area = list(fillOpacity=.3)) %>% 
+      hc_plotOptions(area = list(fillOpacity=.3)) %>%
       hc_title(
-        text ="Daily COVID-19-Related Admits to General Beds",
+        text ="Daily COVID-19-Suspected Admits to General Beds",
         useHTML = TRUE) %>% 
       hc_subtitle(
         text ="Covering all of Texas, this chart shows trends for the daily total of patients with suspected COVID-19 related illness admitted to a MedSurg (General) or isolation bed in 24-hour intervals.<br/><br/>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
@@ -2042,7 +2048,7 @@ server <- function (input, output, session) {
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Daily COVID-19-Related Admits to ICU Beds",
+        text ="Daily COVID-19-Suspected Admits to ICU Beds",
         useHTML = TRUE) %>% 
       hc_subtitle(
         text ="Covering all of Texas, this chart shows trends for the daily total of patients with suspected COVID-19 related illness admitted to adult or pediatric ICU beds in 24-hour intervals.<br/><br/>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
@@ -2810,9 +2816,10 @@ server <- function (input, output, session) {
       
       dshs_tsa_hosp_data_ts %>%
         filter(date==max(date)) %>% 
-        as_tibble() %>% 
+        as_tibble() %>%
         select(tsa,tsa_counties,bed_avail_rate) %>% 
-        filter(tsa_counties==input$countyname) %>%
+        # filter(tsa_counties==input$countyname) %>%
+        filter(tsa_counties=="Harris") %>%
         mutate_at(vars(bed_avail_rate), scales::percent_format(accuracy=.1)) %>% 
         distinct(bed_avail_rate) %>% 
         as.character()
@@ -2877,11 +2884,12 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data %>%
+      dshs_tsa_24hr_data %>%
         filter(date==max(date)) %>%
         as_tibble() %>% 
         filter(tsa_counties==input$countyname) %>% 
-        distinct(suspected_in_hosp) %>% 
+        mutate_at(vars(total_susp_covid_in_hosp_at_time_of_report), scales::comma) %>% 
+        distinct(total_susp_covid_in_hosp_at_time_of_report) %>% 
         as.character()
     })
     
@@ -2892,11 +2900,12 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data %>%
+      dshs_tsa_24hr_data %>%
         filter(date==max(date)) %>%
         as_tibble() %>% 
         filter(tsa_counties==input$countyname) %>% 
-        distinct(lab_con_covid19_gen) %>% 
+        mutate_at(vars(total_laboratory_confirmed), scales::comma) %>% 
+        distinct(total_laboratory_confirmed) %>% 
         as.character()
     })
     
@@ -3036,7 +3045,7 @@ server <- function (input, output, session) {
                       color = "#FFD100", name="7-Day Avg.") %>%
         hc_plotOptions(area = list(fillOpacity=.3)) %>% 
         hc_title(
-          text = paste0(input$countyname," County | Daily COVID-19-Related Admits to General Beds"),
+          text = paste0(input$countyname," County | Daily COVID-19-Suspected Admits to General Beds"),
           useHTML = TRUE) %>% 
         hc_subtitle(
           text ="Covering only this TSA, this chart shows trends for the daily total of patients with suspected COVID-19 related illness admitted to a MedSurg (General) or isolation bed in 24-hour intervals.<br/><br/>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
@@ -3088,7 +3097,7 @@ server <- function (input, output, session) {
                       color = "#FFD100", name="7-Day Avg.") %>%
         hc_plotOptions(area = list(fillOpacity=.3)) %>% 
         hc_title(
-          text = paste0(input$countyname," County | Daily COVID-19-Related Admits to ICU Beds"),
+          text = paste0(input$countyname," County | Daily COVID-19-Suspected Admits to ICU Beds"),
           useHTML = TRUE) %>% 
         hc_subtitle(
           text ="Covering only this TSA, this chart shows trends for the daily total of patients with suspected COVID-19 related illness admitted to adult or pediatric ICU beds in 24-hour intervals.<br/><br/>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
