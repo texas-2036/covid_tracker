@@ -761,14 +761,12 @@ letter-spacing: 3px;
 }
 
 .gt_table {
-  background-color:#002D74 !important;
   color:#fff !important;
-  width:100% !important;
   line-height:1.55 !important;
 }
 
 .gt_title {
-    font-weight: 600 !important;
+    font-weight: 800 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
 }
