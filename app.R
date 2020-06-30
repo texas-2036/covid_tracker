@@ -250,6 +250,11 @@ tex_today_tests <- test_daily %>%
   filter(date==max(date))
 
 
+# COVID Relief Data -------------------------------------------------------
+
+covid_relief <- vroom("clean_data/covid_relief/crf_data.csv")
+
+
 # ~~DSHS Data ----
 
 dshs_state_case_and_fatalities <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv") %>% 
@@ -275,17 +280,17 @@ dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/cov
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_tsa_hosp_data_ts <- vroom("clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
+dshs_tsa_hosp_data_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
 
 dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_vent_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_tsa_24hr_data <- vroom("clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
+dshs_tsa_24hr_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
   ungroup() %>% 
   mutate(date=ymd(date),
          date=as.Date(date))
 
-dshs_hosp_rate_ts <- vroom("clean_data/dshs/hospitals/hosp_rate_ts.csv")
+dshs_hosp_rate_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/hosp_rate_ts.csv")
 
 dshs_test_pos <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/test_pos_tx_ts.csv")
 
@@ -816,9 +821,13 @@ body <- dashboardBody(
                      highchartOutput("daily_covid_of_total_er_hchart", height = 350))
             ),
             
-            # ~~Mobility ---------------------------------------------------------
-            
-            # ~~Trends Over Time --------------------------------------------------------
+            # ~~COVID Relief Funds Data ---------------------------------------------------------
+            h3(class="covid-topic", "COVID-19 Relief Funds Data"),
+            fluidRow(
+              column(width=12, class="economic-grid",
+                     gt_output(outputId = "state_related_crf"))
+            ),
+            # ~~Mobility Data --------------------------------------------------------
             
             h3(class="covid-topic", "Mobility Trends", span="id='statewide_mob"),
             fluidRow(
@@ -1069,6 +1078,15 @@ column(width = 12,
               column(width = 6,
                      highchartOutput("cnty_daily_covid_of_total_er_hchart", height = 350))
             ),
+
+
+            # ~~COVID Relief Funds ------------------------------------------------------
+
+            h3(class="covid-topic", "COVID-19 Relief Funds Data"),
+            fluidRow(
+              column(width=12, class="economic-grid",
+                     gt_output(outputId = "county_related_crf"))
+                ),
   
             # ~~Mobility Trends Data --------------------------------------------------
             
@@ -2773,6 +2791,76 @@ server <- function (input, output, session) {
       gt_tbl
     })
     
+
+    # COVID-Relief State ------------------------------------------------------
+
+    output$state_related_crf <- gt::render_gt({
+      
+      gt_tbl <-  covid_relief %>%
+        filter(place=="State of Texas") %>%
+        gt() %>%
+        tab_header(title = paste0("COVID-19 Related Relief Funds Related To The State of Texas"),
+                   subtitle = "This table shows the distribution of COVID-19 related relief funds that were initially allocated to the State Government in Texas. At the State level, 100% of funds are released to the state from the federal government and then allocated from the State of Texas to smaller governments. The state's larger cities applied for and received money directly. These areas are can be identified on the county page by looking for entities in a county who have '100%' of funds released.") %>%
+        cols_hide(c("county", "place_type")) %>%
+        fmt_percent(vars(pct_released), decimals=1, drop_trailing_zeros = TRUE) %>% 
+        fmt_currency(vars(allocated,curr_released),decimals=0,currency="USD",sep_mark = ",") %>% 
+        cols_label(place=md("**Entity Name**"),
+                   allocated=md("**Total Allocated**"),
+                   curr_released=md("**Currently Released to Texas**"),
+                   pct_released=md("**% Released of All Allocated**")) %>%
+        cols_align(align="center",
+                   columns=vars(allocated, curr_released,pct_released)) %>% 
+        tab_options(table.background.color = "#3A4A9F",
+                    table.font.color = "#fff",
+                    table.font.size = "26px",
+                    table.width = pct(95),
+                    table.align = "center",
+                    row_group.background.color = "#3A4A9F",
+                    table.border.top.color = "#3A4A9F",
+                    table.border.left.color = "#3A4A9F",
+                    table.border.right.color = "#3A4A9F",
+                    table.border.bottom.color = "#3A4A9F",
+                    table_body.border.bottom.color = "#3A4A9F")
+      
+      gt_tbl
+    })
+    
+    
+    # COVID-Relief County -------------------------------------------------
+    
+    output$county_related_crf <- gt::render_gt({
+      
+      req(input$countyname)
+      
+      gt_tbl <-  covid_relief %>%
+        filter(county==input$countyname) %>%
+        gt() %>%
+        tab_header(title = paste0("COVID-19 Related Relief Funds Related To ", input$countyname, " County"),
+                   subtitle = "This report shows the distribution of COVID-19 related relief funds that were initially allocated to specific governments in Texas and how much of those funds have been released to each entity. Not all funds are administered by the county government, which is why you may see multiple city or municipal governments associated with a county. Entities showing 100% of funds released represent those entities who received their relief funds directly from the federal government instead of through the State. Areas with less than 100% rely on the state to act as a fiduciary of federal relief funds.") %>%
+        cols_hide("county") %>%
+        fmt_percent(vars(pct_released), decimals=1, drop_trailing_zeros = TRUE) %>% 
+        fmt_currency(vars(allocated,curr_released),currency="USD",sep_mark = ",") %>% 
+        cols_label(place=md("**Entity Name**"),
+                   place_type=md("**Entity Type**"),
+                   allocated=md("**Total Allocated**"),
+                   curr_released=md("**Currently Released**"),
+                   pct_released=md("**% Released of All Allocated**")) %>% 
+        cols_align(align="center",
+                   columns=vars(allocated, curr_released,pct_released)) %>% 
+        tab_options(table.background.color = "#3A4A9F",
+                    table.font.color = "#fff",
+                    table.font.size = "22px",
+                    table.width = pct(95),
+                    table.align = "center",
+                    row_group.background.color = "#3A4A9F",
+                    table.border.top.color = "#3A4A9F",
+                    table.border.left.color = "#3A4A9F",
+                    table.border.right.color = "#3A4A9F",
+                    table.border.bottom.color = "#3A4A9F",
+                    table_body.border.bottom.color = "#3A4A9F")
+      
+      gt_tbl
+    })
     
     output$county_ui_1 <- renderText({
       
@@ -2887,7 +2975,8 @@ server <- function (input, output, session) {
       dshs_tsa_24hr_data %>%
         filter(date==max(date)) %>%
         as_tibble() %>% 
-        filter(tsa_counties==input$countyname) %>% 
+        # filter(tsa_counties==input$countyname) %>% 
+        filter(tsa_counties=="Harris") %>% 
         mutate_at(vars(total_susp_covid_in_hosp_at_time_of_report), scales::comma) %>% 
         distinct(total_susp_covid_in_hosp_at_time_of_report) %>% 
         as.character()
