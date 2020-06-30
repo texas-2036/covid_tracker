@@ -822,11 +822,11 @@ body <- dashboardBody(
             ),
             
             # ~~COVID Relief Funds Data ---------------------------------------------------------
-            h3(class="covid-topic", "COVID-19 Relief Funds Data"),
-            fluidRow(
-              column(width=12, class="economic-grid",
-                     gt_output(outputId = "state_related_crf"))
-            ),
+            # h3(class="covid-topic", "COVID-19 Relief Funds Data"),
+            # fluidRow(
+            #   column(width=12, class="economic-grid",
+            #          gt_output(outputId = "state_related_crf"))
+            # ),
             # ~~Mobility Data --------------------------------------------------------
             
             h3(class="covid-topic", "Mobility Trends", span="id='statewide_mob"),
@@ -2812,7 +2812,7 @@ server <- function (input, output, session) {
                    columns=vars(allocated, curr_released,pct_released)) %>% 
         tab_options(table.background.color = "#3A4A9F",
                     table.font.color = "#fff",
-                    table.font.size = "26px",
+                    table.font.size = "24px",
                     table.width = pct(95),
                     table.align = "center",
                     row_group.background.color = "#3A4A9F",
@@ -2906,8 +2906,8 @@ server <- function (input, output, session) {
         filter(date==max(date)) %>% 
         as_tibble() %>%
         select(tsa,tsa_counties,bed_avail_rate) %>% 
-        # filter(tsa_counties==input$countyname) %>%
-        filter(tsa_counties=="Harris") %>%
+        filter(tsa_counties==input$countyname) %>%
+        # filter(tsa_counties=="Harris") %>%
         mutate_at(vars(bed_avail_rate), scales::percent_format(accuracy=.1)) %>% 
         distinct(bed_avail_rate) %>% 
         as.character()
