@@ -1,0 +1,1312 @@
+place,place_type,county,allocated,curr_released,pct_released
+City of Austin,City/Town,Travis,170811897.2,170811897.2,1
+Bexar County,County,Bexar,79626415,79626415,1
+Collin County,County,Collin,171453156.4,171453156.4,1
+Dallas County,County,Dallas,239952372.7,239952372.7,1
+City of Dallas,City/Town,Dallas,234443127.6,234443127.6,1
+Denton County,County,Denton,147733721.6,147733721.6,1
+El Paso County,County,El Paso,27484280.4,27484280.4,1
+City of El Paso,City/Town,El Paso,118956278.9,118956278.9,1
+Fort Bend County,County,Fort Bend,134262393.5,134262393.5,1
+City of Fort Worth,City/Town,Tarrant,158715568.3,158715568.3,1
+Harris County,County,Harris,425942656.1,425942656.1,1
+Hidalgo County,County,Hidalgo,151582672.5,151582672.5,1
+City of Houston,City/Town,Harris,404868873.4,404868873.4,1
+Montgomery County,County,Montgomery,104983285.4,104983285.4,1
+City of San Antonio,City/Town,Bexar,269983717,269983717,1
+Tarrant County,County,Tarrant,209816856.5,209816856.5,1
+Travis County,County,Travis,61147507.2,61147507.2,1
+Williamson County,County,Williamson,93382340.1,93382340.1,1
+State of Texas,City/Town,Texas State,8038314290.9,8038314290.9,1
+Anderson County,County,Anderson,1997490,399498,0.2
+City of Elkhart,City/Town,Anderson,72270,14454,0.2
+City of Frankston,City/Town,Anderson,67155,13431,0.2
+City of Palestine,City/Town,Anderson,1038510,207702,0.2
+Andrews County,County,Andrews,222860,44572,0.2
+City of Andrews,City/Town,Andrews,805915,161183,0.2
+Angelina County,County,Angelina,1954260,390852,0.2
+City of Burke,City/Town,Angelina,42020,8404,0.2
+City of Diboll,City/Town,Angelina,295790,59158,0.2
+City of Hudson,City/Town,Angelina,277805,55561,0.2
+City of Huntington,City/Town,Angelina,121055,24211,0.2
+City of Lufkin,City/Town,Angelina,2037585,407517,0.2
+City of Zavalla,City/Town,Angelina,40810,8162,0.2
+Aransas County,County,Aransas,611270,122254,0.2
+City of Aransas Pass,City/Town,Aransas,40315,8063,0.2
+City of Fulton,City/Town,Aransas,78045,15609,0.2
+City of Rockport,City/Town,Aransas,563420,112684,0.2
+Archer County,County,Archer,145695,29139,0.2
+City of Archer City,City/Town,Archer,106095,21219,0.2
+City of Holliday,City/Town,Archer,98560,19712,0.2
+City of Lakeside City (Archer),City/Town,Archer,60170,12034,0.2
+City of Megargel,City/Town,Archer,10890,2178,0.2
+City of Scotland,City/Town,Archer,28765,5753,0.2
+City of Windthorst,City/Town,Archer,20240,4048,0.2
+Armstrong County,County,Armstrong,35915,7183,0.2
+City of Claude,City/Town,Armstrong,67870,13574,0.2
+Atascosa County,County,Atascosa,1390400,278080,0.2
+City of Charlotte,City/Town,Atascosa,101310,20262,0.2
+City of Christine,City/Town,Atascosa,23925,4785,0.2
+City of Jourdanton,City/Town,Atascosa,249260,49852,0.2
+City of Lytle,City/Town,Atascosa,131670,26334,0.2
+City of Pleasanton,City/Town,Atascosa,593670,118734,0.2
+City of Poteet,City/Town,Atascosa,191510,38302,0.2
+City of Lytle,City/Town,Atascosa,131670,26334,0.2
+Austin County,County,Austin,851345,170269,0.2
+City of Bellville,City/Town,Austin,248765,49753,0.2
+City of Brazos Country,City/Town,Austin,27170,5434,0.2
+City of Industry,City/Town,Austin,18535,3707,0.2
+City of San Felipe,City/Town,Austin,48070,9614,0.2
+City of Sealy,City/Town,Austin,382030,76406,0.2
+City of Wallis,City/Town,Austin,75845,15169,0.2
+Bailey County,County,Bailey,95645,19129,0.2
+City of Muleshoe,City/Town,Bailey,289355,57871,0.2
+Bandera County,County,Bandera,1218580,243716,0.2
+City of Bandera,City/Town,Bandera,52580,10516,0.2
+Bastrop County,County,Bastrop,3617735,723547,0.2
+City of Bastrop,City/Town,Bastrop,506605,101321,0.2
+City of Elgin,City/Town,Bastrop,504735,100947,0.2
+City of Smithville,City/Town,Bastrop,250690,50138,0.2
+Baylor County,County,Baylor,40865,8173,0.2
+City of Seymour,City/Town,Baylor,152130,30426,0.2
+Bee County,County,Bee,1051655,210331,0.2
+City of Beeville,City/Town,Bee,739420,147884,0.2
+Bell County,County,Bell,3210735,642147,0.2
+City of Bartlett,City/Town,Bell,39105,7821,0.2
+City of Belton,City/Town,Bell,1225455,245091,0.2
+City of Harker Heights,City/Town,Bell,1789370,357874,0.2
+City of Holland,City/Town,Bell,63635,12727,0.2
+City of Killeen,City/Town,Bell,8335085,1667017,0.2
+City of Little River-Academy,City/Town,Bell,114180,22836,0.2
+City of Moody,City/Town,Bell,78430,15686,0.2
+City of Morgan's Point Resort,City/Town,Bell,258610,51722,0.2
+City of Nolanville,City/Town,Bell,304700,60940,0.2
+City of Rogers,City/Town,Bell,67430,13486,0.2
+City of Salado,City/Town,Bell,115280,23056,0.2
+City of Temple,City/Town,Bell,4251225,850245,0.2
+City of Troy,City/Town,Bell,107580,21516,0.2
+Blanco County,County,Blanco,419870,83974,0.2
+City of Blanco,City/Town,Blanco,112860,22572,0.2
+City of Johnson City,City/Town,Blanco,113245,22649,0.2
+City of Round Mountain,City/Town,Blanco,10230,2046,0.2
+Borden County,County,Borden,35970,7194,0.2
+Bosque County,County,Bosque,568920,113784,0.2
+City of Clifton,City/Town,Bosque,195910,39182,0.2
+City of Cranfills Gap,City/Town,Bosque,15895,3179,0.2
+City of Iredell,City/Town,Bosque,18700,3740,0.2
+City of Meridian,City/Town,Bosque,83105,16621,0.2
+City of Morgan,City/Town,Bosque,28325,5665,0.2
+City of Valley Mills,City/Town,Bosque,65835,13167,0.2
+City of Walnut Springs,City/Town,Bosque,50985,10197,0.2
+Bowie County,County,Bowie,1755490,351098,0.2
+City of De Kalb,City/Town,Bowie,94160,18832,0.2
+City of Hooks,City/Town,Bowie,152570,30514,0.2
+City of Leary,City/Town,Bowie,27005,5401,0.2
+City of Maud,City/Town,Bowie,59345,11869,0.2
+City of Nash,City/Town,Bowie,212190,42438,0.2
+City of New Boston,City/Town,Bowie,256300,51260,0.2
+City of Red Lick,City/Town,Bowie,57970,11594,0.2
+City of Redwater,City/Town,Bowie,61930,12386,0.2
+City of Texarkana,City/Town,Bowie,2134880,426976,0.2
+City of Wake Village,City/Town,Bowie,316635,63327,0.2
+Brazoria County,County,Brazoria,6251080,1250216,0.2
+City of Alvin,City/Town,Brazoria,1549845,309969,0.2
+City of Angleton,City/Town,Brazoria,1131405,226281,0.2
+City of Bailey's Prairie,City/Town,Brazoria,43890,8778,0.2
+City of Bonney,City/Town,Brazoria,19470,3894,0.2
+City of Brazoria,City/Town,Brazoria,190685,38137,0.2
+City of Brookside Village,City/Town,Brazoria,91410,18282,0.2
+City of Clute,City/Town,Brazoria,668580,133716,0.2
+City of Danbury,City/Town,Brazoria,103290,20658,0.2
+City of Freeport,City/Town,Brazoria,690580,138116,0.2
+City of Hillcrest,City/Town,Brazoria,42845,8569,0.2
+City of Holiday Lakes,City/Town,Brazoria,68585,13717,0.2
+City of Iowa Colony,City/Town,Brazoria,122595,24519,0.2
+City of Jones Creek,City/Town,Brazoria,120725,24145,0.2
+City of Lake Jackson,City/Town,Brazoria,1523445,304689,0.2
+City of Liverpool,City/Town,Brazoria,31515,6303,0.2
+City of Manvel,City/Town,Brazoria,744260,148852,0.2
+City of Oyster Creek,City/Town,Brazoria,65945,13189,0.2
+City of Pearland,City/Town,Brazoria,6374005,1274801,0.2
+City of Quintana,City/Town,Brazoria,6545,1309,0.2
+City of Richwood,City/Town,Brazoria,233585,46717,0.2
+City of Sandy Point,City/Town,Brazoria,13475,2695,0.2
+City of Surfside Beach,City/Town,Brazoria,31955,6391,0.2
+City of Sweeny,City/Town,Brazoria,230010,46002,0.2
+City of West Columbia,City/Town,Brazoria,234795,46959,0.2
+Brazos County,County,Brazos,1437370,287474,0.2
+City of Bryan,City/Town,Brazos,4687320,937464,0.2
+City of College Station,City/Town,Brazos,6434890,1286978,0.2
+City of Kurten,City/Town,Brazos,20405,4081,0.2
+City of Millican,City/Town,Brazos,13200,2640,0.2
+City of Wixon Valley,City/Town,Brazos,13420,2684,0.2
+Brewster County,County,Brewster,178090,35618,0.2
+City of Alpine,City/Town,Brewster,328075,65615,0.2
+Briscoe County,County,Briscoe,26180,5236,0.2
+City of Quitaque,City/Town,Briscoe,20845,4169,0.2
+City of Silverton,City/Town,Briscoe,38005,7601,0.2
+Brooks County,County,Brooks,115280,23056,0.2
+City of Falfurrias,City/Town,Brooks,274835,54967,0.2
+Brown County,County,Brown,707740,141548,0.2
+City of Bangs,City/Town,Brown,87340,17468,0.2
+City of Blanket,City/Town,Brown,21560,4312,0.2
+City of Brownwood,City/Town,Brown,1094390,218878,0.2
+City of Brownwood,City/Town,Brown,1094390,218878,0.2
+City of Early,City/Town,Brown,171490,34298,0.2
+City of Early,City/Town,Brown,171490,34298,0.2
+Burleson County,County,Burleson,651915,130383,0.2
+City of Caldwell,City/Town,Burleson,249590,49918,0.2
+City of Snook,City/Town,Burleson,29755,5951,0.2
+City of Somerville,City/Town,Burleson,83105,16621,0.2
+Burnet County,County,Burnet,1264065,252813,0.2
+City of Bertram,City/Town,Burnet,88935,17787,0.2
+City of Burnet,City/Town,Burnet,378455,75691,0.2
+City of Cottonwood Shores,City/Town,Burnet,73975,14795,0.2
+City of Granite Shoals,City/Town,Burnet,281435,56287,0.2
+City of Highland Haven,City/Town,Burnet,23815,4763,0.2
+City of Horeshoe Bay,City/Town,Burnet,45485,9097,0.2
+City of Marble Falls,City/Town,Burnet,391875,78375,0.2
+City of Meadowlakes,City/Town,Burnet,100485,20097,0.2
+Caldwell County,County,Caldwell,1172435,234487,0.2
+City of Lockhart,City/Town,Caldwell,763895,152779,0.2
+City of Luling,City/Town,Caldwell,330880,66176,0.2
+City of Martindale,City/Town,Caldwell,69575,13915,0.2
+City of Mustang Ridge,City/Town,Caldwell,26290,5258,0.2
+City of Niederwald,City/Town,Caldwell,6490,1298,0.2
+City of Uhland,City/Town,Caldwell,31955,6391,0.2
+Calhoun County,County,Calhoun,364705,72941,0.2
+City of Point Comfort,City/Town,Calhoun,38610,7722,0.2
+City of Port Lavaca,City/Town,Calhoun,683815,136763,0.2
+City of Seadrift,City/Town,Calhoun,83820,16764,0.2
+Callahan County,County,Callahan,401775,80355,0.2
+City of Baird,City/Town,Callahan,84370,16874,0.2
+City of Clyde,City/Town,Callahan,219560,43912,0.2
+City of Cross Plains,City/Town,Callahan,55825,11165,0.2
+City of Putnam,City/Town,Callahan,5335,1067,0.2
+Cameron County,County,Cameron,5504180,1100836,0.2
+City of Bayview,City/Town,Cameron,22440,4488,0.2
+City of Brownsville,City/Town,Cameron,10209375,2041875,0.2
+City of Combes,City/Town,Cameron,170885,34177,0.2
+City of Harlingen,City/Town,Cameron,3758040,751608,0.2
+City of Indian Lake,City/Town,Cameron,47300,9460,0.2
+City of La Feria,City/Town,Cameron,429770,85954,0.2
+City of Los Fresnos (Cameron),City/Town,Cameron,441650,88330,0.2
+City of Los Indios,City/Town,Cameron,58300,11660,0.2
+City of Palm Valley,City/Town,Cameron,69245,13849,0.2
+City of Port Isabel,City/Town,Cameron,282150,56430,0.2
+City of Primera,City/Town,Cameron,283030,56606,0.2
+City of Rancho Viejo (Cameron),City/Town,Cameron,141515,28303,0.2
+City of Rangerville,City/Town,Cameron,19525,3905,0.2
+City of Rio Hondo,City/Town,Cameron,149600,29920,0.2
+City of San Benito,City/Town,Cameron,1355200,271040,0.2
+City of Santa Rosa (Cameron),City/Town,Cameron,151690,30338,0.2
+City of Solis CDP,City/Town,Cameron,24255,4851,0.2
+City of South Padre Island,City/Town,Cameron,155815,31163,0.2
+Camp County,County,Camp,456445,91289,0.2
+City of Pittsburg,City/Town,Camp,259820,51964,0.2
+City of Rocky Mound,City/Town,Camp,3905,781,0.2
+Carson County,County,Carson,80465,16093,0.2
+City of Groom,City/Town,Carson,30965,6193,0.2
+City of Panhandle,City/Town,Carson,133650,26730,0.2
+City of Skellytown,City/Town,Carson,25080,5016,0.2
+City of White Deer,City/Town,Carson,55770,11154,0.2
+Cass County,County,Cass,981035,196207,0.2
+City of Atlanta,City/Town,Cass,312565,62513,0.2
+City of Avinger,City/Town,Cass,24420,4884,0.2
+City of Bloomburg,City/Town,Cass,22990,4598,0.2
+City of Domino,City/Town,Cass,5940,1188,0.2
+City of Douglassville,City/Town,Cass,12265,2453,0.2
+City of Hughes Springs,City/Town,Cass,95150,19030,0.2
+City of Linden,City/Town,Cass,108185,21637,0.2
+City of Marietta,City/Town,Cass,7260,1452,0.2
+City of Queen City,City/Town,Cass,81620,16324,0.2
+Castro County,County,Castro,109340,21868,0.2
+City of Dimmitt,City/Town,Castro,229570,45914,0.2
+City of Hart,City/Town,Castro,58520,11704,0.2
+City of Nazareth,City/Town,Castro,16720,3344,0.2
+Chambers County,County,Chambers,1468610,293722,0.2
+City of Anahuac,City/Town,Chambers,137940,27588,0.2
+City of Baytown,City/Town,Chambers,227975,45595,0.2
+City of Beach City,City/Town,Chambers,150480,30096,0.2
+City of Cove,City/Town,Chambers,30250,6050,0.2
+City of Mont Belvieu,City/Town,Chambers,326315,65263,0.2
+City of Old River-Winfree,City/Town,Chambers,69465,13893,0.2
+Cherokee County,County,Cherokee,1511840,302368,0.2
+City of Alto,City/Town,Cherokee,70510,14102,0.2
+City of Bullard,City/Town,Cherokee,3630,726,0.2
+City of Cuney,City/Town,Cherokee,7590,1518,0.2
+City of Gallatin,City/Town,Cherokee,24200,4840,0.2
+City of Jacksonville,City/Town,Cherokee,832590,166518,0.2
+City of New Summerfield,City/Town,Cherokee,66770,13354,0.2
+City of Reklaw,City/Town,Cherokee,12375,2475,0.2
+City of Rusk,City/Town,Cherokee,315975,63195,0.2
+City of Troup,City/Town,Cherokee,3520,704,0.2
+City of Wells,City/Town,Cherokee,46530,9306,0.2
+Childress County,County,Childress,61105,12221,0.2
+City of Childress,City/Town,Childress,340725,68145,0.2
+Clay County,County,Clay,288860,57772,0.2
+City of Bellevue,City/Town,Clay,19250,3850,0.2
+City of Byers,City/Town,Clay,26235,5247,0.2
+City of Dean,City/Town,Clay,26070,5214,0.2
+City of Henrietta,City/Town,Clay,168905,33781,0.2
+City of Jolly,City/Town,Clay,8800,1760,0.2
+City of Petrolia,City/Town,Clay,36850,7370,0.2
+City of Windthorst,City/Town,Clay,935,187,0.2
+Cochran County,County,Cochran,34815,6963,0.2
+City of Morton,City/Town,Cochran,97955,19591,0.2
+City of Whiteface,City/Town,Cochran,24145,4829,0.2
+Coke County,County,Coke,71500,14300,0.2
+City of Bronte,City/Town,Coke,54945,10989,0.2
+City of Robert Lee,City/Town,Coke,59015,11803,0.2
+City of Blackwell,City/Town,Coke,825,165,0.2
+Coleman County,County,Coleman,140525,28105,0.2
+City of Coleman,City/Town,Coleman,243760,48752,0.2
+City of Novice,City/Town,Coleman,7535,1507,0.2
+City of Santa Anna (Coleman),City/Town,Coleman,57805,11561,0.2
+Collingsworth County,County,Collingsworth,42460,8492,0.2
+City of Dodson,City/Town,Collingsworth,5720,1144,0.2
+City of Wellington,City/Town,Collingsworth,112420,22484,0.2
+Colorado County,County,Colorado,651145,130229,0.2
+City of Columbus,City/Town,Colorado,204325,40865,0.2
+City of Eagle Lake,City/Town,Colorado,203445,40689,0.2
+City of Weimar,City/Town,Colorado,123200,24640,0.2
+Comal County,County,Comal,4098215,819643,0.2
+City of Bulverde,City/Town,Comal,318065,63613,0.2
+City of Fair Oaks Ranch,City/Town,Comal,23320,4664,0.2
+City of Garden Ridge,City/Town,Comal,226655,45331,0.2
+City of New Braunfels,City/Town,Comal,3845325,769065,0.2
+City of Schertz,City/Town,Comal,64405,12881,0.2
+City of Selma,City/Town,Comal,1485,297,0.2
+City of Spring Branch,City/Town,Comal,14025,2805,0.2
+Comanche County,County,Comanche,360305,72061,0.2
+City of Comanche,City/Town,Comanche,239305,47861,0.2
+City of De Leon,City/Town,Comanche,123035,24607,0.2
+City of Gustine,City/Town,Comanche,27280,5456,0.2
+Concho County,County,Concho,62865,12573,0.2
+City of Eden,City/Town,Concho,80300,16060,0.2
+City of Paint Rock,City/Town,Concho,6765,1353,0.2
+Cooke County,County,Cooke,1123815,224763,0.2
+City of Callisburg,City/Town,Cooke,21010,4202,0.2
+City of Gainesville,City/Town,Cooke,915145,183029,0.2
+City of Lindsay (Cooke),City/Town,Cooke,61985,12397,0.2
+City of Muenster,City/Town,Cooke,89870,17974,0.2
+City of Oak Ridge (Cooke),City/Town,Cooke,11000,2200,0.2
+City of Valley View,City/Town,Cooke,46310,9262,0.2
+Coryell County,County,Coryell,1472955,294591,0.2
+City of Copperas Cove,City/Town,Coryell,1759395,351879,0.2
+City of Gatesville,City/Town,Coryell,884290,176858,0.2
+City of Oglesby,City/Town,Coryell,25795,5159,0.2
+City of South Mountain,City/Town,Coryell,19910,3982,0.2
+City of Evant,City/Town,Coryell,14960,2992,0.2
+Cottle County,County,Cottle,18205,3641,0.2
+City of Paducah,City/Town,Cottle,58685,11737,0.2
+Crane County,County,Crane,66605,13321,0.2
+City of Crane,City/Town,Crane,197230,39446,0.2
+Crockett County,County,Crockett,190520,38104,0.2
+Crosby County,County,Crosby,63195,12639,0.2
+City of Crosbyton,City/Town,Crosby,87670,17534,0.2
+City of Lorenzo,City/Town,Crosby,63800,12760,0.2
+City of Ralls,City/Town,Crosby,100870,20174,0.2
+Culberson County,County,Culberson,17545,3509,0.2
+City of Van Horn,City/Town,Culberson,101860,20372,0.2
+Dallam County,County,Dallam,62370,12474,0.2
+City of Dalhart,City/Town,Dallam,309210,61842,0.2
+City of Texline,City/Town,Dallam,29205,5841,0.2
+Dawson County,County,Dawson,185900,37180,0.2
+City of Lamesa,City/Town,Dawson,484880,96976,0.2
+City of Los Ybanez,City/Town,Dawson,935,187,0.2
+City of O' Donnell,City/Town,Dawson,6325,1265,0.2
+City of Welch CDP,City/Town,Dawson,13530,2706,0.2
+City of Ackerly,City/Town,Dawson,8470,1694,0.2
+City of Deaf Smith,City/Town,Dawson,166815,33363,0.2
+City of Hereford,City/Town,Dawson,853215,170643,0.2
+Delta County,County,Delta,174570,34914,0.2
+City of Cooper,City/Town,Delta,108185,21637,0.2
+City of Pecan Gap,City/Town,Delta,10450,2090,0.2
+DeWitt County,County,DeWitt,443300,88660,0.2
+City of Cuero,City/Town,DeWitt,414975,82995,0.2
+City of Nordheim,City/Town,DeWitt,17380,3476,0.2
+City of Yoakum,City/Town,DeWitt,115555,23111,0.2
+City of Yorktown,City/Town,DeWitt,117590,23518,0.2
+Dickens County,County,Dickens,39435,7887,0.2
+City of Dickens,City/Town,Dickens,14355,2871,0.2
+City of Spur,City/Town,Dickens,67815,13563,0.2
+Dimmit County,County,Dimmit,140470,28094,0.2
+City of Asherton,City/Town,Dimmit,57145,11429,0.2
+City of Big Wells,City/Town,Dimmit,37345,7469,0.2
+City of Carrizo Springs,City/Town,Dimmit,321860,64372,0.2
+Donley County,County,Donley,42130,8426,0.2
+City of Clarendon,City/Town,Donley,101420,20284,0.2
+City of Hedley,City/Town,Donley,16225,3245,0.2
+City of Howardwick,City/Town,Donley,20515,4103,0.2
+Duval County,County,Duval,216975,43395,0.2
+City of Benavides,City/Town,Duval,68255,13651,0.2
+City of Freer,City/Town,Duval,144485,28897,0.2
+City of San Diego,City/Town,Duval,183920,36784,0.2
+Eastland County,County,Eastland,324280,64856,0.2
+City of Carbon,City/Town,Eastland,14520,2904,0.2
+City of Cisco,City/Town,Eastland,212300,42460,0.2
+City of Eastland,City/Town,Eastland,222860,44572,0.2
+City of Gorman,City/Town,Eastland,57090,11418,0.2
+City of Ranger,City/Town,Eastland,132770,26554,0.2
+City of Rising Star,City/Town,Eastland,45980,9196,0.2
+Ector County,County,Ector,2613105,522621,0.2
+City of Goldsmith,City/Town,Ector,14795,2959,0.2
+City of Odessa,City/Town,Ector,6514365,1302873,0.2
+Edwards County,County,Edwards,44110,8822,0.2
+City of Rocksprings,City/Town,Edwards,62150,12430,0.2
+Ellis County,County,Ellis,3460930,692186,0.2
+City of Alma,City/Town,Ellis,22000,4400,0.2
+City of Bardwell,City/Town,Ellis,39765,7953,0.2
+City of Cedar Hill,City/Town,Ellis,30745,6149,0.2
+City of Ennis,City/Town,Ellis,1157310,231462,0.2
+City of Ferris,City/Town,Ellis,155100,31020,0.2
+City of Garrett,City/Town,Ellis,51425,10285,0.2
+City of Glenn Heights,City/Town,Ellis,167695,33539,0.2
+City of Grand Prairie,City/Town,Ellis,1540,308,0.2
+City of Italy,City/Town,Ellis,107635,21527,0.2
+City of Mansfield,City/Town,Ellis,6545,1309,0.2
+City of Maypearl,City/Town,Ellis,63030,12606,0.2
+City of Midlothian,City/Town,Ellis,1556555,311311,0.2
+City of Milford,City/Town,Ellis,42020,8404,0.2
+City of Oak Leaf,City/Town,Ellis,81345,16269,0.2
+City of Palmer,City/Town,Ellis,122870,24574,0.2
+City of Pecan Hill,City/Town,Ellis,37895,7579,0.2
+City of Red Oak,City/Town,Ellis,723415,144683,0.2
+City of Waxahachie,City/Town,Ellis,2125365,425073,0.2
+City of Ovilla,City/Town,Ellis,207515,41503,0.2
+City of Venus,City/Town,Ellis,4730,946,0.2
+Erath County,County,Erath,936155,187231,0.2
+City of Dublin,City/Town,Erath,198660,39732,0.2
+City of Stephenville,City/Town,Erath,1213575,242715,0.2
+Falls County,County,Falls,499290,99858,0.2
+City of Bruceville-Eddy,City/Town,Falls,220,44,0.2
+City of Lott,City/Town,Falls,43010,8602,0.2
+City of Marlin,City/Town,Falls,311575,62315,0.2
+City of Rosebud,City/Town,Falls,73920,14784,0.2
+City of Golinda,City/Town,Falls,23320,4664,0.2
+Fannin County,County,Fannin,939345,187869,0.2
+City of Bailey,City/Town,Fannin,16720,3344,0.2
+City of Bonham,City/Town,Fannin,586960,117392,0.2
+City of Dodd City,City/Town,Fannin,21120,4224,0.2
+City of Ector,City/Town,Fannin,39930,7986,0.2
+City of Honey Grove,City/Town,Fannin,91520,18304,0.2
+City of Ladonia,City/Town,Fannin,34430,6886,0.2
+City of Leonard,City/Town,Fannin,114400,22880,0.2
+City of Pecan Gap,City/Town,Fannin,660,132,0.2
+City of Ravenna,City/Town,Fannin,11715,2343,0.2
+City of Savoy,City/Town,Fannin,46530,9306,0.2
+City of Trenton,City/Town,Fannin,38060,7612,0.2
+City of Whitewright,City/Town,Fannin,440,88,0.2
+City of Windom,City/Town,Fannin,11440,2288,0.2
+Fayette County,County,Fayette,854260,170852,0.2
+City of Carmine,City/Town,Fayette,14190,2838,0.2
+City of Fayetteville,City/Town,Fayette,14905,2981,0.2
+City of Flatonia,City/Town,Fayette,83105,16621,0.2
+City of La Grange,City/Town,Fayette,261305,52261,0.2
+City of Round Top,City/Town,Fayette,4840,968,0.2
+City of Schulenburg,City/Town,Fayette,161425,32285,0.2
+City of Fisher,City/Town,Fayette,99880,19976,0.2
+City of Roby,City/Town,Fayette,33330,6666,0.2
+City of Rotan,City/Town,Fayette,77440,15488,0.2
+Floyd County,County,Floyd,76835,15367,0.2
+City of Floydada,City/Town,Floyd,146850,29370,0.2
+City of Lockney,City/Town,Floyd,90475,18095,0.2
+City of Foard,City/Town,Floyd,16335,3267,0.2
+City of Crowell,City/Town,Floyd,47190,9438,0.2
+Franklin County,County,Franklin,400785,80157,0.2
+City of Mount Vernon,City/Town,Franklin,150645,30129,0.2
+City of Winnsboro,City/Town,Franklin,38445,7689,0.2
+Freestone County,County,Freestone,640585,128117,0.2
+City of Fairfield,City/Town,Freestone,163900,32780,0.2
+City of Kirvin,City/Town,Freestone,7535,1507,0.2
+City of Oakwood,City/Town,Freestone,2035,407,0.2
+City of Teague,City/Town,Freestone,197340,39468,0.2
+City of Wortham,City/Town,Freestone,59180,11836,0.2
+City of Streetman,City/Town,Freestone,13860,2772,0.2
+Frio County,County,Frio,288475,57695,0.2
+City of Dilley,City/Town,Frio,242275,48455,0.2
+City of Pearsall,City/Town,Frio,586080,117216,0.2
+Gaines County,County,Gaines,603075,120615,0.2
+City of Seagraves,City/Town,Gaines,158730,31746,0.2
+City of Seminole,City/Town,Gaines,420255,84051,0.2
+Galveston County,County,Galveston,2302575,460515,0.2
+City of Bayou Vista,City/Town,Galveston,90640,18128,0.2
+City of Clear Lake Shores,City/Town,Galveston,64020,12804,0.2
+City of Dickinson,City/Town,Galveston,1184260,236852,0.2
+City of Friendswood,City/Town,Galveston,1573330,314666,0.2
+City of Galveston,City/Town,Galveston,2730090,546018,0.2
+City of Hitchcock,City/Town,Galveston,432025,86405,0.2
+City of Jamaica Beach,City/Town,Galveston,59400,11880,0.2
+City of Kemah,City/Town,Galveston,112585,22517,0.2
+City of La Marque,City/Town,Galveston,924935,184987,0.2
+City of League City,City/Town,Galveston,5734300,1146860,0.2
+City of Santa Fe,City/Town,Galveston,749320,149864,0.2
+City of Texas City,City/Town,Galveston,2802030,560406,0.2
+City of Tiki Island,City/Town,Galveston,58135,11627,0.2
+Garza County,County,Garza,50655,10131,0.2
+City of Post,City/Town,Garza,291940,58388,0.2
+Gillespie County,County,Gillespie,850245,170049,0.2
+City of Fredericksburg,City/Town,Gillespie,634095,126819,0.2
+Glasscock County,County,Glasscock,77495,15499,0.2
+Goliad County,County,Goliad,308000,61600,0.2
+City of Goliad,City/Town,Goliad,113190,22638,0.2
+Gonzales County,County,Gonzales,500445,100089,0.2
+City of Gonzales,City/Town,Gonzales,416405,83281,0.2
+City of Nixon,City/Town,Gonzales,135465,27093,0.2
+City of Smiley,City/Town,Gonzales,30580,6116,0.2
+City of Waelder,City/Town,Gonzales,63140,12628,0.2
+Gray County,County,Gray,197615,39523,0.2
+City of Lefors,City/Town,Gray,25960,5192,0.2
+City of McLean,City/Town,Gray,41085,8217,0.2
+City of Pampa,City/Town,Gray,939070,187814,0.2
+Grayson County,County,Grayson,2211495,442299,0.2
+City of Bells,City/Town,Grayson,85360,17072,0.2
+City of Collinsville,City/Town,Grayson,109890,21978,0.2
+City of Denison,City/Town,Grayson,1409705,281941,0.2
+City of Dorchester,City/Town,Grayson,9240,1848,0.2
+City of Gunter,City/Town,Grayson,91465,18293,0.2
+City of Howe,City/Town,Grayson,198550,39710,0.2
+City of Knollwood,City/Town,Grayson,30470,6094,0.2
+City of Pottsboro,City/Town,Grayson,138710,27742,0.2
+City of Sadler,City/Town,Grayson,18975,3795,0.2
+City of Sherman,City/Town,Grayson,2430560,486112,0.2
+City of Southmayd,City/Town,Grayson,60885,12177,0.2
+City of Tioga,City/Town,Grayson,56045,11209,0.2
+City of Tom Bean,City/Town,Grayson,63250,12650,0.2
+City of Van Alstyne,City/Town,Grayson,256190,51238,0.2
+City of Whitesboro,City/Town,Grayson,227645,45529,0.2
+City of Whitewright,City/Town,Grayson,93225,18645,0.2
+Gregg County,County,Gregg,1090980,218196,0.2
+City of Clarksville City,City/Town,Gregg,50820,10164,0.2
+City of Easton,City/Town,Gregg,25190,5038,0.2
+City of Gladewater,City/Town,Gregg,213730,42746,0.2
+City of Kilgore,City/Town,Gregg,623260,124652,0.2
+City of Lakeport,City/Town,Gregg,58080,11616,0.2
+City of Longview,City/Town,Gregg,4382950,898117,0.2049115321872255
+City of Warren City,City/Town,Gregg,16170,3234,0.2
+City of White Oak,City/Town,Gregg,355795,71159,0.2
+Grimes County,County,Grimes,1029380,205876,0.2
+City of Anderson,City/Town,Grimes,13200,2640,0.2
+City of Bedias,City/Town,Grimes,26675,5335,0.2
+City of Iola,City/Town,Grimes,24420,4884,0.2
+City of Navasota,City/Town,Grimes,436535,87307,0.2
+City of Plantersville,City/Town,Grimes,51590,10318,0.2
+City of Todd Mission,City/Town,Grimes,6600,1320,0.2
+Guadalupe County,County,Guadalupe,2548370,509674,0.2
+City of Cibolo,City/Town,Guadalupe,1708630,341726,0.2
+City of Kingsbury,City/Town,Guadalupe,7150,1430,0.2
+City of Marion,City/Town,Guadalupe,68255,13651,0.2
+City of New Berlin,City/Town,Guadalupe,33440,6688,0.2
+City of New Braunfels,City/Town,Guadalupe,808335,161667,0.2
+City of Santa Clara,City/Town,Guadalupe,40315,8063,0.2
+City of Schertz,City/Town,Guadalupe,2082300,416460,0.2
+City of Seguin,City/Town,Guadalupe,1718145,343629,0.2
+City of Selma,City/Town,Guadalupe,146740,29645,0.202023988005997
+City of Staples,City/Town,Guadalupe,14905,2981,0.2
+Hale County,County,Hale,252065,50413,0.2
+City of Edmondson,City/Town,Hale,5665,1133,0.2
+City of Hale Center,City/Town,Hale,115335,23067,0.2
+City of Petersburg,City/Town,Hale,63195,12639,0.2
+City of Plainview,City/Town,Hale,1140700,228140,0.2
+City of Abernathy,City/Town,Hale,108350,21670,0.2
+City of Estelline,City/Town,Hale,7590,1518,0.2
+City of Lakeview,City/Town,Hale,5225,1045,0.2
+City of Memphis,City/Town,Hale,118140,23628,0.2
+City of Turkey,City/Town,Hale,21065,4213,0.2
+Hall County,County,Hall,16115,3223,0.2
+City of Estelline,City/Town,Hall,7205,1441,0.2
+City of Lakeview,City/Town,Hall,5390,1078,0.2
+City of Memphis,City/Town,Hall,113190,22638,0.2
+City of Turkey,City/Town,Hall,21120,4224,0.2
+Hamilton County,County,Hamilton,203720,40744,0.2
+City of Evant,City/Town,Hamilton,7480,1496,0.2
+City of Hamilton,City/Town,Hamilton,173745,34749,0.2
+City of Hico,City/Town,Hamilton,80410,16082,0.2
+Hansford County,County,Hansford,53405,10681,0.2
+City of Gruver,City/Town,Hansford,62535,12507,0.2
+City of Spearman,City/Town,Hansford,181005,36201,0.2
+Hardeman County,County,Hardeman,49115,9823,0.2
+City of Chillicothe,City/Town,Hardeman,35860,7172,0.2
+City of Quanah,City/Town,Hardeman,131340,26268,0.2
+Hardin County,County,Hardin,1840740,368148,0.2
+Hardin County,County,Hardin,1840740,368148,0.2
+City of Kountze,City/Town,Hardin,117150,23430,0.2
+City of Kountze,City/Town,Hardin,117150,23430,0.2
+City of Lumberton,City/Town,Hardin,705870,141174,0.2
+City of Rose Hill Acres,City/Town,Hardin,22825,4565,0.2
+City of Silsbee,City/Town,Hardin,374825,74965,0.2
+City of Sour Lake,City/Town,Hardin,106700,21340,0.2
+Harrison County,County,Harrison,1804880,360976,0.2
+City of Hallsville,City/Town,Harrison,238425,47685,0.2
+City of Longview,City/Town,Harrison,107635,21527,0.2
+City of Marshall,City/Town,Harrison,1344420,268884,0.2
+City of Nesbitt,City/Town,Harrison,14795,2959,0.2
+City of Scottsville,City/Town,Harrison,20350,4070,0.2
+City of Uncertain,City/Town,Harrison,5170,1034,0.2
+City of Waskom,City/Town,Harrison,124740,24948,0.2
+Hartley County,County,Hartley,141075,28215,0.2
+City of Channing,City/Town,Hartley,18535,3707,0.2
+City of Dalhart,City/Town,Hartley,147070,29414,0.2
+Haskell County,County,Haskell,62975,12595,0.2
+City of Haskell,City/Town,Haskell,179630,35926,0.2
+City of O'Brien,City/Town,Haskell,5720,1144,0.2
+City of Rochester,City/Town,Haskell,17380,3476,0.2
+City of Rule,City/Town,Haskell,34265,6853,0.2
+City of Stamford,City/Town,Haskell,1870,374,0.2
+City of Weinert,City/Town,Haskell,9350,1870,0.2
+Hays County,County,Hays,4830760,966152,0.2
+City of Bear Creek,City/Town,Hays,25025,5005,0.2
+City of Buda,City/Town,Hays,1007765,201553,0.2
+City of Dripping Springs,City/Town,Hays,218185,43637,0.2
+City of Hays,City/Town,Hays,14465,2893,0.2
+City of Kyle,City/Town,Hays,2539570,507914,0.2
+City of Mountain City,City/Town,Hays,43835,8767,0.2
+City of Niederwald,City/Town,Hays,26840,5368,0.2
+City of San Marcos,City/Town,Hays,3655630,731126,0.2
+City of Uhland,City/Town,Hays,33660,6732,0.2
+City of Wimberley,City/Town,Hays,171985,34397,0.2
+City of Woodcreek,City/Town,Hays,92785,18557,0.2
+Hemphill County,County,Hemphill,60830,12166,0.2
+City of Canadian,City/Town,Hemphill,149215,29843,0.2
+Henderson County,County,Henderson,2379190,475838,0.2
+City of Athens,City/Town,Henderson,746405,149281,0.2
+City of Berryville,City/Town,Henderson,58190,11638,0.2
+City of Brownsboro,City/Town,Henderson,69245,13849,0.2
+City of Caney City,City/Town,Henderson,12430,2486,0.2
+City of Chandler,City/Town,Henderson,171490,34298,0.2
+City of Coffee City,City/Town,Henderson,80575,16115,0.2
+City of Enchanted Oaks,City/Town,Henderson,18645,3729,0.2
+City of Eustace,City/Town,Henderson,55605,11121,0.2
+City of Gun Barrel City,City/Town,Henderson,338635,67727,0.2
+City of Log Cabin,City/Town,Henderson,43120,8624,0.2
+City of Mabank,City/Town,Henderson,48620,40755,0.8382352941176471
+City of Malakoff,City/Town,Henderson,134310,26862,0.2
+City of Moore Station,City/Town,Henderson,11275,2255,0.2
+City of Murchison,City/Town,Henderson,33605,6721,0.2
+City of Payne Springs,City/Town,Henderson,43890,8778,0.2
+City of Poynor,City/Town,Henderson,17545,3509,0.2
+City of Seven Points,City/Town,Henderson,79475,15895,0.2
+City of Star Harbor,City/Town,Henderson,27060,5412,0.2
+City of Tool,City/Town,Henderson,132220,26444,0.2
+City of Trinidad,City/Town,Henderson,49005,9801,0.2
+Hill County,County,Hill,1113035,222607,0.2
+City of Abbott,City/Town,Hill,20680,4136,0.2
+City of Aquilla,City/Town,Hill,6270,1254,0.2
+City of Blum,City/Town,Hill,25960,5192,0.2
+City of Bynum,City/Town,Hill,11275,2255,0.2
+City of Carl's Corner,City/Town,Hill,9790,1958,0.2
+City of Covington,City/Town,Hill,15510,3102,0.2
+City of Hillsboro,City/Town,Hill,469920,93984,0.2
+City of Hubbard,City/Town,Hill,76670,15334,0.2
+City of Itasca,City/Town,Hill,94985,18997,0.2
+City of Malone,City/Town,Hill,15180,3036,0.2
+City of Mertens,City/Town,Hill,7040,1408,0.2
+City of Mount Calm,City/Town,Hill,18260,3652,0.2
+City of Penelope,City/Town,Hill,11385,2277,0.2
+City of Whitney,City/Town,Hill,119735,23947,0.2
+Hockley County,County,Hockley,313445,62689,0.2
+City of Anton,City/Town,Hockley,60775,12155,0.2
+City of Levelland,City/Town,Hockley,755260,151052,0.2
+City of Opdyke West,City/Town,Hockley,9845,1969,0.2
+City of Ropesville,City/Town,Hockley,23210,4642,0.2
+City of Smyer,City/Town,Hockley,26070,5214,0.2
+City of Sundown,City/Town,Hockley,77550,15510,0.2
+Hood County,County,Hood,2528405,505681,0.2
+City of Cresson,City/Town,Hood,17160,11319,0.6596153846153846
+City of DeCordova,City/Town,Hood,167365,33473,0.2
+City of Granbury,City/Town,Hood,578820,115764,0.2
+City of Lipan,City/Town,Hood,26565,5313,0.2
+City of Stockton Bend City,City/Town,Hood,17875,3575,0.2
+City of Tolar,City/Town,Hood,54175,10835,0.2
+Hopkins County,County,Hopkins,1045715,209143,0.2
+City of Como,City/Town,Hopkins,41030,8206,0.2
+City of Cumby,City/Town,Hopkins,44715,8943,0.2
+City of Sulphur Springs,City/Town,Hopkins,890945,178189,0.2
+City of Tira,City/Town,Hopkins,17215,3443,0.2
+Houston County,County,Houston,744810,148962,0.2
+City of Crockett,City/Town,Houston,368885,73777,0.2
+City of Grapeland,City/Town,Houston,78045,15609,0.2
+City of Kennard,City/Town,Houston,18150,3630,0.2
+City of Latexo,City/Town,Houston,18260,3652,0.2
+City of Lovelady,City/Town,Houston,35090,7018,0.2
+Howard County,County,Howard,407110,81422,0.2
+City of Big Spring,City/Town,Howard,1548580,309716,0.2
+City of Coahoma,City/Town,Howard,48785,9757,0.2
+City of Forsan,City/Town,Howard,12045,2409,0.2
+Hudspeth County,County,Hudspeth,247940,49588,0.2
+City of Dell City,City/Town,Hudspeth,20790,4158,0.2
+Hunt County,County,Hunt,2711115,542223,0.2
+City of Caddo Mills,City/Town,Hunt,93830,18766,0.2
+City of Campbell,City/Town,Hunt,36630,7326,0.2
+City of Celeste,City/Town,Hunt,50875,10175,0.2
+City of Commerce,City/Town,Hunt,538230,107646,0.2
+City of Greenville,City/Town,Hunt,1586805,317361,0.2
+City of Hawk Cove,City/Town,Hunt,30470,6094,0.2
+City of Josephine,City/Town,Hunt,5995,1199,0.2
+City of Lone Oak,City/Town,Hunt,37180,7436,0.2
+City of Neylandville,City/Town,Hunt,5830,1166,0.2
+City of Quinlan,City/Town,Hunt,86075,17215,0.2
+City of Union Valley,City/Town,Hunt,21945,4389,0.2
+City of Royse City,City/Town,Hunt,35970,7194,0.2
+City of West Tawakoni,City/Town,Hunt,97625,19525,0.2
+City of Wolfe City,City/Town,Hunt,84095,16819,0.2
+Hutchinson County,County,Hutchinson,254155,50831,0.2
+City of Borger,City/Town,Hutchinson,684035,136807,0.2
+City of Fritch,City/Town,Hutchinson,108405,21769,0.20081177067478437
+City of Sanford,City/Town,Hutchinson,8415,1683,0.2
+City of Stinnett,City/Town,Hutchinson,96580,19316,0.2
+Irion County,County,Irion,38555,7711,0.2
+City of Mertzon,City/Town,Irion,45925,9185,0.2
+Jack County,County,Jack,211255,42251,0.2
+City of Bryson,City/Town,Jack,31845,6369,0.2
+City of Jacksboro,City/Town,Jack,248325,49665,0.2
+Jackson County,County,Jackson,349305,69861,0.2
+City of Edna,City/Town,Jackson,324940,64988,0.2
+City of Ganado,City/Town,Jackson,125510,25102,0.2
+City of La Ward,City/Town,Jackson,12045,2409,0.2
+City of Jasper,City/Town,Jackson,1397165,279433,0.2
+City of Browndell,City/Town,Jackson,11220,2244,0.2
+City of Jasper,City/Town,Jackson,421575,84315,0.2
+City of Kirbyville,City/Town,Jackson,124135,24827,0.2
+Jeff Davis County,County,Jeff Davis,118195,23639,0.2
+City of Valentine,City/Town,Jeff Davis,6875,1375,0.2
+Jefferson County,County,Jefferson,1548140,309628,0.2
+City of Beaumont,City/Town,Jefferson,6587900,1317580,0.2
+City of Bevil Oaks,City/Town,Jefferson,67815,13563,0.2
+City of China,City/Town,Jefferson,66825,13365,0.2
+City of Groves,City/Town,Jefferson,874885,174977,0.2
+City of Nederland,City/Town,Jefferson,951610,190322,0.2
+City of Nome,City/Town,Jefferson,32780,6556,0.2
+City of Port Arthur,City/Town,Jefferson,2994200,598840,0.2
+City of Port Neches,City/Town,Jefferson,700315,140063,0.2
+City of Taylor Landing,City/Town,Jefferson,11605,2321,0.2
+Jim Hogg County,County,Jim Hogg,286000,57200,0.2
+Jim Wells County,County,Jim Wells,903815,180763,0.2
+City of Alice,City/Town,Jim Wells,1037410,207482,0.2
+City of Orange Grove,City/Town,Jim Wells,71995,14399,0.2
+City of Premont,City/Town,Jim Wells,140470,28094,0.2
+City of San Diego,City/Town,Jim Wells,49885,9977,0.2
+City of Westdale CDP,City/Town,Jim Wells,22935,4587,0.2
+Johnson County,County,Johnson,4152720,830544,0.2
+City of Alvarado,City/Town,Johnson,251570,50314,0.2
+City of Briaroaks,City/Town,Johnson,27775,5555,0.2
+City of Burleson,City/Town,Johnson,2054635,410927,0.2
+City of Cleburne,City/Town,Johnson,1778425,355685,0.2
+City of Coyote Flats City,City/Town,Johnson,18205,3641,0.2
+City of Cresson,City/Town,Johnson,7865,1573,0.2
+City of Cross Timber,City/Town,Johnson,17820,3564,0.2
+City of Crowley,City/Town,Johnson,1925,385,0.2
+City of Godley,City/Town,Johnson,70950,14190,0.2
+City of Grandview,City/Town,Johnson,99165,19833,0.2
+City of Joshua,City/Town,Johnson,428340,85668,0.2
+City of Keene,City/Town,Johnson,374825,74965,0.2
+City of Mansfield,City/Town,Johnson,119515,23903,0.2
+City of Rio Vista,City/Town,Johnson,59015,11803,0.2
+City of Venus,City/Town,Johnson,207185,41437,0.2
+Jones County,County,Jones,343145,68629,0.2
+City of Abilene,City/Town,Jones,310035,62007,0.2
+City of Anson,City/Town,Jones,128150,25630,0.2
+City of Hamlin,City/Town,Jones,111705,22341,0.2
+City of Hawley,City/Town,Jones,34650,6930,0.2
+City of Lueders,City/Town,Jones,17985,3597,0.2
+City of Stamford,City/Town,Jones,158895,31779,0.2
+Karnes County,County,Karnes,387310,77462,0.2
+City of Falls City,City/Town,Karnes,37070,7414,0.2
+City of Karnes City,City/Town,Karnes,176110,35222,0.2
+City of Kenedy,City/Town,Karnes,193875,38775,0.2
+City of Runge,City/Town,Karnes,63690,12738,0.2
+Kaufman County,County,Kaufman,3817605,763521,0.2
+Kaufman County,County,Kaufman,3817605,763521,0.2
+City of Combine,City/Town,Kaufman,78265,15653,0.2
+City of Cottonwood,City/Town,Kaufman,11825,2365,0.2
+City of Crandall,City/Town,Kaufman,191235,38247,0.2
+City of Forney,City/Town,Kaufman,1395405,279081,0.2
+City of Grays Prairie,City/Town,Kaufman,20790,4158,0.2
+City of Kaufman,City/Town,Kaufman,416075,83215,0.2
+City of Kaufman,City/Town,Kaufman,416075,83215,0.2
+City of Kemp,City/Town,Kaufman,69740,13948,0.2
+City of Mabank,City/Town,Kaufman,155155,31031,0.2
+City of Mesquite,City/Town,Kaufman,7260,1452,0.2
+City of Oak Grove,City/Town,Kaufman,38610,7722,0.2
+City of Oak Ridge (Kaufman),City/Town,Kaufman,36355,7271,0.2
+City of Post Oak Bend City,City/Town,Kaufman,37840,7568,0.2
+City of Rosser,City/Town,Kaufman,21010,4202,0.2
+City of Scurry,City/Town,Kaufman,42460,8492,0.2
+City of Seagoville,City/Town,Kaufman,1375,275,0.2
+City of Seven Points,City/Town,Kaufman,4345,869,0.2
+City of Talty,City/Town,Kaufman,146520,29304,0.2
+City of Terrell,City/Town,Kaufman,996600,199320,0.2
+Kendall County,County,Kendall,1554300,310860,0.2
+City of Boerne,City/Town,Kendall,929060,185812,0.2
+City of Fair Oaks Ranch,City/Town,Kendall,125345,25069,0.2
+Kenedy County,County,Kenedy,22220,4444,0.2
+Kent County,County,Kent,14850,2970,0.2
+City of Jayton,City/Town,Kent,27060,5412,0.2
+Kerr County,County,Kerr,1458985,291797,0.2
+City of Ingram,City/Town,Kerr,101640,20328,0.2
+City of Kerrville,City/Town,Kerr,1332375,266475,0.2
+Kimble County,County,Kimble,96800,19360,0.2
+City of Junction,City/Town,Kimble,141735,28347,0.2
+King County,County,King,14960,2992,0.2
+Kinney County,County,Kinney,97845,19569,0.2
+City of Brackettville,City/Town,Kinney,98175,19635,0.2
+City of Spofford,City/Town,Kinney,5665,1133,0.2
+Kleberg County,County,Kleberg,290730,58146,0.2
+City of Kingsville,City/Town,Kleberg,1396670,279334,0.2
+Knox County,County,Knox,55550,11110,0.2
+City of Benjamin,City/Town,Knox,13090,2618,0.2
+City of Goree,City/Town,Knox,10120,2024,0.2
+City of Knox City,City/Town,Knox,58465,11693,0.2
+City of Munday,City/Town,Knox,64295,12859,0.2
+La Salle County,County,La Salle,159940,31988,0.2
+City of Cotulla,City/Town,La Salle,220275,44055,0.2
+City of Encinal,City/Town,La Salle,33385,6677,0.2
+Lamar County,County,Lamar,1002485,200497,0.2
+City of Blossom,City/Town,Lamar,86240,17248,0.2
+City of Deport,City/Town,Lamar,30910,6182,0.2
+City of Paris,City/Town,Lamar,1393150,278630,0.2
+City of Reno (Lamar),City/Town,Lamar,184910,36982,0.2
+City of Roxton,City/Town,Lamar,36080,7216,0.2
+City of Sun Valley,City/Town,Lamar,4510,902,0.2
+City of Toco,City/Town,Lamar,3960,792,0.2
+Lamb County,County,Lamb,128040,25608,0.2
+City of Amherst,City/Town,Lamb,35365,7073,0.2
+City of Earth,City/Town,Lamb,53460,10692,0.2
+City of Littlefield,City/Town,Lamb,325325,65065,0.2
+City of Olton,City/Town,Lamb,112475,22495,0.2
+City of Springlake,City/Town,Lamb,5280,1056,0.2
+City of Sudan,City/Town,Lamb,49170,9834,0.2
+Lampasas County,County,Lampasas,592790,118558,0.2
+City of Copperas Cove,City/Town,Lampasas,36795,7359,0.2
+City of Kempner,City/Town,Lampasas,64625,12925,0.2
+City of Lampasas,City/Town,Lampasas,437085,87417,0.2
+City of Lometa,City/Town,Lampasas,47245,9449,0.2
+Lavaca County,County,Lavaca,577335,115467,0.2
+City of Hallettsville,City/Town,Lavaca,148115,29623,0.2
+City of Moulton,City/Town,Lavaca,49665,9933,0.2
+City of Shiner,City/Town,Lavaca,121990,24398,0.2
+City of Yoakum,City/Town,Lavaca,211365,42273,0.2
+Lee County,County,Lee,596090,119218,0.2
+City of Giddings,City/Town,Lee,285725,57145,0.2
+City of Lexington,City/Town,Lee,66330,13266,0.2
+Leon County,County,Leon,645370,129074,0.2
+City of Buffalo,City/Town,Leon,104280,20856,0.2
+City of Centerville,City/Town,Leon,49995,9999,0.2
+City of Jewett,City/Town,Leon,68365,13673,0.2
+City of Leona,City/Town,Leon,10395,2079,0.2
+City of Marquez,City/Town,Leon,14850,2970,0.2
+City of Normangee,City/Town,Leon,37565,7513,0.2
+City of Oakwood,City/Town,Leon,26400,5280,0.2
+Liberty County,County,Liberty,3041335,608267,0.2
+City of Ames,City/Town,Liberty,64240,12848,0.2
+City of Cleveland,City/Town,Liberty,474100,94820,0.2
+City of Daisetta,City/Town,Liberty,60995,12199,0.2
+City of Dayton,City/Town,Liberty,489885,97977,0.2
+City of Dayton Lakes,City/Town,Liberty,5940,1188,0.2
+City of Devers,City/Town,Liberty,29205,5841,0.2
+City of Hardin,City/Town,Liberty,51645,10329,0.2
+City of Kenefick,City/Town,Liberty,35970,7194,0.2
+City of Liberty,City/Town,Liberty,536470,107294,0.2
+City of North Cleveland,City/Town,Liberty,16720,3344,0.2
+City of Old River-Winfree,City/Town,Liberty,6985,1397,0.2
+City of Plum Grove,City/Town,Liberty,38555,7711,0.2
+Limestone County,County,Limestone,499070,99814,0.2
+City of Coolidge,City/Town,Limestone,54835,10967,0.2
+City of Groesbeck,City/Town,Limestone,240460,48092,0.2
+City of Kosse,City/Town,Limestone,25080,5016,0.2
+City of Mexia,City/Town,Limestone,423995,84799,0.2
+City of Tehuacana,City/Town,Limestone,15840,3168,0.2
+City of Thornton,City/Town,Limestone,29755,5951,0.2
+Lipscomb County,County,Lipscomb,26950,5390,0.2
+City of Booker,City/Town,Lipscomb,84040,16808,0.2
+City of Darrouzett,City/Town,Lipscomb,19360,3872,0.2
+City of Follett,City/Town,Lipscomb,25300,5060,0.2
+City of Higgins,City/Town,Lipscomb,22165,4433,0.2
+Live Oak County,County,Live Oak,421300,84260,0.2
+City of George West,City/Town,Live Oak,141460,28292,0.2
+City of Three Rivers,City/Town,Live Oak,108625,21725,0.2
+Llano County,County,Llano,788920,157784,0.2
+City of Horseshoe Bay,City/Town,Llano,172810,43659,0.2526416295353278
+City of Llano,City/Town,Llano,192885,38577,0.2
+City of Sunrise Beach Village,City/Town,Llano,44110,8822,0.2
+Loving County,County,Loving,9295,1859,0.2
+Lubbock County,County,Lubbock,1896070,379214,0.2
+City of Abernathy,City/Town,Lubbock,41470,8294,0.2
+City of Buffalo Springs,City/Town,Lubbock,27225,5445,0.2
+City of Idalou,City/Town,Lubbock,123530,24706,0.2
+City of Lubbock,City/Town,Lubbock,14113000,2822600,0.2
+City of New Deal,City/Town,Lubbock,45375,9075,0.2
+City of Ransom Canyon,City/Town,Lubbock,60665,12133,0.2
+City of Shallowater,City/Town,Lubbock,137555,27511,0.2
+City of Slaton,City/Town,Lubbock,327140,65428,0.2
+City of Wolfforth,City/Town,Lubbock,309265,61853,0.2
+Lynn County,County,Lynn,94160,18832,0.2
+City of New Home,City/Town,Lynn,20130,4026,0.2
+City of O'Donnell,City/Town,Lynn,39105,7821,0.2
+City of Tahoka,City/Town,Lynn,147290,29458,0.2
+City of Wilson,City/Town,Lynn,26620,5324,0.2
+Madison County,County,Madison,509520,101904,0.2
+City of Madisonville,City/Town,Madison,262790,52558,0.2
+City of Midway,City/Town,Madison,13310,2662,0.2
+Marion County,County,Marion,429935,85987,0.2
+City of Jefferson,City/Town,Marion,112035,22407,0.2
+Martin County,County,Martin,143715,28743,0.2
+City of Ackerly,City/Town,Martin,4015,803,0.2
+City of Stanton,City/Town,Martin,169675,33935,0.2
+Mason County,County,Mason,108955,47014,0.4314992428066633
+City of Mason,City/Town,Mason,126115,25223,0.2
+Matagorda County,County,Matagorda,805860,161172,0.2
+City of Bay City,City/Town,Matagorda,959420,191884,0.2
+City of Palacios,City/Town,Matagorda,250085,50017,0.2
+Maverick County,County,Maverick,1646810,329362,0.2
+City of Eagle Pass,City/Town,Maverick,1582900,316580,0.2
+McCulloch County,County,McCulloch,120560,24112,0.2
+City of Brady,City/Town,McCulloch,308990,61798,0.2
+City of Melvin,City/Town,McCulloch,9570,1914,0.2
+McLennan County,County,McLennan,2281290,456258,0.2
+City of Bellmead,City/Town,McLennan,592405,118481,0.2
+City of Beverly Hills,City/Town,McLennan,109670,21934,0.2
+City of Bruceville-Eddy,City/Town,McLennan,93005,18601,0.2
+City of Crawford,City/Town,McLennan,41470,8294,0.2
+City of Gholson,City/Town,McLennan,61490,12298,0.2
+City of Golinda,City/Town,McLennan,8415,1683,0.2
+City of Hewitt,City/Town,McLennan,834295,166859,0.2
+City of Lacy-Lakeview,City/Town,McLennan,385550,77110,0.2
+City of Leroy,City/Town,McLennan,18975,3795,0.2
+City of Lorena,City/Town,McLennan,97680,19536,0.2
+City of Mart,City/Town,McLennan,112255,22451,0.2
+City of McGregor,City/Town,McLennan,291280,58256,0.2
+City of Riesel,City/Town,McLennan,57805,11561,0.2
+City of Robinson,City/Town,McLennan,654720,130944,0.2
+City of Ross,City/Town,McLennan,15675,3135,0.2
+City of Valley Mills,City/Town,McLennan,715,143,0.2
+City of Waco,City/Town,McLennan,7662820,1532564,0.2
+City of West,City/Town,McLennan,157905,31581,0.2
+City of Woodway,City/Town,McLennan,508750,101750,0.2
+City of Bruceville-Eddy,City/Town,McLennan,102575,20515,0.2
+City of Hallsburg,City/Town,McLennan,25520,5104,0.2
+McMullen County,County,McMullen,40865,8173,0.2
+Medina County,County,Medina,1680360,336072,0.2
+City of Castroville,City/Town,Medina,171105,34221,0.2
+City of Devine,City/Town,Medina,269225,53845,0.2
+City of Hondo,City/Town,Medina,523710,104742,0.2
+City of LaCoste,City/Town,Medina,70785,14157,0.2
+City of Lytle,City/Town,Medina,30910,6182,0.2
+City of Natalia,City/Town,Medina,89485,17897,0.2
+City of San Antonio,City/Town,Medina,1540,308,0.2
+Menard County,County,Menard,40590,8118,0.2
+City of Menard,City/Town,Menard,77000,15400,0.2
+Midland County,County,Midland,1655885,331177,0.2
+City of Midland,City/Town,Midland,7953000,1590600,0.2
+City of Odessa,City/Town,Midland,116875,23375,0.2
+Milam County,County,Milam,610115,122023,0.2
+City of Buckholts,City/Town,Milam,29920,5984,0.2
+City of Cameron,City/Town,Milam,309595,61919,0.2
+City of Milano,City/Town,Milam,25080,5016,0.2
+City of Rockdale,City/Town,Milam,312675,62535,0.2
+City of Thorndale,City/Town,Milam,77880,15576,0.2
+Mills County,County,Mills,153450,30690,0.2
+City of Goldthwaite,City/Town,Mills,104665,20933,0.2
+City of Mullin,City/Town,Mills,9900,1980,0.2
+Mitchell County,County,Mitchell,220715,44143,0.2
+City of Colorado City,City/Town,Mitchell,204820,40964,0.2
+City of Loraine,City/Town,Mitchell,31350,6270,0.2
+City of Westbrook,City/Town,Mitchell,13090,2618,0.2
+Montague County,County,Montague,580635,116127,0.2
+City of Bowie,City/Town,Montague,282535,56507,0.2
+City of Nocona,City/Town,Montague,166980,33396,0.2
+City of St. Jo,City/Town,Montague,59840,11968,0.2
+Moore County,County,Moore,121330,24266,0.2
+City of Cactus,City/Town,Moore,172865,34573,0.2
+City of Dumas,City/Town,Moore,757350,151470,0.2
+City of Fritch,City/Town,Moore,440,88,0.2
+City of Sunray,City/Town,Moore,99715,19943,0.2
+Morris County,County,Morris,342650,68530,0.2
+City of Daingerfield,City/Town,Morris,130020,26004,0.2
+City of Hughes Springs,City/Town,Morris,330,66,0.2
+City of Lone Star,City/Town,Morris,80685,16137,0.2
+City of Naples,City/Town,Morris,73645,14729,0.2
+City of Omaha,City/Town,Morris,54010,10802,0.2
+Motley County,County,Motley,19140,3828,0.2
+City of Matador,City/Town,Motley,33825,6765,0.2
+City of Roaring Springs,City/Town,Motley,13035,2607,0.2
+Nacogdoches County,County,Nacogdoches,1601985,320397,0.2
+City of Appleby,City/Town,Nacogdoches,27225,5445,0.2
+City of Chireno,City/Town,Nacogdoches,21285,4257,0.2
+City of Cushing,City/Town,Nacogdoches,33605,6721,0.2
+City of Garrison,City/Town,Nacogdoches,49940,9988,0.2
+City of Nacogdoches,City/Town,Nacogdoches,1852180,370436,0.2
+Navarro County,County,Navarro,945230,189046,0.2
+City of Angus,City/Town,Navarro,25190,5038,0.2
+City of Barry,City/Town,Navarro,14410,2882,0.2
+City of Blooming Grove,City/Town,Navarro,46915,9383,0.2
+City of Corsicana,City/Town,Navarro,1362020,272404,0.2
+City of Dawson,City/Town,Navarro,44715,8943,0.2
+City of Emhouse,City/Town,Navarro,7810,1562,0.2
+City of Eureka,City/Town,Navarro,17875,3575,0.2
+City of Frost,City/Town,Navarro,35805,7161,0.2
+City of Goodlow,City/Town,Navarro,10890,2178,0.2
+City of Kerens,City/Town,Navarro,87120,17424,0.2
+City of Mildred,City/Town,Navarro,21450,4290,0.2
+City of Mustang,City/Town,Navarro,1265,253,0.2
+City of Navarro,City/Town,Navarro,11605,2321,0.2
+City of Oak Valley,City/Town,Navarro,22055,4411,0.2
+City of Powell,City/Town,Navarro,8140,1628,0.2
+City of Retreat,City/Town,Navarro,22550,4510,0.2
+City of Rice,City/Town,Navarro,56320,11264,0.2
+City of Richland,City/Town,Navarro,14850,2970,0.2
+Newton County,County,Newton,618365,123673,0.2
+City of Newton,City/Town,Newton,129360,25872,0.2
+Nolan County,County,Nolan,149160,29832,0.2
+City of Blackwell,City/Town,Nolan,16225,3245,0.2
+City of Roscoe,City/Town,Nolan,70015,14003,0.2
+City of Sweetwater,City/Town,Nolan,573870,114774,0.2
+Nueces County,County,Nueces,830665,166133,0.2
+City of Agua Dulce,City/Town,Nueces,45815,9163,0.2
+City of Aransas Pass,City/Town,Nueces,770,154,0.2
+City of Bishop,City/Town,Nueces,172370,34474,0.2
+City of Corpus Christi,City/Town,Nueces,17960470,3592094,0.2
+City of Driscoll,City/Town,Nueces,41195,8239,0.2
+City of Petronila,City/Town,Nueces,6160,1232,0.2
+City of Port Aransas,City/Town,Nueces,228745,45749,0.2
+City of Robstown,City/Town,Nueces,616385,123277,0.2
+City of San Patricio,City/Town,Nueces,23595,4719,0.2
+Ochiltree County,County,Ochiltree,63745,12749,0.2
+City of Perryton,City/Town,Ochiltree,477235,95447,0.2
+City of Oldham Country,City/Town,Ochiltree,57750,11550,0.2
+City of Adrian,City/Town,Ochiltree,8635,1727,0.2
+City of Vega,City/Town,Ochiltree,49775,9955,0.2
+Orange County,County,Orange,2271500,454300,0.2
+City of Bridge City,City/Town,Orange,434500,86900,0.2
+City of Orange,City/Town,Orange,1036585,207317,0.2
+City of Pine Forest,City/Town,Orange,27775,5555,0.2
+City of Rose City,City/Town,Orange,28105,5621,0.2
+City of Vidor,City/Town,Orange,602525,120505,0.2
+City of West Orange,City/Town,Orange,185790,37158,0.2
+Palo Pinto County,County,Palo Pinto,542575,108515,0.2
+City of Gordon,City/Town,Palo Pinto,26620,5324,0.2
+City of Graford,City/Town,Palo Pinto,34650,6930,0.2
+City of Mineral Wells,City/Town,Palo Pinto,951225,190245,0.2
+City of Mingus,City/Town,Palo Pinto,13695,2739,0.2
+City of Strawn,City/Town,Palo Pinto,36630,7326,0.2
+Panola County,County,Panola,821590,164318,0.2
+City of Beckville,City/Town,Panola,51315,10263,0.2
+City of Carthage,City/Town,Panola,385220,77044,0.2
+City of Gary City,City/Town,Panola,17545,3509,0.2
+Parker County,County,Parker,4713115,942623,0.2
+City of Aledo,City/Town,Parker,225775,45155,0.2
+City of Annetta,City/Town,Parker,168685,33737,0.2
+City of Annetta North,City/Town,Parker,31075,6215,0.2
+City of Annetta South,City/Town,Parker,32450,6490,0.2
+City of Azle,City/Town,Parker,121275,24255,0.2
+City of Cool,City/Town,Parker,10175,2035,0.2
+City of Cresson,City/Town,Parker,31570,6314,0.2
+City of Fort Worth,City/Town,Parker,440,88,0.2
+City of Hudson Oaks,City/Town,Parker,126005,25201,0.2
+City of Millsap,City/Town,Parker,24530,4906,0.2
+City of Reno,City/Town,Parker,166485,33297,0.2
+City of Sanctuary,City/Town,Parker,18315,3663,0.2
+City of Springtown,City/Town,Parker,169730,33946,0.2
+City of Weatherford,City/Town,Parker,1715340,343068,0.2
+City of Willow Park,City/Town,Parker,303325,60665,0.2
+Parmer County,County,Parmer,139590,27918,0.2
+City of Bovina,City/Town,Parmer,99385,19877,0.2
+City of Farwell,City/Town,Parmer,72930,14586,0.2
+City of Friona,City/Town,Parmer,216370,43274,0.2
+Pecos County,County,Pecos,350515,70103,0.2
+City of Fort Stockton,City/Town,Pecos,455620,91124,0.2
+City of Iraan,City/Town,Pecos,64130,12826,0.2
+Polk County,County,Polk,2276670,455334,0.2
+City of Corrigan,City/Town,Polk,93005,18601,0.2
+City of Goodrich,City/Town,Polk,17160,3432,0.2
+City of Livingston,City/Town,Polk,291610,58322,0.2
+City of Onalaska,City/Town,Polk,139480,27896,0.2
+City of Seven Oaks,City/Town,Polk,6490,1298,0.2
+Potter County,County,Potter,715935,143187,0.2
+City of Amarillo,City/Town,Potter,5732210,1146442,0.2
+City of Bishop Hills,City/Town,Potter,9680,1936,0.2
+Presidio County,County,Presidio,59235,11847,0.2
+City of Marfa,City/Town,Presidio,91630,18326,0.2
+City of Presidio,City/Town,Presidio,217855,43571,0.2
+Rains County,County,Rains,502425,100485,0.2
+City of East Tawakoni,City/Town,Rains,54560,10912,0.2
+City of Emory,City/Town,Rains,79420,15884,0.2
+City of Point,City/Town,Rains,51865,10373,0.2
+Randall County,County,Randall,1258675,251735,0.2
+City of Amarillo,City/Town,Randall,5263610,1052722,0.2
+City of Canyon,City/Town,Randall,920315,184063,0.2
+City of Happy,City/Town,Randall,36795,7359,0.2
+City of Lake Tanglewood,City/Town,Randall,48675,9735,0.2
+City of Palisades,City/Town,Randall,19140,3828,0.2
+City of Timbercreek Canyon,City/Town,Randall,27060,5412,0.2
+Reagan County,County,Reagan,14190,2838,0.2
+City of Big Lake,City/Town,Reagan,197505,39501,0.2
+Real County,County,Real,120175,24035,0.2
+City of Camp Wood,City/Town,Real,41965,8393,0.2
+City of Leakey,City/Town,Real,27720,5544,0.2
+Red River County,County,Red River,349415,69883,0.2
+City of Annona,City/Town,Red River,15950,3190,0.2
+City of Avery,City/Town,Red River,24420,4884,0.2
+City of Bogata,City/Town,Red River,59400,11880,0.2
+City of Clarksville,City/Town,Red River,173745,34749,0.2
+City of Detroit,City/Town,Red River,38335,7667,0.2
+Reeves County,County,Reeves,273900,54780,0.2
+City of Balmorhea,City/Town,Reeves,31130,6226,0.2
+City of Pecos,City/Town,Reeves,568205,113641,0.2
+City of Toyah,City/Town,Reeves,5445,1089,0.2
+Refugio County,County,Refugio,131890,26378,0.2
+City of Austwell,City/Town,Refugio,7975,1595,0.2
+City of Bayside,City/Town,Refugio,16225,3245,0.2
+City of Refugio,City/Town,Refugio,148005,29601,0.2
+City of Woodsboro,City/Town,Refugio,78045,15609,0.2
+Roberts County,County,Roberts,16665,3333,0.2
+City of Miami,City/Town,Roberts,30305,6061,0.2
+Robertson County,County,Robertson,464860,92972,0.2
+City of Bremond,City/Town,Robertson,54505,10901,0.2
+City of Calvert,City/Town,Robertson,62810,12562,0.2
+City of Franklin,City/Town,Robertson,93390,18678,0.2
+City of Hearne,City/Town,Robertson,263505,52701,0.2
+Rockwall County,County,Rockwall,788260,157652,0.2
+City of Fate,City/Town,Rockwall,793485,158697,0.2
+City of Heath,City/Town,Rockwall,462935,92587,0.2
+City of McLendon-Chisholm,City/Town,Rockwall,171215,34243,0.2
+City of Mobile City,City/Town,Rockwall,11440,2288,0.2
+City of Rockwall,City/Town,Rockwall,2426655,485331,0.2
+City of Rowlett,City/Town,Rockwall,439065,87813,0.2
+City of Royse City,City/Town,Rockwall,596310,119262,0.2
+City of Wylie,City/Town,Rockwall,80960,16192,0.2
+Runnels County,County,Runnels,198990,39798,0.2
+City of Ballinger,City/Town,Runnels,188155,37631,0.2
+City of Miles,City/Town,Runnels,45925,9185,0.2
+City of Winters,City/Town,Runnels,131450,26290,0.2
+Rusk County,County,Rusk,1746580,698632,0.4
+City of Easton,City/Town,Rusk,2915,583,0.2
+City of Henderson,City/Town,Rusk,743435,148687,0.2
+City of Kilgore,City/Town,Rusk,194150,38830,0.2
+City of Mount Enterprise,City/Town,Rusk,24145,4829,0.2
+City of New London,City/Town,Rusk,54780,10956,0.2
+City of Overton,City/Town,Rusk,137500,27500,0.2
+City of Reklaw,City/Town,Rusk,8800,1760,0.2
+City of Tatum,City/Town,Rusk,80025,16005,0.2
+Sabine County,County,Sabine,465465,93093,0.2
+City of Hemphill,City/Town,Sabine,69080,13816,0.2
+City of Pineland,City/Town,Sabine,45265,9053,0.2
+San Augustine County,County,San Augustine,336655,67331,0.2
+City of Broaddus,City/Town,San Augustine,11275,2255,0.2
+City of San Augustine,City/Town,San Augustine,105105,21021,0.2
+San Jacinto County,County,San Jacinto,1349425,269885,0.2
+City of Coldspring,City/Town,San Jacinto,53625,10725,0.2
+City of Point Blank,City/Town,San Jacinto,41195,8239,0.2
+City of Shepherd,City/Town,San Jacinto,143000,28600,0.2
+San Patricio County,County,San Patricio,488510,97702,0.2
+City of Aransas Pass,City/Town,San Patricio,405680,81136,0.2
+City of Gregory,City/Town,San Patricio,105600,21120,0.2
+City of Ingleside,City/Town,San Patricio,536470,107294,0.2
+City of Ingleside on the Bay,City/Town,San Patricio,32120,6424,0.2
+City of Lake City,City/Town,San Patricio,28270,5654,0.2
+City of Lakeside,City/Town,San Patricio,16995,3399,0.2
+City of Mathis,City/Town,San Patricio,260975,52195,0.2
+City of Odem,City/Town,San Patricio,131450,26290,0.2
+City of Portland,City/Town,San Patricio,1218305,243661,0.2
+City of Sinton,City/Town,San Patricio,282315,56463,0.2
+City of Taft,City/Town,San Patricio,163460,32692,0.2
+San Saba County,County,San Saba,131340,26268,0.2
+City of Richland Springs,City/Town,San Saba,19250,3850,0.2
+City of San Saba,City/Town,San Saba,182435,36487,0.2
+Schleicher County,County,Schleicher,59180,11836,0.2
+City of Eldorado,City/Town,Schleicher,94435,18887,0.2
+Scurry County,County,Scurry,292765,58553,0.2
+City of Snyder,City/Town,Scurry,625900,125180,0.2
+Shackelford County,County,Shackelford,56760,11352,0.2
+City of Albany,City/Town,Shackelford,108515,21703,0.2
+City of Moran,City/Town,Shackelford,14300,2860,0.2
+Shelby County,County,Shelby,905685,181137,0.2
+City of Center,City/Town,Shelby,293975,58795,0.2
+City of Huxley,City/Town,Shelby,20680,4136,0.2
+City of Joaquin,City/Town,Shelby,43450,8690,0.2
+City of Tenaha,City/Town,Shelby,63965,12793,0.2
+City of Timpson,City/Town,Shelby,62315,12463,0.2
+Sherman County,County,Sherman,30965,6193,0.2
+City of Stratford,City/Town,Sherman,116545,23309,0.2
+City of Texhoma,City/Town,Sherman,18700,3740,0.2
+Smith County,County,Smith,5393850,1078770,0.2
+City of Arp,City/Town,Smith,56595,11319,0.2
+City of Bullard,City/Town,Smith,192060,38412,0.2
+City of Hideaway,City/Town,Smith,174460,34892,0.2
+City of Lindale,City/Town,Smith,353870,70774,0.2
+City of New Chapel Hill,City/Town,Smith,34650,6930,0.2
+City of Noonday,City/Town,Smith,44275,8855,0.2
+City of Troup,City/Town,Smith,108625,22429,0.20648101265822785
+City of Tyler,City/Town,Smith,5915195,1183039,0.2
+City of Whitehouse,City/Town,Smith,495110,99022,0.2
+City of Winona,City/Town,Smith,32615,6523,0.2
+Somervell County,County,Somervell,347105,69421,0.2
+City of Glen Rose,City/Town,Somervell,154935,30987,0.2
+Starr County,County,Starr,1836945,367389,0.2
+City of Escobares,City/Town,Starr,156970,31394,0.2
+City of Escobares,City/Town,Starr,156970,31394,0.2
+City of La Grulla,City/Town,Starr,92180,18436,0.2
+City of Loma Vista CDP,City/Town,Starr,9405,1881,0.2
+City of Rio Grande City,City/Town,Starr,827695,165539,0.2
+City of Roma,City/Town,Starr,631620,126324,0.2
+City of Roma,City/Town,Starr,631620,126324,0.2
+Stephens County,County,Stephens,195745,39149,0.2
+City of Breckenridge,City/Town,Stephens,319385,63877,0.2
+Sterling County,County,Sterling,15730,3146,0.2
+City of Sterling City,City/Town,Sterling,55275,11055,0.2
+Stonewall County,County,Stonewall,26565,5313,0.2
+City of Aspermont,City/Town,Stonewall,47685,9537,0.2
+Sutton County,County,Sutton,39985,7997,0.2
+City of Sonora,City/Town,Sutton,167695,33539,0.2
+Swisher County,County,Swisher,111210,22242,0.2
+City of Kress,City/Town,Swisher,37785,7557,0.2
+City of Tulia,City/Town,Swisher,257840,51568,0.2
+Taylor County,County,Taylor,812075,162415,0.2
+City of Buffalo Gap,City/Town,Taylor,27390,5478,0.2
+City of Impact,City/Town,Taylor,1815,363,0.2
+City of Lawn,City/Town,Taylor,17270,3454,0.2
+City of Merkel,City/Town,Taylor,146080,29216,0.2
+City of Trent,City/Town,Taylor,18700,3740,0.2
+City of Tuscola,City/Town,Taylor,41360,8272,0.2
+City of Tye,City/Town,Taylor,72270,14454,0.2
+City of Abilene,City/Town,Taylor,6454910,1352989,0.20960617576387588
+Terrell County,County,Terrell,42680,8536,0.2
+Terry County,County,Terry,114180,22836,0.2
+City of Brownfield,City/Town,Terry,521620,104324,0.2
+City of Meadow,City/Town,Terry,31790,6358,0.2
+City of Wellman,City/Town,Terry,10945,2189,0.2
+Throckmorton County,County,Throckmorton,26785,5357,0.2
+City of Throckmorton,City/Town,Throckmorton,42020,8404,0.2
+City of Woodson,City/Town,Throckmorton,13750,2750,0.2
+City of Titus,City/Town,Throckmorton,786335,157267,0.2
+City of Miller's Cove,City/Town,Throckmorton,8580,1716,0.2
+City of Mount Pleasant,City/Town,Throckmorton,948035,189607,0.2
+City of Talco,City/Town,Throckmorton,28490,5698,0.2
+City of Winfield,City/Town,Throckmorton,29810,5962,0.2
+City of Tom Green,City/Town,Throckmorton,1067330,213466,0.2
+City of San Angelo,City/Town,Throckmorton,5488670,1097734,0.2
+Trinity County,County,Trinity,594110,118822,0.2
+City of Groveton,City/Town,Trinity,59620,11924,0.2
+City of Trinity,City/Town,Trinity,152075,30415,0.2
+Tyler County,County,Tyler,879010,175802,0.2
+City of Chester,City/Town,Tyler,17820,3564,0.2
+City of Colmesneil,City/Town,Tyler,33605,6721,0.2
+City of Ivanhoe,City/Town,Tyler,110495,22099,0.2
+City of Woodville,City/Town,Tyler,151030,30206,0.2
+Upshur County,County,Upshur,1673650,334730,0.2
+City of Big Sandy,City/Town,Upshur,76120,15224,0.2
+City of East Mountain,City/Town,Upshur,46035,9207,0.2
+City of Gilmer,City/Town,Upshur,276760,55352,0.2
+City of Gladewater,City/Town,Upshur,135850,27170,0.2
+City of Ore City,City/Town,Upshur,67045,13409,0.2
+City of Union Grove,City/Town,Upshur,20515,4103,0.2
+City of Warren,City/Town,Upshur,440,88,0.2
+Upton County,County,Upton,38390,7678,0.2
+City of McCamey,City/Town,Upton,115665,23133,0.2
+City of Rankin,City/Town,Upton,47080,9416,0.2
+Uvalde County,County,Uvalde,474210,94842,0.2
+City of Sabinal,City/Town,Uvalde,96305,19261,0.2
+City of Uvalde,City/Town,Uvalde,900240,180048,0.2
+Val Verde County,County,Val Verde,724515,144903,0.2
+City of Del Rio,City/Town,Val Verde,1971860,394372,0.2
+Van Zandt County,County,Van Zandt,2229535,445907,0.2
+City of Canton,City/Town,Van Zandt,220825,44165,0.2
+City of Edgewood,City/Town,Van Zandt,85580,17116,0.2
+City of Edom,City/Town,Van Zandt,22550,4510,0.2
+City of Fruitvale,City/Town,Van Zandt,23870,4774,0.2
+City of Grand Saline,City/Town,Van Zandt,180620,36124,0.2
+City of Van,City/Town,Van Zandt,159500,31900,0.2
+City of Wills Point,City/Town,Van Zandt,209770,41954,0.2
+Victoria County,County,Victoria,1361690,272338,0.2
+City of Victoria,City/Town,Victoria,3702930,740586,0.2
+Walker County,County,Walker,1642740,328548,0.2
+City of Huntsville,City/Town,Walker,2279915,455983,0.2
+City of New Waverly,City/Town,Walker,60005,12001,0.2
+City of Riverside,City/Town,Walker,30745,6149,0.2
+Waller County,County,Waller,1609355,321871,0.2
+City of Brookshire,City/Town,Waller,312675,62535,0.2
+City of Hempstead,City/Town,Waller,401995,80399,0.2
+City of Katy,City/Town,Waller,99330,19866,0.2
+City of Pattison,City/Town,Waller,33055,6611,0.2
+City of Pine Island,City/Town,Waller,65450,13090,0.2
+City of Prairie View,City/Town,Waller,360800,72160,0.2
+City of Waller,City/Town,Waller,155870,31174,0.2
+Ward County,County,Ward,132990,26598,0.2
+City of Barstow,City/Town,Ward,20735,4147,0.2
+City of Grandfalls,City/Town,Ward,20955,4191,0.2
+City of Monahans,City/Town,Ward,420090,84018,0.2
+City of Pyote,City/Town,Ward,7205,1441,0.2
+City of Thorntonville,City/Town,Ward,28325,5665,0.2
+City of Wickett,City/Town,Ward,29590,5918,0.2
+Washington County,County,Washington,980595,196119,0.2
+City of Brenham,City/Town,Washington,976360,195272,0.2
+City of Burton,City/Town,Washington,16555,3311,0.2
+Webb County,County,Webb,35365,7073,0.2
+City of El Cenizo,City/Town,Webb,171545,34309,0.2
+City of Laredo,City/Town,Webb,14743135,2948627,0.2
+City of Rio Bravo,City/Town,Webb,265815,53163,0.2
+Wharton County,County,Wharton,1032515,206503,0.2
+City of East Bernard,City/Town,Wharton,130185,26037,0.2
+City of El Campo,City/Town,Wharton,648010,129602,0.2
+City of Wharton,City/Town,Wharton,474870,94974,0.2
+Wheeler County,County,Wheeler,92345,18469,0.2
+City of Mobeetie,City/Town,Wheeler,5280,1056,0.2
+City of Shamrock,City/Town,Wheeler,98835,19767,0.2
+City of Wheeler,City/Town,Wheeler,81620,16324,0.2
+Wichita County,County,Wichita,267080,53416,0.2
+City of Burkburnett,City/Town,Wichita,617265,123453,0.2
+City of Cashion Community,City/Town,Wichita,19085,3817,0.2
+City of Electra,City/Town,Wichita,150700,30140,0.2
+City of Iowa Park,City/Town,Wichita,350020,70004,0.2
+City of Pleasant Valley,City/Town,Wichita,18590,3718,0.2
+City of Wichita Falls,City/Town,Wichita,5849910,1169982,0.2
+Wilbarger County,County,Wilbarger,141955,28391,0.2
+City of Vernon,City/Town,Wilbarger,560340,112068,0.2
+Willacy County,County,Willacy,389015,77803,0.2
+City of Lyford,City/Town,Willacy,141680,28336,0.2
+City of Raymondville,City/Town,Willacy,612920,122584,0.2
+City of San Perlita,City/Town,Willacy,31075,6215,0.2
+Wilson County,County,Wilson,2075095,415019,0.2
+City of Floresville,City/Town,Wilson,435985,87197,0.2
+City of La Vernia,City/Town,Wilson,76285,15257,0.2
+City of Nixon,City/Town,Wilson,440,88,0.2
+City of Poth,City/Town,Wilson,128260,25652,0.2
+City of Stockdale,City/Town,Wilson,92785,18557,0.2
+Winkler County,County,Winkler,43945,8789,0.2
+City of Kermit,City/Town,Winkler,339790,67958,0.2
+City of Wink,City/Town,Winkler,56815,11363,0.2
+Wise County,County,Wise,2354495,470899,0.2
+City of Alvord,City/Town,Wise,88275,17655,0.2
+City of Aurora,City/Town,Wise,86680,17336,0.2
+City of Boyd,City/Town,Wise,80685,16137,0.2
+City of Bridgeport,City/Town,Wise,390060,78012,0.2
+City of Chico,City/Town,Wise,64350,12870,0.2
+City of Decatur,City/Town,Wise,385715,77143,0.2
+City of Lake Bridgeport,City/Town,Wise,21890,4378,0.2
+City of New Fairview,City/Town,Wise,86955,17391,0.2
+City of Newark,City/Town,Wise,67540,13508,0.2
+City of Paradise,City/Town,Wise,31460,6292,0.2
+City of Rhome,City/Town,Wise,106315,21263,0.2
+City of Runaway Bay,City/Town,Wise,84700,16940,0.2
+Wood County,County,Wood,1862465,372493,0.2
+City of Alba,City/Town,Wood,30470,6094,0.2
+City of Hawkins,City/Town,Wood,76560,15312,0.2
+City of Mineola,City/Town,Wood,266365,53273,0.2
+City of Quitman,City/Town,Wood,103840,20768,0.2
+City of Winnsboro,City/Town,Wood,142340,28468,0.2
+City of Yantis,City/Town,Wood,22605,4521,0.2
+Yoakum County,County,Yoakum,119130,23826,0.2
+City of Denver City,City/Town,Yoakum,268290,53658,0.2
+City of Plains,City/Town,Yoakum,91795,18359,0.2
+Young County,County,Young,294965,58993,0.2
+City of Graham,City/Town,Young,492250,98450,0.2
+City of Newcastle,City/Town,Young,30745,6149,0.2
+City of Olney,City/Town,Young,172590,34518,0.2
+Zavala County,County,Zavala,251350,50270,0.2
+City of Crystal City,City/Town,Zavala,399850,79970,0.2
+Zapata County,County,Zapata,779845,155969,0.2
+City of Data Source for county data is taken from the U.S. Census Vintage 2019 population estimates as used by the U.S. Treasury.,City/Town,Zapata,NA,NA,NA
+City of This data can be found at the following link:,City/Town,Zapata,NA,NA,NA
+City of Data Source for other jurisdiction population numbers are taken from the Texas Demographic Center's 2019 population,City/Town,Zapata,NA,NA,NA
+City of estimates.  This data can be found at the following link:  https://demographics.texas.gov/Data/TPEPP/Estimates/,City/Town,Zapata,NA,NA,NA
