@@ -7,6 +7,9 @@
 #    http://shiny.rstudio.com/
 #
 
+
+# R Packages --------------------------------------------------------------
+
 library(shinydashboard)
 library(vroom)
 library(shiny)
@@ -26,7 +29,10 @@ library(sever)
 library(sf)
 library(zoo)
 
-blank <- "https://api.mapbox.com/styles/v1/mrw03b/ck9k6odnd1hqd1it49c80p11z/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXJ3MDNiIiwiYSI6IlYwb2FiOWcifQ.RWUm2a87fEC9XrDxzvZKKg"
+# Helper Functions --------------------------------------------------------
+
+blank <- "https://api.mapbox.com/styles/v1/datatx2036/ckc2gkem302hd1io7aaw54a09/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF0YXR4MjAzNiIsImEiOiJja2J4cmJkMWUwYWh1MnNwamQ1a3NxMDlnIn0.pz06mEDLOJOhh4EyGar6Lg"
+# blank <- "https://api.mapbox.com/styles/v1/datatx2036/ckc2gkem302hd1io7aaw54a09.html?fresh=true&title=view&access_token=pk.eyJ1IjoiZGF0YXR4MjAzNiIsImEiOiJja2J4cmJkMWUwYWh1MnNwamQ1a3NxMDlnIn0.pz06mEDLOJOhh4EyGar6Lg"
 map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a href='http://texas2036.org'> MAP © TEXAS 2036</a>"
 
 thumbnail_label <- function (title, label, content, button_link, button_label) {
@@ -131,37 +137,24 @@ jhu_cases_state <- jhu_cases_state_us %>%
   filter(province_state=="Texas") %>%
   mutate(fips=as.character(fips))
 
-jhu_cases_county <- vroom("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases.csv") %>% 
+county_lat_long <- vroom("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases.csv") %>%
   janitor::clean_names() %>% 
-  rename(county=admin2,
-         state=province_state,
-         cases=confirmed) %>% 
-  separate(last_update, into=c("date","time"), sep=" ") %>% 
-  mutate(fips=as.character(fips),
-         mort_rate=round(deaths/cases))
-
-jhu_tx_cases_today <- jhu_cases_county %>% 
-  mutate(date = ymd(date)) %>%
-  group_by(state) %>% 
-  filter(date == max(date)) %>% 
-  ungroup()
-
-tx_county_cases <- jhu_cases_county %>%
-  filter(state=="Texas")
-
-tx_today <- tx_county_cases %>% 
-  mutate(date = ymd(date)) %>%
-  group_by(state) %>% 
-  filter(date == max(date)) %>% 
-  ungroup() %>% 
-  select(-county)
+  filter(province_state=="Texas") %>%
+  select(fips,county=admin2,last_update,lat,long) %>% 
+  separate(last_update, into=c("date","time"), sep=" ") %>%
+  mutate(fips=as.character(fips)) %>% 
+  select(-time)
 
 # ~~NYT Data --------------------------------------------------------------
 
-nyt_county_cases <- vroom("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv") %>%
-  filter(state=="Texas") %>% 
+nyt_county_cases <- vroom("https://texas-2036.github.io/covid-data/county.csv") %>%
+  rename(cases=total_confirmed_cases,
+         deaths=total_fatalities) %>%
   mutate(min = min(cases),
-         max = max(cases)) %>% 
+         max = max(cases),
+         incident_rate=round((cases/population)*100000, digits=2),
+         mort_rate=round(deaths/cases, digits=2),
+         tests_per_100k=round((total_tests/population)*100000, digits=2)) %>% 
   group_by(county) %>% 
   mutate(prev_day_cases = lag(cases,1),
          prev_week_cases = lag(cases,7),
@@ -173,11 +166,42 @@ nyt_county_cases <- vroom("https://raw.githubusercontent.com/nytimes/covid-19-da
          new_deaths_7day= deaths-prev_week_deaths) %>% 
   ungroup()
 
-nyt_state_cases <- vroom("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv") %>% 
-  group_by(state) %>% 
-  mutate(date = ymd(date),
+date1 <- nyt_county_cases %>% 
+  filter(date==max(date))
+
+date_filter <- date1$date - days(5)
+
+if (is.na(date1$active_cases)) {
+  
+  nyt_county_cases_today <- nyt_county_cases %>%
+    filter(date>=date_filter) %>% 
+    group_by(county) %>% 
+    fill(active_cases) %>% 
+    ungroup() %>% 
+    filter(date==max(date))
+  
+} else {
+  
+  nyt_county_cases_today <- date1
+}
+
+nyt_state_cases_tx <- vroom("https://texas-2036.github.io/covid-data/state.csv") %>% 
+  rename(cases=total_confirmed_cases,
+         deaths=total_fatalities,
+         hospitalizations=lab_confirmed_hospitalizations,
+         recovered=total_recovered,
+         active=active_cases) %>%
+  mutate(population=27885195,
          min = min(cases),
          max = max(cases),
+         total_tests=total_public_lab_tests+total_private_lab_tests,
+         tests_per_100k=round((total_tests/population)*100000, digits=2),
+         incident_rate=round((cases/population)*100000, digits=2),
+         mort_rate=round(deaths/cases, digits=4),
+         recovered=round(recovered, digits=0),
+         test_rate=round((cases/population)*100000, digits=2),
+         hosp_rate=round((hospitalizations/active)*100, digits=2),
+         date = ymd(date),
          prev_day_deaths = lag(deaths,1),
          new_deaths_1day = deaths-prev_day_deaths,
          prev_day_cases = lag(cases,1),
@@ -186,12 +210,18 @@ nyt_state_cases <- vroom("https://raw.githubusercontent.com/nytimes/covid-19-dat
          new_cases_7day= cases-prev_week_cases) %>% 
   ungroup()
 
-nyt_state_cases_tx <- nyt_state_cases %>% 
-  filter(state=="Texas")
+nyt_state_cases_text <- nyt_state_cases_tx %>% 
+  filter(date==max(date)) %>% 
+  select(cases,mort_rate,active,recovered) %>% 
+  mutate_at(vars(cases,active,recovered), scales::comma) %>% 
+  mutate_at(vars(mort_rate), scales::percent_format(scale=100,accuracy=.01))
 
-tx_counties <- read_rds("clean_data/population/county_pop.rds")
+tx_counties <- read_rds("clean_data/population/county_pop.rds") %>% 
+  mutate(NAME=gsub(" County, Texas","",x=NAME)) %>% 
+  left_join(county_lat_long, by=c("GEOID"="fips", "NAME"="county")) %>% 
+  select(-date)
 
-county_list <- nyt_county_cases %>% 
+county_list <- nyt_county_cases_today %>% 
   as_tibble() %>% 
   select(`County Names`=county) %>%
   distinct() %>% 
@@ -199,20 +229,21 @@ county_list <- nyt_county_cases %>%
   as.list()
 
 tx_county_sf <- tx_counties %>%
-  left_join(tx_today, by=c("GEOID"="fips")) %>% 
+  left_join(nyt_county_cases_today, by=c("NAME"="county")) %>% 
   st_as_sf() %>% 
   st_transform(crs="+init=epsg:4326") %>% 
   fill(c("date"),.direction="downup") %>% 
-  select(-state, -country_region, -time, -combined_key, -iso3) %>% 
+  # select(-state, -country_region, -time, -combined_key, -iso3) %>% 
   mutate(cases_label=case_when(
     is.na(cases) ~ "No Reported",
     is.numeric(cases) ~ scales::comma(cases)
   ),
   active_label=case_when(
-    is.na(active) ~ "No Reported",
-    is.numeric(active) ~ scales::comma(active)
+    is.na(active_cases) ~ "No Reported",
+    is.numeric(active_cases) ~ scales::comma(active_cases)
   )) %>% 
-  rename(county=NAME)
+  rename(county=NAME,
+         active=active_cases)
 
 # ~~COVID Tracking Data --------------------------------------------------------------
 
@@ -257,44 +288,36 @@ covid_relief <- vroom("clean_data/covid_relief/crf_data.csv")
 
 # ~~DSHS Data ----
 
-dshs_state_case_and_fatalities <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/state_cases_and_fatalities.csv") %>% 
-  mutate(state="Texas",
-         fips="48")
+# dshs_state_hospitalizations <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv") %>% 
+#   mutate(state="Texas",
+#          fips="48")
 
-dshs_state_hospitalizations <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv") %>% 
-  mutate(state="Texas",
-         fips="48")
-
-dshs_state_tests <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/state_tests.csv") %>% 
-  mutate(fips=as.character(fips))
+# dshs_state_tests <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/state_tests.csv") %>% 
+#   mutate(fips=as.character(fips))
 
 dshs_state_demographics <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/time_series_demographics.csv") %>% 
   mutate(fips=as.character(fips))
 
-dshs_county_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/county_cases.csv")
+# dshs_county_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/county_cases.csv")
 
-dshs_county_active <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/cnty_active.csv")
+# dshs_county_active <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/cnty_active.csv")
 
-dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/county_tests.csv")
+# dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/county_tests.csv")
 
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
 dshs_tsa_hosp_data_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
 
-dshs_tsa_vent_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_vent_ts_data.rds") %>% 
-  st_transform(crs="+init=epsg:4326")
-
 dshs_tsa_24hr_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
   ungroup() %>% 
   mutate(date=ymd(date),
          date=as.Date(date))
 
-dshs_hosp_rate_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/hosp_rate_ts.csv")
-
 dshs_test_pos <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/test_pos_tx_ts.csv")
 
-dshs_syndromic_tx <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/syndromic_tx.csv")
+dshs_syndromic_tx <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/syndromic_tx.csv") %>% 
+  rename(influenza_like_illness=2,covid_like_illness=3)
 
 # ** Population Data ---------------------------------------------------------
 
@@ -324,10 +347,6 @@ google_mobil_tx <- google_mobility %>%
 
 google_mobil_tx_cnties <- google_mobility %>%
   filter(!is.na(sub_region_2))
-
-# google_tx_state <- vroom("clean_data/npi/google/google_mobility_tx_state.csv")
-# 
-# google_tx_cnties <- vroom("clean_data/npi/google/google_mobility_tx_cnties.csv")
 
 # ** Economic Data -----------------------------------------------------------
 
@@ -410,39 +429,22 @@ tx_urn <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/mast
 
 # ~~Testing Metrics ----------------------------------------------------------
 
-total_population <- state_pop %>%
-  clean_names() %>% 
-  rename(state=name, total_population=estimate, fips=geoid) %>% 
-  filter(state=="Texas")
-
-total_tests <- dshs_state_tests %>%
-  group_by(state,fips) %>%
-  summarise(total_tests = sum(tests)) %>%
-  ungroup() %>%
-  left_join(total_population, by=c("state","fips")) %>%
-  left_join(dshs_state_hospitalizations, by=c("state","fips")) %>% 
-  left_join(jhu_cases_state, by=c("state"="province_state","fips")) %>% 
-  mutate(tests_per_100k = round((total_tests/total_population)*100000,digits=4))
-
-hosp_capacity <- total_tests %>% 
-  mutate(beds_to_active = avail_hospital_beds/active,
-         icu_beds_to_hosp = avail_icu_beds/people_hospitalized,
-         vents_to_hosp = avail_ventilators/people_hospitalized)
+# total_population <- state_pop %>%
+#   clean_names() %>% 
+#   rename(state=name, total_population=estimate, fips=geoid) %>% 
+#   filter(state=="Texas")
+# 
+# total_tests <- dshs_state_tests %>%
+#   group_by(state,fips) %>%
+#   summarise(total_tests = sum(tests)) %>%
+#   ungroup() %>%
+#   left_join(total_population, by=c("state","fips")) %>%
+#   left_join(dshs_state_hospitalizations, by=c("state","fips")) %>% 
+#   left_join(jhu_cases_state, by=c("state"="province_state","fips")) %>% 
+#   mutate(tests_per_100k = round((total_tests/total_population)*100000,digits=4))
 
 active_cases <- jhu_cases_state %>% 
   select(state=province_state, active, active_rank) 
-
-hosp_rate <- dshs_hosp_rate_ts 
-
-#%>% 
-  # as_tibble() %>% 
-  # filter(date==max(date)) %>% 
-  # filter(str_detect(tsa,"Total|total")) %>% 
-  # select(lab_con_covid19_gen, lab_con_covid19_icu) %>% 
-  # mutate(state="Texas") %>% 
-  # left_join(dshs_hosp, by="state") %>% 
-  # mutate(hospitalization_rate=100*((lab_con_covid19_gen+lab_con_covid19_icu)/active)) %>% 
-  # mutate_at(vars(hospitalization_rate), scales::number_format(accuracy=.01, scale=1))
 
 test_pos_today <- dshs_test_pos %>% 
   filter(date==max(date)) %>% 
@@ -455,22 +457,18 @@ test_pos_today <- dshs_test_pos %>%
 # ~~Current Case Data -----------------------------------------------------
 
 tx_cases <- jhu_cases_state %>% 
-  select(confirmed, cases_rank) %>% 
-  mutate_at(vars(confirmed), scales::comma) %>% 
+  select(cases_rank) %>% 
   mutate_at(vars(cases_rank), scales::label_ordinal())
 
 tx_mort <- jhu_cases_state %>% 
-  select(mortality_rate,  mortality_rank) %>% 
-  mutate_at(vars(mortality_rate), scales::number_format(accuracy=.01, scale=1)) %>% 
+  select( mortality_rank) %>% 
   mutate_at(vars(mortality_rank), scales::label_ordinal())
 
 tx_active <- active_cases %>% 
-  mutate_at(vars(active), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
   mutate_at(vars(active_rank), scales::label_ordinal())
 
 tx_recover <-  jhu_cases_state %>% 
-  select(recovered,  recovered_rank) %>% 
-  mutate_at(vars(recovered), scales::number_format(accuracy=1, scale=1, big.mark = ",")) %>% 
+  select(recovered_rank) %>% 
   mutate_at(vars(recovered_rank), scales::label_ordinal())
 
 date1 <- nyt_state_cases_tx %>% 
@@ -489,65 +487,6 @@ state_case_growth <- nyt_state_cases_tx %>%
   mutate(min_new = as.numeric(min_new),
          max_new = as.numeric(max_new)) %>% 
   ungroup()
-
-daily_growth_rates <- nyt_state_cases %>%
-  arrange(date) %>%
-  filter(state=="Texas") %>% 
-  mutate(daily_growth_rate = (cases/lag(cases))) %>%
-  mutate(daily_growth_rate_7day_avg = rollmean(daily_growth_rate, 7, 
-                                               fill=0, align = "right"))
-
-# Doubling Every X days
-
-## Get total cases today, find the date that was half of that
-
-today <- ((nyt_state_cases %>% 
-             filter(state=="Texas") %>% 
-             arrange(desc(date)))[1, 1])$date
-
-cases_today <- ((nyt_state_cases %>% 
-                   filter(state=="Texas") %>% 
-                   arrange(desc(date)))[1, 4])$cases
-
-last_half_day <- ((nyt_state_cases %>% 
-                     filter(state=="Texas") %>% 
-                     arrange(desc(date)) %>% 
-                     filter(cases < (cases_today / 2)))[1, 1])$date
-
-rates_of_change <- nyt_state_cases %>%
-  arrange(date) %>%
-  mutate(
-    new_cases = case_when(is.na(cases - lag(cases)) ~ 0,
-                          TRUE ~ cases - lag(cases)),
-    new_deaths = case_when(is.na(deaths - lag(deaths)) ~ 0,
-                           TRUE ~ deaths - lag(deaths))
-  ) %>%
-  mutate(
-    new_cases_7day_avg = rollmean(new_cases, 7, fill = 0, align = "right"),
-    new_deaths_7day_avg = rollmean(new_deaths, 7, fill = 0, align = "right")
-  )
-
-total_cnty_population <- tx_counties %>%
-  clean_names() %>%
-  as_tibble() %>% 
-  select(-geometry) %>% 
-  rename(county_name=name, total_population=estimate, fips=geoid) %>% 
-  mutate(county_name=gsub(pattern=" County, Texas", replacement="",x=county_name))
-
-total_cnty_tests <- dshs_county_test_data %>%
-  left_join(total_cnty_population, by="county_name") %>%
-  mutate(tests_per_100k = round((total_tests/total_population)*100000,digits=1)) %>% 
-  group_by(state) %>% 
-  mutate(state_ranking = dense_rank(desc(tests_per_100k))) %>% 
-  ungroup() %>% 
-  filter(county_name!="TOTAL")
-
-waiting_screen <- tagList(
-  spin_flower(),
-  h4("Pulling the latest data from 6 different sources...")
-)
-
-
 
 # HEADER CODE-----------------------------------------------------------
 
@@ -1215,7 +1154,9 @@ server <- function (input, output, session) {
   
   output$currentTime <- renderText({
     
-    latest_update <- tx_today %>% 
+    latest_update <- nyt_county_cases %>% 
+      filter(county=="Travis",
+             date==max(date)) %>% 
       distinct(date) %>% 
       mutate(date = as.character(date)) %>%
       parse_date_time("Ymd")
@@ -1257,7 +1198,7 @@ server <- function (input, output, session) {
   output$tx_cases <- renderInfoBox({
     
     infoBox(
-      value=paste0(tx_cases$confirmed), title="Total Cases",
+      value=paste0(nyt_state_cases_text$cases), title="Total Cases",
       subtitle=paste0(tx_cases$cases_rank, " Most in US"),
       icon = icon("chart-line"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
@@ -1268,7 +1209,7 @@ server <- function (input, output, session) {
   output$tx_mort <- renderInfoBox({
     
     infoBox(
-      title="Deaths (% of All Cases)", value=paste0(tx_mort$mortality_rate, "%"),
+      title="Deaths (% of All Cases)", value=paste0(nyt_state_cases_text$mort_rate),
       subtitle=paste0(tx_mort$mortality_rank, " Most in US"),
       icon = icon("virus"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
@@ -1280,7 +1221,7 @@ server <- function (input, output, session) {
   output$tx_recover <- renderInfoBox({
     
     infoBox(
-      title="Est. Recovered", value=paste0(tx_recover$recovered),
+      title="Est. Recovered", value=paste0(nyt_state_cases_text$recovered),
       subtitle=paste0(tx_recover$recovered_rank, " Most in US"),
       icon = icon("hand-holding-medical"), color = "navy", href=NULL
     )
@@ -1291,7 +1232,7 @@ server <- function (input, output, session) {
   output$tx_active <- renderInfoBox({
     
     infoBox(
-      title="Est. Active", value=paste0(tx_active$active),
+      title="Est. Active", value=paste0(nyt_state_cases_text$active),
       subtitle=paste0(tx_active$active_rank, " Most in US"),
       icon = icon("lungs-virus"), color = "navy", href=NULL
     )
@@ -1304,7 +1245,7 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_hosp_rate_ts %>% 
+    tot_pos <- nyt_state_cases_tx %>% 
       filter(date==max(date))
     
     infoBox(
@@ -1423,11 +1364,11 @@ server <- function (input, output, session) {
     dataset()
     
     nyt_tx_hchart <- dshs_syndromic_tx %>% 
-      mutate(min = min(ili_from_syndromic_surveillance, na.rm = TRUE),
-             max = max(ili_from_syndromic_surveillance, na.rm = TRUE)) 
+      mutate(min = min(influenza_like_illness, na.rm = TRUE),
+             max = max(influenza_like_illness, na.rm = TRUE)) 
     
     nyt_tx_hchart %>% 
-      hchart("area", hcaes(x = date, y = cli_from_syndromic_surveillance), animation=FALSE,
+      hchart("area", hcaes(x = date, y = covid_like_illness), animation=FALSE,
              color = "#fff") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
@@ -1457,11 +1398,11 @@ server <- function (input, output, session) {
     dataset()
     
     nyt_tx_hchart <- dshs_syndromic_tx %>% 
-      mutate(min = min(ili_from_syndromic_surveillance, na.rm = TRUE),
-             max = max(ili_from_syndromic_surveillance, na.rm = TRUE)) 
+      mutate(min = min(influenza_like_illness, na.rm = TRUE),
+             max = max(influenza_like_illness, na.rm = TRUE)) 
     
     nyt_tx_hchart %>% 
-      hchart("area", hcaes(x = date, y = ili_from_syndromic_surveillance), animation=FALSE,
+      hchart("area", hcaes(x = date, y = influenza_like_illness), animation=FALSE,
              color = "#fff") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
@@ -2583,15 +2524,15 @@ server <- function (input, output, session) {
     
     # State - Hours Worked ----------------------------------------------------
     
-    output$state_hours_worked <- renderText({
-      
-      tx_county_cases %>%
-        filter(county==input$countyname) %>% 
-        mutate_at(vars(cases), scales::comma) %>% 
-        distinct(cases) %>% 
-        as.character()
-      
-    })
+    # output$state_hours_worked <- renderText({
+    #   
+    #   tx_county_cases %>%
+    #     filter(county==input$countyname) %>% 
+    #     mutate_at(vars(cases), scales::comma) %>% 
+    #     distinct(cases) %>% 
+    #     as.character()
+    #   
+    # })
     
     
     # County Name -------------------------------------------------------------
@@ -2658,8 +2599,9 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      tx_county_cases %>%
-        filter(county==input$countyname) %>% 
+      nyt_county_cases %>%
+        filter(county==input$countyname,
+               date==max(date)) %>% 
         mutate_at(vars(cases), scales::comma) %>% 
         distinct(cases) %>% 
         as.character()
@@ -2672,11 +2614,12 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_county_active %>%
+      nyt_county_cases %>%
+        filter(!is.na(active_cases)) %>% 
         filter(county==input$countyname,
                date==max(date)) %>% 
-        mutate_at(vars(active), scales::comma) %>% 
-        distinct(active) %>% 
+        mutate_at(vars(active_cases), scales::comma) %>% 
+        distinct(active_cases) %>% 
         as.character()
     })
     
@@ -2687,8 +2630,9 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      tx_county_cases %>%
-        filter(county==input$countyname) %>% 
+      nyt_county_cases %>%
+        filter(county==input$countyname,
+               date==max(date)) %>% 
         distinct(incident_rate) %>% 
         round(digits=1) %>% 
         as.character()
@@ -2701,8 +2645,9 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      tx_county_cases %>%
-        filter(county==input$countyname) %>% 
+      nyt_county_cases %>%
+        filter(county==input$countyname,
+               date==max(date)) %>% 
         distinct(deaths) %>% 
         as.character()
     })
@@ -2715,8 +2660,8 @@ server <- function (input, output, session) {
       req(input$countyname)
       
       nyt_county_cases %>%
-        filter(date == max(date)) %>% 
-        filter(county==input$countyname) %>%
+        filter(county==input$countyname,
+               date==max(date)) %>% 
         mutate(mort_rate=round(deaths/cases,digits=4)) %>% 
         mutate_at(vars(mort_rate),scales::percent_format(accuracy=.01)) %>% 
         distinct(mort_rate) %>% 
@@ -2730,8 +2675,10 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      total_cnty_tests %>%
-        filter(county_name==input$countyname) %>% 
+      nyt_county_cases %>%
+        filter(!is.na(tests_per_100k)) %>% 
+        filter(county==input$countyname,
+               date==max(date)) %>% 
         mutate_at(vars(tests_per_100k), scales::comma) %>% 
         distinct(tests_per_100k) %>% 
         as.character()
@@ -2739,16 +2686,16 @@ server <- function (input, output, session) {
     
     # County Testing Total -----------------------------------------------------
     
-    output$county_test_tots <- renderText({
-      
-      # Make sure requirements are met
-      req(input$countyname)
-      
-      total_cnty_tests %>%
-        filter(county_name==input$countyname) %>% 
-        distinct(total_tests) %>% 
-        as.character()
-    })
+    # output$county_test_tots <- renderText({
+    #   
+    #   # Make sure requirements are met
+    #   req(input$countyname)
+    #   
+    #   total_cnty_tests %>%
+    #     filter(county==input$countyname) %>% 
+    #     distinct(total_tests) %>% 
+    #     as.character()
+    # })
     
     # County UI Claims --------------------------------------------------------
     
@@ -3608,8 +3555,8 @@ server <- function (input, output, session) {
         hc_plotOptions(area = list(fillOpacity=.3)) %>% 
         hc_credits(
           enabled = TRUE,
-          text = "Source: New York Times County-Level COVID-19 Data (Github)",
-          href = "https://github.com/nytimes/covid-19-data") %>%
+          text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+          href = "https://tabexternal.dshs.texas.gov/t/THD/views/COVIDExternalQC/COVIDTrends?%3AisGuestRedirectFromVizportal=y&%3Aembed=y") %>%
         hc_add_theme(tx2036_hc)
       
     })
@@ -3659,8 +3606,8 @@ server <- function (input, output, session) {
                    New Cases: {point.y:,.0f}") %>% 
         hc_credits(
           enabled = TRUE,
-          text = "Source: New York Times County-Level COVID-19 Data (Github)",
-          href = "https://github.com/nytimes/covid-19-data") %>%
+          text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+          href = "https://tabexternal.dshs.texas.gov/t/THD/views/COVIDExternalQC/COVIDTrends?%3AisGuestRedirectFromVizportal=y&%3Aembed=y") %>%
         hc_add_theme(tx2036_hc)
       
     })
@@ -3710,8 +3657,8 @@ server <- function (input, output, session) {
                    New Deaths: {point.y:,.0f}") %>% 
         hc_credits(
           enabled = TRUE,
-          text = "Source: New York Times County-Level COVID-19 Data (Github)",
-          href = "https://github.com/nytimes/covid-19-data") %>%
+          text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+          href = "https://tabexternal.dshs.texas.gov/t/THD/views/COVIDExternalQC/COVIDTrends?%3AisGuestRedirectFromVizportal=y&%3Aembed=y") %>%
         hc_add_theme(tx2036_hc)
       
     })
