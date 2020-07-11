@@ -1,261 +1,4 @@
 county,date,value
-Anderson,2020-06-28,4
-Andrews,2020-06-28,0
-Angelina,2020-06-28,3
-Aransas,2020-06-28,0
-Archer,2020-06-28,1
-Armstrong,2020-06-28,0
-Atascosa,2020-06-28,2
-Austin,2020-06-28,0
-Bailey,2020-06-28,0
-Bandera,2020-06-28,1
-Bastrop,2020-06-28,4
-Baylor,2020-06-28,0
-Bee,2020-06-28,3
-Bell,2020-06-28,3
-Bexar,2020-06-28,69
-Blanco,2020-06-28,0
-Borden,2020-06-28,0
-Bosque,2020-06-28,0
-Bowie,2020-06-28,5
-Brazoria,2020-06-28,11
-Brazos,2020-06-28,4
-Brewster,2020-06-28,1
-Briscoe,2020-06-28,0
-Brooks,2020-06-28,0
-Brown,2020-06-28,2
-Burleson,2020-06-28,0
-Burnet,2020-06-28,4
-Caldwell,2020-06-28,5
-Calhoun,2020-06-28,1
-Callahan,2020-06-28,0
-Cameron,2020-06-28,43
-Camp,2020-06-28,0
-Carson,2020-06-28,0
-Cass,2020-06-28,0
-Castro,2020-06-28,0
-Chambers,2020-06-28,6
-Cherokee,2020-06-28,3
-Childress,2020-06-28,0
-Clay,2020-06-28,0
-Cochran,2020-06-28,0
-Coke,2020-06-28,0
-Coleman,2020-06-28,0
-Collin,2020-06-28,10
-Collingsworth,2020-06-28,0
-Colorado,2020-06-28,0
-Comal,2020-06-28,0
-Comanche,2020-06-28,0
-Concho,2020-06-28,0
-Cooke,2020-06-28,0
-Coryell,2020-06-28,1
-Cottle,2020-06-28,0
-Crane,2020-06-28,0
-Crockett,2020-06-28,0
-Crosby,2020-06-28,0
-Culberson,2020-06-28,0
-Dallam,2020-06-28,0
-Dallas,2020-06-28,82
-Dawson,2020-06-28,0
-Deaf Smith,2020-06-28,1
-Delta,2020-06-28,0
-Denton,2020-06-28,6
-DeWitt,2020-06-28,0
-Dickens,2020-06-28,0
-Dimmit,2020-06-28,0
-Donley,2020-06-28,0
-Duval,2020-06-28,2
-Eastland,2020-06-28,0
-Ector,2020-06-28,7
-Edwards,2020-06-28,0
-Ellis,2020-06-28,4
-El Paso,2020-06-28,25
-Erath,2020-06-28,0
-Falls,2020-06-28,0
-Fannin,2020-06-28,1
-Fayette,2020-06-28,0
-Fisher,2020-06-28,0
-Floyd,2020-06-28,0
-Foard,2020-06-28,0
-Fort Bend,2020-06-28,11
-Franklin,2020-06-28,1
-Freestone,2020-06-28,1
-Frio,2020-06-28,0
-Gaines,2020-06-28,0
-Galveston,2020-06-28,10
-Garza,2020-06-28,0
-Gillespie,2020-06-28,1
-Glasscock,2020-06-28,0
-Goliad,2020-06-28,0
-Gonzales,2020-06-28,3
-Gray,2020-06-28,1
-Grayson,2020-06-28,3
-Gregg,2020-06-28,1
-Grimes,2020-06-28,2
-Guadalupe,2020-06-28,14
-Hale,2020-06-28,4
-Hall,2020-06-28,0
-Hamilton,2020-06-28,0
-Hansford,2020-06-28,0
-Hardeman,2020-06-28,0
-Hardin,2020-06-28,1
-Harris,2020-06-28,94
-Harrison,2020-06-28,1
-Hartley,2020-06-28,0
-Haskell,2020-06-28,1
-Hays,2020-06-28,5
-Hemphill,2020-06-28,0
-Henderson,2020-06-28,4
-Hidalgo,2020-06-28,42
-Hill,2020-06-28,0
-Hockley,2020-06-28,0
-Hood,2020-06-28,1
-Hopkins,2020-06-28,3
-Houston,2020-06-28,0
-Howard,2020-06-28,0
-Hudspeth,2020-06-28,0
-Hunt,2020-06-28,2
-Hutchinson,2020-06-28,0
-Irion,2020-06-28,0
-Jack,2020-06-28,0
-Jackson,2020-06-28,1
-Jasper,2020-06-28,1
-Jeff Davis,2020-06-28,0
-Jefferson,2020-06-28,3
-Jim Hogg,2020-06-28,1
-Jim Wells,2020-06-28,2
-Johnson,2020-06-28,2
-Jones,2020-06-28,0
-Karnes,2020-06-28,0
-Kaufman,2020-06-28,0
-Kendall,2020-06-28,0
-Kenedy,2020-06-28,0
-Kent,2020-06-28,0
-Kerr,2020-06-28,0
-Kimble,2020-06-28,0
-King,2020-06-28,0
-Kinney,2020-06-28,0
-Kleberg,2020-06-28,2
-Knox,2020-06-28,0
-Lamar,2020-06-28,0
-Lamb,2020-06-28,0
-Lampasas,2020-06-28,0
-La Salle,2020-06-28,0
-Lavaca,2020-06-28,1
-Lee,2020-06-28,0
-Leon,2020-06-28,0
-Liberty,2020-06-28,3
-Limestone,2020-06-28,0
-Lipscomb,2020-06-28,0
-Live Oak,2020-06-28,2
-Llano,2020-06-28,2
-Loving,2020-06-28,0
-Lubbock,2020-06-28,2
-Lynn,2020-06-28,0
-McCulloch,2020-06-28,0
-McLennan,2020-06-28,22
-McMullen,2020-06-28,0
-Madison,2020-06-28,0
-Marion,2020-06-28,0
-Martin,2020-06-28,0
-Mason,2020-06-28,0
-Matagorda,2020-06-28,2
-Maverick,2020-06-28,0
-Medina,2020-06-28,5
-Menard,2020-06-28,0
-Midland,2020-06-28,0
-Milam,2020-06-28,0
-Mills,2020-06-28,0
-Mitchell,2020-06-28,0
-Montague,2020-06-28,1
-Montgomery,2020-06-28,13
-Moore,2020-06-28,0
-Morris,2020-06-28,0
-Motley,2020-06-28,0
-Nacogdoches,2020-06-28,1
-Navarro,2020-06-28,0
-Newton,2020-06-28,0
-Nolan,2020-06-28,0
-Nueces,2020-06-28,18
-Ochiltree,2020-06-28,0
-Oldham,2020-06-28,0
-Orange,2020-06-28,3
-Palo Pinto,2020-06-28,0
-Panola,2020-06-28,0
-Parker,2020-06-28,2
-Parmer,2020-06-28,0
-Pecos,2020-06-28,0
-Polk,2020-06-28,0
-Potter,2020-06-28,7
-Presidio,2020-06-28,0
-Rains,2020-06-28,0
-Randall,2020-06-28,11
-Reagan,2020-06-28,0
-Real,2020-06-28,0
-Red River,2020-06-28,1
-Reeves,2020-06-28,0
-Refugio,2020-06-28,0
-Roberts,2020-06-28,0
-Robertson,2020-06-28,0
-Rockwall,2020-06-28,0
-Runnels,2020-06-28,0
-Rusk,2020-06-28,1
-Sabine,2020-06-28,0
-San Augustine,2020-06-28,0
-San Jacinto,2020-06-28,0
-San Patricio,2020-06-28,6
-San Saba,2020-06-28,0
-Schleicher,2020-06-28,0
-Scurry,2020-06-28,0
-Shackelford,2020-06-28,0
-Shelby,2020-06-28,0
-Sherman,2020-06-28,0
-Smith,2020-06-28,19
-Somervell,2020-06-28,0
-Starr,2020-06-28,0
-Stephens,2020-06-28,0
-Sterling,2020-06-28,0
-Stonewall,2020-06-28,0
-Sutton,2020-06-28,0
-Swisher,2020-06-28,0
-Tarrant,2020-06-28,35
-Taylor,2020-06-28,0
-Terrell,2020-06-28,0
-Terry,2020-06-28,0
-Throckmorton,2020-06-28,0
-Titus,2020-06-28,0
-Tom Green,2020-06-28,13
-Travis,2020-06-28,32
-Trinity,2020-06-28,0
-Tyler,2020-06-28,0
-Upshur,2020-06-28,2
-Upton,2020-06-28,0
-Uvalde,2020-06-28,2
-Val Verde,2020-06-28,0
-Van Zandt,2020-06-28,2
-Victoria,2020-06-28,5
-Walker,2020-06-28,0
-Waller,2020-06-28,0
-Ward,2020-06-28,0
-Washington,2020-06-28,0
-Webb,2020-06-28,6
-Wharton,2020-06-28,2
-Wheeler,2020-06-28,0
-Wichita,2020-06-28,4
-Wilbarger,2020-06-28,0
-Willacy,2020-06-28,1
-Williamson,2020-06-28,7
-Wilson,2020-06-28,1
-Winkler,2020-06-28,0
-Wise,2020-06-28,0
-Wood,2020-06-28,0
-Yoakum,2020-06-28,0
-Young,2020-06-28,0
-Zapata,2020-06-28,0
-Zavala,2020-06-28,0
-NA,2020-06-28,NA
-NA,2020-06-28,NA
-NA,2020-06-28,NA
 Anderson,2020-06-29,3
 Andrews,2020-06-29,0
 Angelina,2020-06-29,0
@@ -334,7 +77,7 @@ Fayette,2020-06-29,0
 Fisher,2020-06-29,0
 Floyd,2020-06-29,1
 Foard,2020-06-29,0
-Fort Bend,2020-06-29,11
+Fort Bend,2020-06-29,12
 Franklin,2020-06-29,0
 Freestone,2020-06-29,2
 Frio,2020-06-29,3
@@ -356,7 +99,7 @@ Hamilton,2020-06-29,0
 Hansford,2020-06-29,0
 Hardeman,2020-06-29,0
 Hardin,2020-06-29,1
-Harris,2020-06-29,122
+Harris,2020-06-29,115
 Harrison,2020-06-29,1
 Hartley,2020-06-29,0
 Haskell,2020-06-29,0
@@ -410,7 +153,7 @@ Loving,2020-06-29,0
 Lubbock,2020-06-29,4
 Lynn,2020-06-29,0
 McCulloch,2020-06-29,0
-McLennan,2020-06-29,12
+McLennan,2020-06-29,13
 McMullen,2020-06-29,0
 Madison,2020-06-29,0
 Marion,2020-06-29,0
@@ -425,7 +168,7 @@ Milam,2020-06-29,0
 Mills,2020-06-29,0
 Mitchell,2020-06-29,0
 Montague,2020-06-29,1
-Montgomery,2020-06-29,19
+Montgomery,2020-06-29,17
 Moore,2020-06-29,1
 Morris,2020-06-29,0
 Motley,2020-06-29,0
@@ -482,7 +225,7 @@ Terry,2020-06-29,0
 Throckmorton,2020-06-29,0
 Titus,2020-06-29,0
 Tom Green,2020-06-29,13
-Travis,2020-06-29,15
+Travis,2020-06-29,17
 Trinity,2020-06-29,0
 Tyler,2020-06-29,0
 Upshur,2020-06-29,1
@@ -520,7 +263,7 @@ Aransas,2020-06-30,0
 Archer,2020-06-30,0
 Armstrong,2020-06-30,0
 Atascosa,2020-06-30,3
-Austin,2020-06-30,4
+Austin,2020-06-30,3
 Bailey,2020-06-30,0
 Bandera,2020-06-30,1
 Bastrop,2020-06-30,2
@@ -613,7 +356,7 @@ Hamilton,2020-06-30,0
 Hansford,2020-06-30,0
 Hardeman,2020-06-30,0
 Hardin,2020-06-30,1
-Harris,2020-06-30,96
+Harris,2020-06-30,89
 Harrison,2020-06-30,1
 Hartley,2020-06-30,0
 Haskell,2020-06-30,1
@@ -658,7 +401,7 @@ La Salle,2020-06-30,0
 Lavaca,2020-06-30,0
 Lee,2020-06-30,0
 Leon,2020-06-30,0
-Liberty,2020-06-30,4
+Liberty,2020-06-30,3
 Limestone,2020-06-30,1
 Lipscomb,2020-06-30,0
 Live Oak,2020-06-30,2
@@ -848,7 +591,7 @@ Fayette,2020-07-01,0
 Fisher,2020-07-01,0
 Floyd,2020-07-01,1
 Foard,2020-07-01,0
-Fort Bend,2020-07-01,11
+Fort Bend,2020-07-01,12
 Franklin,2020-07-01,0
 Freestone,2020-07-01,0
 Frio,2020-07-01,1
@@ -870,7 +613,7 @@ Hamilton,2020-07-01,0
 Hansford,2020-07-01,0
 Hardeman,2020-07-01,0
 Hardin,2020-07-01,0
-Harris,2020-07-01,88
+Harris,2020-07-01,85
 Harrison,2020-07-01,1
 Hartley,2020-07-01,0
 Haskell,2020-07-01,0
@@ -939,7 +682,7 @@ Milam,2020-07-01,0
 Mills,2020-07-01,0
 Mitchell,2020-07-01,0
 Montague,2020-07-01,0
-Montgomery,2020-07-01,13
+Montgomery,2020-07-01,12
 Moore,2020-07-01,1
 Morris,2020-07-01,0
 Motley,2020-07-01,0
@@ -996,7 +739,7 @@ Terry,2020-07-01,0
 Throckmorton,2020-07-01,0
 Titus,2020-07-01,0
 Tom Green,2020-07-01,10
-Travis,2020-07-01,15
+Travis,2020-07-01,16
 Trinity,2020-07-01,0
 Tyler,2020-07-01,0
 Upshur,2020-07-01,0
@@ -1105,7 +848,7 @@ Fayette,2020-07-02,1
 Fisher,2020-07-02,0
 Floyd,2020-07-02,0
 Foard,2020-07-02,0
-Fort Bend,2020-07-02,18
+Fort Bend,2020-07-02,16
 Franklin,2020-07-02,0
 Freestone,2020-07-02,1
 Frio,2020-07-02,0
@@ -1127,7 +870,7 @@ Hamilton,2020-07-02,0
 Hansford,2020-07-02,0
 Hardeman,2020-07-02,0
 Hardin,2020-07-02,0
-Harris,2020-07-02,86
+Harris,2020-07-02,80
 Harrison,2020-07-02,1
 Hartley,2020-07-02,0
 Haskell,2020-07-02,0
@@ -1246,7 +989,7 @@ Sterling,2020-07-02,0
 Stonewall,2020-07-02,0
 Sutton,2020-07-02,0
 Swisher,2020-07-02,1
-Tarrant,2020-07-02,36
+Tarrant,2020-07-02,37
 Taylor,2020-07-02,1
 Terrell,2020-07-02,0
 Terry,2020-07-02,0
@@ -1340,7 +1083,7 @@ Crockett,2020-07-03,1
 Crosby,2020-07-03,0
 Culberson,2020-07-03,0
 Dallam,2020-07-03,0
-Dallas,2020-07-03,201
+Dallas,2020-07-03,202
 Dawson,2020-07-03,0
 Deaf Smith,2020-07-03,1
 Delta,2020-07-03,0
@@ -1362,7 +1105,7 @@ Fayette,2020-07-03,0
 Fisher,2020-07-03,0
 Floyd,2020-07-03,0
 Foard,2020-07-03,0
-Fort Bend,2020-07-03,9
+Fort Bend,2020-07-03,7
 Franklin,2020-07-03,0
 Freestone,2020-07-03,0
 Frio,2020-07-03,0
@@ -1384,7 +1127,7 @@ Hamilton,2020-07-03,0
 Hansford,2020-07-03,0
 Hardeman,2020-07-03,0
 Hardin,2020-07-03,0
-Harris,2020-07-03,68
+Harris,2020-07-03,64
 Harrison,2020-07-03,1
 Hartley,2020-07-03,0
 Haskell,2020-07-03,0
@@ -1555,12 +1298,12 @@ Bastrop,2020-07-04,3
 Baylor,2020-07-04,0
 Bee,2020-07-04,1
 Bell,2020-07-04,17
-Bexar,2020-07-04,50
+Bexar,2020-07-04,51
 Blanco,2020-07-04,0
 Borden,2020-07-04,0
 Bosque,2020-07-04,1
 Bowie,2020-07-04,2
-Brazoria,2020-07-04,12
+Brazoria,2020-07-04,11
 Brazos,2020-07-04,2
 Brewster,2020-07-04,0
 Briscoe,2020-07-04,0
@@ -1619,7 +1362,7 @@ Fayette,2020-07-04,0
 Fisher,2020-07-04,0
 Floyd,2020-07-04,2
 Foard,2020-07-04,0
-Fort Bend,2020-07-04,9
+Fort Bend,2020-07-04,8
 Franklin,2020-07-04,0
 Freestone,2020-07-04,1
 Frio,2020-07-04,0
@@ -1641,14 +1384,14 @@ Hamilton,2020-07-04,0
 Hansford,2020-07-04,0
 Hardeman,2020-07-04,0
 Hardin,2020-07-04,0
-Harris,2020-07-04,55
+Harris,2020-07-04,54
 Harrison,2020-07-04,3
 Hartley,2020-07-04,0
 Haskell,2020-07-04,0
 Hays,2020-07-04,5
 Hemphill,2020-07-04,0
 Henderson,2020-07-04,1
-Hidalgo,2020-07-04,63
+Hidalgo,2020-07-04,62
 Hill,2020-07-04,0
 Hockley,2020-07-04,1
 Hood,2020-07-04,0
@@ -1663,7 +1406,7 @@ Jack,2020-07-04,2
 Jackson,2020-07-04,1
 Jasper,2020-07-04,1
 Jeff Davis,2020-07-04,0
-Jefferson,2020-07-04,7
+Jefferson,2020-07-04,6
 Jim Hogg,2020-07-04,0
 Jim Wells,2020-07-04,1
 Johnson,2020-07-04,11
@@ -1817,7 +1560,7 @@ Blanco,2020-07-05,3
 Borden,2020-07-05,0
 Bosque,2020-07-05,1
 Bowie,2020-07-05,1
-Brazoria,2020-07-05,13
+Brazoria,2020-07-05,12
 Brazos,2020-07-05,4
 Brewster,2020-07-05,0
 Briscoe,2020-07-05,0
@@ -1876,7 +1619,7 @@ Fayette,2020-07-05,0
 Fisher,2020-07-05,0
 Floyd,2020-07-05,0
 Foard,2020-07-05,0
-Fort Bend,2020-07-05,8
+Fort Bend,2020-07-05,7
 Franklin,2020-07-05,0
 Freestone,2020-07-05,2
 Frio,2020-07-05,0
@@ -2068,7 +1811,7 @@ Bandera,2020-07-06,1
 Bastrop,2020-07-06,4
 Baylor,2020-07-06,0
 Bee,2020-07-06,0
-Bell,2020-07-06,10
+Bell,2020-07-06,9
 Bexar,2020-07-06,66
 Blanco,2020-07-06,2
 Borden,2020-07-06,0
@@ -2090,14 +1833,14 @@ Camp,2020-07-06,0
 Carson,2020-07-06,0
 Cass,2020-07-06,1
 Castro,2020-07-06,0
-Chambers,2020-07-06,2
+Chambers,2020-07-06,1
 Cherokee,2020-07-06,3
 Childress,2020-07-06,0
 Clay,2020-07-06,0
 Cochran,2020-07-06,0
 Coke,2020-07-06,0
 Coleman,2020-07-06,0
-Collin,2020-07-06,20
+Collin,2020-07-06,21
 Collingsworth,2020-07-06,0
 Colorado,2020-07-06,0
 Comal,2020-07-06,3
@@ -2111,7 +1854,7 @@ Crockett,2020-07-06,0
 Crosby,2020-07-06,0
 Culberson,2020-07-06,0
 Dallam,2020-07-06,1
-Dallas,2020-07-06,247
+Dallas,2020-07-06,249
 Dawson,2020-07-06,0
 Deaf Smith,2020-07-06,2
 Delta,2020-07-06,0
@@ -2133,7 +1876,7 @@ Fayette,2020-07-06,0
 Fisher,2020-07-06,0
 Floyd,2020-07-06,0
 Foard,2020-07-06,0
-Fort Bend,2020-07-06,20
+Fort Bend,2020-07-06,19
 Franklin,2020-07-06,0
 Freestone,2020-07-06,0
 Frio,2020-07-06,3
@@ -2155,14 +1898,14 @@ Hamilton,2020-07-06,0
 Hansford,2020-07-06,0
 Hardeman,2020-07-06,0
 Hardin,2020-07-06,3
-Harris,2020-07-06,92
+Harris,2020-07-06,84
 Harrison,2020-07-06,0
 Hartley,2020-07-06,0
 Haskell,2020-07-06,0
 Hays,2020-07-06,9
 Hemphill,2020-07-06,0
 Henderson,2020-07-06,4
-Hidalgo,2020-07-06,62
+Hidalgo,2020-07-06,67
 Hill,2020-07-06,2
 Hockley,2020-07-06,0
 Hood,2020-07-06,2
@@ -2177,10 +1920,10 @@ Jack,2020-07-06,0
 Jackson,2020-07-06,1
 Jasper,2020-07-06,1
 Jeff Davis,2020-07-06,0
-Jefferson,2020-07-06,7
+Jefferson,2020-07-06,6
 Jim Hogg,2020-07-06,0
 Jim Wells,2020-07-06,1
-Johnson,2020-07-06,3
+Johnson,2020-07-06,5
 Jones,2020-07-06,0
 Karnes,2020-07-06,0
 Kaufman,2020-07-06,0
@@ -2290,7 +2033,7 @@ Uvalde,2020-07-06,1
 Val Verde,2020-07-06,0
 Van Zandt,2020-07-06,4
 Victoria,2020-07-06,2
-Walker,2020-07-06,4
+Walker,2020-07-06,5
 Waller,2020-07-06,0
 Ward,2020-07-06,0
 Washington,2020-07-06,0
@@ -2368,7 +2111,7 @@ Crockett,2020-07-07,1
 Crosby,2020-07-07,0
 Culberson,2020-07-07,0
 Dallam,2020-07-07,0
-Dallas,2020-07-07,190
+Dallas,2020-07-07,196
 Dawson,2020-07-07,0
 Deaf Smith,2020-07-07,3
 Delta,2020-07-07,0
@@ -2390,7 +2133,7 @@ Fayette,2020-07-07,0
 Fisher,2020-07-07,0
 Floyd,2020-07-07,0
 Foard,2020-07-07,0
-Fort Bend,2020-07-07,15
+Fort Bend,2020-07-07,16
 Franklin,2020-07-07,1
 Freestone,2020-07-07,1
 Frio,2020-07-07,3
@@ -2412,14 +2155,14 @@ Hamilton,2020-07-07,0
 Hansford,2020-07-07,0
 Hardeman,2020-07-07,0
 Hardin,2020-07-07,1
-Harris,2020-07-07,93
+Harris,2020-07-07,84
 Harrison,2020-07-07,1
 Hartley,2020-07-07,0
 Haskell,2020-07-07,0
 Hays,2020-07-07,2
 Hemphill,2020-07-07,0
 Henderson,2020-07-07,2
-Hidalgo,2020-07-07,45
+Hidalgo,2020-07-07,46
 Hill,2020-07-07,0
 Hockley,2020-07-07,2
 Hood,2020-07-07,4
@@ -2481,7 +2224,7 @@ Milam,2020-07-07,0
 Mills,2020-07-07,0
 Mitchell,2020-07-07,0
 Montague,2020-07-07,0
-Montgomery,2020-07-07,19
+Montgomery,2020-07-07,18
 Moore,2020-07-07,1
 Morris,2020-07-07,0
 Motley,2020-07-07,0
@@ -2489,7 +2232,7 @@ Nacogdoches,2020-07-07,2
 Navarro,2020-07-07,0
 Newton,2020-07-07,0
 Nolan,2020-07-07,2
-Nueces,2020-07-07,14
+Nueces,2020-07-07,13
 Ochiltree,2020-07-07,0
 Oldham,2020-07-07,0
 Orange,2020-07-07,1
@@ -2531,7 +2274,7 @@ Sterling,2020-07-07,0
 Stonewall,2020-07-07,0
 Sutton,2020-07-07,1
 Swisher,2020-07-07,0
-Tarrant,2020-07-07,38
+Tarrant,2020-07-07,39
 Taylor,2020-07-07,0
 Terrell,2020-07-07,0
 Terry,2020-07-07,0
@@ -2571,24 +2314,24 @@ NA,2020-07-07,NA
 NA,2020-07-07,NA
 Anderson,2020-07-08,0
 Andrews,2020-07-08,0
-Angelina,2020-07-08,1
+Angelina,2020-07-08,6
 Aransas,2020-07-08,0
 Archer,2020-07-08,1
 Armstrong,2020-07-08,0
 Atascosa,2020-07-08,1
-Austin,2020-07-08,0
+Austin,2020-07-08,1
 Bailey,2020-07-08,0
 Bandera,2020-07-08,0
 Bastrop,2020-07-08,0
 Baylor,2020-07-08,0
 Bee,2020-07-08,2
-Bell,2020-07-08,17
+Bell,2020-07-08,18
 Bexar,2020-07-08,48
 Blanco,2020-07-08,0
 Borden,2020-07-08,0
 Bosque,2020-07-08,0
 Bowie,2020-07-08,2
-Brazoria,2020-07-08,12
+Brazoria,2020-07-08,11
 Brazos,2020-07-08,1
 Brewster,2020-07-08,0
 Briscoe,2020-07-08,0
@@ -2596,22 +2339,22 @@ Brooks,2020-07-08,1
 Brown,2020-07-08,2
 Burleson,2020-07-08,1
 Burnet,2020-07-08,0
-Caldwell,2020-07-08,2
+Caldwell,2020-07-08,4
 Calhoun,2020-07-08,0
 Callahan,2020-07-08,0
-Cameron,2020-07-08,32
+Cameron,2020-07-08,36
 Camp,2020-07-08,0
 Carson,2020-07-08,0
-Cass,2020-07-08,0
+Cass,2020-07-08,1
 Castro,2020-07-08,0
 Chambers,2020-07-08,3
-Cherokee,2020-07-08,5
+Cherokee,2020-07-08,6
 Childress,2020-07-08,0
 Clay,2020-07-08,0
 Cochran,2020-07-08,0
 Coke,2020-07-08,0
 Coleman,2020-07-08,0
-Collin,2020-07-08,16
+Collin,2020-07-08,15
 Collingsworth,2020-07-08,0
 Colorado,2020-07-08,0
 Comal,2020-07-08,0
@@ -2625,11 +2368,11 @@ Crockett,2020-07-08,2
 Crosby,2020-07-08,0
 Culberson,2020-07-08,0
 Dallam,2020-07-08,0
-Dallas,2020-07-08,182
+Dallas,2020-07-08,212
 Dawson,2020-07-08,0
 Deaf Smith,2020-07-08,2
 Delta,2020-07-08,0
-Denton,2020-07-08,8
+Denton,2020-07-08,9
 DeWitt,2020-07-08,1
 Dickens,2020-07-08,0
 Dimmit,2020-07-08,1
@@ -2639,7 +2382,7 @@ Eastland,2020-07-08,0
 Ector,2020-07-08,7
 Edwards,2020-07-08,0
 Ellis,2020-07-08,2
-El Paso,2020-07-08,26
+El Paso,2020-07-08,27
 Erath,2020-07-08,0
 Falls,2020-07-08,0
 Fannin,2020-07-08,0
@@ -2659,24 +2402,24 @@ Glasscock,2020-07-08,0
 Goliad,2020-07-08,0
 Gonzales,2020-07-08,0
 Gray,2020-07-08,1
-Grayson,2020-07-08,2
-Gregg,2020-07-08,2
+Grayson,2020-07-08,5
+Gregg,2020-07-08,4
 Grimes,2020-07-08,0
-Guadalupe,2020-07-08,3
+Guadalupe,2020-07-08,10
 Hale,2020-07-08,1
 Hall,2020-07-08,0
 Hamilton,2020-07-08,0
 Hansford,2020-07-08,0
 Hardeman,2020-07-08,0
 Hardin,2020-07-08,1
-Harris,2020-07-08,93
+Harris,2020-07-08,88
 Harrison,2020-07-08,0
 Hartley,2020-07-08,0
 Haskell,2020-07-08,0
-Hays,2020-07-08,1
+Hays,2020-07-08,2
 Hemphill,2020-07-08,0
 Henderson,2020-07-08,3
-Hidalgo,2020-07-08,15
+Hidalgo,2020-07-08,70
 Hill,2020-07-08,2
 Hockley,2020-07-08,0
 Hood,2020-07-08,0
@@ -2694,7 +2437,7 @@ Jeff Davis,2020-07-08,0
 Jefferson,2020-07-08,4
 Jim Hogg,2020-07-08,0
 Jim Wells,2020-07-08,1
-Johnson,2020-07-08,2
+Johnson,2020-07-08,5
 Jones,2020-07-08,0
 Karnes,2020-07-08,0
 Kaufman,2020-07-08,1
@@ -2726,11 +2469,11 @@ McCulloch,2020-07-08,0
 McLennan,2020-07-08,12
 McMullen,2020-07-08,0
 Madison,2020-07-08,0
-Marion,2020-07-08,0
+Marion,2020-07-08,3
 Martin,2020-07-08,0
 Mason,2020-07-08,0
 Matagorda,2020-07-08,1
-Maverick,2020-07-08,0
+Maverick,2020-07-08,3
 Medina,2020-07-08,5
 Menard,2020-07-08,0
 Midland,2020-07-08,1
@@ -2738,7 +2481,7 @@ Milam,2020-07-08,0
 Mills,2020-07-08,0
 Mitchell,2020-07-08,1
 Montague,2020-07-08,0
-Montgomery,2020-07-08,20
+Montgomery,2020-07-08,19
 Moore,2020-07-08,0
 Morris,2020-07-08,0
 Motley,2020-07-08,0
@@ -2755,11 +2498,11 @@ Panola,2020-07-08,0
 Parker,2020-07-08,1
 Parmer,2020-07-08,0
 Pecos,2020-07-08,0
-Polk,2020-07-08,0
-Potter,2020-07-08,8
+Polk,2020-07-08,2
+Potter,2020-07-08,9
 Presidio,2020-07-08,0
 Rains,2020-07-08,0
-Randall,2020-07-08,8
+Randall,2020-07-08,10
 Reagan,2020-07-08,1
 Real,2020-07-08,1
 Red River,2020-07-08,0
@@ -2771,7 +2514,7 @@ Rockwall,2020-07-08,0
 Runnels,2020-07-08,0
 Rusk,2020-07-08,0
 Sabine,2020-07-08,0
-San Augustine,2020-07-08,1
+San Augustine,2020-07-08,2
 San Jacinto,2020-07-08,0
 San Patricio,2020-07-08,2
 San Saba,2020-07-08,0
@@ -2782,20 +2525,20 @@ Shelby,2020-07-08,0
 Sherman,2020-07-08,0
 Smith,2020-07-08,16
 Somervell,2020-07-08,0
-Starr,2020-07-08,1
+Starr,2020-07-08,2
 Stephens,2020-07-08,0
 Sterling,2020-07-08,0
 Stonewall,2020-07-08,0
 Sutton,2020-07-08,0
 Swisher,2020-07-08,0
-Tarrant,2020-07-08,44
+Tarrant,2020-07-08,47
 Taylor,2020-07-08,2
 Terrell,2020-07-08,0
 Terry,2020-07-08,0
 Throckmorton,2020-07-08,0
 Titus,2020-07-08,1
 Tom Green,2020-07-08,13
-Travis,2020-07-08,15
+Travis,2020-07-08,20
 Trinity,2020-07-08,0
 Tyler,2020-07-08,0
 Upshur,2020-07-08,0
@@ -2804,11 +2547,11 @@ Uvalde,2020-07-08,2
 Val Verde,2020-07-08,0
 Van Zandt,2020-07-08,1
 Victoria,2020-07-08,3
-Walker,2020-07-08,11
-Waller,2020-07-08,0
+Walker,2020-07-08,10
+Waller,2020-07-08,1
 Ward,2020-07-08,0
 Washington,2020-07-08,0
-Webb,2020-07-08,4
+Webb,2020-07-08,13
 Wharton,2020-07-08,1
 Wheeler,2020-07-08,0
 Wichita,2020-07-08,1
@@ -2826,3 +2569,260 @@ Zavala,2020-07-08,0
 NA,2020-07-08,NA
 NA,2020-07-08,NA
 NA,2020-07-08,NA
+Anderson,2020-07-09,1
+Andrews,2020-07-09,0
+Angelina,2020-07-09,0
+Aransas,2020-07-09,2
+Archer,2020-07-09,0
+Armstrong,2020-07-09,0
+Atascosa,2020-07-09,0
+Austin,2020-07-09,0
+Bailey,2020-07-09,0
+Bandera,2020-07-09,0
+Bastrop,2020-07-09,2
+Baylor,2020-07-09,0
+Bee,2020-07-09,0
+Bell,2020-07-09,14
+Bexar,2020-07-09,42
+Blanco,2020-07-09,0
+Borden,2020-07-09,0
+Bosque,2020-07-09,0
+Bowie,2020-07-09,2
+Brazoria,2020-07-09,12
+Brazos,2020-07-09,1
+Brewster,2020-07-09,0
+Briscoe,2020-07-09,0
+Brooks,2020-07-09,0
+Brown,2020-07-09,1
+Burleson,2020-07-09,0
+Burnet,2020-07-09,1
+Caldwell,2020-07-09,0
+Calhoun,2020-07-09,0
+Callahan,2020-07-09,0
+Cameron,2020-07-09,23
+Camp,2020-07-09,0
+Carson,2020-07-09,1
+Cass,2020-07-09,0
+Castro,2020-07-09,0
+Chambers,2020-07-09,2
+Cherokee,2020-07-09,3
+Childress,2020-07-09,1
+Clay,2020-07-09,0
+Cochran,2020-07-09,0
+Coke,2020-07-09,0
+Coleman,2020-07-09,0
+Collin,2020-07-09,8
+Collingsworth,2020-07-09,0
+Colorado,2020-07-09,0
+Comal,2020-07-09,1
+Comanche,2020-07-09,0
+Concho,2020-07-09,0
+Cooke,2020-07-09,1
+Coryell,2020-07-09,2
+Cottle,2020-07-09,0
+Crane,2020-07-09,0
+Crockett,2020-07-09,0
+Crosby,2020-07-09,0
+Culberson,2020-07-09,0
+Dallam,2020-07-09,1
+Dallas,2020-07-09,184
+Dawson,2020-07-09,0
+Deaf Smith,2020-07-09,0
+Delta,2020-07-09,1
+Denton,2020-07-09,8
+DeWitt,2020-07-09,0
+Dickens,2020-07-09,0
+Dimmit,2020-07-09,0
+Donley,2020-07-09,0
+Duval,2020-07-09,0
+Eastland,2020-07-09,1
+Ector,2020-07-09,10
+Edwards,2020-07-09,0
+Ellis,2020-07-09,4
+El Paso,2020-07-09,17
+Erath,2020-07-09,0
+Falls,2020-07-09,1
+Fannin,2020-07-09,0
+Fayette,2020-07-09,0
+Fisher,2020-07-09,0
+Floyd,2020-07-09,0
+Foard,2020-07-09,0
+Fort Bend,2020-07-09,9
+Franklin,2020-07-09,0
+Freestone,2020-07-09,0
+Frio,2020-07-09,1
+Gaines,2020-07-09,0
+Galveston,2020-07-09,15
+Garza,2020-07-09,1
+Gillespie,2020-07-09,0
+Glasscock,2020-07-09,0
+Goliad,2020-07-09,0
+Gonzales,2020-07-09,0
+Gray,2020-07-09,0
+Grayson,2020-07-09,0
+Gregg,2020-07-09,0
+Grimes,2020-07-09,1
+Guadalupe,2020-07-09,3
+Hale,2020-07-09,1
+Hall,2020-07-09,0
+Hamilton,2020-07-09,0
+Hansford,2020-07-09,0
+Hardeman,2020-07-09,0
+Hardin,2020-07-09,0
+Harris,2020-07-09,81
+Harrison,2020-07-09,0
+Hartley,2020-07-09,0
+Haskell,2020-07-09,0
+Hays,2020-07-09,1
+Hemphill,2020-07-09,0
+Henderson,2020-07-09,3
+Hidalgo,2020-07-09,12
+Hill,2020-07-09,2
+Hockley,2020-07-09,0
+Hood,2020-07-09,2
+Hopkins,2020-07-09,1
+Houston,2020-07-09,0
+Howard,2020-07-09,0
+Hudspeth,2020-07-09,0
+Hunt,2020-07-09,6
+Hutchinson,2020-07-09,0
+Irion,2020-07-09,0
+Jack,2020-07-09,0
+Jackson,2020-07-09,1
+Jasper,2020-07-09,0
+Jeff Davis,2020-07-09,0
+Jefferson,2020-07-09,2
+Jim Hogg,2020-07-09,1
+Jim Wells,2020-07-09,0
+Johnson,2020-07-09,2
+Jones,2020-07-09,1
+Karnes,2020-07-09,1
+Kaufman,2020-07-09,4
+Kendall,2020-07-09,0
+Kenedy,2020-07-09,0
+Kent,2020-07-09,1
+Kerr,2020-07-09,3
+Kimble,2020-07-09,0
+King,2020-07-09,0
+Kinney,2020-07-09,0
+Kleberg,2020-07-09,2
+Knox,2020-07-09,0
+Lamar,2020-07-09,0
+Lamb,2020-07-09,0
+Lampasas,2020-07-09,2
+La Salle,2020-07-09,0
+Lavaca,2020-07-09,1
+Lee,2020-07-09,0
+Leon,2020-07-09,0
+Liberty,2020-07-09,4
+Limestone,2020-07-09,3
+Lipscomb,2020-07-09,0
+Live Oak,2020-07-09,2
+Llano,2020-07-09,0
+Loving,2020-07-09,0
+Lubbock,2020-07-09,3
+Lynn,2020-07-09,0
+McCulloch,2020-07-09,0
+McLennan,2020-07-09,24
+McMullen,2020-07-09,0
+Madison,2020-07-09,1
+Marion,2020-07-09,0
+Martin,2020-07-09,0
+Mason,2020-07-09,0
+Matagorda,2020-07-09,0
+Maverick,2020-07-09,0
+Medina,2020-07-09,2
+Menard,2020-07-09,0
+Midland,2020-07-09,1
+Milam,2020-07-09,0
+Mills,2020-07-09,0
+Mitchell,2020-07-09,1
+Montague,2020-07-09,0
+Montgomery,2020-07-09,12
+Moore,2020-07-09,0
+Morris,2020-07-09,0
+Motley,2020-07-09,0
+Nacogdoches,2020-07-09,2
+Navarro,2020-07-09,1
+Newton,2020-07-09,3
+Nolan,2020-07-09,0
+Nueces,2020-07-09,7
+Ochiltree,2020-07-09,0
+Oldham,2020-07-09,1
+Orange,2020-07-09,1
+Palo Pinto,2020-07-09,0
+Panola,2020-07-09,0
+Parker,2020-07-09,1
+Parmer,2020-07-09,0
+Pecos,2020-07-09,0
+Polk,2020-07-09,0
+Potter,2020-07-09,6
+Presidio,2020-07-09,0
+Rains,2020-07-09,0
+Randall,2020-07-09,4
+Reagan,2020-07-09,0
+Real,2020-07-09,0
+Red River,2020-07-09,0
+Reeves,2020-07-09,0
+Refugio,2020-07-09,0
+Roberts,2020-07-09,0
+Robertson,2020-07-09,1
+Rockwall,2020-07-09,0
+Runnels,2020-07-09,0
+Rusk,2020-07-09,2
+Sabine,2020-07-09,0
+San Augustine,2020-07-09,0
+San Jacinto,2020-07-09,1
+San Patricio,2020-07-09,2
+San Saba,2020-07-09,0
+Schleicher,2020-07-09,0
+Scurry,2020-07-09,0
+Shackelford,2020-07-09,0
+Shelby,2020-07-09,0
+Sherman,2020-07-09,0
+Smith,2020-07-09,11
+Somervell,2020-07-09,0
+Starr,2020-07-09,1
+Stephens,2020-07-09,0
+Sterling,2020-07-09,0
+Stonewall,2020-07-09,0
+Sutton,2020-07-09,0
+Swisher,2020-07-09,0
+Tarrant,2020-07-09,33
+Taylor,2020-07-09,1
+Terrell,2020-07-09,0
+Terry,2020-07-09,0
+Throckmorton,2020-07-09,0
+Titus,2020-07-09,0
+Tom Green,2020-07-09,8
+Travis,2020-07-09,8
+Trinity,2020-07-09,0
+Tyler,2020-07-09,0
+Upshur,2020-07-09,0
+Upton,2020-07-09,0
+Uvalde,2020-07-09,2
+Val Verde,2020-07-09,0
+Van Zandt,2020-07-09,3
+Victoria,2020-07-09,4
+Walker,2020-07-09,5
+Waller,2020-07-09,1
+Ward,2020-07-09,0
+Washington,2020-07-09,0
+Webb,2020-07-09,0
+Wharton,2020-07-09,4
+Wheeler,2020-07-09,0
+Wichita,2020-07-09,0
+Wilbarger,2020-07-09,0
+Willacy,2020-07-09,0
+Williamson,2020-07-09,4
+Wilson,2020-07-09,2
+Winkler,2020-07-09,0
+Wise,2020-07-09,0
+Wood,2020-07-09,3
+Yoakum,2020-07-09,0
+Young,2020-07-09,0
+Zapata,2020-07-09,0
+Zavala,2020-07-09,2
+NA,2020-07-09,NA
+NA,2020-07-09,NA
+NA,2020-07-09,NA
