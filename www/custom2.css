@@ -795,6 +795,18 @@ letter-spacing: 3px;
   margin-right: auto;
 }
 
+.hosp_latest_date {
+text-align: center;
+font-size: 1em;
+font-weight: 500;
+background-color: #F26852;
+width: 72%;
+height: 21px;
+padding-top: 0px;
+margin-left: auto;
+margin-right: auto;
+}
+
 .leaflet-bar button, .leaflet-bar button:hover {
 background-color: #3A4A9F !important;
 color: #fff !important;
