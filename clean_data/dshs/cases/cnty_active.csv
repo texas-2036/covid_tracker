@@ -93,6 +93,8 @@ Texas,48,Anderson,2020-07-06,986
 Texas,48,Anderson,2020-07-07,1012
 Texas,48,Anderson,2020-07-08,1054
 Texas,48,Anderson,2020-07-09,1435
+Texas,48,Anderson,2020-07-10,1664
+Texas,48,Anderson,2020-07-11,1699
 Texas,48,Andrews,2020-04-07,10
 Texas,48,Andrews,2020-04-08,10
 Texas,48,Andrews,2020-04-09,10
@@ -187,6 +189,8 @@ Texas,48,Andrews,2020-07-06,66
 Texas,48,Andrews,2020-07-07,60
 Texas,48,Andrews,2020-07-08,65
 Texas,48,Andrews,2020-07-09,77
+Texas,48,Andrews,2020-07-10,70
+Texas,48,Andrews,2020-07-11,89
 Texas,48,Angelina,2020-04-07,14
 Texas,48,Angelina,2020-04-08,14
 Texas,48,Angelina,2020-04-09,14
@@ -281,6 +285,8 @@ Texas,48,Angelina,2020-07-06,307
 Texas,48,Angelina,2020-07-07,376
 Texas,48,Angelina,2020-07-08,376
 Texas,48,Angelina,2020-07-09,411
+Texas,48,Angelina,2020-07-10,449
+Texas,48,Angelina,2020-07-11,509
 Texas,48,Aransas,2020-04-07,1
 Texas,48,Aransas,2020-04-08,2
 Texas,48,Aransas,2020-04-09,2
@@ -375,6 +381,8 @@ Texas,48,Aransas,2020-07-06,33
 Texas,48,Aransas,2020-07-07,32
 Texas,48,Aransas,2020-07-08,31
 Texas,48,Aransas,2020-07-09,34
+Texas,48,Aransas,2020-07-10,28
+Texas,48,Aransas,2020-07-11,28
 Texas,48,Archer,2020-04-07,0
 Texas,48,Archer,2020-04-08,0
 Texas,48,Archer,2020-04-09,0
@@ -469,6 +477,8 @@ Texas,48,Archer,2020-07-06,5
 Texas,48,Archer,2020-07-07,6
 Texas,48,Archer,2020-07-08,7
 Texas,48,Archer,2020-07-09,7
+Texas,48,Archer,2020-07-10,3
+Texas,48,Archer,2020-07-11,3
 Texas,48,Armstrong,2020-04-07,0
 Texas,48,Armstrong,2020-04-08,0
 Texas,48,Armstrong,2020-04-09,0
@@ -563,6 +573,8 @@ Texas,48,Armstrong,2020-07-06,0
 Texas,48,Armstrong,2020-07-07,0
 Texas,48,Armstrong,2020-07-08,0
 Texas,48,Armstrong,2020-07-09,0
+Texas,48,Armstrong,2020-07-10,0
+Texas,48,Armstrong,2020-07-11,0
 Texas,48,Atascosa,2020-04-07,4
 Texas,48,Atascosa,2020-04-08,3
 Texas,48,Atascosa,2020-04-09,3
@@ -657,6 +669,8 @@ Texas,48,Atascosa,2020-07-06,41
 Texas,48,Atascosa,2020-07-07,51
 Texas,48,Atascosa,2020-07-08,51
 Texas,48,Atascosa,2020-07-09,85
+Texas,48,Atascosa,2020-07-10,85
+Texas,48,Atascosa,2020-07-11,94
 Texas,48,Austin,2020-04-07,6
 Texas,48,Austin,2020-04-08,6
 Texas,48,Austin,2020-04-09,6
@@ -751,6 +765,8 @@ Texas,48,Austin,2020-07-06,5
 Texas,48,Austin,2020-07-07,58
 Texas,48,Austin,2020-07-08,63
 Texas,48,Austin,2020-07-09,75
+Texas,48,Austin,2020-07-10,82
+Texas,48,Austin,2020-07-11,86
 Texas,48,Bailey,2020-04-07,0
 Texas,48,Bailey,2020-04-08,0
 Texas,48,Bailey,2020-04-09,0
@@ -845,6 +861,8 @@ Texas,48,Bailey,2020-07-06,5
 Texas,48,Bailey,2020-07-07,33
 Texas,48,Bailey,2020-07-08,35
 Texas,48,Bailey,2020-07-09,36
+Texas,48,Bailey,2020-07-10,36
+Texas,48,Bailey,2020-07-11,32
 Texas,48,Bandera,2020-04-07,0
 Texas,48,Bandera,2020-04-08,0
 Texas,48,Bandera,2020-04-09,1
@@ -939,6 +957,8 @@ Texas,48,Bandera,2020-07-06,9
 Texas,48,Bandera,2020-07-07,9
 Texas,48,Bandera,2020-07-08,8
 Texas,48,Bandera,2020-07-09,9
+Texas,48,Bandera,2020-07-10,12
+Texas,48,Bandera,2020-07-11,18
 Texas,48,Bastrop,2020-04-07,14
 Texas,48,Bastrop,2020-04-08,15
 Texas,48,Bastrop,2020-04-09,13
@@ -1033,6 +1053,8 @@ Texas,48,Bastrop,2020-07-06,181
 Texas,48,Bastrop,2020-07-07,176
 Texas,48,Bastrop,2020-07-08,268
 Texas,48,Bastrop,2020-07-09,297
+Texas,48,Bastrop,2020-07-10,310
+Texas,48,Bastrop,2020-07-11,336
 Texas,48,Baylor,2020-04-07,0
 Texas,48,Baylor,2020-04-08,0
 Texas,48,Baylor,2020-04-09,0
@@ -1127,6 +1149,8 @@ Texas,48,Baylor,2020-07-06,0
 Texas,48,Baylor,2020-07-07,0
 Texas,48,Baylor,2020-07-08,0
 Texas,48,Baylor,2020-07-09,0
+Texas,48,Baylor,2020-07-10,0
+Texas,48,Baylor,2020-07-11,0
 Texas,48,Bee,2020-04-07,0
 Texas,48,Bee,2020-04-08,1
 Texas,48,Bee,2020-04-09,1
@@ -1221,6 +1245,8 @@ Texas,48,Bee,2020-07-06,49
 Texas,48,Bee,2020-07-07,53
 Texas,48,Bee,2020-07-08,60
 Texas,48,Bee,2020-07-09,97
+Texas,48,Bee,2020-07-10,92
+Texas,48,Bee,2020-07-11,94
 Texas,48,Bell,2020-04-07,53
 Texas,48,Bell,2020-04-08,55
 Texas,48,Bell,2020-04-09,57
@@ -1315,6 +1341,8 @@ Texas,48,Bell,2020-07-06,1089
 Texas,48,Bell,2020-07-07,1144
 Texas,48,Bell,2020-07-08,1203
 Texas,48,Bell,2020-07-09,1321
+Texas,48,Bell,2020-07-10,1422
+Texas,48,Bell,2020-07-11,1512
 Texas,48,Bexar,2020-04-07,399
 Texas,48,Bexar,2020-04-08,431
 Texas,48,Bexar,2020-04-09,469
@@ -1409,6 +1437,8 @@ Texas,48,Bexar,2020-07-06,8791
 Texas,48,Bexar,2020-07-07,8873
 Texas,48,Bexar,2020-07-08,9552
 Texas,48,Bexar,2020-07-09,10397
+Texas,48,Bexar,2020-07-10,11332
+Texas,48,Bexar,2020-07-11,12254
 Texas,48,Blanco,2020-04-07,3
 Texas,48,Blanco,2020-04-08,3
 Texas,48,Blanco,2020-04-09,3
@@ -1503,6 +1533,8 @@ Texas,48,Blanco,2020-07-06,11
 Texas,48,Blanco,2020-07-07,10
 Texas,48,Blanco,2020-07-08,25
 Texas,48,Blanco,2020-07-09,26
+Texas,48,Blanco,2020-07-10,26
+Texas,48,Blanco,2020-07-11,26
 Texas,48,Borden,2020-04-07,0
 Texas,48,Borden,2020-04-08,0
 Texas,48,Borden,2020-04-09,0
@@ -1597,6 +1629,8 @@ Texas,48,Borden,2020-07-06,0
 Texas,48,Borden,2020-07-07,0
 Texas,48,Borden,2020-07-08,0
 Texas,48,Borden,2020-07-09,0
+Texas,48,Borden,2020-07-10,0
+Texas,48,Borden,2020-07-11,0
 Texas,48,Bosque,2020-04-07,0
 Texas,48,Bosque,2020-04-08,0
 Texas,48,Bosque,2020-04-09,0
@@ -1691,6 +1725,8 @@ Texas,48,Bosque,2020-07-06,9
 Texas,48,Bosque,2020-07-07,9
 Texas,48,Bosque,2020-07-08,24
 Texas,48,Bosque,2020-07-09,27
+Texas,48,Bosque,2020-07-10,28
+Texas,48,Bosque,2020-07-11,32
 Texas,48,Bowie,2020-04-07,15
 Texas,48,Bowie,2020-04-08,18
 Texas,48,Bowie,2020-04-09,21
@@ -1785,6 +1821,8 @@ Texas,48,Bowie,2020-07-06,245
 Texas,48,Bowie,2020-07-07,55
 Texas,48,Bowie,2020-07-08,59
 Texas,48,Bowie,2020-07-09,57
+Texas,48,Bowie,2020-07-10,72
+Texas,48,Bowie,2020-07-11,80
 Texas,48,Brazoria,2020-04-07,152
 Texas,48,Brazoria,2020-04-08,157
 Texas,48,Brazoria,2020-04-09,157
@@ -1879,6 +1917,8 @@ Texas,48,Brazoria,2020-07-06,1125
 Texas,48,Brazoria,2020-07-07,1211
 Texas,48,Brazoria,2020-07-08,1300
 Texas,48,Brazoria,2020-07-09,1349
+Texas,48,Brazoria,2020-07-10,1437
+Texas,48,Brazoria,2020-07-11,1477
 Texas,48,Brazos,2020-04-07,77
 Texas,48,Brazos,2020-04-08,77
 Texas,48,Brazos,2020-04-09,83
@@ -1973,6 +2013,8 @@ Texas,48,Brazos,2020-07-06,1190
 Texas,48,Brazos,2020-07-07,1227
 Texas,48,Brazos,2020-07-08,1249
 Texas,48,Brazos,2020-07-09,1211
+Texas,48,Brazos,2020-07-10,1085
+Texas,48,Brazos,2020-07-11,1181
 Texas,48,Brewster,2020-04-07,0
 Texas,48,Brewster,2020-04-08,0
 Texas,48,Brewster,2020-04-09,0
@@ -2067,6 +2109,8 @@ Texas,48,Brewster,2020-07-06,111
 Texas,48,Brewster,2020-07-07,109
 Texas,48,Brewster,2020-07-08,97
 Texas,48,Brewster,2020-07-09,86
+Texas,48,Brewster,2020-07-10,81
+Texas,48,Brewster,2020-07-11,81
 Texas,48,Briscoe,2020-04-07,0
 Texas,48,Briscoe,2020-04-08,0
 Texas,48,Briscoe,2020-04-09,0
@@ -2161,6 +2205,8 @@ Texas,48,Briscoe,2020-07-06,6
 Texas,48,Briscoe,2020-07-07,7
 Texas,48,Briscoe,2020-07-08,7
 Texas,48,Briscoe,2020-07-09,7
+Texas,48,Briscoe,2020-07-10,6
+Texas,48,Briscoe,2020-07-11,6
 Texas,48,Brooks,2020-04-07,0
 Texas,48,Brooks,2020-04-08,0
 Texas,48,Brooks,2020-04-09,0
@@ -2255,6 +2301,8 @@ Texas,48,Brooks,2020-07-06,5
 Texas,48,Brooks,2020-07-07,6
 Texas,48,Brooks,2020-07-08,13
 Texas,48,Brooks,2020-07-09,24
+Texas,48,Brooks,2020-07-10,27
+Texas,48,Brooks,2020-07-11,27
 Texas,48,Brown,2020-04-07,4
 Texas,48,Brown,2020-04-08,4
 Texas,48,Brown,2020-04-09,6
@@ -2349,6 +2397,8 @@ Texas,48,Brown,2020-07-06,31
 Texas,48,Brown,2020-07-07,26
 Texas,48,Brown,2020-07-08,38
 Texas,48,Brown,2020-07-09,77
+Texas,48,Brown,2020-07-10,54
+Texas,48,Brown,2020-07-11,69
 Texas,48,Burleson,2020-04-07,5
 Texas,48,Burleson,2020-04-08,5
 Texas,48,Burleson,2020-04-09,5
@@ -2443,6 +2493,8 @@ Texas,48,Burleson,2020-07-06,39
 Texas,48,Burleson,2020-07-07,34
 Texas,48,Burleson,2020-07-08,60
 Texas,48,Burleson,2020-07-09,70
+Texas,48,Burleson,2020-07-10,72
+Texas,48,Burleson,2020-07-11,85
 Texas,48,Burnet,2020-04-07,4
 Texas,48,Burnet,2020-04-08,4
 Texas,48,Burnet,2020-04-09,4
@@ -2537,6 +2589,8 @@ Texas,48,Burnet,2020-07-06,99
 Texas,48,Burnet,2020-07-07,93
 Texas,48,Burnet,2020-07-08,112
 Texas,48,Burnet,2020-07-09,124
+Texas,48,Burnet,2020-07-10,114
+Texas,48,Burnet,2020-07-11,126
 Texas,48,Caldwell,2020-04-07,5
 Texas,48,Caldwell,2020-04-08,5
 Texas,48,Caldwell,2020-04-09,5
@@ -2631,6 +2685,8 @@ Texas,48,Caldwell,2020-07-06,252
 Texas,48,Caldwell,2020-07-07,213
 Texas,48,Caldwell,2020-07-08,293
 Texas,48,Caldwell,2020-07-09,333
+Texas,48,Caldwell,2020-07-10,347
+Texas,48,Caldwell,2020-07-11,383
 Texas,48,Calhoun,2020-04-07,12
 Texas,48,Calhoun,2020-04-08,12
 Texas,48,Calhoun,2020-04-09,11
@@ -2725,6 +2781,8 @@ Texas,48,Calhoun,2020-07-06,29
 Texas,48,Calhoun,2020-07-07,41
 Texas,48,Calhoun,2020-07-08,42
 Texas,48,Calhoun,2020-07-09,55
+Texas,48,Calhoun,2020-07-10,71
+Texas,48,Calhoun,2020-07-11,81
 Texas,48,Callahan,2020-04-07,1
 Texas,48,Callahan,2020-04-08,1
 Texas,48,Callahan,2020-04-09,1
@@ -2819,6 +2877,8 @@ Texas,48,Callahan,2020-07-06,0
 Texas,48,Callahan,2020-07-07,11
 Texas,48,Callahan,2020-07-08,10
 Texas,48,Callahan,2020-07-09,10
+Texas,48,Callahan,2020-07-10,2
+Texas,48,Callahan,2020-07-11,3
 Texas,48,Cameron,2020-04-07,95
 Texas,48,Cameron,2020-04-08,102
 Texas,48,Cameron,2020-04-09,111
@@ -2913,6 +2973,8 @@ Texas,48,Cameron,2020-07-06,639
 Texas,48,Cameron,2020-07-07,633
 Texas,48,Cameron,2020-07-08,642
 Texas,48,Cameron,2020-07-09,708
+Texas,48,Cameron,2020-07-10,771
+Texas,48,Cameron,2020-07-11,871
 Texas,48,Camp,2020-04-07,2
 Texas,48,Camp,2020-04-08,2
 Texas,48,Camp,2020-04-09,3
@@ -3007,6 +3069,8 @@ Texas,48,Camp,2020-07-06,23
 Texas,48,Camp,2020-07-07,16
 Texas,48,Camp,2020-07-08,16
 Texas,48,Camp,2020-07-09,18
+Texas,48,Camp,2020-07-10,16
+Texas,48,Camp,2020-07-11,16
 Texas,48,Carson,2020-04-07,0
 Texas,48,Carson,2020-04-08,0
 Texas,48,Carson,2020-04-09,0
@@ -3101,6 +3165,8 @@ Texas,48,Carson,2020-07-06,1
 Texas,48,Carson,2020-07-07,1
 Texas,48,Carson,2020-07-08,1
 Texas,48,Carson,2020-07-09,4
+Texas,48,Carson,2020-07-10,4
+Texas,48,Carson,2020-07-11,4
 Texas,48,Cass,2020-04-07,3
 Texas,48,Cass,2020-04-08,3
 Texas,48,Cass,2020-04-09,3
@@ -3195,6 +3261,8 @@ Texas,48,Cass,2020-07-06,13
 Texas,48,Cass,2020-07-07,14
 Texas,48,Cass,2020-07-08,16
 Texas,48,Cass,2020-07-09,15
+Texas,48,Cass,2020-07-10,15
+Texas,48,Cass,2020-07-11,15
 Texas,48,Castro,2020-04-07,7
 Texas,48,Castro,2020-04-08,7
 Texas,48,Castro,2020-04-09,4
@@ -3289,6 +3357,8 @@ Texas,48,Castro,2020-07-06,46
 Texas,48,Castro,2020-07-07,51
 Texas,48,Castro,2020-07-08,48
 Texas,48,Castro,2020-07-09,47
+Texas,48,Castro,2020-07-10,47
+Texas,48,Castro,2020-07-11,54
 Texas,48,Chambers,2020-04-07,15
 Texas,48,Chambers,2020-04-08,17
 Texas,48,Chambers,2020-04-09,20
@@ -3383,6 +3453,8 @@ Texas,48,Chambers,2020-07-06,132
 Texas,48,Chambers,2020-07-07,234
 Texas,48,Chambers,2020-07-08,211
 Texas,48,Chambers,2020-07-09,194
+Texas,48,Chambers,2020-07-10,260
+Texas,48,Chambers,2020-07-11,249
 Texas,48,Cherokee,2020-04-07,6
 Texas,48,Cherokee,2020-04-08,6
 Texas,48,Cherokee,2020-04-09,6
@@ -3477,6 +3549,8 @@ Texas,48,Cherokee,2020-07-06,160
 Texas,48,Cherokee,2020-07-07,198
 Texas,48,Cherokee,2020-07-08,161
 Texas,48,Cherokee,2020-07-09,177
+Texas,48,Cherokee,2020-07-10,222
+Texas,48,Cherokee,2020-07-11,248
 Texas,48,Childress,2020-04-07,0
 Texas,48,Childress,2020-04-08,0
 Texas,48,Childress,2020-04-09,0
@@ -3571,6 +3645,8 @@ Texas,48,Childress,2020-07-06,2
 Texas,48,Childress,2020-07-07,2
 Texas,48,Childress,2020-07-08,1
 Texas,48,Childress,2020-07-09,1
+Texas,48,Childress,2020-07-10,0
+Texas,48,Childress,2020-07-11,1
 Texas,48,Clay,2020-04-07,1
 Texas,48,Clay,2020-04-08,1
 Texas,48,Clay,2020-04-09,1
@@ -3665,6 +3741,8 @@ Texas,48,Clay,2020-07-06,4
 Texas,48,Clay,2020-07-07,4
 Texas,48,Clay,2020-07-08,8
 Texas,48,Clay,2020-07-09,8
+Texas,48,Clay,2020-07-10,4
+Texas,48,Clay,2020-07-11,6
 Texas,48,Cochran,2020-04-07,0
 Texas,48,Cochran,2020-04-08,0
 Texas,48,Cochran,2020-04-09,0
@@ -3759,6 +3837,8 @@ Texas,48,Cochran,2020-07-06,0
 Texas,48,Cochran,2020-07-07,2
 Texas,48,Cochran,2020-07-08,3
 Texas,48,Cochran,2020-07-09,4
+Texas,48,Cochran,2020-07-10,5
+Texas,48,Cochran,2020-07-11,5
 Texas,48,Coke,2020-04-07,0
 Texas,48,Coke,2020-04-08,0
 Texas,48,Coke,2020-04-09,0
@@ -3853,6 +3933,8 @@ Texas,48,Coke,2020-07-06,1
 Texas,48,Coke,2020-07-07,1
 Texas,48,Coke,2020-07-08,1
 Texas,48,Coke,2020-07-09,1
+Texas,48,Coke,2020-07-10,2
+Texas,48,Coke,2020-07-11,2
 Texas,48,Coleman,2020-04-07,0
 Texas,48,Coleman,2020-04-08,0
 Texas,48,Coleman,2020-04-09,0
@@ -3947,6 +4029,8 @@ Texas,48,Coleman,2020-07-06,0
 Texas,48,Coleman,2020-07-07,0
 Texas,48,Coleman,2020-07-08,1
 Texas,48,Coleman,2020-07-09,1
+Texas,48,Coleman,2020-07-10,2
+Texas,48,Coleman,2020-07-11,2
 Texas,48,Collin,2020-04-07,272
 Texas,48,Collin,2020-04-08,304
 Texas,48,Collin,2020-04-09,331
@@ -4041,6 +4125,8 @@ Texas,48,Collin,2020-07-06,717
 Texas,48,Collin,2020-07-07,742
 Texas,48,Collin,2020-07-08,674
 Texas,48,Collin,2020-07-09,608
+Texas,48,Collin,2020-07-10,612
+Texas,48,Collin,2020-07-11,707
 Texas,48,Collingsworth,2020-04-07,0
 Texas,48,Collingsworth,2020-04-08,0
 Texas,48,Collingsworth,2020-04-09,0
@@ -4135,6 +4221,8 @@ Texas,48,Collingsworth,2020-07-06,1
 Texas,48,Collingsworth,2020-07-07,1
 Texas,48,Collingsworth,2020-07-08,1
 Texas,48,Collingsworth,2020-07-09,1
+Texas,48,Collingsworth,2020-07-10,1
+Texas,48,Collingsworth,2020-07-11,0
 Texas,48,Colorado,2020-04-07,3
 Texas,48,Colorado,2020-04-08,6
 Texas,48,Colorado,2020-04-09,6
@@ -4229,6 +4317,8 @@ Texas,48,Colorado,2020-07-06,5
 Texas,48,Colorado,2020-07-07,75
 Texas,48,Colorado,2020-07-08,77
 Texas,48,Colorado,2020-07-09,109
+Texas,48,Colorado,2020-07-10,118
+Texas,48,Colorado,2020-07-11,127
 Texas,48,Comal,2020-04-07,17
 Texas,48,Comal,2020-04-08,21
 Texas,48,Comal,2020-04-09,20
@@ -4323,6 +4413,8 @@ Texas,48,Comal,2020-07-06,343
 Texas,48,Comal,2020-07-07,403
 Texas,48,Comal,2020-07-08,386
 Texas,48,Comal,2020-07-09,439
+Texas,48,Comal,2020-07-10,462
+Texas,48,Comal,2020-07-11,473
 Texas,48,Comanche,2020-04-07,3
 Texas,48,Comanche,2020-04-08,3
 Texas,48,Comanche,2020-04-09,3
@@ -4417,6 +4509,8 @@ Texas,48,Comanche,2020-07-06,7
 Texas,48,Comanche,2020-07-07,7
 Texas,48,Comanche,2020-07-08,11
 Texas,48,Comanche,2020-07-09,11
+Texas,48,Comanche,2020-07-10,7
+Texas,48,Comanche,2020-07-11,7
 Texas,48,Concho,2020-04-07,0
 Texas,48,Concho,2020-04-08,0
 Texas,48,Concho,2020-04-09,0
@@ -4511,6 +4605,8 @@ Texas,48,Concho,2020-07-06,9
 Texas,48,Concho,2020-07-07,9
 Texas,48,Concho,2020-07-08,9
 Texas,48,Concho,2020-07-09,10
+Texas,48,Concho,2020-07-10,9
+Texas,48,Concho,2020-07-11,7
 Texas,48,Cooke,2020-04-07,0
 Texas,48,Cooke,2020-04-08,0
 Texas,48,Cooke,2020-04-09,0
@@ -4605,6 +4701,8 @@ Texas,48,Cooke,2020-07-06,36
 Texas,48,Cooke,2020-07-07,40
 Texas,48,Cooke,2020-07-08,47
 Texas,48,Cooke,2020-07-09,55
+Texas,48,Cooke,2020-07-10,40
+Texas,48,Cooke,2020-07-11,41
 Texas,48,Coryell,2020-04-07,10
 Texas,48,Coryell,2020-04-08,11
 Texas,48,Coryell,2020-04-09,16
@@ -4699,6 +4797,8 @@ Texas,48,Coryell,2020-07-06,26
 Texas,48,Coryell,2020-07-07,21
 Texas,48,Coryell,2020-07-08,37
 Texas,48,Coryell,2020-07-09,41
+Texas,48,Coryell,2020-07-10,55
+Texas,48,Coryell,2020-07-11,78
 Texas,48,Cottle,2020-04-07,0
 Texas,48,Cottle,2020-04-08,0
 Texas,48,Cottle,2020-04-09,0
@@ -4793,6 +4893,8 @@ Texas,48,Cottle,2020-07-06,0
 Texas,48,Cottle,2020-07-07,0
 Texas,48,Cottle,2020-07-08,0
 Texas,48,Cottle,2020-07-09,0
+Texas,48,Cottle,2020-07-10,0
+Texas,48,Cottle,2020-07-11,0
 Texas,48,Crane,2020-04-07,1
 Texas,48,Crane,2020-04-08,1
 Texas,48,Crane,2020-04-09,1
@@ -4887,6 +4989,8 @@ Texas,48,Crane,2020-07-06,13
 Texas,48,Crane,2020-07-07,15
 Texas,48,Crane,2020-07-08,15
 Texas,48,Crane,2020-07-09,15
+Texas,48,Crane,2020-07-10,15
+Texas,48,Crane,2020-07-11,17
 Texas,48,Crockett,2020-04-07,0
 Texas,48,Crockett,2020-04-08,0
 Texas,48,Crockett,2020-04-09,0
@@ -4981,6 +5085,8 @@ Texas,48,Crockett,2020-07-06,9
 Texas,48,Crockett,2020-07-07,11
 Texas,48,Crockett,2020-07-08,12
 Texas,48,Crockett,2020-07-09,14
+Texas,48,Crockett,2020-07-10,25
+Texas,48,Crockett,2020-07-11,29
 Texas,48,Crosby,2020-04-07,1
 Texas,48,Crosby,2020-04-08,1
 Texas,48,Crosby,2020-04-09,1
@@ -5075,6 +5181,8 @@ Texas,48,Crosby,2020-07-06,19
 Texas,48,Crosby,2020-07-07,20
 Texas,48,Crosby,2020-07-08,19
 Texas,48,Crosby,2020-07-09,23
+Texas,48,Crosby,2020-07-10,20
+Texas,48,Crosby,2020-07-11,21
 Texas,48,Culberson,2020-04-07,0
 Texas,48,Culberson,2020-04-08,0
 Texas,48,Culberson,2020-04-09,0
@@ -5169,6 +5277,8 @@ Texas,48,Culberson,2020-07-06,2
 Texas,48,Culberson,2020-07-07,2
 Texas,48,Culberson,2020-07-08,2
 Texas,48,Culberson,2020-07-09,4
+Texas,48,Culberson,2020-07-10,4
+Texas,48,Culberson,2020-07-11,3
 Texas,48,Dallam,2020-04-07,1
 Texas,48,Dallam,2020-04-08,1
 Texas,48,Dallam,2020-04-09,1
@@ -5263,6 +5373,8 @@ Texas,48,Dallam,2020-07-06,38
 Texas,48,Dallam,2020-07-07,46
 Texas,48,Dallam,2020-07-08,37
 Texas,48,Dallam,2020-07-09,34
+Texas,48,Dallam,2020-07-10,50
+Texas,48,Dallam,2020-07-11,43
 Texas,48,Dallas,2020-04-07,1035
 Texas,48,Dallas,2020-04-08,1111
 Texas,48,Dallas,2020-04-09,1067
@@ -5357,6 +5469,8 @@ Texas,48,Dallas,2020-07-06,10078
 Texas,48,Dallas,2020-07-07,10869
 Texas,48,Dallas,2020-07-08,11529
 Texas,48,Dallas,2020-07-09,12175
+Texas,48,Dallas,2020-07-10,12996
+Texas,48,Dallas,2020-07-11,13711
 Texas,48,Dawson,2020-04-07,4
 Texas,48,Dawson,2020-04-08,4
 Texas,48,Dawson,2020-04-09,4
@@ -5451,6 +5565,8 @@ Texas,48,Dawson,2020-07-06,24
 Texas,48,Dawson,2020-07-07,24
 Texas,48,Dawson,2020-07-08,23
 Texas,48,Dawson,2020-07-09,28
+Texas,48,Dawson,2020-07-10,21
+Texas,48,Dawson,2020-07-11,29
 Texas,48,Deaf Smith,2020-04-07,5
 Texas,48,Deaf Smith,2020-04-08,5
 Texas,48,Deaf Smith,2020-04-09,5
@@ -5545,6 +5661,8 @@ Texas,48,Deaf Smith,2020-07-06,127
 Texas,48,Deaf Smith,2020-07-07,131
 Texas,48,Deaf Smith,2020-07-08,137
 Texas,48,Deaf Smith,2020-07-09,150
+Texas,48,Deaf Smith,2020-07-10,139
+Texas,48,Deaf Smith,2020-07-11,141
 Texas,48,Delta,2020-04-07,0
 Texas,48,Delta,2020-04-08,1
 Texas,48,Delta,2020-04-09,1
@@ -5639,6 +5757,8 @@ Texas,48,Delta,2020-07-06,3
 Texas,48,Delta,2020-07-07,3
 Texas,48,Delta,2020-07-08,3
 Texas,48,Delta,2020-07-09,3
+Texas,48,Delta,2020-07-10,3
+Texas,48,Delta,2020-07-11,3
 Texas,48,Denton,2020-04-07,306
 Texas,48,Denton,2020-04-08,335
 Texas,48,Denton,2020-04-09,335
@@ -5733,6 +5853,8 @@ Texas,48,Denton,2020-07-06,2044
 Texas,48,Denton,2020-07-07,2098
 Texas,48,Denton,2020-07-08,2132
 Texas,48,Denton,2020-07-09,2223
+Texas,48,Denton,2020-07-10,2229
+Texas,48,Denton,2020-07-11,2272
 Texas,48,DeWitt,2020-04-07,6
 Texas,48,DeWitt,2020-04-08,6
 Texas,48,DeWitt,2020-04-09,6
@@ -5827,6 +5949,8 @@ Texas,48,DeWitt,2020-07-06,36
 Texas,48,DeWitt,2020-07-07,48
 Texas,48,DeWitt,2020-07-08,39
 Texas,48,DeWitt,2020-07-09,57
+Texas,48,DeWitt,2020-07-10,57
+Texas,48,DeWitt,2020-07-11,85
 Texas,48,Dickens,2020-04-07,0
 Texas,48,Dickens,2020-04-08,1
 Texas,48,Dickens,2020-04-09,1
@@ -5921,6 +6045,8 @@ Texas,48,Dickens,2020-07-06,0
 Texas,48,Dickens,2020-07-07,0
 Texas,48,Dickens,2020-07-08,0
 Texas,48,Dickens,2020-07-09,0
+Texas,48,Dickens,2020-07-10,0
+Texas,48,Dickens,2020-07-11,0
 Texas,48,Dimmit,2020-04-07,0
 Texas,48,Dimmit,2020-04-08,0
 Texas,48,Dimmit,2020-04-09,0
@@ -6015,6 +6141,8 @@ Texas,48,Dimmit,2020-07-06,7
 Texas,48,Dimmit,2020-07-07,12
 Texas,48,Dimmit,2020-07-08,9
 Texas,48,Dimmit,2020-07-09,15
+Texas,48,Dimmit,2020-07-10,16
+Texas,48,Dimmit,2020-07-11,14
 Texas,48,Donley,2020-04-07,7
 Texas,48,Donley,2020-04-08,13
 Texas,48,Donley,2020-04-09,14
@@ -6109,6 +6237,8 @@ Texas,48,Donley,2020-07-06,0
 Texas,48,Donley,2020-07-07,1
 Texas,48,Donley,2020-07-08,1
 Texas,48,Donley,2020-07-09,1
+Texas,48,Donley,2020-07-10,1
+Texas,48,Donley,2020-07-11,5
 Texas,48,Duval,2020-04-07,0
 Texas,48,Duval,2020-04-08,0
 Texas,48,Duval,2020-04-09,0
@@ -6203,6 +6333,8 @@ Texas,48,Duval,2020-07-06,49
 Texas,48,Duval,2020-07-07,52
 Texas,48,Duval,2020-07-08,37
 Texas,48,Duval,2020-07-09,39
+Texas,48,Duval,2020-07-10,42
+Texas,48,Duval,2020-07-11,43
 Texas,48,Eastland,2020-04-07,1
 Texas,48,Eastland,2020-04-08,1
 Texas,48,Eastland,2020-04-09,1
@@ -6297,6 +6429,8 @@ Texas,48,Eastland,2020-07-06,4
 Texas,48,Eastland,2020-07-07,4
 Texas,48,Eastland,2020-07-08,5
 Texas,48,Eastland,2020-07-09,9
+Texas,48,Eastland,2020-07-10,4
+Texas,48,Eastland,2020-07-11,7
 Texas,48,Ector,2020-04-07,30
 Texas,48,Ector,2020-04-08,29
 Texas,48,Ector,2020-04-09,33
@@ -6391,6 +6525,8 @@ Texas,48,Ector,2020-07-06,187
 Texas,48,Ector,2020-07-07,413
 Texas,48,Ector,2020-07-08,273
 Texas,48,Ector,2020-07-09,430
+Texas,48,Ector,2020-07-10,296
+Texas,48,Ector,2020-07-11,425
 Texas,48,Edwards,2020-04-07,0
 Texas,48,Edwards,2020-04-08,0
 Texas,48,Edwards,2020-04-09,0
@@ -6485,6 +6621,8 @@ Texas,48,Edwards,2020-07-06,2
 Texas,48,Edwards,2020-07-07,2
 Texas,48,Edwards,2020-07-08,2
 Texas,48,Edwards,2020-07-09,2
+Texas,48,Edwards,2020-07-10,2
+Texas,48,Edwards,2020-07-11,4
 Texas,48,Ellis,2020-04-07,29
 Texas,48,Ellis,2020-04-08,34
 Texas,48,Ellis,2020-04-09,43
@@ -6579,6 +6717,8 @@ Texas,48,Ellis,2020-07-06,570
 Texas,48,Ellis,2020-07-07,678
 Texas,48,Ellis,2020-07-08,730
 Texas,48,Ellis,2020-07-09,802
+Texas,48,Ellis,2020-07-10,451
+Texas,48,Ellis,2020-07-11,476
 Texas,48,El Paso,2020-04-07,119
 Texas,48,El Paso,2020-04-08,144
 Texas,48,El Paso,2020-04-09,175
@@ -6673,6 +6813,8 @@ Texas,48,El Paso,2020-07-06,2644
 Texas,48,El Paso,2020-07-07,2599
 Texas,48,El Paso,2020-07-08,2736
 Texas,48,El Paso,2020-07-09,2899
+Texas,48,El Paso,2020-07-10,3024
+Texas,48,El Paso,2020-07-11,3250
 Texas,48,Erath,2020-04-07,6
 Texas,48,Erath,2020-04-08,7
 Texas,48,Erath,2020-04-09,8
@@ -6767,6 +6909,8 @@ Texas,48,Erath,2020-07-06,107
 Texas,48,Erath,2020-07-07,120
 Texas,48,Erath,2020-07-08,126
 Texas,48,Erath,2020-07-09,140
+Texas,48,Erath,2020-07-10,87
+Texas,48,Erath,2020-07-11,96
 Texas,48,Falls,2020-04-07,0
 Texas,48,Falls,2020-04-08,0
 Texas,48,Falls,2020-04-09,0
@@ -6861,6 +7005,8 @@ Texas,48,Falls,2020-07-06,15
 Texas,48,Falls,2020-07-07,13
 Texas,48,Falls,2020-07-08,22
 Texas,48,Falls,2020-07-09,24
+Texas,48,Falls,2020-07-10,28
+Texas,48,Falls,2020-07-11,33
 Texas,48,Fannin,2020-04-07,1
 Texas,48,Fannin,2020-04-08,3
 Texas,48,Fannin,2020-04-09,3
@@ -6955,6 +7101,8 @@ Texas,48,Fannin,2020-07-06,50
 Texas,48,Fannin,2020-07-07,59
 Texas,48,Fannin,2020-07-08,46
 Texas,48,Fannin,2020-07-09,54
+Texas,48,Fannin,2020-07-10,21
+Texas,48,Fannin,2020-07-11,23
 Texas,48,Fayette,2020-04-07,8
 Texas,48,Fayette,2020-04-08,8
 Texas,48,Fayette,2020-04-09,7
@@ -7049,6 +7197,8 @@ Texas,48,Fayette,2020-07-06,43
 Texas,48,Fayette,2020-07-07,39
 Texas,48,Fayette,2020-07-08,65
 Texas,48,Fayette,2020-07-09,67
+Texas,48,Fayette,2020-07-10,73
+Texas,48,Fayette,2020-07-11,82
 Texas,48,Fisher,2020-04-07,0
 Texas,48,Fisher,2020-04-08,0
 Texas,48,Fisher,2020-04-09,0
@@ -7143,6 +7293,8 @@ Texas,48,Fisher,2020-07-06,9
 Texas,48,Fisher,2020-07-07,9
 Texas,48,Fisher,2020-07-08,6
 Texas,48,Fisher,2020-07-09,6
+Texas,48,Fisher,2020-07-10,6
+Texas,48,Fisher,2020-07-11,8
 Texas,48,Floyd,2020-04-07,0
 Texas,48,Floyd,2020-04-08,1
 Texas,48,Floyd,2020-04-09,1
@@ -7237,6 +7389,8 @@ Texas,48,Floyd,2020-07-06,18
 Texas,48,Floyd,2020-07-07,26
 Texas,48,Floyd,2020-07-08,29
 Texas,48,Floyd,2020-07-09,28
+Texas,48,Floyd,2020-07-10,29
+Texas,48,Floyd,2020-07-11,30
 Texas,48,Foard,2020-04-07,0
 Texas,48,Foard,2020-04-08,0
 Texas,48,Foard,2020-04-09,0
@@ -7331,6 +7485,8 @@ Texas,48,Foard,2020-07-06,0
 Texas,48,Foard,2020-07-07,0
 Texas,48,Foard,2020-07-08,0
 Texas,48,Foard,2020-07-09,0
+Texas,48,Foard,2020-07-10,1
+Texas,48,Foard,2020-07-11,1
 Texas,48,Fort Bend,2020-04-07,289
 Texas,48,Fort Bend,2020-04-08,373
 Texas,48,Fort Bend,2020-04-09,387
@@ -7425,6 +7581,8 @@ Texas,48,Fort Bend,2020-07-06,2701
 Texas,48,Fort Bend,2020-07-07,2824
 Texas,48,Fort Bend,2020-07-08,2868
 Texas,48,Fort Bend,2020-07-09,2934
+Texas,48,Fort Bend,2020-07-10,3002
+Texas,48,Fort Bend,2020-07-11,2989
 Texas,48,Franklin,2020-04-07,1
 Texas,48,Franklin,2020-04-08,1
 Texas,48,Franklin,2020-04-09,1
@@ -7519,6 +7677,8 @@ Texas,48,Franklin,2020-07-06,18
 Texas,48,Franklin,2020-07-07,20
 Texas,48,Franklin,2020-07-08,20
 Texas,48,Franklin,2020-07-09,18
+Texas,48,Franklin,2020-07-10,17
+Texas,48,Franklin,2020-07-11,15
 Texas,48,Freestone,2020-04-07,0
 Texas,48,Freestone,2020-04-08,0
 Texas,48,Freestone,2020-04-09,0
@@ -7613,6 +7773,8 @@ Texas,48,Freestone,2020-07-06,22
 Texas,48,Freestone,2020-07-07,21
 Texas,48,Freestone,2020-07-08,41
 Texas,48,Freestone,2020-07-09,45
+Texas,48,Freestone,2020-07-10,48
+Texas,48,Freestone,2020-07-11,55
 Texas,48,Frio,2020-04-07,0
 Texas,48,Frio,2020-04-08,1
 Texas,48,Frio,2020-04-09,1
@@ -7707,6 +7869,8 @@ Texas,48,Frio,2020-07-06,97
 Texas,48,Frio,2020-07-07,98
 Texas,48,Frio,2020-07-08,96
 Texas,48,Frio,2020-07-09,148
+Texas,48,Frio,2020-07-10,152
+Texas,48,Frio,2020-07-11,192
 Texas,48,Gaines,2020-04-07,1
 Texas,48,Gaines,2020-04-08,0
 Texas,48,Gaines,2020-04-09,0
@@ -7801,6 +7965,8 @@ Texas,48,Gaines,2020-07-06,12
 Texas,48,Gaines,2020-07-07,14
 Texas,48,Gaines,2020-07-08,20
 Texas,48,Gaines,2020-07-09,23
+Texas,48,Gaines,2020-07-10,20
+Texas,48,Gaines,2020-07-11,24
 Texas,48,Galveston,2020-04-07,241
 Texas,48,Galveston,2020-04-08,250
 Texas,48,Galveston,2020-04-09,260
@@ -7895,6 +8061,8 @@ Texas,48,Galveston,2020-07-06,2771
 Texas,48,Galveston,2020-07-07,3242
 Texas,48,Galveston,2020-07-08,3368
 Texas,48,Galveston,2020-07-09,3487
+Texas,48,Galveston,2020-07-10,3623
+Texas,48,Galveston,2020-07-11,3929
 Texas,48,Garza,2020-04-07,0
 Texas,48,Garza,2020-04-08,0
 Texas,48,Garza,2020-04-09,0
@@ -7989,6 +8157,8 @@ Texas,48,Garza,2020-07-06,5
 Texas,48,Garza,2020-07-07,7
 Texas,48,Garza,2020-07-08,11
 Texas,48,Garza,2020-07-09,9
+Texas,48,Garza,2020-07-10,9
+Texas,48,Garza,2020-07-11,9
 Texas,48,Gillespie,2020-04-07,1
 Texas,48,Gillespie,2020-04-08,1
 Texas,48,Gillespie,2020-04-09,1
@@ -8083,6 +8253,8 @@ Texas,48,Gillespie,2020-07-06,18
 Texas,48,Gillespie,2020-07-07,20
 Texas,48,Gillespie,2020-07-08,24
 Texas,48,Gillespie,2020-07-09,26
+Texas,48,Gillespie,2020-07-10,34
+Texas,48,Gillespie,2020-07-11,36
 Texas,48,Glasscock,2020-04-07,0
 Texas,48,Glasscock,2020-04-08,0
 Texas,48,Glasscock,2020-04-09,0
@@ -8177,6 +8349,8 @@ Texas,48,Glasscock,2020-07-06,1
 Texas,48,Glasscock,2020-07-07,1
 Texas,48,Glasscock,2020-07-08,2
 Texas,48,Glasscock,2020-07-09,2
+Texas,48,Glasscock,2020-07-10,2
+Texas,48,Glasscock,2020-07-11,2
 Texas,48,Goliad,2020-04-07,3
 Texas,48,Goliad,2020-04-08,3
 Texas,48,Goliad,2020-04-09,3
@@ -8271,6 +8445,8 @@ Texas,48,Goliad,2020-07-06,7
 Texas,48,Goliad,2020-07-07,8
 Texas,48,Goliad,2020-07-08,5
 Texas,48,Goliad,2020-07-09,7
+Texas,48,Goliad,2020-07-10,10
+Texas,48,Goliad,2020-07-11,12
 Texas,48,Gonzales,2020-04-07,1
 Texas,48,Gonzales,2020-04-08,1
 Texas,48,Gonzales,2020-04-09,2
@@ -8365,6 +8541,8 @@ Texas,48,Gonzales,2020-07-06,74
 Texas,48,Gonzales,2020-07-07,80
 Texas,48,Gonzales,2020-07-08,77
 Texas,48,Gonzales,2020-07-09,76
+Texas,48,Gonzales,2020-07-10,73
+Texas,48,Gonzales,2020-07-11,78
 Texas,48,Gray,2020-04-07,9
 Texas,48,Gray,2020-04-08,11
 Texas,48,Gray,2020-04-09,12
@@ -8459,6 +8637,8 @@ Texas,48,Gray,2020-07-06,10
 Texas,48,Gray,2020-07-07,10
 Texas,48,Gray,2020-07-08,14
 Texas,48,Gray,2020-07-09,14
+Texas,48,Gray,2020-07-10,18
+Texas,48,Gray,2020-07-11,21
 Texas,48,Grayson,2020-04-07,13
 Texas,48,Grayson,2020-04-08,13
 Texas,48,Grayson,2020-04-09,13
@@ -8553,6 +8733,8 @@ Texas,48,Grayson,2020-07-06,40
 Texas,48,Grayson,2020-07-07,30
 Texas,48,Grayson,2020-07-08,58
 Texas,48,Grayson,2020-07-09,69
+Texas,48,Grayson,2020-07-10,46
+Texas,48,Grayson,2020-07-11,67
 Texas,48,Gregg,2020-04-07,19
 Texas,48,Gregg,2020-04-08,21
 Texas,48,Gregg,2020-04-09,33
@@ -8647,6 +8829,8 @@ Texas,48,Gregg,2020-07-06,259
 Texas,48,Gregg,2020-07-07,313
 Texas,48,Gregg,2020-07-08,493
 Texas,48,Gregg,2020-07-09,523
+Texas,48,Gregg,2020-07-10,539
+Texas,48,Gregg,2020-07-11,573
 Texas,48,Grimes,2020-04-07,2
 Texas,48,Grimes,2020-04-08,4
 Texas,48,Grimes,2020-04-09,3
@@ -8741,6 +8925,8 @@ Texas,48,Grimes,2020-07-06,270
 Texas,48,Grimes,2020-07-07,280
 Texas,48,Grimes,2020-07-08,320
 Texas,48,Grimes,2020-07-09,332
+Texas,48,Grimes,2020-07-10,325
+Texas,48,Grimes,2020-07-11,320
 Texas,48,Guadalupe,2020-04-07,39
 Texas,48,Guadalupe,2020-04-08,42
 Texas,48,Guadalupe,2020-04-09,40
@@ -8835,6 +9021,8 @@ Texas,48,Guadalupe,2020-07-06,518
 Texas,48,Guadalupe,2020-07-07,551
 Texas,48,Guadalupe,2020-07-08,525
 Texas,48,Guadalupe,2020-07-09,515
+Texas,48,Guadalupe,2020-07-10,522
+Texas,48,Guadalupe,2020-07-11,565
 Texas,48,Hale,2020-04-07,7
 Texas,48,Hale,2020-04-08,7
 Texas,48,Hale,2020-04-09,8
@@ -8929,6 +9117,8 @@ Texas,48,Hale,2020-07-06,161
 Texas,48,Hale,2020-07-07,253
 Texas,48,Hale,2020-07-08,218
 Texas,48,Hale,2020-07-09,265
+Texas,48,Hale,2020-07-10,259
+Texas,48,Hale,2020-07-11,312
 Texas,48,Hall,2020-04-07,0
 Texas,48,Hall,2020-04-08,0
 Texas,48,Hall,2020-04-09,0
@@ -9023,6 +9213,8 @@ Texas,48,Hall,2020-07-06,0
 Texas,48,Hall,2020-07-07,0
 Texas,48,Hall,2020-07-08,0
 Texas,48,Hall,2020-07-09,0
+Texas,48,Hall,2020-07-10,0
+Texas,48,Hall,2020-07-11,0
 Texas,48,Hamilton,2020-04-07,1
 Texas,48,Hamilton,2020-04-08,1
 Texas,48,Hamilton,2020-04-09,1
@@ -9117,6 +9309,8 @@ Texas,48,Hamilton,2020-07-06,5
 Texas,48,Hamilton,2020-07-07,5
 Texas,48,Hamilton,2020-07-08,9
 Texas,48,Hamilton,2020-07-09,11
+Texas,48,Hamilton,2020-07-10,11
+Texas,48,Hamilton,2020-07-11,15
 Texas,48,Hansford,2020-04-07,1
 Texas,48,Hansford,2020-04-08,1
 Texas,48,Hansford,2020-04-09,1
@@ -9211,6 +9405,8 @@ Texas,48,Hansford,2020-07-06,9
 Texas,48,Hansford,2020-07-07,8
 Texas,48,Hansford,2020-07-08,8
 Texas,48,Hansford,2020-07-09,6
+Texas,48,Hansford,2020-07-10,6
+Texas,48,Hansford,2020-07-11,9
 Texas,48,Hardeman,2020-04-07,0
 Texas,48,Hardeman,2020-04-08,0
 Texas,48,Hardeman,2020-04-09,0
@@ -9305,6 +9501,8 @@ Texas,48,Hardeman,2020-07-06,1
 Texas,48,Hardeman,2020-07-07,1
 Texas,48,Hardeman,2020-07-08,1
 Texas,48,Hardeman,2020-07-09,1
+Texas,48,Hardeman,2020-07-10,0
+Texas,48,Hardeman,2020-07-11,0
 Texas,48,Hardin,2020-04-07,27
 Texas,48,Hardin,2020-04-08,38
 Texas,48,Hardin,2020-04-09,38
@@ -9399,6 +9597,8 @@ Texas,48,Hardin,2020-07-06,76
 Texas,48,Hardin,2020-07-07,83
 Texas,48,Hardin,2020-07-08,107
 Texas,48,Hardin,2020-07-09,116
+Texas,48,Hardin,2020-07-10,163
+Texas,48,Hardin,2020-07-11,198
 Texas,48,Harris,2020-04-07,1745
 Texas,48,Harris,2020-04-08,2017
 Texas,48,Harris,2020-04-09,2164
@@ -9493,6 +9693,8 @@ Texas,48,Harris,2020-07-06,23996
 Texas,48,Harris,2020-07-07,24875
 Texas,48,Harris,2020-07-08,26048
 Texas,48,Harris,2020-07-09,26414
+Texas,48,Harris,2020-07-10,26969
+Texas,48,Harris,2020-07-11,27617
 Texas,48,Harrison,2020-04-07,9
 Texas,48,Harrison,2020-04-08,9
 Texas,48,Harrison,2020-04-09,11
@@ -9587,6 +9789,8 @@ Texas,48,Harrison,2020-07-06,91
 Texas,48,Harrison,2020-07-07,108
 Texas,48,Harrison,2020-07-08,110
 Texas,48,Harrison,2020-07-09,111
+Texas,48,Harrison,2020-07-10,115
+Texas,48,Harrison,2020-07-11,114
 Texas,48,Hartley,2020-04-07,0
 Texas,48,Hartley,2020-04-08,0
 Texas,48,Hartley,2020-04-09,0
@@ -9681,6 +9885,8 @@ Texas,48,Hartley,2020-07-06,23
 Texas,48,Hartley,2020-07-07,23
 Texas,48,Hartley,2020-07-08,27
 Texas,48,Hartley,2020-07-09,32
+Texas,48,Hartley,2020-07-10,36
+Texas,48,Hartley,2020-07-11,35
 Texas,48,Haskell,2020-04-07,0
 Texas,48,Haskell,2020-04-08,0
 Texas,48,Haskell,2020-04-09,0
@@ -9775,6 +9981,8 @@ Texas,48,Haskell,2020-07-06,1
 Texas,48,Haskell,2020-07-07,2
 Texas,48,Haskell,2020-07-08,2
 Texas,48,Haskell,2020-07-09,3
+Texas,48,Haskell,2020-07-10,1
+Texas,48,Haskell,2020-07-11,1
 Texas,48,Hays,2020-04-07,53
 Texas,48,Hays,2020-04-08,55
 Texas,48,Hays,2020-04-09,70
@@ -9869,6 +10077,8 @@ Texas,48,Hays,2020-07-06,2553
 Texas,48,Hays,2020-07-07,2602
 Texas,48,Hays,2020-07-08,2637
 Texas,48,Hays,2020-07-09,2711
+Texas,48,Hays,2020-07-10,2743
+Texas,48,Hays,2020-07-11,2835
 Texas,48,Hemphill,2020-04-07,1
 Texas,48,Hemphill,2020-04-08,1
 Texas,48,Hemphill,2020-04-09,1
@@ -9963,6 +10173,8 @@ Texas,48,Hemphill,2020-07-06,12
 Texas,48,Hemphill,2020-07-07,12
 Texas,48,Hemphill,2020-07-08,14
 Texas,48,Hemphill,2020-07-09,14
+Texas,48,Hemphill,2020-07-10,15
+Texas,48,Hemphill,2020-07-11,14
 Texas,48,Henderson,2020-04-07,1
 Texas,48,Henderson,2020-04-08,4
 Texas,48,Henderson,2020-04-09,6
@@ -10057,6 +10269,8 @@ Texas,48,Henderson,2020-07-06,91
 Texas,48,Henderson,2020-07-07,118
 Texas,48,Henderson,2020-07-08,137
 Texas,48,Henderson,2020-07-09,147
+Texas,48,Henderson,2020-07-10,152
+Texas,48,Henderson,2020-07-11,178
 Texas,48,Hidalgo,2020-04-07,111
 Texas,48,Hidalgo,2020-04-08,110
 Texas,48,Hidalgo,2020-04-09,132
@@ -10151,6 +10365,8 @@ Texas,48,Hidalgo,2020-07-06,3452
 Texas,48,Hidalgo,2020-07-07,2889
 Texas,48,Hidalgo,2020-07-08,2635
 Texas,48,Hidalgo,2020-07-09,2895
+Texas,48,Hidalgo,2020-07-10,3121
+Texas,48,Hidalgo,2020-07-11,4322
 Texas,48,Hill,2020-04-07,5
 Texas,48,Hill,2020-04-08,6
 Texas,48,Hill,2020-04-09,6
@@ -10245,6 +10461,8 @@ Texas,48,Hill,2020-07-06,37
 Texas,48,Hill,2020-07-07,36
 Texas,48,Hill,2020-07-08,71
 Texas,48,Hill,2020-07-09,82
+Texas,48,Hill,2020-07-10,86
+Texas,48,Hill,2020-07-11,90
 Texas,48,Hockley,2020-04-07,7
 Texas,48,Hockley,2020-04-08,7
 Texas,48,Hockley,2020-04-09,7
@@ -10339,6 +10557,8 @@ Texas,48,Hockley,2020-07-06,39
 Texas,48,Hockley,2020-07-07,57
 Texas,48,Hockley,2020-07-08,64
 Texas,48,Hockley,2020-07-09,64
+Texas,48,Hockley,2020-07-10,65
+Texas,48,Hockley,2020-07-11,74
 Texas,48,Hood,2020-04-07,9
 Texas,48,Hood,2020-04-08,9
 Texas,48,Hood,2020-04-09,10
@@ -10433,6 +10653,8 @@ Texas,48,Hood,2020-07-06,86
 Texas,48,Hood,2020-07-07,103
 Texas,48,Hood,2020-07-08,111
 Texas,48,Hood,2020-07-09,119
+Texas,48,Hood,2020-07-10,66
+Texas,48,Hood,2020-07-11,82
 Texas,48,Hopkins,2020-04-07,3
 Texas,48,Hopkins,2020-04-08,3
 Texas,48,Hopkins,2020-04-09,3
@@ -10527,6 +10749,8 @@ Texas,48,Hopkins,2020-07-06,21
 Texas,48,Hopkins,2020-07-07,25
 Texas,48,Hopkins,2020-07-08,28
 Texas,48,Hopkins,2020-07-09,27
+Texas,48,Hopkins,2020-07-10,30
+Texas,48,Hopkins,2020-07-11,28
 Texas,48,Houston,2020-04-07,0
 Texas,48,Houston,2020-04-08,0
 Texas,48,Houston,2020-04-09,0
@@ -10621,6 +10845,8 @@ Texas,48,Houston,2020-07-06,128
 Texas,48,Houston,2020-07-07,21
 Texas,48,Houston,2020-07-08,20
 Texas,48,Houston,2020-07-09,20
+Texas,48,Houston,2020-07-10,20
+Texas,48,Houston,2020-07-11,17
 Texas,48,Howard,2020-04-07,0
 Texas,48,Howard,2020-04-08,0
 Texas,48,Howard,2020-04-09,0
@@ -10715,6 +10941,8 @@ Texas,48,Howard,2020-07-06,20
 Texas,48,Howard,2020-07-07,30
 Texas,48,Howard,2020-07-08,33
 Texas,48,Howard,2020-07-09,35
+Texas,48,Howard,2020-07-10,35
+Texas,48,Howard,2020-07-11,37
 Texas,48,Hudspeth,2020-04-07,0
 Texas,48,Hudspeth,2020-04-08,0
 Texas,48,Hudspeth,2020-04-09,0
@@ -10809,6 +11037,8 @@ Texas,48,Hudspeth,2020-07-06,4
 Texas,48,Hudspeth,2020-07-07,4
 Texas,48,Hudspeth,2020-07-08,4
 Texas,48,Hudspeth,2020-07-09,4
+Texas,48,Hudspeth,2020-07-10,4
+Texas,48,Hudspeth,2020-07-11,4
 Texas,48,Hunt,2020-04-07,0
 Texas,48,Hunt,2020-04-08,13
 Texas,48,Hunt,2020-04-09,14
@@ -10903,6 +11133,8 @@ Texas,48,Hunt,2020-07-06,391
 Texas,48,Hunt,2020-07-07,453
 Texas,48,Hunt,2020-07-08,452
 Texas,48,Hunt,2020-07-09,473
+Texas,48,Hunt,2020-07-10,410
+Texas,48,Hunt,2020-07-11,438
 Texas,48,Hutchinson,2020-04-07,2
 Texas,48,Hutchinson,2020-04-08,2
 Texas,48,Hutchinson,2020-04-09,2
@@ -10997,6 +11229,8 @@ Texas,48,Hutchinson,2020-07-06,20
 Texas,48,Hutchinson,2020-07-07,19
 Texas,48,Hutchinson,2020-07-08,18
 Texas,48,Hutchinson,2020-07-09,18
+Texas,48,Hutchinson,2020-07-10,18
+Texas,48,Hutchinson,2020-07-11,19
 Texas,48,Irion,2020-04-07,0
 Texas,48,Irion,2020-04-08,0
 Texas,48,Irion,2020-04-09,0
@@ -11091,6 +11325,8 @@ Texas,48,Irion,2020-07-06,1
 Texas,48,Irion,2020-07-07,1
 Texas,48,Irion,2020-07-08,1
 Texas,48,Irion,2020-07-09,2
+Texas,48,Irion,2020-07-10,2
+Texas,48,Irion,2020-07-11,1
 Texas,48,Jack,2020-04-07,0
 Texas,48,Jack,2020-04-08,0
 Texas,48,Jack,2020-04-09,1
@@ -11185,6 +11421,8 @@ Texas,48,Jack,2020-07-06,8
 Texas,48,Jack,2020-07-07,6
 Texas,48,Jack,2020-07-08,6
 Texas,48,Jack,2020-07-09,6
+Texas,48,Jack,2020-07-10,2
+Texas,48,Jack,2020-07-11,2
 Texas,48,Jackson,2020-04-07,4
 Texas,48,Jackson,2020-04-08,4
 Texas,48,Jackson,2020-04-09,3
@@ -11279,6 +11517,8 @@ Texas,48,Jackson,2020-07-06,1
 Texas,48,Jackson,2020-07-07,28
 Texas,48,Jackson,2020-07-08,26
 Texas,48,Jackson,2020-07-09,29
+Texas,48,Jackson,2020-07-10,35
+Texas,48,Jackson,2020-07-11,45
 Texas,48,Jasper,2020-04-07,2
 Texas,48,Jasper,2020-04-08,2
 Texas,48,Jasper,2020-04-09,2
@@ -11373,6 +11613,8 @@ Texas,48,Jasper,2020-07-06,30
 Texas,48,Jasper,2020-07-07,38
 Texas,48,Jasper,2020-07-08,38
 Texas,48,Jasper,2020-07-09,39
+Texas,48,Jasper,2020-07-10,39
+Texas,48,Jasper,2020-07-11,39
 Texas,48,Jeff Davis,2020-04-07,0
 Texas,48,Jeff Davis,2020-04-08,0
 Texas,48,Jeff Davis,2020-04-09,0
@@ -11467,6 +11709,8 @@ Texas,48,Jeff Davis,2020-07-06,4
 Texas,48,Jeff Davis,2020-07-07,4
 Texas,48,Jeff Davis,2020-07-08,4
 Texas,48,Jeff Davis,2020-07-09,5
+Texas,48,Jeff Davis,2020-07-10,4
+Texas,48,Jeff Davis,2020-07-11,4
 Texas,48,Jefferson,2020-04-07,74
 Texas,48,Jefferson,2020-04-08,72
 Texas,48,Jefferson,2020-04-09,76
@@ -11561,6 +11805,8 @@ Texas,48,Jefferson,2020-07-06,1795
 Texas,48,Jefferson,2020-07-07,2016
 Texas,48,Jefferson,2020-07-08,2104
 Texas,48,Jefferson,2020-07-09,2224
+Texas,48,Jefferson,2020-07-10,2414
+Texas,48,Jefferson,2020-07-11,2482
 Texas,48,Jim Hogg,2020-04-07,0
 Texas,48,Jim Hogg,2020-04-08,0
 Texas,48,Jim Hogg,2020-04-09,0
@@ -11655,6 +11901,8 @@ Texas,48,Jim Hogg,2020-07-06,9
 Texas,48,Jim Hogg,2020-07-07,10
 Texas,48,Jim Hogg,2020-07-08,11
 Texas,48,Jim Hogg,2020-07-09,13
+Texas,48,Jim Hogg,2020-07-10,17
+Texas,48,Jim Hogg,2020-07-11,17
 Texas,48,Jim Wells,2020-04-07,2
 Texas,48,Jim Wells,2020-04-08,2
 Texas,48,Jim Wells,2020-04-09,2
@@ -11749,6 +11997,8 @@ Texas,48,Jim Wells,2020-07-06,121
 Texas,48,Jim Wells,2020-07-07,119
 Texas,48,Jim Wells,2020-07-08,112
 Texas,48,Jim Wells,2020-07-09,111
+Texas,48,Jim Wells,2020-07-10,129
+Texas,48,Jim Wells,2020-07-11,87
 Texas,48,Johnson,2020-04-07,21
 Texas,48,Johnson,2020-04-08,22
 Texas,48,Johnson,2020-04-09,22
@@ -11843,6 +12093,8 @@ Texas,48,Johnson,2020-07-06,314
 Texas,48,Johnson,2020-07-07,302
 Texas,48,Johnson,2020-07-08,448
 Texas,48,Johnson,2020-07-09,493
+Texas,48,Johnson,2020-07-10,265
+Texas,48,Johnson,2020-07-11,284
 Texas,48,Jones,2020-04-07,0
 Texas,48,Jones,2020-04-08,1
 Texas,48,Jones,2020-04-09,1
@@ -11937,6 +12189,8 @@ Texas,48,Jones,2020-07-06,0
 Texas,48,Jones,2020-07-07,0
 Texas,48,Jones,2020-07-08,0
 Texas,48,Jones,2020-07-09,0
+Texas,48,Jones,2020-07-10,581
+Texas,48,Jones,2020-07-11,581
 Texas,48,Karnes,2020-04-07,2
 Texas,48,Karnes,2020-04-08,2
 Texas,48,Karnes,2020-04-09,1
@@ -12031,6 +12285,8 @@ Texas,48,Karnes,2020-07-06,30
 Texas,48,Karnes,2020-07-07,35
 Texas,48,Karnes,2020-07-08,36
 Texas,48,Karnes,2020-07-09,37
+Texas,48,Karnes,2020-07-10,41
+Texas,48,Karnes,2020-07-11,55
 Texas,48,Kaufman,2020-04-07,12
 Texas,48,Kaufman,2020-04-08,14
 Texas,48,Kaufman,2020-04-09,17
@@ -12125,6 +12381,8 @@ Texas,48,Kaufman,2020-07-06,421
 Texas,48,Kaufman,2020-07-07,475
 Texas,48,Kaufman,2020-07-08,427
 Texas,48,Kaufman,2020-07-09,480
+Texas,48,Kaufman,2020-07-10,180
+Texas,48,Kaufman,2020-07-11,199
 Texas,48,Kendall,2020-04-07,9
 Texas,48,Kendall,2020-04-08,7
 Texas,48,Kendall,2020-04-09,7
@@ -12219,6 +12477,8 @@ Texas,48,Kendall,2020-07-06,33
 Texas,48,Kendall,2020-07-07,36
 Texas,48,Kendall,2020-07-08,32
 Texas,48,Kendall,2020-07-09,29
+Texas,48,Kendall,2020-07-10,25
+Texas,48,Kendall,2020-07-11,29
 Texas,48,Kenedy,2020-04-07,0
 Texas,48,Kenedy,2020-04-08,0
 Texas,48,Kenedy,2020-04-09,0
@@ -12313,6 +12573,8 @@ Texas,48,Kenedy,2020-07-06,0
 Texas,48,Kenedy,2020-07-07,0
 Texas,48,Kenedy,2020-07-08,0
 Texas,48,Kenedy,2020-07-09,0
+Texas,48,Kenedy,2020-07-10,0
+Texas,48,Kenedy,2020-07-11,0
 Texas,48,Kent,2020-04-07,0
 Texas,48,Kent,2020-04-08,0
 Texas,48,Kent,2020-04-09,0
@@ -12407,6 +12669,8 @@ Texas,48,Kent,2020-07-06,0
 Texas,48,Kent,2020-07-07,0
 Texas,48,Kent,2020-07-08,0
 Texas,48,Kent,2020-07-09,0
+Texas,48,Kent,2020-07-10,0
+Texas,48,Kent,2020-07-11,0
 Texas,48,Kerr,2020-04-07,2
 Texas,48,Kerr,2020-04-08,2
 Texas,48,Kerr,2020-04-09,2
@@ -12501,6 +12765,8 @@ Texas,48,Kerr,2020-07-06,36
 Texas,48,Kerr,2020-07-07,35
 Texas,48,Kerr,2020-07-08,33
 Texas,48,Kerr,2020-07-09,44
+Texas,48,Kerr,2020-07-10,49
+Texas,48,Kerr,2020-07-11,57
 Texas,48,Kimble,2020-04-07,0
 Texas,48,Kimble,2020-04-08,0
 Texas,48,Kimble,2020-04-09,0
@@ -12595,6 +12861,8 @@ Texas,48,Kimble,2020-07-06,5
 Texas,48,Kimble,2020-07-07,9
 Texas,48,Kimble,2020-07-08,8
 Texas,48,Kimble,2020-07-09,8
+Texas,48,Kimble,2020-07-10,7
+Texas,48,Kimble,2020-07-11,8
 Texas,48,King,2020-04-07,0
 Texas,48,King,2020-04-08,0
 Texas,48,King,2020-04-09,0
@@ -12689,6 +12957,8 @@ Texas,48,King,2020-07-06,0
 Texas,48,King,2020-07-07,0
 Texas,48,King,2020-07-08,0
 Texas,48,King,2020-07-09,0
+Texas,48,King,2020-07-10,0
+Texas,48,King,2020-07-11,0
 Texas,48,Kinney,2020-04-07,0
 Texas,48,Kinney,2020-04-08,0
 Texas,48,Kinney,2020-04-09,0
@@ -12783,6 +13053,8 @@ Texas,48,Kinney,2020-07-06,0
 Texas,48,Kinney,2020-07-07,0
 Texas,48,Kinney,2020-07-08,0
 Texas,48,Kinney,2020-07-09,1
+Texas,48,Kinney,2020-07-10,1
+Texas,48,Kinney,2020-07-11,1
 Texas,48,Kleberg,2020-04-07,2
 Texas,48,Kleberg,2020-04-08,2
 Texas,48,Kleberg,2020-04-09,2
@@ -12877,6 +13149,8 @@ Texas,48,Kleberg,2020-07-06,51
 Texas,48,Kleberg,2020-07-07,57
 Texas,48,Kleberg,2020-07-08,45
 Texas,48,Kleberg,2020-07-09,44
+Texas,48,Kleberg,2020-07-10,74
+Texas,48,Kleberg,2020-07-11,79
 Texas,48,Knox,2020-04-07,1
 Texas,48,Knox,2020-04-08,1
 Texas,48,Knox,2020-04-09,1
@@ -12971,6 +13245,8 @@ Texas,48,Knox,2020-07-06,2
 Texas,48,Knox,2020-07-07,3
 Texas,48,Knox,2020-07-08,4
 Texas,48,Knox,2020-07-09,4
+Texas,48,Knox,2020-07-10,2
+Texas,48,Knox,2020-07-11,2
 Texas,48,Lamar,2020-04-07,5
 Texas,48,Lamar,2020-04-08,5
 Texas,48,Lamar,2020-04-09,7
@@ -13065,6 +13341,8 @@ Texas,48,Lamar,2020-07-06,201
 Texas,48,Lamar,2020-07-07,97
 Texas,48,Lamar,2020-07-08,106
 Texas,48,Lamar,2020-07-09,101
+Texas,48,Lamar,2020-07-10,117
+Texas,48,Lamar,2020-07-11,132
 Texas,48,Lamb,2020-04-07,1
 Texas,48,Lamb,2020-04-08,1
 Texas,48,Lamb,2020-04-09,1
@@ -13159,6 +13437,8 @@ Texas,48,Lamb,2020-07-06,4
 Texas,48,Lamb,2020-07-07,24
 Texas,48,Lamb,2020-07-08,42
 Texas,48,Lamb,2020-07-09,41
+Texas,48,Lamb,2020-07-10,43
+Texas,48,Lamb,2020-07-11,43
 Texas,48,Lampasas,2020-04-07,2
 Texas,48,Lampasas,2020-04-08,2
 Texas,48,Lampasas,2020-04-09,2
@@ -13253,6 +13533,8 @@ Texas,48,Lampasas,2020-07-06,4
 Texas,48,Lampasas,2020-07-07,3
 Texas,48,Lampasas,2020-07-08,13
 Texas,48,Lampasas,2020-07-09,15
+Texas,48,Lampasas,2020-07-10,20
+Texas,48,Lampasas,2020-07-11,22
 Texas,48,La Salle,2020-04-07,0
 Texas,48,La Salle,2020-04-08,0
 Texas,48,La Salle,2020-04-09,0
@@ -13347,6 +13629,8 @@ Texas,48,La Salle,2020-07-06,16
 Texas,48,La Salle,2020-07-07,19
 Texas,48,La Salle,2020-07-08,32
 Texas,48,La Salle,2020-07-09,36
+Texas,48,La Salle,2020-07-10,51
+Texas,48,La Salle,2020-07-11,56
 Texas,48,Lavaca,2020-04-07,1
 Texas,48,Lavaca,2020-04-08,2
 Texas,48,Lavaca,2020-04-09,3
@@ -13441,6 +13725,8 @@ Texas,48,Lavaca,2020-07-06,88
 Texas,48,Lavaca,2020-07-07,97
 Texas,48,Lavaca,2020-07-08,92
 Texas,48,Lavaca,2020-07-09,104
+Texas,48,Lavaca,2020-07-10,114
+Texas,48,Lavaca,2020-07-11,122
 Texas,48,Lee,2020-04-07,2
 Texas,48,Lee,2020-04-08,2
 Texas,48,Lee,2020-04-09,2
@@ -13535,6 +13821,8 @@ Texas,48,Lee,2020-07-06,37
 Texas,48,Lee,2020-07-07,37
 Texas,48,Lee,2020-07-08,41
 Texas,48,Lee,2020-07-09,44
+Texas,48,Lee,2020-07-10,40
+Texas,48,Lee,2020-07-11,42
 Texas,48,Leon,2020-04-07,2
 Texas,48,Leon,2020-04-08,2
 Texas,48,Leon,2020-04-09,2
@@ -13629,6 +13917,8 @@ Texas,48,Leon,2020-07-06,6
 Texas,48,Leon,2020-07-07,26
 Texas,48,Leon,2020-07-08,61
 Texas,48,Leon,2020-07-09,65
+Texas,48,Leon,2020-07-10,69
+Texas,48,Leon,2020-07-11,78
 Texas,48,Liberty,2020-04-07,12
 Texas,48,Liberty,2020-04-08,14
 Texas,48,Liberty,2020-04-09,14
@@ -13723,6 +14013,8 @@ Texas,48,Liberty,2020-07-06,297
 Texas,48,Liberty,2020-07-07,315
 Texas,48,Liberty,2020-07-08,332
 Texas,48,Liberty,2020-07-09,351
+Texas,48,Liberty,2020-07-10,369
+Texas,48,Liberty,2020-07-11,395
 Texas,48,Limestone,2020-04-07,4
 Texas,48,Limestone,2020-04-08,4
 Texas,48,Limestone,2020-04-09,5
@@ -13817,6 +14109,8 @@ Texas,48,Limestone,2020-07-06,22
 Texas,48,Limestone,2020-07-07,22
 Texas,48,Limestone,2020-07-08,34
 Texas,48,Limestone,2020-07-09,46
+Texas,48,Limestone,2020-07-10,52
+Texas,48,Limestone,2020-07-11,59
 Texas,48,Lipscomb,2020-04-07,0
 Texas,48,Lipscomb,2020-04-08,0
 Texas,48,Lipscomb,2020-04-09,0
@@ -13911,6 +14205,8 @@ Texas,48,Lipscomb,2020-07-06,3
 Texas,48,Lipscomb,2020-07-07,3
 Texas,48,Lipscomb,2020-07-08,3
 Texas,48,Lipscomb,2020-07-09,3
+Texas,48,Lipscomb,2020-07-10,3
+Texas,48,Lipscomb,2020-07-11,2
 Texas,48,Live Oak,2020-04-07,3
 Texas,48,Live Oak,2020-04-08,3
 Texas,48,Live Oak,2020-04-09,3
@@ -14005,6 +14301,8 @@ Texas,48,Live Oak,2020-07-06,30
 Texas,48,Live Oak,2020-07-07,38
 Texas,48,Live Oak,2020-07-08,50
 Texas,48,Live Oak,2020-07-09,51
+Texas,48,Live Oak,2020-07-10,49
+Texas,48,Live Oak,2020-07-11,49
 Texas,48,Llano,2020-04-07,3
 Texas,48,Llano,2020-04-08,2
 Texas,48,Llano,2020-04-09,1
@@ -14099,6 +14397,8 @@ Texas,48,Llano,2020-07-06,4
 Texas,48,Llano,2020-07-07,4
 Texas,48,Llano,2020-07-08,17
 Texas,48,Llano,2020-07-09,21
+Texas,48,Llano,2020-07-10,23
+Texas,48,Llano,2020-07-11,27
 Texas,48,Loving,2020-04-07,0
 Texas,48,Loving,2020-04-08,0
 Texas,48,Loving,2020-04-09,0
@@ -14193,6 +14493,8 @@ Texas,48,Loving,2020-07-06,0
 Texas,48,Loving,2020-07-07,0
 Texas,48,Loving,2020-07-08,0
 Texas,48,Loving,2020-07-09,0
+Texas,48,Loving,2020-07-10,0
+Texas,48,Loving,2020-07-11,0
 Texas,48,Lubbock,2020-04-07,165
 Texas,48,Lubbock,2020-04-08,175
 Texas,48,Lubbock,2020-04-09,192
@@ -14287,6 +14589,8 @@ Texas,48,Lubbock,2020-07-06,1153
 Texas,48,Lubbock,2020-07-07,1411
 Texas,48,Lubbock,2020-07-08,1504
 Texas,48,Lubbock,2020-07-09,1550
+Texas,48,Lubbock,2020-07-10,1675
+Texas,48,Lubbock,2020-07-11,1814
 Texas,48,Lynn,2020-04-07,3
 Texas,48,Lynn,2020-04-08,3
 Texas,48,Lynn,2020-04-09,3
@@ -14381,6 +14685,8 @@ Texas,48,Lynn,2020-07-06,10
 Texas,48,Lynn,2020-07-07,7
 Texas,48,Lynn,2020-07-08,11
 Texas,48,Lynn,2020-07-09,15
+Texas,48,Lynn,2020-07-10,10
+Texas,48,Lynn,2020-07-11,14
 Texas,48,McCulloch,2020-04-07,0
 Texas,48,McCulloch,2020-04-08,0
 Texas,48,McCulloch,2020-04-09,1
@@ -14475,6 +14781,8 @@ Texas,48,McCulloch,2020-07-06,15
 Texas,48,McCulloch,2020-07-07,16
 Texas,48,McCulloch,2020-07-08,16
 Texas,48,McCulloch,2020-07-09,17
+Texas,48,McCulloch,2020-07-10,16
+Texas,48,McCulloch,2020-07-11,14
 Texas,48,McLennan,2020-04-07,39
 Texas,48,McLennan,2020-04-08,43
 Texas,48,McLennan,2020-04-09,39
@@ -14569,6 +14877,8 @@ Texas,48,McLennan,2020-07-06,1365
 Texas,48,McLennan,2020-07-07,1477
 Texas,48,McLennan,2020-07-08,1703
 Texas,48,McLennan,2020-07-09,1856
+Texas,48,McLennan,2020-07-10,2010
+Texas,48,McLennan,2020-07-11,2003
 Texas,48,McMullen,2020-04-07,0
 Texas,48,McMullen,2020-04-08,0
 Texas,48,McMullen,2020-04-09,0
@@ -14663,6 +14973,8 @@ Texas,48,McMullen,2020-07-06,0
 Texas,48,McMullen,2020-07-07,0
 Texas,48,McMullen,2020-07-08,0
 Texas,48,McMullen,2020-07-09,0
+Texas,48,McMullen,2020-07-10,0
+Texas,48,McMullen,2020-07-11,0
 Texas,48,Madison,2020-04-07,0
 Texas,48,Madison,2020-04-08,0
 Texas,48,Madison,2020-04-09,0
@@ -14757,6 +15069,8 @@ Texas,48,Madison,2020-07-06,2
 Texas,48,Madison,2020-07-07,21
 Texas,48,Madison,2020-07-08,51
 Texas,48,Madison,2020-07-09,73
+Texas,48,Madison,2020-07-10,73
+Texas,48,Madison,2020-07-11,81
 Texas,48,Marion,2020-04-07,0
 Texas,48,Marion,2020-04-08,0
 Texas,48,Marion,2020-04-09,0
@@ -14851,6 +15165,8 @@ Texas,48,Marion,2020-07-06,8
 Texas,48,Marion,2020-07-07,13
 Texas,48,Marion,2020-07-08,14
 Texas,48,Marion,2020-07-09,14
+Texas,48,Marion,2020-07-10,12
+Texas,48,Marion,2020-07-11,11
 Texas,48,Martin,2020-04-07,2
 Texas,48,Martin,2020-04-08,2
 Texas,48,Martin,2020-04-09,1
@@ -14945,6 +15261,8 @@ Texas,48,Martin,2020-07-06,12
 Texas,48,Martin,2020-07-07,13
 Texas,48,Martin,2020-07-08,14
 Texas,48,Martin,2020-07-09,14
+Texas,48,Martin,2020-07-10,16
+Texas,48,Martin,2020-07-11,16
 Texas,48,Mason,2020-04-07,1
 Texas,48,Mason,2020-04-08,1
 Texas,48,Mason,2020-04-09,1
@@ -15039,6 +15357,8 @@ Texas,48,Mason,2020-07-06,1
 Texas,48,Mason,2020-07-07,2
 Texas,48,Mason,2020-07-08,2
 Texas,48,Mason,2020-07-09,2
+Texas,48,Mason,2020-07-10,2
+Texas,48,Mason,2020-07-11,2
 Texas,48,Matagorda,2020-04-07,32
 Texas,48,Matagorda,2020-04-08,31
 Texas,48,Matagorda,2020-04-09,29
@@ -15133,6 +15453,8 @@ Texas,48,Matagorda,2020-07-06,185
 Texas,48,Matagorda,2020-07-07,193
 Texas,48,Matagorda,2020-07-08,205
 Texas,48,Matagorda,2020-07-09,214
+Texas,48,Matagorda,2020-07-10,256
+Texas,48,Matagorda,2020-07-11,267
 Texas,48,Maverick,2020-04-07,5
 Texas,48,Maverick,2020-04-08,6
 Texas,48,Maverick,2020-04-09,6
@@ -15227,6 +15549,8 @@ Texas,48,Maverick,2020-07-06,316
 Texas,48,Maverick,2020-07-07,347
 Texas,48,Maverick,2020-07-08,274
 Texas,48,Maverick,2020-07-09,392
+Texas,48,Maverick,2020-07-10,427
+Texas,48,Maverick,2020-07-11,483
 Texas,48,Medina,2020-04-07,5
 Texas,48,Medina,2020-04-08,6
 Texas,48,Medina,2020-04-09,7
@@ -15321,6 +15645,8 @@ Texas,48,Medina,2020-07-06,7
 Texas,48,Medina,2020-07-07,41
 Texas,48,Medina,2020-07-08,50
 Texas,48,Medina,2020-07-09,15
+Texas,48,Medina,2020-07-10,14
+Texas,48,Medina,2020-07-11,19
 Texas,48,Menard,2020-04-07,0
 Texas,48,Menard,2020-04-08,0
 Texas,48,Menard,2020-04-09,0
@@ -15415,6 +15741,8 @@ Texas,48,Menard,2020-07-06,7
 Texas,48,Menard,2020-07-07,10
 Texas,48,Menard,2020-07-08,10
 Texas,48,Menard,2020-07-09,10
+Texas,48,Menard,2020-07-10,12
+Texas,48,Menard,2020-07-11,12
 Texas,48,Midland,2020-04-07,25
 Texas,48,Midland,2020-04-08,27
 Texas,48,Midland,2020-04-09,27
@@ -15509,6 +15837,8 @@ Texas,48,Midland,2020-07-06,508
 Texas,48,Midland,2020-07-07,660
 Texas,48,Midland,2020-07-08,700
 Texas,48,Midland,2020-07-09,639
+Texas,48,Midland,2020-07-10,681
+Texas,48,Midland,2020-07-11,715
 Texas,48,Milam,2020-04-07,3
 Texas,48,Milam,2020-04-08,5
 Texas,48,Milam,2020-04-09,5
@@ -15603,6 +15933,8 @@ Texas,48,Milam,2020-07-06,0
 Texas,48,Milam,2020-07-07,18
 Texas,48,Milam,2020-07-08,26
 Texas,48,Milam,2020-07-09,36
+Texas,48,Milam,2020-07-10,40
+Texas,48,Milam,2020-07-11,52
 Texas,48,Mills,2020-04-07,0
 Texas,48,Mills,2020-04-08,0
 Texas,48,Mills,2020-04-09,0
@@ -15697,6 +16029,8 @@ Texas,48,Mills,2020-07-06,0
 Texas,48,Mills,2020-07-07,0
 Texas,48,Mills,2020-07-08,2
 Texas,48,Mills,2020-07-09,5
+Texas,48,Mills,2020-07-10,5
+Texas,48,Mills,2020-07-11,6
 Texas,48,Mitchell,2020-04-07,1
 Texas,48,Mitchell,2020-04-08,1
 Texas,48,Mitchell,2020-04-09,1
@@ -15791,6 +16125,8 @@ Texas,48,Mitchell,2020-07-06,8
 Texas,48,Mitchell,2020-07-07,5
 Texas,48,Mitchell,2020-07-08,11
 Texas,48,Mitchell,2020-07-09,14
+Texas,48,Mitchell,2020-07-10,15
+Texas,48,Mitchell,2020-07-11,17
 Texas,48,Montague,2020-04-07,1
 Texas,48,Montague,2020-04-08,1
 Texas,48,Montague,2020-04-09,1
@@ -15885,6 +16221,8 @@ Texas,48,Montague,2020-07-06,6
 Texas,48,Montague,2020-07-07,8
 Texas,48,Montague,2020-07-08,9
 Texas,48,Montague,2020-07-09,10
+Texas,48,Montague,2020-07-10,3
+Texas,48,Montague,2020-07-11,3
 Texas,48,Montgomery,2020-04-07,143
 Texas,48,Montgomery,2020-04-08,175
 Texas,48,Montgomery,2020-04-09,181
@@ -15979,6 +16317,8 @@ Texas,48,Montgomery,2020-07-06,864
 Texas,48,Montgomery,2020-07-07,946
 Texas,48,Montgomery,2020-07-08,902
 Texas,48,Montgomery,2020-07-09,910
+Texas,48,Montgomery,2020-07-10,910
+Texas,48,Montgomery,2020-07-11,1040
 Texas,48,Moore,2020-04-07,7
 Texas,48,Moore,2020-04-08,9
 Texas,48,Moore,2020-04-09,15
@@ -16073,6 +16413,8 @@ Texas,48,Moore,2020-07-06,24
 Texas,48,Moore,2020-07-07,26
 Texas,48,Moore,2020-07-08,33
 Texas,48,Moore,2020-07-09,32
+Texas,48,Moore,2020-07-10,33
+Texas,48,Moore,2020-07-11,33
 Texas,48,Morris,2020-04-07,0
 Texas,48,Morris,2020-04-08,0
 Texas,48,Morris,2020-04-09,1
@@ -16167,6 +16509,8 @@ Texas,48,Morris,2020-07-06,11
 Texas,48,Morris,2020-07-07,16
 Texas,48,Morris,2020-07-08,14
 Texas,48,Morris,2020-07-09,15
+Texas,48,Morris,2020-07-10,16
+Texas,48,Morris,2020-07-11,13
 Texas,48,Motley,2020-04-07,0
 Texas,48,Motley,2020-04-08,0
 Texas,48,Motley,2020-04-09,0
@@ -16261,6 +16605,8 @@ Texas,48,Motley,2020-07-06,0
 Texas,48,Motley,2020-07-07,0
 Texas,48,Motley,2020-07-08,1
 Texas,48,Motley,2020-07-09,1
+Texas,48,Motley,2020-07-10,1
+Texas,48,Motley,2020-07-11,1
 Texas,48,Nacogdoches,2020-04-07,19
 Texas,48,Nacogdoches,2020-04-08,23
 Texas,48,Nacogdoches,2020-04-09,22
@@ -16355,6 +16701,8 @@ Texas,48,Nacogdoches,2020-07-06,104
 Texas,48,Nacogdoches,2020-07-07,114
 Texas,48,Nacogdoches,2020-07-08,125
 Texas,48,Nacogdoches,2020-07-09,155
+Texas,48,Nacogdoches,2020-07-10,157
+Texas,48,Nacogdoches,2020-07-11,175
 Texas,48,Navarro,2020-04-07,4
 Texas,48,Navarro,2020-04-08,4
 Texas,48,Navarro,2020-04-09,8
@@ -16449,6 +16797,8 @@ Texas,48,Navarro,2020-07-06,66
 Texas,48,Navarro,2020-07-07,131
 Texas,48,Navarro,2020-07-08,148
 Texas,48,Navarro,2020-07-09,156
+Texas,48,Navarro,2020-07-10,167
+Texas,48,Navarro,2020-07-11,157
 Texas,48,Newton,2020-04-07,1
 Texas,48,Newton,2020-04-08,1
 Texas,48,Newton,2020-04-09,1
@@ -16543,6 +16893,8 @@ Texas,48,Newton,2020-07-06,6
 Texas,48,Newton,2020-07-07,6
 Texas,48,Newton,2020-07-08,6
 Texas,48,Newton,2020-07-09,6
+Texas,48,Newton,2020-07-10,6
+Texas,48,Newton,2020-07-11,6
 Texas,48,Nolan,2020-04-07,0
 Texas,48,Nolan,2020-04-08,0
 Texas,48,Nolan,2020-04-09,0
@@ -16637,6 +16989,8 @@ Texas,48,Nolan,2020-07-06,34
 Texas,48,Nolan,2020-07-07,29
 Texas,48,Nolan,2020-07-08,28
 Texas,48,Nolan,2020-07-09,28
+Texas,48,Nolan,2020-07-10,31
+Texas,48,Nolan,2020-07-11,41
 Texas,48,Nueces,2020-04-07,58
 Texas,48,Nueces,2020-04-08,57
 Texas,48,Nueces,2020-04-09,58
@@ -16731,6 +17085,8 @@ Texas,48,Nueces,2020-07-06,3333
 Texas,48,Nueces,2020-07-07,3617
 Texas,48,Nueces,2020-07-08,3982
 Texas,48,Nueces,2020-07-09,4389
+Texas,48,Nueces,2020-07-10,4698
+Texas,48,Nueces,2020-07-11,5105
 Texas,48,Ochiltree,2020-04-07,0
 Texas,48,Ochiltree,2020-04-08,0
 Texas,48,Ochiltree,2020-04-09,0
@@ -16825,6 +17181,8 @@ Texas,48,Ochiltree,2020-07-06,0
 Texas,48,Ochiltree,2020-07-07,7
 Texas,48,Ochiltree,2020-07-08,7
 Texas,48,Ochiltree,2020-07-09,7
+Texas,48,Ochiltree,2020-07-10,7
+Texas,48,Ochiltree,2020-07-11,10
 Texas,48,Oldham,2020-04-07,2
 Texas,48,Oldham,2020-04-08,2
 Texas,48,Oldham,2020-04-09,2
@@ -16919,6 +17277,8 @@ Texas,48,Oldham,2020-07-06,0
 Texas,48,Oldham,2020-07-07,1
 Texas,48,Oldham,2020-07-08,0
 Texas,48,Oldham,2020-07-09,0
+Texas,48,Oldham,2020-07-10,0
+Texas,48,Oldham,2020-07-11,0
 Texas,48,Orange,2020-04-07,26
 Texas,48,Orange,2020-04-08,28
 Texas,48,Orange,2020-04-09,29
@@ -17013,6 +17373,8 @@ Texas,48,Orange,2020-07-06,133
 Texas,48,Orange,2020-07-07,147
 Texas,48,Orange,2020-07-08,230
 Texas,48,Orange,2020-07-09,270
+Texas,48,Orange,2020-07-10,300
+Texas,48,Orange,2020-07-11,305
 Texas,48,Palo Pinto,2020-04-07,2
 Texas,48,Palo Pinto,2020-04-08,3
 Texas,48,Palo Pinto,2020-04-09,4
@@ -17107,6 +17469,8 @@ Texas,48,Palo Pinto,2020-07-06,24
 Texas,48,Palo Pinto,2020-07-07,33
 Texas,48,Palo Pinto,2020-07-08,36
 Texas,48,Palo Pinto,2020-07-09,39
+Texas,48,Palo Pinto,2020-07-10,19
+Texas,48,Palo Pinto,2020-07-11,25
 Texas,48,Panola,2020-04-07,3
 Texas,48,Panola,2020-04-08,3
 Texas,48,Panola,2020-04-09,6
@@ -17201,6 +17565,8 @@ Texas,48,Panola,2020-07-06,24
 Texas,48,Panola,2020-07-07,23
 Texas,48,Panola,2020-07-08,22
 Texas,48,Panola,2020-07-09,21
+Texas,48,Panola,2020-07-10,23
+Texas,48,Panola,2020-07-11,23
 Texas,48,Parker,2020-04-07,5
 Texas,48,Parker,2020-04-08,5
 Texas,48,Parker,2020-04-09,7
@@ -17295,6 +17661,8 @@ Texas,48,Parker,2020-07-06,229
 Texas,48,Parker,2020-07-07,260
 Texas,48,Parker,2020-07-08,313
 Texas,48,Parker,2020-07-09,347
+Texas,48,Parker,2020-07-10,173
+Texas,48,Parker,2020-07-11,213
 Texas,48,Parmer,2020-04-07,0
 Texas,48,Parmer,2020-04-08,0
 Texas,48,Parmer,2020-04-09,0
@@ -17389,6 +17757,8 @@ Texas,48,Parmer,2020-07-06,68
 Texas,48,Parmer,2020-07-07,71
 Texas,48,Parmer,2020-07-08,72
 Texas,48,Parmer,2020-07-09,73
+Texas,48,Parmer,2020-07-10,67
+Texas,48,Parmer,2020-07-11,64
 Texas,48,Pecos,2020-04-07,1
 Texas,48,Pecos,2020-04-08,1
 Texas,48,Pecos,2020-04-09,1
@@ -17483,6 +17853,8 @@ Texas,48,Pecos,2020-07-06,10
 Texas,48,Pecos,2020-07-07,24
 Texas,48,Pecos,2020-07-08,47
 Texas,48,Pecos,2020-07-09,23
+Texas,48,Pecos,2020-07-10,23
+Texas,48,Pecos,2020-07-11,39
 Texas,48,Polk,2020-04-07,8
 Texas,48,Polk,2020-04-08,8
 Texas,48,Polk,2020-04-09,8
@@ -17577,6 +17949,8 @@ Texas,48,Polk,2020-07-06,128
 Texas,48,Polk,2020-07-07,163
 Texas,48,Polk,2020-07-08,163
 Texas,48,Polk,2020-07-09,226
+Texas,48,Polk,2020-07-10,246
+Texas,48,Polk,2020-07-11,279
 Texas,48,Potter,2020-04-07,38
 Texas,48,Potter,2020-04-08,44
 Texas,48,Potter,2020-04-09,55
@@ -17671,6 +18045,8 @@ Texas,48,Potter,2020-07-06,159
 Texas,48,Potter,2020-07-07,190
 Texas,48,Potter,2020-07-08,214
 Texas,48,Potter,2020-07-09,218
+Texas,48,Potter,2020-07-10,220
+Texas,48,Potter,2020-07-11,230
 Texas,48,Presidio,2020-04-07,0
 Texas,48,Presidio,2020-04-08,0
 Texas,48,Presidio,2020-04-09,0
@@ -17765,6 +18141,8 @@ Texas,48,Presidio,2020-07-06,8
 Texas,48,Presidio,2020-07-07,8
 Texas,48,Presidio,2020-07-08,7
 Texas,48,Presidio,2020-07-09,14
+Texas,48,Presidio,2020-07-10,14
+Texas,48,Presidio,2020-07-11,14
 Texas,48,Rains,2020-04-07,0
 Texas,48,Rains,2020-04-08,0
 Texas,48,Rains,2020-04-09,0
@@ -17859,6 +18237,8 @@ Texas,48,Rains,2020-07-06,8
 Texas,48,Rains,2020-07-07,10
 Texas,48,Rains,2020-07-08,10
 Texas,48,Rains,2020-07-09,11
+Texas,48,Rains,2020-07-10,11
+Texas,48,Rains,2020-07-11,11
 Texas,48,Randall,2020-04-07,35
 Texas,48,Randall,2020-04-08,39
 Texas,48,Randall,2020-04-09,50
@@ -17953,6 +18333,8 @@ Texas,48,Randall,2020-07-06,144
 Texas,48,Randall,2020-07-07,149
 Texas,48,Randall,2020-07-08,163
 Texas,48,Randall,2020-07-09,189
+Texas,48,Randall,2020-07-10,203
+Texas,48,Randall,2020-07-11,222
 Texas,48,Reagan,2020-04-07,0
 Texas,48,Reagan,2020-04-08,0
 Texas,48,Reagan,2020-04-09,0
@@ -18047,6 +18429,8 @@ Texas,48,Reagan,2020-07-06,12
 Texas,48,Reagan,2020-07-07,12
 Texas,48,Reagan,2020-07-08,13
 Texas,48,Reagan,2020-07-09,21
+Texas,48,Reagan,2020-07-10,25
+Texas,48,Reagan,2020-07-11,29
 Texas,48,Real,2020-04-07,0
 Texas,48,Real,2020-04-08,0
 Texas,48,Real,2020-04-09,0
@@ -18141,6 +18525,8 @@ Texas,48,Real,2020-07-06,3
 Texas,48,Real,2020-07-07,3
 Texas,48,Real,2020-07-08,3
 Texas,48,Real,2020-07-09,3
+Texas,48,Real,2020-07-10,3
+Texas,48,Real,2020-07-11,5
 Texas,48,Red River,2020-04-07,0
 Texas,48,Red River,2020-04-08,0
 Texas,48,Red River,2020-04-09,0
@@ -18235,6 +18621,8 @@ Texas,48,Red River,2020-07-06,39
 Texas,48,Red River,2020-07-07,16
 Texas,48,Red River,2020-07-08,16
 Texas,48,Red River,2020-07-09,14
+Texas,48,Red River,2020-07-10,12
+Texas,48,Red River,2020-07-11,12
 Texas,48,Reeves,2020-04-07,0
 Texas,48,Reeves,2020-04-08,0
 Texas,48,Reeves,2020-04-09,0
@@ -18329,6 +18717,8 @@ Texas,48,Reeves,2020-07-06,0
 Texas,48,Reeves,2020-07-07,44
 Texas,48,Reeves,2020-07-08,43
 Texas,48,Reeves,2020-07-09,46
+Texas,48,Reeves,2020-07-10,59
+Texas,48,Reeves,2020-07-11,59
 Texas,48,Refugio,2020-04-07,0
 Texas,48,Refugio,2020-04-08,0
 Texas,48,Refugio,2020-04-09,0
@@ -18423,6 +18813,8 @@ Texas,48,Refugio,2020-07-06,20
 Texas,48,Refugio,2020-07-07,22
 Texas,48,Refugio,2020-07-08,24
 Texas,48,Refugio,2020-07-09,26
+Texas,48,Refugio,2020-07-10,29
+Texas,48,Refugio,2020-07-11,27
 Texas,48,Roberts,2020-04-07,0
 Texas,48,Roberts,2020-04-08,0
 Texas,48,Roberts,2020-04-09,0
@@ -18517,6 +18909,8 @@ Texas,48,Roberts,2020-07-06,1
 Texas,48,Roberts,2020-07-07,2
 Texas,48,Roberts,2020-07-08,3
 Texas,48,Roberts,2020-07-09,3
+Texas,48,Roberts,2020-07-10,3
+Texas,48,Roberts,2020-07-11,3
 Texas,48,Robertson,2020-04-07,1
 Texas,48,Robertson,2020-04-08,1
 Texas,48,Robertson,2020-04-09,1
@@ -18611,6 +19005,8 @@ Texas,48,Robertson,2020-07-06,35
 Texas,48,Robertson,2020-07-07,32
 Texas,48,Robertson,2020-07-08,48
 Texas,48,Robertson,2020-07-09,56
+Texas,48,Robertson,2020-07-10,56
+Texas,48,Robertson,2020-07-11,80
 Texas,48,Rockwall,2020-04-07,11
 Texas,48,Rockwall,2020-04-08,14
 Texas,48,Rockwall,2020-04-09,12
@@ -18705,6 +19101,8 @@ Texas,48,Rockwall,2020-07-06,177
 Texas,48,Rockwall,2020-07-07,182
 Texas,48,Rockwall,2020-07-08,162
 Texas,48,Rockwall,2020-07-09,155
+Texas,48,Rockwall,2020-07-10,50
+Texas,48,Rockwall,2020-07-11,53
 Texas,48,Runnels,2020-04-07,0
 Texas,48,Runnels,2020-04-08,0
 Texas,48,Runnels,2020-04-09,0
@@ -18799,6 +19197,8 @@ Texas,48,Runnels,2020-07-06,14
 Texas,48,Runnels,2020-07-07,14
 Texas,48,Runnels,2020-07-08,12
 Texas,48,Runnels,2020-07-09,14
+Texas,48,Runnels,2020-07-10,5
+Texas,48,Runnels,2020-07-11,9
 Texas,48,Rusk,2020-04-07,11
 Texas,48,Rusk,2020-04-08,13
 Texas,48,Rusk,2020-04-09,12
@@ -18893,6 +19293,8 @@ Texas,48,Rusk,2020-07-06,213
 Texas,48,Rusk,2020-07-07,43
 Texas,48,Rusk,2020-07-08,75
 Texas,48,Rusk,2020-07-09,66
+Texas,48,Rusk,2020-07-10,46
+Texas,48,Rusk,2020-07-11,47
 Texas,48,Sabine,2020-04-07,0
 Texas,48,Sabine,2020-04-08,0
 Texas,48,Sabine,2020-04-09,0
@@ -18987,6 +19389,8 @@ Texas,48,Sabine,2020-07-06,14
 Texas,48,Sabine,2020-07-07,15
 Texas,48,Sabine,2020-07-08,15
 Texas,48,Sabine,2020-07-09,15
+Texas,48,Sabine,2020-07-10,16
+Texas,48,Sabine,2020-07-11,18
 Texas,48,San Augustine,2020-04-07,3
 Texas,48,San Augustine,2020-04-08,3
 Texas,48,San Augustine,2020-04-09,6
@@ -19081,6 +19485,8 @@ Texas,48,San Augustine,2020-07-06,73
 Texas,48,San Augustine,2020-07-07,73
 Texas,48,San Augustine,2020-07-08,73
 Texas,48,San Augustine,2020-07-09,78
+Texas,48,San Augustine,2020-07-10,80
+Texas,48,San Augustine,2020-07-11,83
 Texas,48,San Jacinto,2020-04-07,1
 Texas,48,San Jacinto,2020-04-08,3
 Texas,48,San Jacinto,2020-04-09,3
@@ -19175,6 +19581,8 @@ Texas,48,San Jacinto,2020-07-06,40
 Texas,48,San Jacinto,2020-07-07,39
 Texas,48,San Jacinto,2020-07-08,40
 Texas,48,San Jacinto,2020-07-09,34
+Texas,48,San Jacinto,2020-07-10,35
+Texas,48,San Jacinto,2020-07-11,33
 Texas,48,San Patricio,2020-04-07,2
 Texas,48,San Patricio,2020-04-08,7
 Texas,48,San Patricio,2020-04-09,6
@@ -19269,6 +19677,8 @@ Texas,48,San Patricio,2020-07-06,110
 Texas,48,San Patricio,2020-07-07,127
 Texas,48,San Patricio,2020-07-08,93
 Texas,48,San Patricio,2020-07-09,129
+Texas,48,San Patricio,2020-07-10,128
+Texas,48,San Patricio,2020-07-11,154
 Texas,48,San Saba,2020-04-07,0
 Texas,48,San Saba,2020-04-08,0
 Texas,48,San Saba,2020-04-09,0
@@ -19363,6 +19773,8 @@ Texas,48,San Saba,2020-07-06,2
 Texas,48,San Saba,2020-07-07,2
 Texas,48,San Saba,2020-07-08,4
 Texas,48,San Saba,2020-07-09,4
+Texas,48,San Saba,2020-07-10,7
+Texas,48,San Saba,2020-07-11,7
 Texas,48,Schleicher,2020-04-07,0
 Texas,48,Schleicher,2020-04-08,0
 Texas,48,Schleicher,2020-04-09,0
@@ -19457,6 +19869,8 @@ Texas,48,Schleicher,2020-07-06,11
 Texas,48,Schleicher,2020-07-07,11
 Texas,48,Schleicher,2020-07-08,10
 Texas,48,Schleicher,2020-07-09,10
+Texas,48,Schleicher,2020-07-10,12
+Texas,48,Schleicher,2020-07-11,12
 Texas,48,Scurry,2020-04-07,0
 Texas,48,Scurry,2020-04-08,0
 Texas,48,Scurry,2020-04-09,0
@@ -19551,6 +19965,8 @@ Texas,48,Scurry,2020-07-06,39
 Texas,48,Scurry,2020-07-07,50
 Texas,48,Scurry,2020-07-08,50
 Texas,48,Scurry,2020-07-09,62
+Texas,48,Scurry,2020-07-10,66
+Texas,48,Scurry,2020-07-11,297
 Texas,48,Shackelford,2020-04-07,0
 Texas,48,Shackelford,2020-04-08,0
 Texas,48,Shackelford,2020-04-09,0
@@ -19645,6 +20061,8 @@ Texas,48,Shackelford,2020-07-06,3
 Texas,48,Shackelford,2020-07-07,4
 Texas,48,Shackelford,2020-07-08,4
 Texas,48,Shackelford,2020-07-09,5
+Texas,48,Shackelford,2020-07-10,4
+Texas,48,Shackelford,2020-07-11,4
 Texas,48,Shelby,2020-04-07,13
 Texas,48,Shelby,2020-04-08,17
 Texas,48,Shelby,2020-04-09,23
@@ -19739,6 +20157,8 @@ Texas,48,Shelby,2020-07-06,33
 Texas,48,Shelby,2020-07-07,29
 Texas,48,Shelby,2020-07-08,27
 Texas,48,Shelby,2020-07-09,25
+Texas,48,Shelby,2020-07-10,23
+Texas,48,Shelby,2020-07-11,0
 Texas,48,Sherman,2020-04-07,0
 Texas,48,Sherman,2020-04-08,0
 Texas,48,Sherman,2020-04-09,0
@@ -19833,6 +20253,8 @@ Texas,48,Sherman,2020-07-06,1
 Texas,48,Sherman,2020-07-07,0
 Texas,48,Sherman,2020-07-08,0
 Texas,48,Sherman,2020-07-09,2
+Texas,48,Sherman,2020-07-10,2
+Texas,48,Sherman,2020-07-11,2
 Texas,48,Smith,2020-04-07,51
 Texas,48,Smith,2020-04-08,63
 Texas,48,Smith,2020-04-09,69
@@ -19927,6 +20349,8 @@ Texas,48,Smith,2020-07-06,473
 Texas,48,Smith,2020-07-07,549
 Texas,48,Smith,2020-07-08,799
 Texas,48,Smith,2020-07-09,863
+Texas,48,Smith,2020-07-10,919
+Texas,48,Smith,2020-07-11,998
 Texas,48,Somervell,2020-04-07,0
 Texas,48,Somervell,2020-04-08,0
 Texas,48,Somervell,2020-04-09,0
@@ -20021,6 +20445,8 @@ Texas,48,Somervell,2020-07-06,9
 Texas,48,Somervell,2020-07-07,14
 Texas,48,Somervell,2020-07-08,16
 Texas,48,Somervell,2020-07-09,18
+Texas,48,Somervell,2020-07-10,9
+Texas,48,Somervell,2020-07-11,11
 Texas,48,Starr,2020-04-07,7
 Texas,48,Starr,2020-04-08,7
 Texas,48,Starr,2020-04-09,7
@@ -20115,6 +20541,8 @@ Texas,48,Starr,2020-07-06,525
 Texas,48,Starr,2020-07-07,548
 Texas,48,Starr,2020-07-08,518
 Texas,48,Starr,2020-07-09,501
+Texas,48,Starr,2020-07-10,474
+Texas,48,Starr,2020-07-11,426
 Texas,48,Stephens,2020-04-07,0
 Texas,48,Stephens,2020-04-08,0
 Texas,48,Stephens,2020-04-09,0
@@ -20209,6 +20637,8 @@ Texas,48,Stephens,2020-07-06,3
 Texas,48,Stephens,2020-07-07,4
 Texas,48,Stephens,2020-07-08,5
 Texas,48,Stephens,2020-07-09,6
+Texas,48,Stephens,2020-07-10,4
+Texas,48,Stephens,2020-07-11,6
 Texas,48,Sterling,2020-04-07,0
 Texas,48,Sterling,2020-04-08,0
 Texas,48,Sterling,2020-04-09,0
@@ -20303,6 +20733,8 @@ Texas,48,Sterling,2020-07-06,1
 Texas,48,Sterling,2020-07-07,0
 Texas,48,Sterling,2020-07-08,0
 Texas,48,Sterling,2020-07-09,0
+Texas,48,Sterling,2020-07-10,0
+Texas,48,Sterling,2020-07-11,0
 Texas,48,Stonewall,2020-04-07,0
 Texas,48,Stonewall,2020-04-08,0
 Texas,48,Stonewall,2020-04-09,0
@@ -20397,6 +20829,8 @@ Texas,48,Stonewall,2020-07-06,0
 Texas,48,Stonewall,2020-07-07,0
 Texas,48,Stonewall,2020-07-08,0
 Texas,48,Stonewall,2020-07-09,0
+Texas,48,Stonewall,2020-07-10,0
+Texas,48,Stonewall,2020-07-11,0
 Texas,48,Sutton,2020-04-07,0
 Texas,48,Sutton,2020-04-08,0
 Texas,48,Sutton,2020-04-09,0
@@ -20491,6 +20925,8 @@ Texas,48,Sutton,2020-07-06,10
 Texas,48,Sutton,2020-07-07,11
 Texas,48,Sutton,2020-07-08,11
 Texas,48,Sutton,2020-07-09,14
+Texas,48,Sutton,2020-07-10,18
+Texas,48,Sutton,2020-07-11,19
 Texas,48,Swisher,2020-04-07,1
 Texas,48,Swisher,2020-04-08,2
 Texas,48,Swisher,2020-04-09,2
@@ -20585,6 +21021,8 @@ Texas,48,Swisher,2020-07-06,16
 Texas,48,Swisher,2020-07-07,22
 Texas,48,Swisher,2020-07-08,22
 Texas,48,Swisher,2020-07-09,27
+Texas,48,Swisher,2020-07-10,27
+Texas,48,Swisher,2020-07-11,25
 Texas,48,Tarrant,2020-04-07,394
 Texas,48,Tarrant,2020-04-08,443
 Texas,48,Tarrant,2020-04-09,498
@@ -20679,6 +21117,8 @@ Texas,48,Tarrant,2020-07-06,7585
 Texas,48,Tarrant,2020-07-07,7904
 Texas,48,Tarrant,2020-07-08,8319
 Texas,48,Tarrant,2020-07-09,8436
+Texas,48,Tarrant,2020-07-10,8711
+Texas,48,Tarrant,2020-07-11,9206
 Texas,48,Taylor,2020-04-07,30
 Texas,48,Taylor,2020-04-08,37
 Texas,48,Taylor,2020-04-09,42
@@ -20773,6 +21213,8 @@ Texas,48,Taylor,2020-07-06,206
 Texas,48,Taylor,2020-07-07,223
 Texas,48,Taylor,2020-07-08,245
 Texas,48,Taylor,2020-07-09,264
+Texas,48,Taylor,2020-07-10,281
+Texas,48,Taylor,2020-07-11,298
 Texas,48,Terrell,2020-04-07,0
 Texas,48,Terrell,2020-04-08,0
 Texas,48,Terrell,2020-04-09,0
@@ -20867,6 +21309,8 @@ Texas,48,Terrell,2020-07-06,2
 Texas,48,Terrell,2020-07-07,1
 Texas,48,Terrell,2020-07-08,1
 Texas,48,Terrell,2020-07-09,1
+Texas,48,Terrell,2020-07-10,1
+Texas,48,Terrell,2020-07-11,1
 Texas,48,Terry,2020-04-07,4
 Texas,48,Terry,2020-04-08,5
 Texas,48,Terry,2020-04-09,5
@@ -20961,6 +21405,8 @@ Texas,48,Terry,2020-07-06,19
 Texas,48,Terry,2020-07-07,21
 Texas,48,Terry,2020-07-08,26
 Texas,48,Terry,2020-07-09,29
+Texas,48,Terry,2020-07-10,24
+Texas,48,Terry,2020-07-11,25
 Texas,48,Throckmorton,2020-04-07,0
 Texas,48,Throckmorton,2020-04-08,0
 Texas,48,Throckmorton,2020-04-09,0
@@ -21055,6 +21501,8 @@ Texas,48,Throckmorton,2020-07-06,1
 Texas,48,Throckmorton,2020-07-07,1
 Texas,48,Throckmorton,2020-07-08,1
 Texas,48,Throckmorton,2020-07-09,1
+Texas,48,Throckmorton,2020-07-10,0
+Texas,48,Throckmorton,2020-07-11,0
 Texas,48,Titus,2020-04-07,2
 Texas,48,Titus,2020-04-08,2
 Texas,48,Titus,2020-04-09,4
@@ -21149,6 +21597,8 @@ Texas,48,Titus,2020-07-06,82
 Texas,48,Titus,2020-07-07,177
 Texas,48,Titus,2020-07-08,175
 Texas,48,Titus,2020-07-09,178
+Texas,48,Titus,2020-07-10,170
+Texas,48,Titus,2020-07-11,169
 Texas,48,Tom Green,2020-04-07,23
 Texas,48,Tom Green,2020-04-08,24
 Texas,48,Tom Green,2020-04-09,23
@@ -21243,6 +21693,8 @@ Texas,48,Tom Green,2020-07-06,343
 Texas,48,Tom Green,2020-07-07,355
 Texas,48,Tom Green,2020-07-08,415
 Texas,48,Tom Green,2020-07-09,417
+Texas,48,Tom Green,2020-07-10,442
+Texas,48,Tom Green,2020-07-11,461
 Texas,48,Travis,2020-04-07,433
 Texas,48,Travis,2020-04-08,469
 Texas,48,Travis,2020-04-09,495
@@ -21337,6 +21789,8 @@ Texas,48,Travis,2020-07-06,2637
 Texas,48,Travis,2020-07-07,2434
 Texas,48,Travis,2020-07-08,2420
 Texas,48,Travis,2020-07-09,2688
+Texas,48,Travis,2020-07-10,2913
+Texas,48,Travis,2020-07-11,3064
 Texas,48,Trinity,2020-04-07,2
 Texas,48,Trinity,2020-04-08,2
 Texas,48,Trinity,2020-04-09,3
@@ -21431,6 +21885,8 @@ Texas,48,Trinity,2020-07-06,25
 Texas,48,Trinity,2020-07-07,24
 Texas,48,Trinity,2020-07-08,22
 Texas,48,Trinity,2020-07-09,24
+Texas,48,Trinity,2020-07-10,28
+Texas,48,Trinity,2020-07-11,28
 Texas,48,Tyler,2020-04-07,1
 Texas,48,Tyler,2020-04-08,1
 Texas,48,Tyler,2020-04-09,1
@@ -21525,6 +21981,8 @@ Texas,48,Tyler,2020-07-06,12
 Texas,48,Tyler,2020-07-07,15
 Texas,48,Tyler,2020-07-08,15
 Texas,48,Tyler,2020-07-09,15
+Texas,48,Tyler,2020-07-10,21
+Texas,48,Tyler,2020-07-11,21
 Texas,48,Upshur,2020-04-07,4
 Texas,48,Upshur,2020-04-08,5
 Texas,48,Upshur,2020-04-09,5
@@ -21619,6 +22077,8 @@ Texas,48,Upshur,2020-07-06,28
 Texas,48,Upshur,2020-07-07,32
 Texas,48,Upshur,2020-07-08,31
 Texas,48,Upshur,2020-07-09,35
+Texas,48,Upshur,2020-07-10,39
+Texas,48,Upshur,2020-07-11,43
 Texas,48,Upton,2020-04-07,0
 Texas,48,Upton,2020-04-08,0
 Texas,48,Upton,2020-04-09,0
@@ -21713,6 +22173,8 @@ Texas,48,Upton,2020-07-06,5
 Texas,48,Upton,2020-07-07,5
 Texas,48,Upton,2020-07-08,5
 Texas,48,Upton,2020-07-09,8
+Texas,48,Upton,2020-07-10,9
+Texas,48,Upton,2020-07-11,8
 Texas,48,Uvalde,2020-04-07,5
 Texas,48,Uvalde,2020-04-08,5
 Texas,48,Uvalde,2020-04-09,6
@@ -21807,6 +22269,8 @@ Texas,48,Uvalde,2020-07-06,63
 Texas,48,Uvalde,2020-07-07,63
 Texas,48,Uvalde,2020-07-08,69
 Texas,48,Uvalde,2020-07-09,72
+Texas,48,Uvalde,2020-07-10,73
+Texas,48,Uvalde,2020-07-11,75
 Texas,48,Val Verde,2020-04-07,6
 Texas,48,Val Verde,2020-04-08,6
 Texas,48,Val Verde,2020-04-09,5
@@ -21901,6 +22365,8 @@ Texas,48,Val Verde,2020-07-06,225
 Texas,48,Val Verde,2020-07-07,185
 Texas,48,Val Verde,2020-07-08,286
 Texas,48,Val Verde,2020-07-09,286
+Texas,48,Val Verde,2020-07-10,400
+Texas,48,Val Verde,2020-07-11,400
 Texas,48,Van Zandt,2020-04-07,3
 Texas,48,Van Zandt,2020-04-08,5
 Texas,48,Van Zandt,2020-04-09,5
@@ -21995,6 +22461,8 @@ Texas,48,Van Zandt,2020-07-06,74
 Texas,48,Van Zandt,2020-07-07,89
 Texas,48,Van Zandt,2020-07-08,112
 Texas,48,Van Zandt,2020-07-09,120
+Texas,48,Van Zandt,2020-07-10,129
+Texas,48,Van Zandt,2020-07-11,144
 Texas,48,Victoria,2020-04-07,50
 Texas,48,Victoria,2020-04-08,59
 Texas,48,Victoria,2020-04-09,64
@@ -22089,6 +22557,8 @@ Texas,48,Victoria,2020-07-06,547
 Texas,48,Victoria,2020-07-07,643
 Texas,48,Victoria,2020-07-08,737
 Texas,48,Victoria,2020-07-09,495
+Texas,48,Victoria,2020-07-10,759
+Texas,48,Victoria,2020-07-11,759
 Texas,48,Walker,2020-04-07,10
 Texas,48,Walker,2020-04-08,9
 Texas,48,Walker,2020-04-09,9
@@ -22183,6 +22653,8 @@ Texas,48,Walker,2020-07-06,276
 Texas,48,Walker,2020-07-07,280
 Texas,48,Walker,2020-07-08,330
 Texas,48,Walker,2020-07-09,353
+Texas,48,Walker,2020-07-10,375
+Texas,48,Walker,2020-07-11,404
 Texas,48,Waller,2020-04-07,11
 Texas,48,Waller,2020-04-08,11
 Texas,48,Waller,2020-04-09,12
@@ -22277,6 +22749,8 @@ Texas,48,Waller,2020-07-06,108
 Texas,48,Waller,2020-07-07,117
 Texas,48,Waller,2020-07-08,127
 Texas,48,Waller,2020-07-09,138
+Texas,48,Waller,2020-07-10,148
+Texas,48,Waller,2020-07-11,157
 Texas,48,Ward,2020-04-07,0
 Texas,48,Ward,2020-04-08,0
 Texas,48,Ward,2020-04-09,0
@@ -22371,6 +22845,8 @@ Texas,48,Ward,2020-07-06,17
 Texas,48,Ward,2020-07-07,22
 Texas,48,Ward,2020-07-08,22
 Texas,48,Ward,2020-07-09,22
+Texas,48,Ward,2020-07-10,26
+Texas,48,Ward,2020-07-11,34
 Texas,48,Washington,2020-04-07,20
 Texas,48,Washington,2020-04-08,22
 Texas,48,Washington,2020-04-09,27
@@ -22465,6 +22941,8 @@ Texas,48,Washington,2020-07-06,75
 Texas,48,Washington,2020-07-07,72
 Texas,48,Washington,2020-07-08,94
 Texas,48,Washington,2020-07-09,95
+Texas,48,Washington,2020-07-10,108
+Texas,48,Washington,2020-07-11,96
 Texas,48,Webb,2020-04-07,112
 Texas,48,Webb,2020-04-08,123
 Texas,48,Webb,2020-04-09,141
@@ -22559,6 +23037,8 @@ Texas,48,Webb,2020-07-06,1059
 Texas,48,Webb,2020-07-07,1150
 Texas,48,Webb,2020-07-08,1242
 Texas,48,Webb,2020-07-09,1280
+Texas,48,Webb,2020-07-10,1502
+Texas,48,Webb,2020-07-11,1643
 Texas,48,Wharton,2020-04-07,17
 Texas,48,Wharton,2020-04-08,15
 Texas,48,Wharton,2020-04-09,16
@@ -22653,6 +23133,8 @@ Texas,48,Wharton,2020-07-06,161
 Texas,48,Wharton,2020-07-07,169
 Texas,48,Wharton,2020-07-08,176
 Texas,48,Wharton,2020-07-09,187
+Texas,48,Wharton,2020-07-10,237
+Texas,48,Wharton,2020-07-11,253
 Texas,48,Wheeler,2020-04-07,0
 Texas,48,Wheeler,2020-04-08,0
 Texas,48,Wheeler,2020-04-09,0
@@ -22747,6 +23229,8 @@ Texas,48,Wheeler,2020-07-06,3
 Texas,48,Wheeler,2020-07-07,3
 Texas,48,Wheeler,2020-07-08,3
 Texas,48,Wheeler,2020-07-09,3
+Texas,48,Wheeler,2020-07-10,3
+Texas,48,Wheeler,2020-07-11,4
 Texas,48,Wichita,2020-04-07,44
 Texas,48,Wichita,2020-04-08,44
 Texas,48,Wichita,2020-04-09,44
@@ -22841,6 +23325,8 @@ Texas,48,Wichita,2020-07-06,343
 Texas,48,Wichita,2020-07-07,357
 Texas,48,Wichita,2020-07-08,404
 Texas,48,Wichita,2020-07-09,434
+Texas,48,Wichita,2020-07-10,451
+Texas,48,Wichita,2020-07-11,469
 Texas,48,Wilbarger,2020-04-07,0
 Texas,48,Wilbarger,2020-04-08,0
 Texas,48,Wilbarger,2020-04-09,0
@@ -22935,6 +23421,8 @@ Texas,48,Wilbarger,2020-07-06,5
 Texas,48,Wilbarger,2020-07-07,5
 Texas,48,Wilbarger,2020-07-08,7
 Texas,48,Wilbarger,2020-07-09,8
+Texas,48,Wilbarger,2020-07-10,5
+Texas,48,Wilbarger,2020-07-11,5
 Texas,48,Willacy,2020-04-07,4
 Texas,48,Willacy,2020-04-08,6
 Texas,48,Willacy,2020-04-09,4
@@ -23029,6 +23517,8 @@ Texas,48,Willacy,2020-07-06,119
 Texas,48,Willacy,2020-07-07,121
 Texas,48,Willacy,2020-07-08,117
 Texas,48,Willacy,2020-07-09,118
+Texas,48,Willacy,2020-07-10,123
+Texas,48,Willacy,2020-07-11,134
 Texas,48,Williamson,2020-04-07,67
 Texas,48,Williamson,2020-04-08,68
 Texas,48,Williamson,2020-04-09,75
@@ -23123,6 +23613,8 @@ Texas,48,Williamson,2020-07-06,1455
 Texas,48,Williamson,2020-07-07,2135
 Texas,48,Williamson,2020-07-08,2134
 Texas,48,Williamson,2020-07-09,2422
+Texas,48,Williamson,2020-07-10,2594
+Texas,48,Williamson,2020-07-11,2631
 Texas,48,Wilson,2020-04-07,7
 Texas,48,Wilson,2020-04-08,7
 Texas,48,Wilson,2020-04-09,8
@@ -23217,6 +23709,8 @@ Texas,48,Wilson,2020-07-06,44
 Texas,48,Wilson,2020-07-07,55
 Texas,48,Wilson,2020-07-08,54
 Texas,48,Wilson,2020-07-09,72
+Texas,48,Wilson,2020-07-10,73
+Texas,48,Wilson,2020-07-11,89
 Texas,48,Winkler,2020-04-07,0
 Texas,48,Winkler,2020-04-08,0
 Texas,48,Winkler,2020-04-09,0
@@ -23311,6 +23805,8 @@ Texas,48,Winkler,2020-07-06,24
 Texas,48,Winkler,2020-07-07,32
 Texas,48,Winkler,2020-07-08,31
 Texas,48,Winkler,2020-07-09,31
+Texas,48,Winkler,2020-07-10,30
+Texas,48,Winkler,2020-07-11,28
 Texas,48,Wise,2020-04-07,3
 Texas,48,Wise,2020-04-08,3
 Texas,48,Wise,2020-04-09,3
@@ -23405,6 +23901,8 @@ Texas,48,Wise,2020-07-06,11
 Texas,48,Wise,2020-07-07,88
 Texas,48,Wise,2020-07-08,76
 Texas,48,Wise,2020-07-09,83
+Texas,48,Wise,2020-07-10,34
+Texas,48,Wise,2020-07-11,44
 Texas,48,Wood,2020-04-07,4
 Texas,48,Wood,2020-04-08,4
 Texas,48,Wood,2020-04-09,4
@@ -23499,6 +23997,8 @@ Texas,48,Wood,2020-07-06,31
 Texas,48,Wood,2020-07-07,40
 Texas,48,Wood,2020-07-08,48
 Texas,48,Wood,2020-07-09,51
+Texas,48,Wood,2020-07-10,44
+Texas,48,Wood,2020-07-11,47
 Texas,48,Yoakum,2020-04-07,0
 Texas,48,Yoakum,2020-04-08,0
 Texas,48,Yoakum,2020-04-09,0
@@ -23593,6 +24093,8 @@ Texas,48,Yoakum,2020-07-06,13
 Texas,48,Yoakum,2020-07-07,14
 Texas,48,Yoakum,2020-07-08,15
 Texas,48,Yoakum,2020-07-09,15
+Texas,48,Yoakum,2020-07-10,10
+Texas,48,Yoakum,2020-07-11,12
 Texas,48,Young,2020-04-07,3
 Texas,48,Young,2020-04-08,3
 Texas,48,Young,2020-04-09,3
@@ -23687,6 +24189,8 @@ Texas,48,Young,2020-07-06,20
 Texas,48,Young,2020-07-07,19
 Texas,48,Young,2020-07-08,19
 Texas,48,Young,2020-07-09,23
+Texas,48,Young,2020-07-10,8
+Texas,48,Young,2020-07-11,15
 Texas,48,Zapata,2020-04-07,1
 Texas,48,Zapata,2020-04-08,1
 Texas,48,Zapata,2020-04-09,3
@@ -23781,6 +24285,8 @@ Texas,48,Zapata,2020-07-06,18
 Texas,48,Zapata,2020-07-07,20
 Texas,48,Zapata,2020-07-08,21
 Texas,48,Zapata,2020-07-09,22
+Texas,48,Zapata,2020-07-10,24
+Texas,48,Zapata,2020-07-11,24
 Texas,48,Zavala,2020-04-07,0
 Texas,48,Zavala,2020-04-08,0
 Texas,48,Zavala,2020-04-09,0
@@ -23875,3 +24381,5 @@ Texas,48,Zavala,2020-07-06,7
 Texas,48,Zavala,2020-07-07,11
 Texas,48,Zavala,2020-07-08,10
 Texas,48,Zavala,2020-07-09,17
+Texas,48,Zavala,2020-07-10,18
+Texas,48,Zavala,2020-07-11,21
