@@ -32,7 +32,6 @@ library(zoo)
 # Helper Functions --------------------------------------------------------
 
 blank <- "https://api.mapbox.com/styles/v1/datatx2036/ckc2gkem302hd1io7aaw54a09/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGF0YXR4MjAzNiIsImEiOiJja2J4cmJkMWUwYWh1MnNwamQ1a3NxMDlnIn0.pz06mEDLOJOhh4EyGar6Lg"
-# blank <- "https://api.mapbox.com/styles/v1/datatx2036/ckc2gkem302hd1io7aaw54a09.html?fresh=true&title=view&access_token=pk.eyJ1IjoiZGF0YXR4MjAzNiIsImEiOiJja2J4cmJkMWUwYWh1MnNwamQ1a3NxMDlnIn0.pz06mEDLOJOhh4EyGar6Lg"
 map_attr <- "<a href='https://www.mapbox.com/map-feedback/'>© MAPBOX</a> | <a href='http://texas2036.org'> MAP © TEXAS 2036</a>"
 
 thumbnail_label <- function (title, label, content, button_link, button_label) {
@@ -73,19 +72,19 @@ tx2036_hc <- hc_theme_merge(
                                                   color="#fff",fontWeight="500")),
                         gridLineWidth = 0,
                         gridLineColor = "#F3F3F3", 
-                        lineColor = "#fff", 
-                        minorGridLineColor = "#F3F3F3", 
+                        lineColor = 'rgba(255,255,255,0.7)', 
+                        minorGridLineColor = 'rgba(243,243,243,0.7)', 
                         tickColor = "#F3F3F3", 
-                        tickWidth = .5), 
+                        tickWidth = 1), 
            yAxis = list(labels =list(style = list(fontFamily = "Montserrat", color="#fff")), 
                         title = list(style = list(color = "#fff", fontSize = "12px", 
                                                   color="#fff",fontWeight="500")), 
                         gridLineWidth = .5,
-                        gridLineColor = "#F3F3F3", 
-                        lineColor = "#fff", 
-                        minorGridLineColor = "#F3F3F3", 
+                        gridLineColor = 'rgba(243,243,243,0.15)', 
+                        lineColor = 'rgba(255,255,255,0.15)', 
+                        minorGridLineColor = 'rgba(243,243,243,0.15)', 
                         tickColor = "#F3F3F3", 
-                        tickWidth = 1)))
+                        tickWidth = 2)))
 
 
 sever_default <- function (title = "Whoops!", subtitle = "You have been disconnected", 
@@ -112,6 +111,13 @@ disconnected <- sever_default(
 
 
 # **Coronavirus Data -----------------------------------------------------------
+
+
+# ~~Key Events Data -------------------------------------------------------
+
+key_events <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2q_c5RpywszCamM3VINgAwZ51OJoPfBFflEvXpuAqAZrw9SDovcGnfDOlF7uwzCnZf5XMkEluhlUb/pub?output=csv") %>% 
+  clean_names() %>% 
+  mutate(date=as_date(date))
 
 
 # ~~JHU Data --------------------------------------------------------------
@@ -150,6 +156,7 @@ county_lat_long <- vroom("https://raw.githubusercontent.com/CSSEGISandData/COVID
 nyt_county_cases <- vroom("https://texas-2036.github.io/covid-data/county.csv") %>%
   rename(cases=total_confirmed_cases,
          deaths=total_fatalities) %>%
+  mutate(date=gsub("2020-07-30","	2020-06-30",x=date)) %>% 
   mutate(min = min(cases),
          max = max(cases),
          incident_rate=round((cases/population)*100000, digits=2),
@@ -164,10 +171,11 @@ nyt_county_cases <- vroom("https://texas-2036.github.io/covid-data/county.csv") 
          new_cases_7day= cases-prev_week_cases,
          new_deaths_1day = deaths-prev_day_deaths,
          new_deaths_7day= deaths-prev_week_deaths) %>% 
-  ungroup()
+  ungroup() %>% 
+  mutate(date=as_date(date))
 
 date1 <- nyt_county_cases %>% 
-  filter(date==max(date))
+  filter(date==max(date)) 
 
 date_filter <- date1$date - days(5)
 
@@ -181,24 +189,25 @@ if (is.na(date1$active_cases)) {
     filter(date==max(date))
   
 } else {
-  
+
   nyt_county_cases_today <- date1
 }
 
-nyt_state_cases_tx <- vroom("https://texas-2036.github.io/covid-data/state.csv") %>% 
-  rename(cases=total_confirmed_cases,
-         deaths=total_fatalities,
-         hospitalizations=lab_confirmed_hospitalizations,
-         recovered=total_recovered,
-         active=active_cases) %>%
+dshs_hosp_rate_ts <- vroom("clean_data/dshs/hospitals/hosp_rate_ts.csv") %>% 
+  select(-hospitalized)
+
+nyt_state_cases_tx <- vroom("https://texas-2036.github.io/covid-data/state.csv") %>%
+  left_join(dshs_hosp_rate_ts,by="date") %>% 
+  rename(cases=cumulative_cases,
+         deaths=cumulative_fatalities) %>%
   mutate(population=27885195,
          min = min(cases),
          max = max(cases),
-         total_tests=total_public_lab_tests+total_private_lab_tests,
-         tests_per_100k=round((total_tests/population)*100000, digits=2),
+         # total_tests=total_public_lab_tests+total_private_lab_tests,
+         tests_per_100k=round((total_tests_reported/population)*100000, digits=2),
          incident_rate=round((cases/population)*100000, digits=2),
          mort_rate=round(deaths/cases, digits=4),
-         recovered=round(recovered, digits=0),
+         # recovered=round(recovered, digits=0),
          test_rate=round((cases/population)*100000, digits=2),
          hosp_rate=round((hospitalizations/active)*100, digits=2),
          date = ymd(date),
@@ -210,7 +219,25 @@ nyt_state_cases_tx <- vroom("https://texas-2036.github.io/covid-data/state.csv")
          new_cases_7day= cases-prev_week_cases) %>% 
   ungroup()
 
-nyt_state_cases_text <- nyt_state_cases_tx %>% 
+date2 <- nyt_state_cases_tx %>% 
+  filter(date==max(date)) 
+
+date_filter <- date2$date - days(60)
+
+hosp_rate_hchart <- nyt_state_cases_tx %>% 
+  arrange(date) %>%
+  select(date, hospitalizations,active) %>% 
+  mutate(state="TX") %>% 
+  group_by(state) %>% 
+  mutate(hosp_rate_7day_avg = rollmean(hospitalizations, 7, 
+                                       fill=0, align = "right")) %>% 
+  filter(date >= as.Date(date_filter)) %>% 
+  # mutate(min_new = min(hosp_rate, na.rm = TRUE),
+  #        max_new = max(hosp_rate, na.rm = TRUE)) %>% 
+  ungroup()
+
+nyt_state_cases_text <- nyt_state_cases_tx %>%
+  fill(c(active,recovered), .direction="down") %>% 
   filter(date==max(date)) %>% 
   select(cases,mort_rate,active,recovered) %>% 
   mutate_at(vars(cases,active,recovered), scales::comma) %>% 
@@ -288,35 +315,50 @@ covid_relief <- vroom("clean_data/covid_relief/crf_data.csv")
 
 # ~~DSHS Data ----
 
-# dshs_state_hospitalizations <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/state_hospitalizations.csv") %>% 
-#   mutate(state="Texas",
-#          fips="48")
-
-# dshs_state_tests <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/state_tests.csv") %>% 
-#   mutate(fips=as.character(fips))
-
-dshs_state_demographics <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/time_series_demographics.csv") %>% 
+dshs_state_demographics <- vroom("clean_data/dshs/cases/time_series_demographics.csv") %>% 
   mutate(fips=as.character(fips))
 
-# dshs_county_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/county_cases.csv")
+dshs_case_trends <- vroom("clean_data/dshs/cases/state_cases_trends.csv")
 
-# dshs_county_active <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/cases/cnty_active.csv")
+dshs_state_trends <- vroom("clean_data/dshs/cases/state_test_trends.csv")
 
-# dshs_county_test_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/county_tests.csv")
+dshs_case_fatality_totals <- dshs_case_trends %>% 
+  select(date,cases=cumulative_cases, fatalities=cumulative_fatalities) %>% 
+  gather(report_type,totals, 2:3)
+
+dshs_completed_investigation <- dshs_state_demographics %>% 
+  group_by(date, report_type) %>% 
+  summarise(completed_investigations=sum(count)) %>% 
+  ungroup() %>% 
+  left_join(dshs_case_fatality_totals, by=c("date","report_type")) %>% 
+  mutate(completed_investigations=completed_investigations/3,
+         diff=totals-completed_investigations) %>% 
+  select(-totals)
+  
 
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
 
-dshs_tsa_hosp_data_ts <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/dshs_hosp_ts_data.csv")
-
-dshs_tsa_24hr_data <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
+dshs_tsa_24hr_data <- vroom("clean_data/dshs/hospitals/texas_hosp_bed_ts_24hr_data.csv") %>% 
   ungroup() %>% 
   mutate(date=ymd(date),
          date=as.Date(date))
 
-dshs_test_pos <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/testing/test_pos_tx_ts.csv")
+dshs_tsa_avail_latest <- dshs_tsa_24hr_data %>%
+  filter(!is.na(icu_avail_rate)) %>% 
+  filter(date==max(date)) %>% 
+  as_tibble() %>%
+  distinct(date)
 
-dshs_syndromic_tx <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/dshs/syndromic_tx.csv") %>% 
+dshs_tsa_num_latest <- dshs_tsa_24hr_data %>%
+  filter(!is.na(total_susp_covid_in_hosp_at_time_of_report)) %>% 
+  filter(date==max(date)) %>% 
+  as_tibble() %>%
+  distinct(date)
+
+dshs_test_pos <- vroom("clean_data/dshs/testing/test_pos_tx_ts.csv")
+
+dshs_syndromic_tx <- vroom("clean_data/dshs/syndromic_tx.csv") %>% 
   rename(influenza_like_illness=2,covid_like_illness=3)
 
 # ** Population Data ---------------------------------------------------------
@@ -331,25 +373,24 @@ tsa_shps <- dshs_tsa_hosp_data %>%
   summarise(tsa_counties = toString(tsa_counties)) %>%
   ungroup()
 
+dshs_cases_text <- dshs_case_trends %>% 
+  filter(date==max(date)) %>% 
+  select(cumulative_cases) %>% 
+  mutate_at(vars(cumulative_cases), scales::comma)
+
 # ** NPI Data ----------------------------------------------------------------
 
 
 # ~~Google Mobility -------------------------------------------------------
 
-google_mobility <- vroom("https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv",
-                            col_types = cols(sub_region_2 = col_character())) %>% 
-  filter(sub_region_1=="Texas") %>% 
-  mutate(sub_region_2=gsub(pattern=" County", replacement="",x=sub_region_2))
-
-google_mobil_tx <- google_mobility %>%
-  filter(is.na(sub_region_2)) %>% 
-  mutate(date = ymd(date))
-
-google_mobil_tx_cnties <- google_mobility %>%
-  filter(!is.na(sub_region_2))
+google_mobil_tx <- vroom("https://texas-2036.github.io/covid-data/google_mobility_tx_state.csv")
+  
+google_mobil_tx_cnties <- vroom("https://texas-2036.github.io/covid-data/google_mobility_tx_cnty.csv")
 
 # ** Economic Data -----------------------------------------------------------
 
+
+# Affinity Spending Data --------------------------------------------------
 
 # ~~Homebase Data ---------------------------------------------------------
 
@@ -446,9 +487,11 @@ tx_urn <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/mast
 active_cases <- jhu_cases_state %>% 
   select(state=province_state, active, active_rank) 
 
-test_pos_today <- dshs_test_pos %>% 
+test_pos_today <- dshs_state_trends %>% 
+  filter(!is.na(covid_19_positivity_rate)) %>% 
   filter(date==max(date)) %>% 
-  mutate(test_pos_label=test_pos) %>% 
+  mutate(test_pos_label=covid_19_positivity_rate) %>% 
+  select(date,test_pos_label) %>% 
   mutate_at(vars(test_pos_label),scales::percent_format(accuracy=.01, scale=100))
 
 # **STATE EXPLORER METRICS ------------------------------------------------------
@@ -471,24 +514,23 @@ tx_recover <-  jhu_cases_state %>%
   select(recovered_rank) %>% 
   mutate_at(vars(recovered_rank), scales::label_ordinal())
 
-date1 <- nyt_state_cases_tx %>% 
+date1 <- dshs_case_trends %>% 
   filter(date==max(date))
 
 date_filter <- date1$date - days(30)
 
-state_case_growth <- nyt_state_cases_tx %>% 
-  filter(date >= as.Date(date_filter)) %>% 
+state_case_growth <- dshs_case_trends %>% 
+  select(date,cumulative_cases) %>% 
   arrange(date) %>% 
-  mutate(daily_growth_rate = round(((cases/lag(cases))-1)*100, digits=1)) %>%
+  mutate(daily_growth_rate = round(((cumulative_cases/lag(cumulative_cases))-1)*100, digits=1)) %>%
   mutate(daily_growth_rate_7day_avg = round(rollmean(daily_growth_rate, 7,
                                                      fill=0, align = "right"), digits=1)) %>%
   mutate(min_new = min(daily_growth_rate, na.rm = TRUE),
          max_new = max(daily_growth_rate, na.rm = TRUE)) %>% 
   mutate(min_new = as.numeric(min_new),
          max_new = as.numeric(max_new)) %>% 
+  filter(date >= as.Date(date_filter)) %>% 
   ungroup()
-
-# HEADER CODE-----------------------------------------------------------
 
 header <- dashboardHeader(disable = FALSE,
                           title = tags$a(href='http://www.texas2036.org',
@@ -658,6 +700,12 @@ body <- dashboardBody(
             ),
             fluidRow(
               column(width = 6,
+                     highchartOutput("state_cases_report_rate", height = 225)),
+              column(width = 6,
+                     highchartOutput("state_fatalities_report_rate", height = 225))
+            ),
+            fluidRow(
+              column(width = 6,
                      highchartOutput("state_cases_race", height = 350)),
               column(width = 6,
                      highchartOutput("state_fatalities_race", height = 350))
@@ -715,7 +763,12 @@ body <- dashboardBody(
                         p(style = "text-align:center;font-size:.6em;font-weight:600;color:#DBDCDD;", 
                           paste0("Last 7 Days From ", format(test_pos_today$date, format="%b %d"))),
                         p(style = "text-align:center;font-size:.4em;font-weight:400", 
-                          tags$a(href="https://www.dshs.state.tx.us/coronavirus/additionaldata/","Source: Texas Department of State Health Services"))))),
+                          tags$a(href="https://www.dshs.state.tx.us/coronavirus/additionaldata/","Source: Texas Department of State Health Services")))),
+              fluidRow(
+                column(width = 12,
+                       highchartOutput("test_pos_chart", height = 350))
+              ),
+              ),
             
             # ~~Syndromic Data ---------------------------------------------------------
             
@@ -742,22 +795,30 @@ body <- dashboardBody(
             ),
             hr(),
             fluidRow(
-              column(width = 6,
-                     highchartOutput("total_conf_covid_gen_hchart", height = 350)),
-              column(width = 6,
-                     highchartOutput("total_conf_covid_icu_hchart", height = 350))
+              column(width = 12,
+                     highchartOutput("state_hosp_chart", height = 375))
+            ),
+            fluidRow(
+              column(width = 12,
+                     highchartOutput("state_hosp_resource_hchart", height = 400))
             ),
             fluidRow(
               column(width = 6,
-                     highchartOutput("daily_covid_gen_admits_hchart", height = 350)),
+                     highchartOutput("total_conf_covid_gen_hchart", height = 375)),
               column(width = 6,
-                     highchartOutput("daily_covid_icu_admits_hchart", height = 350))
+                     highchartOutput("total_conf_covid_icu_hchart", height = 375))
             ),
             fluidRow(
               column(width = 6,
-                     highchartOutput("daily_covid_ers_hchart", height = 350)),
+                     highchartOutput("daily_covid_gen_admits_hchart", height = 375)),
               column(width = 6,
-                     highchartOutput("daily_covid_of_total_er_hchart", height = 350))
+                     highchartOutput("daily_covid_icu_admits_hchart", height = 375))
+            ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("daily_covid_ers_hchart", height = 375)),
+              column(width = 6,
+                     highchartOutput("daily_covid_of_total_er_hchart", height = 375))
             ),
             
             # ~~COVID Relief Funds Data ---------------------------------------------------------
@@ -923,29 +984,41 @@ body <- dashboardBody(
                        column(width = 4,
                               h2(style="font-weight:800;text-align:center;", 
                                  textOutput("hosp_covid_er_visits")),
-                              p(style="text-align:center","COVID-19 Related ER Visits")),
+                              p(style="text-align:center","COVID-19 Related ER Visits"),
+                              p(class="hosp_latest_date",paste0("As of: ", format(dshs_tsa_num_latest$date, format="%b %d"))),
+                       ),
                        column(width = 4,
                               h2(style="font-weight:800;text-align:center;", 
                                  textOutput("hosp_susp_covid")),
-                              p(style="text-align:center","Suspected COVID-19 Patients")),
+                              p(style="text-align:center","Suspected COVID-19 Patients"),
+                              p(class="hosp_latest_date",paste0("As of: ", format(dshs_tsa_num_latest$date, format="%b %d"))),
+                       ),
                        column(width = 4,
                               h2(style="font-weight:800;text-align:center;", 
                                  textOutput("hosp_lab_covid")),
-                              p(style="text-align:center","Lab Confirmed COVID-19 Patients"))
+                              p(style="text-align:center","Confirmed COVID-19 Patients"),
+                              p(class="hosp_latest_date",paste0("As of: ", format(dshs_tsa_num_latest$date, format="%b %d"))),
+                       )
                      ),
                      fluidRow( 
                        column(width = 4,
                               h2(style="font-weight:800;text-align:center;", 
                                  textOutput("cnty_beds")),
-                              p(style="text-align:center","All Beds Availability")),
+                              p(style="text-align:center","All Beds Availability"),
+                              p(class="hosp_latest_date",paste0("As of: ", format(dshs_tsa_avail_latest$date, format="%b %d"))),
+                              ),
                        column(width = 4,
                               h2(style="font-weight:800;text-align:center;", 
                                  textOutput("cnty_icu_beds")),
-                              p(style="text-align:center","ICU Beds Availability")),
+                              p(style="text-align:center","ICU Beds Availability"),
+                              p(class="hosp_latest_date",paste0("As of: ", format(dshs_tsa_avail_latest$date, format="%b %d"))),
+                       ),
                        column(width = 4,
                               h2(style="font-weight:800;text-align:center;", 
                                  textOutput("cnty_vents")),
-                              p(style="text-align:center","Ventilator Availability"))
+                              p(style="text-align:center","Ventilator Availability"),
+                              p(class="hosp_latest_date",paste0("As of: ", format(dshs_tsa_avail_latest$date, format="%b %d"))),
+                       )
                      ),
                      br())
             ),
@@ -1000,22 +1073,26 @@ column(width = 12,
        hr()
        ),
             fluidRow(
-              column(width = 6,
-                     highchartOutput("cnty_total_conf_covid_gen_hchart", height = 350)),
-              column(width = 6,
-                     highchartOutput("cnty_total_conf_covid_icu_hchart", height = 350))
+              column(width = 12,
+                     highchartOutput("cnty_hosp_resource_hchart", height = 400))
             ),
             fluidRow(
               column(width = 6,
-                     highchartOutput("cnty_daily_covid_gen_admits_hchart", height = 350)),
+                     highchartOutput("cnty_total_conf_covid_gen_hchart", height = 375)),
               column(width = 6,
-                     highchartOutput("cnty_daily_covid_icu_admits_hchart", height = 350))
+                     highchartOutput("cnty_total_conf_covid_icu_hchart", height = 375))
+            ),
+            fluidRow(
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_gen_admits_hchart", height = 375)),
+              column(width = 6,
+                     highchartOutput("cnty_daily_covid_icu_admits_hchart", height = 375))
             ),            
             fluidRow(
               column(width = 6,
-                     highchartOutput("cnty_daily_covid_ers_hchart", height = 350)),
+                     highchartOutput("cnty_daily_covid_ers_hchart", height = 375)),
               column(width = 6,
-                     highchartOutput("cnty_daily_covid_of_total_er_hchart", height = 350))
+                     highchartOutput("cnty_daily_covid_of_total_er_hchart", height = 375))
             ),
 
 
@@ -1149,6 +1226,7 @@ server <- function (input, output, session) {
   hcoptslang <- getOption("highcharter.lang")
   hcoptslang$thousandsSep <- ","
   options(highcharter.lang = hcoptslang)
+
   
   # {Latest NYT Update Date} ----------------------------------------------------
   
@@ -1198,7 +1276,7 @@ server <- function (input, output, session) {
   output$tx_cases <- renderInfoBox({
     
     infoBox(
-      value=paste0(nyt_state_cases_text$cases), title="Total Cases",
+      value=paste0(dshs_cases_text$cumulative_cases), title="Total Cases",
       subtitle=paste0(tx_cases$cases_rank, " Most in US"),
       icon = icon("chart-line"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
@@ -1246,6 +1324,7 @@ server <- function (input, output, session) {
     dataset()
     
     tot_pos <- nyt_state_cases_tx %>% 
+      filter(!is.na(hosp_rate)) %>% 
       filter(date==max(date))
     
     infoBox(
@@ -1262,8 +1341,9 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_tsa_hosp_data_ts %>%
+    tot_pos <- dshs_tsa_24hr_data %>%
       as_tibble() %>% 
+      filter(!is.na(bed_avail_rate)) %>% 
       filter(date==max(date)) %>%
       select(tsa,tsa_counties,bed_avail_rate) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
@@ -1283,8 +1363,9 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_tsa_hosp_data_ts %>%
+    tot_pos <- dshs_tsa_24hr_data %>%
       as_tibble() %>%
+      filter(!is.na(icu_avail_rate)) %>% 
       filter(date==max(date)) %>% 
       select(tsa,tsa_counties,icu_avail_rate) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
@@ -1304,7 +1385,8 @@ server <- function (input, output, session) {
     
     dataset()
     
-    tot_pos <- dshs_tsa_hosp_data_ts %>%
+    tot_pos <- dshs_tsa_24hr_data %>%
+      filter(!is.na(vent_avail_rate)) %>% 
       filter(date==max(date)) %>% 
       filter(str_detect(tsa,"Total|total")) %>%
       select(tsa,tsa_counties, vent_avail_rate) %>% 
@@ -1327,6 +1409,18 @@ server <- function (input, output, session) {
     hcoptslang$thousandsSep <- ","
     options(highcharter.lang = hcoptslang)
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     state_case_growth %>% 
       hchart("column", hcaes(x = date, y = daily_growth_rate), animation=FALSE,
              color = "#fff") %>% 
@@ -1344,14 +1438,16 @@ server <- function (input, output, session) {
                min = round(mean(state_case_growth$min_new), 2), 
                max = 8,
                format = "{value}%") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
+      hc_legend(enabled=FALSE) %>%
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Growth Rate: {point.y:.0f}%") %>% 
       hc_credits(
         enabled = TRUE,
-        text = "Source: New York Times County-Level COVID-19 Data (Github)",
-        href = NULL) %>%
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
       hc_add_theme(tx2036_hc)
     
     
@@ -1367,6 +1463,21 @@ server <- function (input, output, session) {
       mutate(min = min(influenza_like_illness, na.rm = TRUE),
              max = max(influenza_like_illness, na.rm = TRUE)) 
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    dates <- key_events_fltr$date
+    events <- key_events_fltr$event
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     nyt_tx_hchart %>% 
       hchart("area", hcaes(x = date, y = covid_like_illness), animation=FALSE,
              color = "#fff") %>% 
@@ -1376,8 +1487,9 @@ server <- function (input, output, session) {
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text="Reported Cases of CLI"),
                min = 0, 
-               max = 1000) %>% 
-      hc_xAxis(title=NULL) %>% 
+               max = 1100) %>% 
+      hc_xAxis(title=NULL,
+               plotLines = plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Reported CLI Cases: {point.y:,.0f}<br>") %>% 
@@ -1401,6 +1513,18 @@ server <- function (input, output, session) {
       mutate(min = min(influenza_like_illness, na.rm = TRUE),
              max = max(influenza_like_illness, na.rm = TRUE)) 
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     nyt_tx_hchart %>% 
       hchart("area", hcaes(x = date, y = influenza_like_illness), animation=FALSE,
              color = "#fff") %>% 
@@ -1410,8 +1534,9 @@ server <- function (input, output, session) {
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="Reported Cases of ILI"),
                min = 0, 
-               max = 1000) %>% 
-      hc_xAxis(title=NULL) %>% 
+               max = 1100) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Reported ILI Cases: {point.y:,.0f}<br>") %>% 
@@ -1425,13 +1550,88 @@ server <- function (input, output, session) {
     
   })
   
+  # {State Test Positive Charts}  --------------------------------------------------
+  
+  output$test_pos_chart <- renderHighchart({
+    
+    dataset()
+    
+    state_test_trends <- dshs_state_trends %>% 
+      select(date,test_pos=covid_19_positivity_rate) %>%
+      mutate(test_pos=test_pos*100) %>% 
+      mutate(min = min(dshs_state_trends$test_pos, na.rm = TRUE),
+             max = max(dshs_state_trends$test_pos, na.rm = TRUE))
+    
+    # state_test_trends <- dshs_state_trends %>% 
+    #   select(date,test_pos=covid_19_positivity_rate) %>%
+    #   mutate(test_pos=test_pos*100) %>% 
+    #   mutate(min = min(dshs_state_trends$test_pos, na.rm = TRUE),
+    #          max = max(dshs_state_trends$test_pos, na.rm = TRUE))
+    
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
+    state_test_trends %>% 
+      arrange(date) %>% 
+      filter(date >= as.Date("2020-03-16")) %>% 
+      hchart("area", hcaes(x = date, y = test_pos), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>7-Day Avg. Positivty</b>: {point.y:,.2f}%"),
+             color='rgba(255, 255, 255, 0.6)') %>% 
+      hc_title(
+        text ="Texas COVID-19 Test Positive Rate | 7-Day Avg. History",
+        useHTML = TRUE) %>% 
+      hc_subtitle(text="This data comes from DSHS Accessible Data Dashboard. DSHS Calculates their test positive 7-day Avg. History as follows: 'Positivity rate' (previous 7 days) = New cases (previous 7 days) / New test results (previous 7 days), excluding antibody tests in rate reported 19-May onwards. Gaps indicate missing reported data.") %>% 
+      hc_yAxis(title = list(text ="Test Positive Rate (%)"),
+               min = round(min(state_test_trends$min), 2), 
+               max = round(min(state_test_trends$max), 2)) %>% 
+      hc_xAxis(title=NULL,plotLines=plotLines) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   Test Positive Rate: {point.y:,.0f}<br>") %>% 
+      hc_plotOptions(area = list(fillOpacity=.2)) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  
+  
   # {State Curve Charts}  --------------------------------------------------
   
   output$state_curves_hchart <- renderHighchart({
     
     dataset()
     
-    nyt_tx_hchart <- nyt_state_cases_tx %>% 
+    state_case_trends <- dshs_case_trends %>% 
+      select(date,cases=cumulative_cases) %>% 
+      mutate(min = min(dshs_case_trends$cumulative_cases, na.rm = TRUE),
+             max = max(dshs_case_trends$cumulative_cases, na.rm = TRUE))
+    
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
+    nyt_tx_hchart <-  state_case_trends %>% 
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16")) %>% 
       hchart("area", hcaes(x = date, y = cases), animation=FALSE,
@@ -1440,22 +1640,110 @@ server <- function (input, output, session) {
         text ="Texas COVID-19 Cumulative Cases",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="Total Cases"),
-               min = round(mean(nyt_state_cases_tx$min), 2), 
-               max = round(mean(nyt_state_cases_tx$max), 2)) %>% 
-      hc_xAxis(title=NULL) %>% 
+               min = round(min(state_case_trends$min), 2), 
+               max = round(min(state_case_trends$max), 2)) %>% 
+      hc_xAxis(title=NULL,plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Confirmed Cases: {point.y:,.0f}<br>") %>% 
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_credits(
         enabled = TRUE,
-        text = "Source: New York Times County-Level COVID-19 Data (Github)",
-        href = "https://github.com/nytimes/covid-19-data") %>%
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
       hc_add_theme(tx2036_hc)
     
     nyt_tx_hchart
     
   })
+  
+  # {State Cases - Reporting Rate}  --------------------------------------------------
+  
+  output$state_cases_report_rate <- renderHighchart({
+    
+    dataset()
+    
+    dshs_completed_investigation_chart <- dshs_completed_investigation %>% 
+      arrange(date) %>% 
+      rename(Remaining=diff,`Completed`=completed_investigations) %>% 
+      filter(date==max(date),
+             report_type=="cases") %>% 
+      gather(group,value,3:4) %>% 
+      mutate(report_type =gsub("cases",paste0("As of: ", format(date, format="%B %d, %Y")), x = report_type))
+    
+    dshs_completed_investigation_chart <- within(dshs_completed_investigation_chart, cat2 <- factor(group, levels=c("Remaining","Completed")))
+    
+    dshs_completed_investigation_chart %>% 
+      hchart("bar", hcaes(x = report_type, y = value, group = cat2), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.value:,.0f}")) %>% 
+      hc_title(
+        text ="Status of Completed Case Investigations",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="As of today, this is the breakdown of completed and remaing investigations received by DSHS from local and regional health departments.",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of All Investigations")) %>%
+      hc_xAxis(title = NULL,
+               labels = FALSE) %>% 
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, 
+                 sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.2),
+                     series = list(stacking = "percent")) %>%
+      hc_colors(colors = list('rgba(242,104,82,0.3)','rgba(242,104,82,1)')) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Fatalities - Reporting Rate}  --------------------------------------------------
+  
+  output$state_fatalities_report_rate <- renderHighchart({
+    
+    dataset()
+    
+    dshs_completed_investigation_chart <- dshs_completed_investigation %>% 
+      arrange(date) %>% 
+      rename(Remaining=diff,`Completed`=completed_investigations) %>% 
+      filter(date==max(date),
+             report_type=="fatalities") %>% 
+      gather(group,value,3:4) %>% 
+      mutate(report_type = gsub("fatalities",paste0("As of: ", format(date, format="%B %d, %Y")), x = report_type))
+    
+    dshs_completed_investigation_chart <- within(dshs_completed_investigation_chart, cat2 <- factor(group, levels=c("Remaining","Completed")))
+    
+    dshs_completed_investigation_chart %>% 
+      hchart("bar", hcaes(x = report_type, y = value, group = cat2), animation=FALSE,
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.value:,.0f}")) %>% 
+      hc_title(
+        text ="Status of Completed Fatality Investigations",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="As of today, this is the breakdown of completed and remaing investigations received by DSHS from local and regional health departments.",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of All Investigations")) %>%
+      hc_xAxis(title = NULL,
+               labels = FALSE) %>%
+      hc_legend(enabled=FALSE) %>% 
+      hc_tooltip(table = TRUE, 
+                 sort = TRUE,
+                 shared=TRUE) %>%
+      hc_plotOptions(area = list(fillOpacity=.2),
+                     series = list(stacking = "percent")) %>%
+      hc_colors(colors = list('rgba(242,104,82,0.3)','rgba(242,104,82,1)')) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  
   
   # {State Race - Cases}  --------------------------------------------------
   
@@ -1470,7 +1758,7 @@ server <- function (input, output, session) {
              report_type=="cases",
              demographic_type=="race") %>% 
       hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
       hc_title(
         text ="Texas COVID-19 Cases, by Race",
         useHTML = TRUE) %>% 
@@ -1503,7 +1791,7 @@ server <- function (input, output, session) {
              report_type=="fatalities",
              demographic_type=="race") %>% 
       hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
       hc_title(
         text ="Texas COVID-19 Fatalities, by Race",
         useHTML = TRUE) %>% 
@@ -1536,7 +1824,7 @@ server <- function (input, output, session) {
              report_type=="cases",
              demographic_type=="ages") %>% 
       hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
       hc_title(
         text ="Texas COVID-19 Cases, by Age",
         useHTML = TRUE) %>% 
@@ -1569,7 +1857,7 @@ server <- function (input, output, session) {
              report_type=="fatalities",
              demographic_type=="ages") %>% 
       hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
       hc_title(
         text ="Texas COVID-19 Fatalities, by Age",
         useHTML = TRUE) %>% 
@@ -1602,7 +1890,7 @@ server <- function (input, output, session) {
              report_type=="cases",
              demographic_type=="gender") %>% 
       hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
       hc_title(
         text ="Texas COVID-19 Cases, by Gender",
         useHTML = TRUE) %>% 
@@ -1635,7 +1923,7 @@ server <- function (input, output, session) {
              report_type=="fatalities",
              demographic_type=="gender") %>% 
       hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-              tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.0f}%")) %>% 
+              tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
       hc_title(
         text ="Texas COVID-19 Fatalities, by Gender",
         useHTML = TRUE) %>% 
@@ -1662,24 +1950,34 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
-    nyt_tx_new_cases_hchart <- nyt_state_cases_tx %>% 
-      mutate(daily_growth_rate = (new_cases_1day/lag(new_cases_1day))) %>%
-      mutate(daily_growth_rate_7day_avg = rollmean(new_cases_1day, 7, 
-                                                   fill=0, align = "right")) %>% 
-      mutate(min_new = min(new_cases_1day, na.rm = TRUE),
-             max_new = max(new_cases_1day, na.rm = TRUE)) %>% 
+    nyt_tx_new_cases_hchart <- dshs_case_trends %>% 
+      mutate(min_new = min(daily_new_cases, na.rm = TRUE),
+             max_new = max(daily_new_cases, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
              max_new = as.numeric(max_new)) %>% 
       ungroup() %>% 
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     nyt_tx_new_cases_hchart %>% 
-      hchart("column", hcaes(x = date, y = new_cases_1day), 
+      hchart("column", hcaes(x = date, y = daily_new_cases), 
              animation=FALSE,
              color = "#fff") %>% 
-      hc_add_series(nyt_tx_new_cases_hchart, type = "area", hcaes(x = date, y = daily_growth_rate_7day_avg),
-                    tooltip = list(pointFormat = "<br>7-Day Avg.: {point.daily_growth_rate_7day_avg:,.0f}"),
+      # hc_add_series(key_events, type="line", hcaes(x = date, y = event)) %>% 
+      hc_add_series(nyt_tx_new_cases_hchart, type = "area", hcaes(x = date, y = new_cases_7day_avg),
+                    tooltip = list(pointFormat = "<br>7-Day Avg.: {point.new_cases_7day_avg:,.0f}"),
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
@@ -1691,17 +1989,17 @@ server <- function (input, output, session) {
       hc_yAxis(title = list(text ="New Cases Per Day"),
                min = mean(nyt_tx_new_cases_hchart$min_new),
                max = mean(nyt_tx_new_cases_hchart$max_new)) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    New Cases: {point.y:,.0f}") %>% 
+      hc_legend(enabled=FALSE) %>% 
       hc_credits(
         enabled = TRUE,
-        text = "Source: New York Times County-Level COVID-19 Data (Github)",
-        href = "https://github.com/nytimes/covid-19-data") %>%
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
       hc_add_theme(tx2036_hc)
-    
-    
     
   })
   
@@ -1713,23 +2011,33 @@ server <- function (input, output, session) {
     # Make sure requirements are met
     # req(input$countyname)
     
-    nyt_tx_new_cases_hchart <- nyt_state_cases_tx %>% 
-      mutate(daily_death_growth_rate_7day_avg = rollmean(new_deaths_1day, 7, 
-                                                         fill=0, align = "right")) %>% 
-      mutate(min_new = min(new_deaths_1day, na.rm = TRUE),
-             max_new = max(new_deaths_1day, na.rm = TRUE)) %>% 
+    nyt_tx_new_cases_hchart <- dshs_case_trends %>% 
+      mutate(min_new = min(daily_new_fatalities, na.rm = TRUE),
+             max_new = max(daily_new_fatalities, na.rm = TRUE)) %>% 
       mutate(min_new = as.numeric(min_new),
              max_new = as.numeric(max_new)) %>% 
       ungroup() %>% 
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     nyt_tx_new_cases_hchart %>% 
-      hchart("column", hcaes(x = date, y = new_deaths_1day), 
+      hchart("column", hcaes(x = date, y = daily_new_fatalities), 
              animation=FALSE,
              color = "#fff") %>% 
-      hc_add_series(nyt_tx_new_cases_hchart, type = "area", hcaes(x = date, y = daily_death_growth_rate_7day_avg),
-                    tooltip = list(pointFormat = "<br>7-Day Avg.: {point.daily_death_growth_rate_7day_avg:,.0f}"),
+      hc_add_series(nyt_tx_new_cases_hchart, type = "area", hcaes(x = date, y = new_deaths_7day_avg),
+                    tooltip = list(pointFormat = "<br>7-Day Avg.: {point.new_deaths_7day_avg:,.0f}"),
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
@@ -1741,14 +2049,16 @@ server <- function (input, output, session) {
       hc_yAxis(title = list(text ="New Deaths Per Day"),
                min = mean(nyt_tx_new_cases_hchart$min_new),
                max = mean(nyt_tx_new_cases_hchart$max_new)) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
+      hc_legend(enabled=FALSE) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    New Deaths: {point.y:,.0f}") %>% 
       hc_credits(
         enabled = TRUE,
-        text = "Source: New York Times County-Level COVID-19 Data (Github)",
-        href = "https://github.com/nytimes/covid-19-data") %>%
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
       hc_add_theme(tx2036_hc)
     
     
@@ -1774,6 +2084,18 @@ server <- function (input, output, session) {
       ungroup() %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     tx_new_tests_hchart %>% 
       hchart("column", hcaes(x = date, y = totalTestResultsIncrease), 
              animation=FALSE,
@@ -1791,7 +2113,8 @@ server <- function (input, output, session) {
       hc_yAxis(title = list(text ="New Tests Per Day"),
                min = mean(tx_new_tests_hchart$min_new),
                max = mean(tx_new_tests_hchart$max_new)) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    New Tests: {point.y:,.0f}") %>% 
@@ -1817,6 +2140,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     tx_series_all %>% 
       hchart("column", hcaes(x = date, y = value), 
              animation=FALSE,
@@ -1826,7 +2160,7 @@ server <- function (input, output, session) {
         text ="Texas Jobless Claims",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="Claims Filed Weekly")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL, plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Weekly Claims Filed: {point.y:,.0f}") %>% 
@@ -1834,6 +2168,132 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: The Federal Reserve Bank of St. Louis + Department of Labor",
         href = "https://fred.stlouisfed.org/series/TXICLAIMS") %>%
+      hc_add_theme(tx2036_hc)
+    
+    
+    
+  })
+  
+  # {State Hospital Resource Availability Charts}  --------------------------------------------------
+  
+  output$state_hosp_resource_hchart <- renderHighchart({
+    
+    hosp_resource_avail <- dshs_tsa_24hr_data %>% 
+      ungroup() %>% 
+      select(date,tsa,location,
+             `All Bed Availability`=bed_avail_rate,
+             `ICU Bed Availability`=icu_avail_rate, 
+             `Ventilator Availabiliity`=vent_avail_rate) %>% 
+      arrange(date) %>% 
+      filter(location=="Texas",
+             !is.na(`All Bed Availability`),
+             date >= as.Date("2020-03-16")) %>% 
+      gather(type, value, 4:6) %>% 
+      mutate(value=value*100)
+    
+    hosp_resource_avail_avg <- dshs_tsa_24hr_data %>% 
+      ungroup() %>% 
+      filter(location=="Texas",
+             !is.na(bed_avail_rate_7day_avg),
+             bed_avail_rate_7day_avg!=0,
+             date >= as.Date("2020-03-16")) %>% 
+      select(date,tsa,location,
+             `All Bed Availability | 7-Day Avg.`=bed_avail_rate_7day_avg,
+             `ICU Bed Availability | 7-Day Avg.`=icu_avail_rate_7day_avg,
+             `Ventilator Availability | 7-Day Avg.`=vent_avail_rate_7day_avg) %>% 
+      arrange(date) %>% 
+      gather(type, value, 4:6) %>% 
+      mutate(value=value*100)
+    
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
+    hosp_resource_avail %>% 
+      hchart("line", hcaes(x = date, y = value, group=type), color = c("rgba(255, 255, 255, 0.5)","rgba(242, 104, 82, 0.5)", "rgba(255, 209, 0, 0.5)"),
+             tooltip = list(pointFormat = "<br><b>{series.name}</b>: {point.y:,.1f}%"),
+             animation=FALSE) %>% 
+      hc_add_series(hosp_resource_avail_avg, type = "spline", hcaes(x = date, y = value, group=type),
+                    tooltip = list(pointFormat = "<br><b>{series.name}</b>: {point.y:,.1f}%"),
+                    dashStyle = "Dash", color = c("#FFF","#F26852", "#FFD100")) %>%
+      hc_plotOptions(line = list(lineWidth=5)) %>%
+      hc_title(
+        text ="Texas Hospital Resource Availability",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="This chart shows representations of hospital resource availability for All Beds, ICU Beds, and Ventilators. <br> [COLOR LEGEND] - <span style='color: #FFF;font-weight:bold;'>All Beds</span> | <span style='color: #F26852;font-weight:bold;'>ICU Beds</span> | <span style='color: #FFD100;font-weight:bold;'>Ventilators</span><br>[LINE LEGEND] - <span style='color: #FFF;font-weight:bold;'>Solid Line</span> = Daily Rate | <span style='color: #FFF;font-weight:bold;'>Dashed Line</span> = 7-Day Avg.",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="% of Resource Available"),
+               min = 0,
+               max = 100) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 shared=TRUE, crosshairs = TRUE) %>%
+      hc_legend(enabled=FALSE) %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
+      hc_add_theme(tx2036_hc)
+    
+  })
+  
+  # {State Hospitalized Rate}  --------------------------------------------------
+  
+  output$state_hosp_chart <- renderHighchart({
+    
+    # Make sure requirements are met
+    # req(input$countyname)
+      
+    
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
+    hosp_rate_hchart %>% 
+      hchart("column", hcaes(x = date, y = hospitalizations), 
+             animation=FALSE,
+             color = "#fff") %>% 
+      hc_add_series(hosp_rate_hchart, type = "area", hcaes(x = date, y = hosp_rate_7day_avg),
+                    tooltip = list(pointFormat = "<br>7-Day Avg.: {point.hosp_rate_7day_avg:,.0f}"),
+                    color = "#FFD100", name="7-Day Avg.") %>%
+      hc_plotOptions(area = list(fillOpacity=.3)) %>%
+      hc_title(
+        text ="Texas COVID-19 Daily Total Hospitalizations",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="Covering all of Texas, this shows the number of total hospitalized patients in Texas for COVID-19 <br><br/>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="Total Hospitalizations Per Day"),
+               min = min(hosp_rate_hchart$hospitalizations),
+               max = max(hosp_rate_hchart$hospitalizations),
+               format = "{value:,.0f}") %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   Total Hospitalizations: {point.y:,.0f}") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
       hc_add_theme(tx2036_hc)
     
     
@@ -1857,6 +2317,18 @@ server <- function (input, output, session) {
       ungroup() %>% 
       arrange(date)
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     dshs_tsa_24hr_data_hchart %>% 
       hchart("column", hcaes(x = date, y = covid19_er_visits_24h), 
              animation=FALSE,
@@ -1875,7 +2347,8 @@ server <- function (input, output, session) {
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
                max = mean(dshs_tsa_24hr_data_hchart$max_new),
                format = "{value:,.0f}") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    New Visits: {point.y:,.0f}") %>% 
@@ -1906,6 +2379,18 @@ server <- function (input, output, session) {
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     dshs_tsa_24hr_data_hchart %>% 
       hchart("column", hcaes(x = date, y = covid_share_of_new_er_visits), 
              animation=FALSE,
@@ -1924,7 +2409,8 @@ server <- function (input, output, session) {
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
                max = mean(dshs_tsa_24hr_data_hchart$max_new),
                format = "{value}%") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Today's Share: {point.y}%") %>% 
@@ -1952,6 +2438,18 @@ server <- function (input, output, session) {
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     dshs_tsa_24hr_data_hchart %>% 
       hchart("column", hcaes(x = date, y = covid19_admitted_gen_24h), 
              animation=FALSE,
@@ -1970,7 +2468,8 @@ server <- function (input, output, session) {
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
                max = mean(dshs_tsa_24hr_data_hchart$max_new),
                format = "{value}") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Today's Admits: {point.y}") %>% 
@@ -1998,6 +2497,18 @@ server <- function (input, output, session) {
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     dshs_tsa_24hr_data_hchart %>% 
       hchart("column", hcaes(x = date, y = covid19_admitted_icu_24h), 
              animation=FALSE,
@@ -2016,7 +2527,8 @@ server <- function (input, output, session) {
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
                max = mean(dshs_tsa_24hr_data_hchart$max_new),
                format = "{value}") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Today's Admits: {point.y}") %>% 
@@ -2044,6 +2556,18 @@ server <- function (input, output, session) {
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     dshs_tsa_24hr_data_hchart %>% 
       hchart("column", hcaes(x = date, y = lab_con_covid19_gen), 
              animation=FALSE,
@@ -2062,7 +2586,8 @@ server <- function (input, output, session) {
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
                max = mean(dshs_tsa_24hr_data_hchart$max_new),
                format = "{value}") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Total Admits : {point.y}") %>% 
@@ -2090,6 +2615,18 @@ server <- function (input, output, session) {
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16"))
     
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     dshs_tsa_24hr_data_hchart %>% 
       hchart("column", hcaes(x = date, y = lab_con_covid19_icu), 
              animation=FALSE,
@@ -2108,7 +2645,8 @@ server <- function (input, output, session) {
                min = mean(dshs_tsa_24hr_data_hchart$min_new),
                max = mean(dshs_tsa_24hr_data_hchart$max_new),
                format = "{value}") %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Today's Admits: {point.y}") %>% 
@@ -2130,6 +2668,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     google_mobil_tx %>% 
       hchart("area", hcaes(x = date, y = grocery_and_pharmacy_percent_change_from_baseline), 
              animation=FALSE,
@@ -2142,7 +2691,8 @@ server <- function (input, output, session) {
         text ="<i class='fas fa-shopping-basket mobility-icon'></i>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Mobility")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Change From Baseline Activity: {point.y:,.0f}%") %>% 
@@ -2169,6 +2719,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     google_mobil_tx %>% 
       hchart("area", hcaes(x = date, y = parks_percent_change_from_baseline), 
              animation=FALSE,
@@ -2181,7 +2742,8 @@ server <- function (input, output, session) {
         text ="<i class='fas fa-tree mobility-icon'></i>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Mobility")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Change From Baseline Activity: {point.y:,.0f}%") %>% 
@@ -2206,6 +2768,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     google_mobil_tx %>% 
       hchart("area", hcaes(x = date, y = transit_stations_percent_change_from_baseline), 
              animation=FALSE,
@@ -2218,7 +2791,8 @@ server <- function (input, output, session) {
         text ="<i class='fas fa-bus-alt mobility-icon'></i>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Mobility")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Change From Baseline Activity: {point.y:,.0f}%") %>% 
@@ -2245,6 +2819,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     google_mobil_tx %>% 
       hchart("area", hcaes(x = date, y = retail_and_recreation_percent_change_from_baseline), 
              animation=FALSE,
@@ -2257,7 +2842,8 @@ server <- function (input, output, session) {
         text ="<i class='fas fa-shopping-bag mobility-icon'></i>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Mobility")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Change From Baseline Activity: {point.y:,.0f}%") %>% 
@@ -2282,6 +2868,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     google_mobil_tx %>% 
       hchart("area", hcaes(x = date, y = workplaces_percent_change_from_baseline), 
              animation=FALSE,
@@ -2294,7 +2891,7 @@ server <- function (input, output, session) {
         text ="<i class='fas fa-building mobility-icon'></i>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Mobility")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Change From Baseline Activity: {point.y:,.0f}%") %>% 
@@ -2320,6 +2917,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     google_mobil_tx %>% 
       hchart("area", hcaes(x = date, y = residential_percent_change_from_baseline), 
              animation=FALSE,
@@ -2332,7 +2940,8 @@ server <- function (input, output, session) {
         text ="<i class='fas fa-home mobility-icon'></i>",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Mobility")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Change From Baseline Activity: {point.y:,.0f}%") %>% 
@@ -2361,6 +2970,16 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = '#fff', fontSize='11px', textTransform='initial')),
+                            color = "#fff",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     hb_businesses_open_all %>% 
       hchart("area", hcaes(x = date, y = pct), 
              animation=FALSE,
@@ -2370,7 +2989,7 @@ server <- function (input, output, session) {
         text ="Est. Change in Businesses Open",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Business Open")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Businesses Open: {point.y:,.0f}%") %>% 
@@ -2396,6 +3015,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     hb_hours_worked_all %>% 
       hchart("area", hcaes(x = date, y = pct), 
              animation=FALSE,
@@ -2405,7 +3035,8 @@ server <- function (input, output, session) {
         text ="Est. Change in Hours Worked By Hourly Employees",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Hours Worked")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Hours Worked: {point.y:,.0f}%") %>% 
@@ -2428,6 +3059,17 @@ server <- function (input, output, session) {
     
     dataset()
     
+    key_events_fltr <- key_events
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
     hb_employees_working_all %>% 
       hchart("area", hcaes(x = date, y = pct), 
              animation=FALSE,
@@ -2437,7 +3079,8 @@ server <- function (input, output, session) {
         text = "Est. Change in Number of Hourly Employees Working",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% Change in Employees Working")) %>% 
-      hc_xAxis(title=NULL) %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Employees Working: {point.y:,.0f}%") %>% 
@@ -2849,12 +3492,12 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data_ts %>%
+      dshs_tsa_24hr_data %>%
+        filter(!is.na(bed_avail_rate)) %>% 
         filter(date==max(date)) %>% 
         as_tibble() %>%
         select(tsa,tsa_counties,bed_avail_rate) %>% 
         filter(tsa_counties==input$countyname) %>%
-        # filter(tsa_counties=="Harris") %>%
         mutate_at(vars(bed_avail_rate), scales::percent_format(accuracy=.1)) %>% 
         distinct(bed_avail_rate) %>% 
         as.character()
@@ -2867,7 +3510,8 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data_ts %>%
+      dshs_tsa_24hr_data %>%
+        filter(!is.na(icu_avail_rate)) %>% 
         filter(date==max(date)) %>% 
         as_tibble() %>%
         select(tsa,tsa_counties,icu_avail_rate) %>% 
@@ -2885,7 +3529,8 @@ server <- function (input, output, session) {
       # Make sure requirements are met
       req(input$countyname)
       
-      dshs_tsa_hosp_data_ts %>% 
+      dshs_tsa_24hr_data %>% 
+        filter(!is.na(vent_avail_rate)) %>% 
         filter(date==max(date)) %>% 
         as_tibble() %>% 
         select(tsa,tsa_counties,vent_avail_rate) %>% 
@@ -2922,8 +3567,8 @@ server <- function (input, output, session) {
       dshs_tsa_24hr_data %>%
         filter(date==max(date)) %>%
         as_tibble() %>% 
-        # filter(tsa_counties==input$countyname) %>% 
-        filter(tsa_counties=="Harris") %>% 
+        filter(tsa_counties==input$countyname) %>%
+        # filter(tsa_counties=="Harris") %>% 
         mutate_at(vars(total_susp_covid_in_hosp_at_time_of_report), scales::comma) %>% 
         distinct(total_susp_covid_in_hosp_at_time_of_report) %>% 
         as.character()
@@ -2947,7 +3592,81 @@ server <- function (input, output, session) {
     
     # CHARTS - COUNTY------------------------------------------------------------------
     
+    # {TSA Hospital Resource Availability}  --------------------------------------------------
+    
+    output$cnty_hosp_resource_hchart <- renderHighchart({
+      
+      hosp_resource_avail <- dshs_tsa_24hr_data %>% 
+        ungroup() %>% 
+        select(date,tsa,tsa_counties,
+               `All Bed Availability`=bed_avail_rate,
+               `ICU Bed Availability`=icu_avail_rate, 
+               `Ventilator Availabiliity`=vent_avail_rate) %>% 
+        arrange(date) %>% 
+        filter(tsa_counties==input$countyname,
+               !is.na(`All Bed Availability`),
+               date >= as.Date("2020-03-16")) %>% 
+        gather(type, value, 4:6) %>% 
+        mutate(value=value*100)
+      
+      hosp_resource_avail_avg <- dshs_tsa_24hr_data %>% 
+        ungroup() %>% 
+        filter(tsa_counties==input$countyname,
+               !is.na(bed_avail_rate_7day_avg),
+               bed_avail_rate_7day_avg!=0,
+               date >= as.Date("2020-03-16")) %>% 
+        select(date,tsa,tsa_counties,
+               `All Bed Availability | 7-Day Avg.`=bed_avail_rate_7day_avg,
+               `ICU Bed Availability | 7-Day Avg.`=icu_avail_rate_7day_avg,
+               `Ventilator Availability | 7-Day Avg.`=vent_avail_rate_7day_avg) %>% 
+        arrange(date) %>% 
+        gather(type, value, 4:6) %>% 
+        mutate(value=value*100)
+      
+      key_events_fltr <- key_events %>%
+        filter(!str_detect(event,"Stimulus"))
+      
+      plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                        ~list(label = list(text = .y,
+                                           style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                        fontSize='12px',textTransform='initial')),
+                              color = "rgba(255, 255, 255, 0.6)",
+                              width = 1,
+                              dashStyle = "Dash",
+                              value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+      
+      hosp_resource_avail %>% 
+        hchart("line", hcaes(x = date, y = value, group=type), color = c("rgba(255, 255, 255, 0.5)","rgba(242, 104, 82, 0.5)", "rgba(255, 209, 0, 0.5)"),
+               tooltip = list(pointFormat = "<br><b>{series.name}</b>: {point.y:,.1f}%"),
+               animation=FALSE) %>% 
+        hc_add_series(hosp_resource_avail_avg, type = "spline", hcaes(x = date, y = value, group=type),
+                      tooltip = list(pointFormat = "<br><b>{series.name}</b>: {point.y:,.1f}%"),
+                      dashStyle = "Dash", color = c("#FFF","#F26852", "#FFD100")) %>%
+        hc_plotOptions(line = list(lineWidth=5)) %>%
+        hc_title(
+          text =paste0(input$countyname, " County | Hospital Resource Availability"),
+          useHTML = TRUE) %>% 
+        hc_subtitle(
+          text ="Covering only this TSA, this chart shows representations of hospital resource availability for All Beds, ICU Beds, and Ventilators. <br> [COLOR LEGEND] - <span style='color: #FFF;font-weight:bold;'>All Beds</span> | <span style='color: #F26852;font-weight:bold;'>ICU Beds</span> | <span style='color: #FFD100;font-weight:bold;'>Ventilators</span><br>[LINE LEGEND] - <span style='color: #FFF;font-weight:bold;'>Solid Line</span> = Daily Rate | <span style='color: #FFF;font-weight:bold;'>Dashed Line</span> = 7-Day Avg.",
+          useHTML = TRUE) %>% 
+        hc_yAxis(title = list(text ="% of Resource Available"),
+                 min = 0,
+                 max = 100) %>% 
+        hc_xAxis(title=NULL,
+                 plotLines=plotLines) %>% 
+        hc_tooltip(table = TRUE, sort = TRUE,
+                   shared=TRUE, crosshairs = TRUE) %>%
+        hc_legend(enabled=FALSE) %>% 
+        hc_credits(
+          enabled = TRUE,
+          text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
+          href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
+        hc_add_theme(tx2036_hc)
+      
+    })
+    
     # {TSA New COVID-Related ER Visits}  --------------------------------------------------
+    
     
     output$cnty_daily_covid_ers_hchart <- renderHighchart({
       
@@ -3540,12 +4259,25 @@ server <- function (input, output, session) {
         arrange(date) %>% 
         filter(date >= as.Date("2020-03-16"))
       
+      key_events_fltr <- key_events %>%
+        filter(!str_detect(event,"Stimulus"))
+      
+      plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                        ~list(label = list(text = .y,
+                                           style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                        fontSize='12px',textTransform='initial')),
+                              color = "rgba(255, 255, 255, 0.6)",
+                              width = 1,
+                              dashStyle = "Dash",
+                              value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+      
       nyt_county_cases_chart %>% 
         hchart("area", hcaes(x = date, y = cases), animation=FALSE,
                color = "#fff") %>% 
         hc_title(
           text = paste0(input$countyname, " County | COVID-19 Cases"),
           useHTML = TRUE) %>% 
+        hc_xAxis(title=NULL,plotLines=plotLines) %>% 
         hc_yAxis(title=list(text="Total Cases"),
                  min = round(mean(nyt_county_cases_chart$min_new), 1), 
                  max = round(mean(nyt_county_cases_chart$max_new), 1)) %>% 
@@ -3583,6 +4315,18 @@ server <- function (input, output, session) {
         ungroup() %>% 
         filter(date >= as.Date("2020-03-16"))
       
+      key_events_fltr <- key_events %>%
+        filter(!str_detect(event,"Stimulus"))
+      
+      plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                        ~list(label = list(text = .y,
+                                           style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                        fontSize='12px',textTransform='initial')),
+                              color = "rgba(255, 255, 255, 0.6)",
+                              width = 1,
+                              dashStyle = "Dash",
+                              value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+      
       nyt_cnty_new_cases_hchart %>% 
         hchart("column", hcaes(x = date, y = new_cases_1day), 
                animation=FALSE,
@@ -3601,6 +4345,7 @@ server <- function (input, output, session) {
         hc_yAxis(title=list(text="New Cases Per Day"),
                  min = mean(nyt_cnty_new_cases_hchart$min_new),
                  max = mean(nyt_cnty_new_cases_hchart$max_new)) %>% 
+        hc_xAxis(title=NULL,plotLines=plotLines) %>% 
         hc_tooltip(table = TRUE, sort = TRUE,
                    pointFormat = "<b>{point.name}</b><br>
                    New Cases: {point.y:,.0f}") %>% 
@@ -3634,6 +4379,18 @@ server <- function (input, output, session) {
         ungroup() %>% 
         filter(date >= as.Date("2020-03-16"))
       
+      key_events_fltr <- key_events %>%
+        filter(!str_detect(event,"Stimulus"))
+      
+      plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                        ~list(label = list(text = .y,
+                                           style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                        fontSize='12px',textTransform='initial')),
+                              color = "rgba(255, 255, 255, 0.6)",
+                              width = 1,
+                              dashStyle = "Dash",
+                              value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+      
       nyt_cnty_new_deaths_hchart %>% 
         hchart("column", hcaes(x = date, y = new_deaths_1day), 
                animation=FALSE,
@@ -3652,6 +4409,7 @@ server <- function (input, output, session) {
         hc_yAxis(title=list(text="New Deaths Per Day"),
                  min = mean(nyt_cnty_new_deaths_hchart$min_new),
                  max = mean(nyt_cnty_new_deaths_hchart$max_new)) %>% 
+        hc_xAxis(title=NULL,plotLines=plotLines) %>% 
         hc_tooltip(table = TRUE, sort = TRUE,
                    pointFormat = "<b>{point.name}</b><br>
                    New Deaths: {point.y:,.0f}") %>% 
