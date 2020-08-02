@@ -28,6 +28,7 @@ library(waiter)
 library(sever)
 library(sf)
 library(zoo)
+library(shinyalert)
 
 # Helper Functions --------------------------------------------------------
 
@@ -44,7 +45,6 @@ thumbnail_label <- function (title, label, content, button_link, button_label) {
                                           label=button_label)
                          )))
 }
-
 
 tx2036_hc <- hc_theme_merge(
   hc_theme_smpl(),
@@ -125,7 +125,8 @@ key_events <- vroom("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2q_c5Rpyw
 
 jhu_cases_state_us <- vroom("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases_state.csv") %>% 
   janitor::clean_names() %>%
-  filter(country_region=="US") %>%
+  filter(country_region=="US",
+         !str_detect(province_state, "Diamond Princess|Grand Princess|Guam|Puerto Rico|Virgin Islands|Northern Mariana Islands|American Samoa")) %>%
   group_by(last_update) %>% 
   mutate(cases_rank=dense_rank(desc(confirmed)),
          deaths_rank=dense_rank(desc(deaths)),
@@ -143,6 +144,9 @@ jhu_cases_state <- jhu_cases_state_us %>%
   filter(province_state=="Texas") %>%
   mutate(fips=as.character(fips))
 
+r_naught <- vroom("https://d14wlfuexuxgcm.cloudfront.net/covid/rt.csv") %>% 
+  filter(region=="TX")
+
 county_lat_long <- vroom("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/web-data/data/cases.csv") %>%
   janitor::clean_names() %>% 
   filter(province_state=="Texas") %>%
@@ -153,7 +157,7 @@ county_lat_long <- vroom("https://raw.githubusercontent.com/CSSEGISandData/COVID
 
 # ~~NYT Data --------------------------------------------------------------
 
-nyt_county_cases <- vroom("https://texas-2036.github.io/covid-data/county.csv") %>%
+nyt_county_cases <- vroom("clean_data/dshs/testing/county_table.csv") %>%
   rename(cases=total_confirmed_cases,
          deaths=total_fatalities) %>%
   mutate(date=gsub("2020-07-30","	2020-06-30",x=date)) %>% 
@@ -194,11 +198,17 @@ if (is.na(date1$active_cases)) {
 }
 
 dshs_hosp_rate_ts <- vroom("clean_data/dshs/hospitals/hosp_rate_ts.csv") %>% 
-  select(-hospitalized)
+  rename(hospitalizations=hospitalized)
 
-nyt_state_cases_tx <- vroom("https://texas-2036.github.io/covid-data/state.csv") %>%
-  left_join(dshs_hosp_rate_ts,by="date") %>% 
+dshs_state_trends <- vroom("clean_data/dshs/cases/state_test_trends.csv")
+
+# nyt_state_cases_tx <- vroom("https://texas-2036.github.io/covid-data/state.csv") #%>%
+nyt_state_cases_tx <- vroom("clean_data/dshs/cases/state_cases_trends.csv") %>%
+  left_join(dshs_hosp_rate_ts,by=c("date","state","fips")) %>% 
+  left_join(dshs_state_trends, by=c("date","state","fips")) %>% 
+  # select(-x1) %>% 
   rename(cases=cumulative_cases,
+         # daily_new_fatalities=fatalities_by_date_of_death,
          deaths=cumulative_fatalities) %>%
   mutate(population=27885195,
          min = min(cases),
@@ -236,8 +246,18 @@ hosp_rate_hchart <- nyt_state_cases_tx %>%
   #        max_new = max(hosp_rate, na.rm = TRUE)) %>% 
   ungroup()
 
+hospt_rate_hchart <- nyt_state_cases_tx %>% 
+  arrange(date) %>%
+  select(date,hosp_rate) %>% 
+  mutate(hosp_rate_7day_avg = rollmean(hosp_rate, 7, 
+                                       fill=0, align = "right")) %>% 
+  filter(date >= as.Date(date_filter),
+         !is.na(hosp_rate)) %>% 
+  mutate(min_new = min(hosp_rate, na.rm = TRUE),
+         max_new = max(hosp_rate, na.rm = TRUE))
+
 nyt_state_cases_text <- nyt_state_cases_tx %>%
-  fill(c(active,recovered), .direction="down") %>% 
+  fill(c(active,recovered, mort_rate), .direction="down") %>% 
   filter(date==max(date)) %>% 
   select(cases,mort_rate,active,recovered) %>% 
   mutate_at(vars(cases,active,recovered), scales::comma) %>% 
@@ -310,7 +330,7 @@ tex_today_tests <- test_daily %>%
 
 # COVID Relief Data -------------------------------------------------------
 
-covid_relief <- vroom("clean_data/covid_relief/crf_data.csv")
+covid_relief <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/covid_relief/crf_data.csv")
 
 
 # ~~DSHS Data ----
@@ -319,8 +339,6 @@ dshs_state_demographics <- vroom("clean_data/dshs/cases/time_series_demographics
   mutate(fips=as.character(fips))
 
 dshs_case_trends <- vroom("clean_data/dshs/cases/state_cases_trends.csv")
-
-dshs_state_trends <- vroom("clean_data/dshs/cases/state_test_trends.csv")
 
 dshs_case_fatality_totals <- dshs_case_trends %>% 
   select(date,cases=cumulative_cases, fatalities=cumulative_fatalities) %>% 
@@ -390,7 +408,7 @@ google_mobil_tx_cnties <- vroom("https://texas-2036.github.io/covid-data/google_
 # ** Economic Data -----------------------------------------------------------
 
 
-# Affinity Spending Data --------------------------------------------------
+# ~~ Affinity Spending Data --------------------------------------------------
 
 # ~~Homebase Data ---------------------------------------------------------
 
@@ -530,20 +548,16 @@ state_case_growth <- dshs_case_trends %>%
   mutate(min_new = as.numeric(min_new),
          max_new = as.numeric(max_new)) %>% 
   filter(date >= as.Date(date_filter)) %>% 
+  mutate(date=as_date(date)) %>% 
   ungroup()
+
+
+# HEADER CODE  ------------------------------------------------------------
 
 header <- dashboardHeader(disable = FALSE,
                           title = tags$a(href='http://www.texas2036.org',
                                          HTML('<svg viewBox="0 0 227.4 83.5" style="height:4.5vh;padding-bottom:1.1vh;margin-top:7px"><path fill="#3a4a9f" d="M192.5 66.2c2.2 0 3.9.6 3.9 2.6v4.1c0 2-1.7 3.6-3.9 3.6-2.1 0-3.8-1.6-3.8-3.6v-5.1h-7.8v5.1c0 5.9 5.2 10.6 11.6 10.6 6.4 0 11.5-4.6 11.7-10.4.6 5.4 5.6 10.4 11.6 10.4 6.4 0 11.6-4.8 11.6-10.6v-7.4c0-5.8-5.2-10.6-11.6-10.6-1.4 0-2.7.2-3.9.6v-4.1c0-1.9 1.8-3.5 3.9-3.5 2.1 0 3.8 1.6 3.8 3.5v2.2h7.8v-2.2c0-4-2.5-7.5-6.1-9.3 3.6-1.8 6.1-5.3 6.1-9.3V10.5c0-5.8-5.2-10.5-11.6-10.5-6.1 0-11.1 4.3-11.6 9.8-.4-5.5-5.5-9.8-11.7-9.8-6.4 0-11.6 4.7-11.6 10.6v2.6h7.8v-2.6c0-1.9 1.7-3.5 3.8-3.5 2.2 0 3.9 1.6 3.9 3.5v.8l-.1.1-13 15.6c-2.3 2.8-2.4 3-2.4 5.9v10.5h4.1c-2.5 1.9-4.1 4.8-4.1 8v2.2h7.8v-2.2c0-1.9 1.7-3.5 3.8-3.5 2.2 0 3.9 1.6 3.9 3.5v4.1c0 2-1.7 3.6-3.9 3.6h-2.4v7.1h2.4zm19.4-55.6c0-1.9 1.7-3.5 3.8-3.5 2.1 0 3.8 1.6 3.8 3.5v20.7c0 2-1.7 3.6-3.8 3.6-2.1 0-3.8-1.6-3.8-3.6V10.6zm-7.8 57c-.3-1.9-1.3-3.3-2.9-5 1.6-1.6 2.6-3.7 2.9-5.9v10.9zm-15.4-32.8v-2.6l13.1-15.8c1.6-1.9 2.2-2.6 2.3-3.8v20.3c0 .5 0 .9.1 1.3l2.1 6.4h6.8l-5.5 4 2.1 6.5-5.5-4-5.5 4 2.1-6.5-5.5-4h6.8l1.9-5.9h-15.3zm30.9 38.1c0 2-1.7 3.6-3.8 3.6-2.2 0-3.9-1.6-3.9-3.6v-7.4c0-1.9 1.8-3.5 3.9-3.5 2.1 0 3.8 1.6 3.8 3.5v7.4zM8.4 82.7V8H0V0h24.8v8h-8.4v74.8h-8zm45.4 0H33V0h20.8v8H41v29.5h12.8v8H41v29.4h12.8v7.8zm70.2 0V45.3h-12.8v37.4h-8V14.4c0-8 6.5-14.4 14.4-14.4 7.8 0 14.3 6.5 14.3 14.4v68.3H124zm0-68.3c0-3.6-2.9-6.5-6.3-6.5-3.6 0-6.5 2.9-6.5 6.5v22.9H124V14.4zm37.6 6.1v-6.2c0-3.5-2.9-6.3-6.3-6.3-3.5 0-6.3 2.9-6.3 6.3v6.3c0 1.5 0 1.5.4 2.1l17.9 31.6c2.4 4.2 2.4 4.2 2.4 7.8v6.2c0 8-6.5 14.3-14.3 14.3S141 76.4 141 68.4v-6.2h8v6.2c0 3.6 2.9 6.5 6.3 6.5 3.5 0 6.3-2.9 6.3-6.5v-6.2c0-1.4 0-1.4-.4-2l-17.9-31.6c-2.4-4.2-2.4-4.2-2.4-8v-6.3C141 6.5 147.5 0 155.3 0s14.3 6.5 14.3 14.3v6.2h-8zM95.9 0h-8.2l-9.2 28.7L69.3 0h-8.2l13.3 41.6L61.1 83h8.3l9.1-28.5L87.6 83h8.3L82.6 41.6z"></path><svg>'),
-                                         tags$title('Texas COVID-19 Resource Kit'))
-                          # dropdownMenu(type = "notifications",
-                          #              headerText=NULL,
-                          #              badgeStatus = "info",
-                          #              notificationItem(
-                          #                text = "New County Data Has Been Added",
-                          #                icon("users")
-                          #              ))
-)
+                                         tags$title('Texas COVID-19 Resource Kit')))
 
 # SIDEBAR CODE-----------------------------------------------------------
 
@@ -553,22 +567,22 @@ sidebar <- dashboardSidebar(disable = FALSE,
                               id = "tabs",
                               menuItem("Introduction",
                                        tabName = "intro", 
-                                       icon = icon("square")),
+                                       icon = icon("square", class="fad fa-square")),
                               menuItem("Reopening",
                                        tabName = "reopening", 
-                                       icon = icon("door-open")),
+                                       icon = icon("door-open", class="fad fa-door-open")),
                               menuItem("State Explorer",
                                        tabName = "state_profiles", 
-                                       icon = icon("landmark")),
+                                       icon = icon("landmark", class="fad fa-landmark")),
                               menuItem("County Explorer",
                                        tabName = "county_profiles", 
-                                       icon = icon("city")),
+                                       icon = icon("city", class="fad fa-city")),
                               menuItem("Credits",
                                        tabName = "credits",
-                                       icon = icon("circle")),
+                                       icon = icon("circle", class="fad fa-circle")),
                               menuItem("Data",
                                        tabName = "data",
-                                       icon = icon("circle")),
+                                       icon = icon("circle", class="fad fa-circle")),
                               actionButton("about", "About"),
                               actionButton("learn", "Learn More")
                               # actionButton("show", "Learn More", icon = icon("info-circle", class = "fa-pull-left"), style="color: #152934"),
@@ -593,6 +607,7 @@ body <- dashboardBody(
   
   # **Landing Page ----------------------------------------------------------
   use_sever(),
+  useShinyalert(),
   meta() %>%
     meta_social(
       title = "Texas 2036 | Texas COVID-19 Data Resource",
@@ -614,17 +629,17 @@ body <- dashboardBody(
             hr(),
             br(),
             fluidRow(
-              column(4, thumbnail_label(title="<i class='fas fa-door-open'></i>",
+              column(4, thumbnail_label(title="<i class='fad fa-door-open fa-3x'></i>",
                                         label = 'Reopening Analysis',
                                         content = includeMarkdown("markdown/intro/reopening.md"),
                                         button_link ='explore_reopen', 
                                         button_label = 'Explore')),
-              column(4, thumbnail_label(title="<i class='fas fa-landmark'></i>", 
+              column(4, thumbnail_label(title="<i class='fad fa-landmark fa-3x'></i>", 
                                         label = 'State Explorer',
                                         content = includeMarkdown("markdown/intro/state.md"),
                                         button_link ='explore_state', 
                                         button_label = 'Explore')),
-              column(4, thumbnail_label(title="<i class='fas fa-city'></i>",
+              column(4, thumbnail_label(title="<i class='fad fa-city fa-3x'></i>",
                                         label = 'County Explorer',
                                         content = includeMarkdown("markdown/intro/county.md"),
                                         button_link = 'explore_county', 
@@ -665,13 +680,27 @@ body <- dashboardBody(
               infoBoxOutput("tx_recover", width=3),
               infoBoxOutput("tx_active", width=3)
             ),
+            # fluidRow(
+            #   br(),
+            #   column(width = 12,
+            #          tags$div(class="source-notes",
+            #                   br(),
+            #                   h4(style="font-weight:700;display:inline;","Source Notes:"),
+            #                   h4(style="font-weight:400;display:inline;","Before July, Texas 2036 sourced figures for confirmed cases, deaths as a percent of all cases, estimated recoveries, and estimated active cases from Johns Hopkins University's COVID-19 Data Repository. As of July 2014, we have switched to sourcing figures from the Texas Department of State Health Services' 'COVID-19 Accessible Dashboard Data'. In addiiton, rankings are still being produced by Texas 2036 using the Johns Hopkins University dataset (which records data from other territorities states), but rankings have been updated to only reflect comparisons between Texas, other US States, and DC only. Prior to July, comparisons included other US Territories."),
+            #          ),
+            #          hr()
+            #   )
+            # ),
+            
             
             # ~~Trends Over Time --------------------------------------------------------
             
             h3(class="covid-topic", "Trends Over Time", span="id='statewide_tot"),
             fluidRow(
-              column(width=12, 
-                     highchartOutput("state_new_cases_hchart", height = 350))
+              column(width=6, 
+                     highchartOutput("state_new_cases_hchart", height = 375)),
+              column(width=6, 
+                     highchartOutput("infection_chart", height = 375)),
             ),
             fluidRow(
               column(width = 6,
@@ -693,7 +722,7 @@ body <- dashboardBody(
                    tags$div(class="tsa-paragraph",
                             br(),
                             h4(style="font-weight:700;display:inline;","NOTE:"),
-                            h4(style="font-weight:400;display:inline;","These charts were developed by recording each day's value from the DSHS daily report published on their 'Accessible Dashboard Data' report posted on their site every day, saving a copy of that information in a timestamped file on our github, and then organizing each of the individual timestamped files into a single time-series dataset that allows us to track trends in population health as the completes more cases and fatality investigations."),
+                            h4(style="font-weight:400;display:inline;","These charts were developed by recording each day's value from the DSHS daily report published on their 'Accessible Dashboard Data' report posted on their site every day, saving a copy of that information in a timestamped file on our github, and then organizing each of the individual timestamped files into a single time-series dataset that allows us to track trends in population health as the completes more cases and fatality investigations. As of July 27th, fatality demographics have shifted from being processed using data from completed epidemiological fatality investigations to being processed using data from death certificates."),
                    ),
                    br(),
                    hr()
@@ -795,8 +824,10 @@ body <- dashboardBody(
             ),
             hr(),
             fluidRow(
-              column(width = 12,
-                     highchartOutput("state_hosp_chart", height = 375))
+              column(width = 6,
+                     highchartOutput("state_hosp_chart", height = 375)),
+              column(width = 6,
+                     highchartOutput("state_hosp_rate_chart", height = 375))
             ),
             fluidRow(
               column(width = 12,
@@ -1156,13 +1187,31 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
 
 server <- function (input, output, session) {
   
+  shinyalert(
+    title = "Fatality Data & Hospital Data Update",
+    text = "<h4><i class='fad fa-virus'></i> | Fatality Data</h4>As of July 27, Texas DSHS is now reporting COVID-19 fatality data based on death certificates. A fatality is counted as a COVID-19 fatality when the medical certifier attests on the death certificate that COVID-19 is a cause of death. This change means fatalities may be counted sooner and demographic data will be more comprehensive. Fatalities are reported by county of residence.</br></br><h4><i class='fad fa-hospital-symbol'></i> |  Hospital Capacity Data</h4>In addition, the state's adjustment to new federal requirements for reporting hospital data is creating a lag in our ability to report daily hospital capacity information. As we get complete data, we will include it on our dash board.",
+    closeOnEsc = TRUE,
+    closeOnClickOutside = FALSE,
+    html = TRUE,
+    type = "warning",
+    showConfirmButton = TRUE,
+    showCancelButton = FALSE,
+    confirmButtonText = "OK",
+    confirmButtonCol = "#F26852",
+    timer = 0,
+    imageUrl = "",
+    animation = TRUE
+  )
+  
+  myMenuItems <- c("downloadCSV", "downloadXLS","separator", "downloadPNG", "downloadJPEG", "downloadPDF", "downloadSVG")
+
   Sys.sleep(3) # do something that takes time
   waiter_hide()
   
   # Waiter + Waitress Functions ---------------------------------------------
   
   w <- Waiter$new(html = spin_facebook(), 
-                  id = c("tx_cases","state_growth_rate_hchart", "cli_hchart", "ili_hchart", "state_curves_hchart",
+                  id = c("tx_cases","state_growth_rate_hchart", "infection_chart","cli_hchart", "ili_hchart", "state_curves_hchart",
                          "state_new_cases_hchart", "state_new_deaths_hchart", "state_new_tests_hchart",
                          "state_cases_race", "state_fatalities_race", "state_cases_age",
                          "state_fatalities_age", "state_cases_gender", "state_fatalities_gender",
@@ -1278,7 +1327,7 @@ server <- function (input, output, session) {
     infoBox(
       value=paste0(dshs_cases_text$cumulative_cases), title="Total Cases",
       subtitle=paste0(tx_cases$cases_rank, " Most in US"),
-      icon = icon("chart-line"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+      icon = icon("chart-line", class = "fad fa-chart-line"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
@@ -1289,7 +1338,7 @@ server <- function (input, output, session) {
     infoBox(
       title="Deaths (% of All Cases)", value=paste0(nyt_state_cases_text$mort_rate),
       subtitle=paste0(tx_mort$mortality_rank, " Most in US"),
-      icon = icon("virus"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
+      icon = icon("virus", class="fad fa-virus"), color = "navy", href="https://github.com/CSSEGISandData/COVID-19?target=_blank"
     )
   })
   
@@ -1301,7 +1350,7 @@ server <- function (input, output, session) {
     infoBox(
       title="Est. Recovered", value=paste0(nyt_state_cases_text$recovered),
       subtitle=paste0(tx_recover$recovered_rank, " Most in US"),
-      icon = icon("hand-holding-medical"), color = "navy", href=NULL
+      icon = icon("hand-holding-medical", class="fad fa-hand-holding-medical"), color = "navy", href=NULL
     )
   })
   
@@ -1312,7 +1361,7 @@ server <- function (input, output, session) {
     infoBox(
       title="Est. Active", value=paste0(nyt_state_cases_text$active),
       subtitle=paste0(tx_active$active_rank, " Most in US"),
-      icon = icon("lungs-virus"), color = "navy", href=NULL
+      icon = icon("lungs-virus", class="fad fa-lungs-virus"), color = "navy", href=NULL
     )
   })
   
@@ -1331,7 +1380,7 @@ server <- function (input, output, session) {
       title="% Hospitalized", 
       value=paste0(tot_pos$hosp_rate, "%"),
       subtitle="% of Active Cases",
-      icon = icon("hospital-user"), color = "navy", href=NULL
+      icon = icon("hospital-user", class = "fad fa-hospital-user"), color = "navy", href=NULL
     )
   })
   
@@ -1351,7 +1400,8 @@ server <- function (input, output, session) {
     
     
     infoBox(
-      title="All Beds Availability", value=paste0(tot_pos$bed_avail_rate), icon=icon("bed"),
+      title="All Beds Availability", value=paste0(tot_pos$bed_avail_rate), 
+      icon=icon("bed", class = "fad fa-bed"),
       subtitle="of All Beds Available",
       color = "navy", href=NULL
     )
@@ -1374,7 +1424,7 @@ server <- function (input, output, session) {
     infoBox(
       title="ICU Beds Availability", 
       value=paste0(tot_pos$icu_avail_rate),
-      icon=icon("procedures"),
+      icon=icon("procedures", class = "fad fa-procedures"),
       subtitle="of ICU Beds Available",
       color = "navy", href=NULL)
   })
@@ -1394,12 +1444,81 @@ server <- function (input, output, session) {
     
     
     infoBox(
-      title="Ventilator Availability", value=paste0(tot_pos$vent_avail_rate), icon=icon("lungs"),
+      title="Ventilator Availability", value=paste0(tot_pos$vent_avail_rate), 
+      icon=icon("lungs", class = "fad fa-lungs"),
       subtitle="of Ventilators Available",
       color = "navy", href=NULL)
   })
   
   # CHARTS - STATE ----------------------------------------------------------
+  
+  # {State Infection Rate Charts}  --------------------------------------------------
+  
+  output$infection_chart <- renderHighchart({
+    
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    dates <- key_events_fltr$date
+    events <- key_events_fltr$event
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
+    r_naught %>% 
+      hchart("line", hcaes(x = date, y = mean), animation=FALSE,
+             tooltip = FALSE,
+             threshold = 1, negativeColor = "#FFD100",  color = "#F26852") %>%
+      hc_add_series(r_naught, type = "arearange",
+                    hcaes(x = date, low = lower_80,
+                          high = upper_80),
+                    threshold = 1, negativeColor = "#FFD100", color = "#F26852",
+                    linkedTo = "r_naught") %>%
+      hc_plotOptions(arearange = list(fillOpacity=.3)) %>%
+      hc_title(
+        text ="Texas Effective Reproduction Rate · R<sub>t</sub>",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="<span>From R<sub>t</sub> Live: R<sub>t</sub>  is the average number of people who become infected by an infectious person.</span><br/><span style='color: #F26852'>  If it’s above 1.0, COVID-19 will spread quickly.</span> <span style='color: #FFD100'> If it’s below 1.0, infections will slow.</span>",
+        useHTML = TRUE) %>%
+      hc_yAxis(title = list(text="Effective Reproduction Rate (R<sub>t</sub>)"),
+               min = min(r_naught$lower_80), 
+               max = max(r_naught$upper_80)) %>% 
+      hc_xAxis(title=NULL,
+               plotLines = plotLines) %>% 
+      hc_tooltip(table = FALSE, sort = FALSE,
+                 pointFormat = "Effective Reproduction Rate · R<sub>t</sub>: {point.mean:,.2f}<br>") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: rt.live Analysis",
+        href = "https://rt.live") %>%
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
+    
+  })
   
   # {State Growth Rate Charts}  --------------------------------------------------
   
@@ -1448,7 +1567,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
   })
@@ -1497,7 +1634,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas Department of State Health Services (DSHS)",
         href = NULL) %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -1544,7 +1699,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas Department of State Health Services (DSHS)",
         href = NULL) %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -1580,20 +1753,37 @@ server <- function (input, output, session) {
                             dashStyle = "Dash",
                             value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
     
+    band_df <- list(
+      band_text = c("No Rate Reported","No Rate Reported"),
+      band_from = c("2020-05-22","2020-05-29"),
+      band_to = c("2020-05-24","2020-05-31"))
+    
+    draw_bands <- function(band_text, band_from, band_to, ...) {
+      list(label = list(text = band_text, rotation = 90, y = 100, x=-5,
+                        style = list(color = "rgba(255,255,255, 0.5)", fontWeight = '300',
+                                     fontSize='16px',textTransform='uppercase')),
+           color = "rgba(0, 45, 116, 0.7)",
+           width = 2,
+           from = datetime_to_timestamp(as.Date(band_from, tz="UTC")),
+           to = datetime_to_timestamp(as.Date(band_to, tz="UTC")))
+    }
+    
+    plotBands <- pmap(band_df,draw_bands)
+    
     state_test_trends %>% 
       arrange(date) %>% 
       filter(date >= as.Date("2020-03-16")) %>% 
-      hchart("area", hcaes(x = date, y = test_pos), animation=FALSE,
+      hchart("area", hcaes(x = date, y = test_pos), animation=FALSE, name = "7-Day Avg. Test Positivty",
              tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>7-Day Avg. Positivty</b>: {point.y:,.2f}%"),
-             color='rgba(255, 255, 255, 0.6)') %>% 
+             color='rgba(255,255,255, 0.6)') %>% 
       hc_title(
         text ="Texas COVID-19 Test Positive Rate | 7-Day Avg. History",
         useHTML = TRUE) %>% 
       hc_subtitle(text="This data comes from DSHS Accessible Data Dashboard. DSHS Calculates their test positive 7-day Avg. History as follows: 'Positivity rate' (previous 7 days) = New cases (previous 7 days) / New test results (previous 7 days), excluding antibody tests in rate reported 19-May onwards. Gaps indicate missing reported data.") %>% 
       hc_yAxis(title = list(text ="Test Positive Rate (%)"),
-               min = round(min(state_test_trends$min), 2), 
-               max = round(min(state_test_trends$max), 2)) %>% 
-      hc_xAxis(title=NULL,plotLines=plotLines) %>% 
+               min = round(min(state_test_trends$test_pos), 2), 
+               max = round(max(state_test_trends$test_pos), 2)) %>% 
+      hc_xAxis(title=NULL,plotLines=plotLines,plotBands=plotBands) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
                    Test Positive Rate: {point.y:,.0f}<br>") %>% 
@@ -1602,7 +1792,26 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       title = "Export This Chart",
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1617,7 +1826,8 @@ server <- function (input, output, session) {
     state_case_trends <- dshs_case_trends %>% 
       select(date,cases=cumulative_cases) %>% 
       mutate(min = min(dshs_case_trends$cumulative_cases, na.rm = TRUE),
-             max = max(dshs_case_trends$cumulative_cases, na.rm = TRUE))
+             max = max(dshs_case_trends$cumulative_cases, na.rm = TRUE)) %>% 
+      mutate(date=as_date(date))
     
     key_events_fltr <- key_events %>%
       filter(!str_detect(event,"Stimulus"))
@@ -1651,7 +1861,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     nyt_tx_hchart
     
@@ -1696,7 +1924,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1720,10 +1966,10 @@ server <- function (input, output, session) {
       hchart("bar", hcaes(x = report_type, y = value, group = cat2), animation=FALSE,
              tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.value:,.0f}")) %>% 
       hc_title(
-        text ="Status of Completed Fatality Investigations",
+        text ="Percent of Death Certificates Processed",
         useHTML = TRUE) %>% 
       hc_subtitle(
-        text ="As of today, this is the breakdown of completed and remaing investigations received by DSHS from local and regional health departments.",
+        text ="As of today, this is the breakdown of death certificates that have been processed for demographic data by DSHS.",
         useHTML = TRUE) %>% 
       hc_yAxis(title = list(text ="% of All Investigations")) %>%
       hc_xAxis(title = NULL,
@@ -1739,7 +1985,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1774,7 +2038,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1784,30 +2066,55 @@ server <- function (input, output, session) {
     
     dataset()
     
-    dshs_state_demographics %>% 
+    race_dem <- dshs_state_demographics %>% 
       mutate(pct=round(pct*100,digits=2)) %>% 
       arrange(date) %>% 
-      filter(date >= as.Date("2020-03-16"),
+      filter(date == max(date),
              report_type=="fatalities",
-             demographic_type=="race") %>% 
-      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
+             demographic_type=="race") 
+    
+    hchart(data_to_hierarchical(race_dem, group_vars=group, size_var = pct,
+                                colors = list("rgba(59, 154, 178,0.8)",
+                                              "rgba(120, 183, 197,0.8)",
+                                              "rgba(235, 204, 42,0.8)",
+                                              "rgba(225, 175, 0,0.8)",
+                                              "rgba(242, 26, 0,0.8)",
+                                              "rgba(196, 203, 106,0.8)")),
+           type = "treemap",
+           tooltip = list(pointFormat = "<br>Share of Deaths: {point.value:,.2f}%"),
+           animated = FALSE) %>% 
       hc_title(
         text ="Texas COVID-19 Fatalities, by Race",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="% of Total, By Race")) %>%
-      hc_xAxis(title=NULL) %>% 
+      hc_subtitle(
+        text="This chart breaks data that has been processed from death certificates by DSHS, by race. Each box represents the share of each group's representation among all recorded COVID-19 deaths in Texas."
+      ) %>% 
       hc_legend(enabled=FALSE) %>% 
-      hc_tooltip(table = TRUE, sort = TRUE,
-                 shared=TRUE) %>%
-      hc_plotOptions(area = list(fillOpacity=.5),
-                     series = list(stacking = "percent")) %>%
-      hc_colors(colors = list("#FEDA26","#CCB233", "#CCBE7A", "#D9D2AD", "#6CB6D9", "#3091BF","#0072A6","#DBDCDD")) %>% 
+      hc_plotOptions(series = list(setOpacity=.5)) %>%
+      hc_colors(colors = list("#3B9AB2", "#78B7C5", "#EBCC2A", "#E1AF00", "#F21A00")) %>% 
       hc_credits(
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1840,7 +2147,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1850,30 +2175,59 @@ server <- function (input, output, session) {
     
     dataset()
     
-    dshs_state_demographics %>% 
+    age_dem <- dshs_state_demographics %>% 
       mutate(pct=round(pct*100,digits=2)) %>% 
       arrange(date) %>% 
-      filter(date >= as.Date("2020-03-16"),
+      filter(date == max(date),
              report_type=="fatalities",
-             demographic_type=="ages") %>% 
-      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-             tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
+             demographic_type=="ages") 
+    
+    hchart(data_to_hierarchical(age_dem, group_vars=group, size_var = pct,
+                                colors = list("rgba(124,181,236,0.8)",
+                                              "rgba(67,67,72,0.8)",
+                                              "rgba(144,237,125,0.8)",
+                                              "rgba(247,163,92,0.8)",
+                                              "rgba(128,133,233,0.8)",
+                                              "rgba(241,92,128,0.8)",
+                                              "rgba(228,211,84,0.8)",
+                                              "rgba(43,144,143,0.8)",
+                                              "rgba(244,91,91,0.8)",
+                                              "rgba(145,232,225,0.8)")),
+           type = "treemap",
+           tooltip = list(pointFormat = "<br>Share of Deaths: {point.value:,.2f}%"),
+           animated = FALSE) %>% 
       hc_title(
         text ="Texas COVID-19 Fatalities, by Age",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="% of Total, By Age")) %>%
-      hc_xAxis(title=NULL) %>% 
+      hc_subtitle(
+        text="This chart breaks data that has been processed from death certificates by DSHS, by age. Each box represents the share of each group's representation among all recorded COVID-19 deaths in Texas."
+      ) %>% 
       hc_legend(enabled=FALSE) %>% 
-      hc_tooltip(table = TRUE, sort = TRUE,
-                 shared=TRUE) %>%
-      hc_plotOptions(area = list(fillOpacity=.5),
-                     series = list(stacking = "percent")) %>%
-      # hc_colors(colors = list("#002D74","#2A7DE1","#DBDCDD")) %>% 
+      hc_plotOptions(treemap = list(fillOpacity=.5)) %>%
+      hc_colors(colors = list("#FEDA26","#CCB233", "#CCBE7A", "#D9D2AD", "#6CB6D9", "#3091BF","#0072A6","#DBDCDD")) %>% 
       hc_credits(
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1906,7 +2260,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1916,30 +2288,50 @@ server <- function (input, output, session) {
     
     dataset()
     
-    dshs_state_demographics %>% 
+    gender_dem <- dshs_state_demographics %>% 
       mutate(pct=round(pct*100,digits=2)) %>% 
       arrange(date) %>% 
-      filter(date >= as.Date("2020-03-16"),
+      filter(date == max(date),
              report_type=="fatalities",
-             demographic_type=="gender") %>% 
-      hchart("area", hcaes(x = date, y = pct, group=group, colors=group), animation=FALSE,
-              tooltip = list(pointFormat = "<br><span style='color:{point.color}'>\u25CF</span> <b>{series.name}</b>: {point.pct:,.2f}%")) %>% 
+             demographic_type=="gender") 
+    
+    hchart(data_to_hierarchical(gender_dem, group_vars=group, size_var = pct,
+                                colors = list("rgba(0,45,116,0.8)",
+                                              "rgba(42,125,225,0.8)",
+                                              "rgba(219,220,221,0.8)")),
+           type = "treemap",
+           tooltip = list(pointFormat = "<br>Share of Deaths: {point.value:,.2f}%"),
+           animated = FALSE) %>% 
       hc_title(
         text ="Texas COVID-19 Fatalities, by Gender",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="% of Total, By Gender")) %>%
-      hc_xAxis(title=NULL) %>% 
+      hc_subtitle(
+        text="This chart breaks data that has been processed from death certificates by DSHS, by gender. Each box represents the share of each group's representation among all recorded COVID-19 deaths in Texas."
+      ) %>% 
       hc_legend(enabled=FALSE) %>% 
-      hc_tooltip(table = TRUE, sort = TRUE,
-                 shared=TRUE) %>%
-      hc_plotOptions(area = list(fillOpacity=.5),
-                     series = list(stacking = "percent")) %>%
-      hc_colors(colors = list("#002D74","#2A7DE1","#DBDCDD")) %>% 
       hc_credits(
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -1957,7 +2349,8 @@ server <- function (input, output, session) {
              max_new = as.numeric(max_new)) %>% 
       ungroup() %>% 
       arrange(date) %>% 
-      filter(date >= as.Date("2020-03-16"))
+      filter(date >= as.Date("2020-03-16")) %>% 
+      mutate(date=as_date(date))
     
     key_events_fltr <- key_events %>%
       filter(!str_detect(event,"Stimulus"))
@@ -1999,7 +2392,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -2018,7 +2429,8 @@ server <- function (input, output, session) {
              max_new = as.numeric(max_new)) %>% 
       ungroup() %>% 
       arrange(date) %>% 
-      filter(date >= as.Date("2020-03-16"))
+      filter(date >= as.Date("2020-03-16")) %>% 
+      mutate(date=as_date(date))
     
     key_events_fltr <- key_events %>%
       filter(!str_detect(event,"Stimulus"))
@@ -2041,12 +2453,12 @@ server <- function (input, output, session) {
                     color = "#FFD100", name="7-Day Avg.") %>%
       hc_plotOptions(area = list(fillOpacity=.3)) %>% 
       hc_title(
-        text ="Texas COVID-19 Daily New Deaths",
+        text ="Texas COVID-19 Fatalities by Date of Death",
         useHTML = TRUE) %>% 
       hc_subtitle(
         text ="LEGEND - <span style='color: #FFD100'>7-DAY ROLLING AVG.</span>",
         useHTML = TRUE) %>% 
-      hc_yAxis(title = list(text ="New Deaths Per Day"),
+      hc_yAxis(title = list(text ="Deaths By Date"),
                min = mean(nyt_tx_new_cases_hchart$min_new),
                max = mean(nyt_tx_new_cases_hchart$max_new)) %>% 
       hc_xAxis(title=NULL,
@@ -2054,12 +2466,30 @@ server <- function (input, output, session) {
       hc_legend(enabled=FALSE) %>% 
       hc_tooltip(table = TRUE, sort = TRUE,
                  pointFormat = "<b>{point.name}</b><br>
-                   New Deaths: {point.y:,.0f}") %>% 
+                   Deaths: {point.y:,.0f}") %>% 
       hc_credits(
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
         href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -2082,7 +2512,8 @@ server <- function (input, output, session) {
       mutate(min_new = as.numeric(min_new),
              max_new = as.numeric(max_new)) %>% 
       ungroup() %>% 
-      filter(date >= as.Date("2020-03-16"))
+      filter(date >= as.Date("2020-03-16")) %>% 
+      mutate(date=as_date(date))
     
     key_events_fltr <- key_events %>%
       filter(!str_detect(event,"Stimulus"))
@@ -2122,7 +2553,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: The COVID Tracking Project (Github)",
         href = "https://github.com/COVID19Tracking/covid-tracking-data") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -2168,7 +2617,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: The Federal Reserve Bank of St. Louis + Department of Labor",
         href = "https://fred.stlouisfed.org/series/TXICLAIMS") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -2243,11 +2710,29 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
-  # {State Hospitalized Rate}  --------------------------------------------------
+  # {State Hospitalizations}  --------------------------------------------------
   
   output$state_hosp_chart <- renderHighchart({
     
@@ -2292,9 +2777,95 @@ server <- function (input, output, session) {
                    Total Hospitalizations: {point.y:,.0f}") %>% 
       hc_credits(
         enabled = TRUE,
-        text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
-        href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
+    
+    
+    
+  })
+  
+  # {State Hospitalized Rate}  --------------------------------------------------
+  
+  output$state_hosp_rate_chart <- renderHighchart({
+    
+    key_events_fltr <- key_events %>%
+      filter(!str_detect(event,"Stimulus"))
+    
+    plotLines <- map2(key_events_fltr$date,key_events_fltr$event,
+                      ~list(label = list(text = .y,
+                                         style = list(color = "rgba(255, 255, 255, 0.6)", 
+                                                      fontSize='12px',textTransform='initial')),
+                            color = "rgba(255, 255, 255, 0.6)",
+                            width = 1,
+                            dashStyle = "Dash",
+                            value = datetime_to_timestamp(as.Date(.x, tz="UTC"))))
+    
+    hospt_rate_hchart %>% 
+      hchart("column", hcaes(x = date, y = hosp_rate), 
+             animation=FALSE,
+             color = "#fff") %>% 
+      hc_add_series(hospt_rate_hchart, type = "area", hcaes(x = date, y = hosp_rate_7day_avg),
+                    tooltip = list(pointFormat = "<br>7-Day Avg.: {point.hosp_rate_7day_avg:,.2f}%"),
+                    color = "#FFD100", name="7-Day Avg.") %>%
+      hc_plotOptions(area = list(fillOpacity=.3)) %>%
+      hc_title(
+        text ="Texas COVID-19 Daily Hospitalization Rate",
+        useHTML = TRUE) %>% 
+      hc_subtitle(
+        text ="Covering all of Texas, this shows the reported day's hospitalization rate in Texas for COVID-19. Hospitalization rate is calculated by taking each day's number of reported hospitalizations and dividing it by the number of estimated active cases. <br><br/>LEGEND - <span style='color: #FFD100;font-weight:bold'>7-DAY ROLLING AVG.</span>",
+        useHTML = TRUE) %>% 
+      hc_yAxis(title = list(text ="Hospitalization
+                            Rate (%)"),
+               min = 0,
+               max = max(hospt_rate_hchart$hosp_rate),
+               format = "{value:,.2f}%") %>% 
+      hc_xAxis(title=NULL,
+               plotLines=plotLines) %>% 
+      hc_tooltip(table = TRUE, sort = TRUE,
+                 pointFormat = "<b>{point.name}</b><br>
+                   Hospitalization Rate: {point.y:,.2f}%") %>% 
+      hc_credits(
+        enabled = TRUE,
+        text = "Source: Texas DSHS - COVID-19 Accessible Dashboard Data",
+        href = "https://www.dshs.state.tx.us/coronavirus/additionaldata/") %>%
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -2356,7 +2927,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -2418,7 +3007,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -2477,7 +3084,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
 
   })
   
@@ -2536,7 +3161,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
 
   })
   
@@ -2595,7 +3238,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
 
   })
   
@@ -2654,7 +3315,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
         href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
 
   })
   
@@ -2700,7 +3379,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Google COVID-19 Community Mobility Reports",
         href = "https://www.google.com/covid19/mobility/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -2751,7 +3448,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Google COVID-19 Community Mobility Reports",
         href = "https://www.google.com/covid19/mobility/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -2800,7 +3515,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Google COVID-19 Community Mobility Reports",
         href = "https://www.google.com/covid19/mobility/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
     
@@ -2851,7 +3584,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Google COVID-19 Community Mobility Reports",
         href = "https://www.google.com/covid19/mobility/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -2899,7 +3650,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Google COVID-19 Community Mobility Reports",
         href = "https://www.google.com/covid19/mobility/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
     
   })
@@ -2949,7 +3718,25 @@ server <- function (input, output, session) {
         enabled = TRUE,
         text = "Source: Google COVID-19 Community Mobility Reports",
         href = "https://www.google.com/covid19/mobility/") %>%
-      hc_add_theme(tx2036_hc)
+      hc_add_theme(tx2036_hc) %>% 
+      hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                   allowHTML = TRUE,
+                   buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                       symbol = 'menuball', 
+                                                       symbolStrokeWidth = 1,
+                                                       symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                       symbolStroke ='#ffffff',
+                                                       theme = list(fill='#3A4A9F'))),
+                   chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                       subtitle =  list(style = list(fontSize = '14px')),
+                                       chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
   })
   
@@ -3661,7 +4448,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -3711,7 +4517,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -3764,7 +4589,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
       
     })
@@ -3817,7 +4661,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -3869,7 +4732,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -3921,7 +4803,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -3973,7 +4874,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://texas-2036.github.io/covid-pages/Creating-COVID-Hospitalization-TS-Data.html") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4008,7 +4928,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Google COVID-19 Community Mobility Reports",
           href = "https://www.google.com/covid19/mobility/") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
       
     })
@@ -4044,7 +4983,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Google COVID-19 Community Mobility Reports",
           href = "https://www.google.com/covid19/mobility/") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4082,7 +5040,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Google COVID-19 Community Mobility Reports",
           href = "https://www.google.com/covid19/mobility/") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
     
       
     })
@@ -4121,7 +5098,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Google COVID-19 Community Mobility Reports",
           href = "https://www.google.com/covid19/mobility/") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
       
     })
@@ -4160,7 +5156,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Google COVID-19 Community Mobility Reports",
           href = "https://www.google.com/covid19/mobility/") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
       
     })
@@ -4199,7 +5214,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Google COVID-19 Community Mobility Reports",
           href = "https://www.google.com/covid19/mobility/") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4237,7 +5271,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: The Texas Workforce Commission",
           href = "https://www.twc.texas.gov/news/unemployment-claims-numbers#claimsByCounty") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4289,7 +5342,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://tabexternal.dshs.texas.gov/t/THD/views/COVIDExternalQC/COVIDTrends?%3AisGuestRedirectFromVizportal=y&%3Aembed=y") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4353,7 +5425,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://tabexternal.dshs.texas.gov/t/THD/views/COVIDExternalQC/COVIDTrends?%3AisGuestRedirectFromVizportal=y&%3Aembed=y") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4417,7 +5508,26 @@ server <- function (input, output, session) {
           enabled = TRUE,
           text = "Source: Texas DSHS - COVID-19 Hospital Bed Reporting",
           href = "https://tabexternal.dshs.texas.gov/t/THD/views/COVIDExternalQC/COVIDTrends?%3AisGuestRedirectFromVizportal=y&%3Aembed=y") %>%
-        hc_add_theme(tx2036_hc)
+        hc_add_theme(tx2036_hc) %>% 
+        hc_exporting(enabled=TRUE, scale=2, sourceWidth= 1200, sourceHeight = 600, 
+                     allowHTML = TRUE,
+                     buttons = list(contextButton = list(menuItems = myMenuItems, 
+                                                         title = "Export This Chart",
+                                                         symbol = 'menuball', 
+                                                         symbolStrokeWidth = 1,
+                                                         symbolFill = 'rgba(255,209, 0, 0.9)',
+                                                         symbolStroke ='#ffffff',
+                                                         theme = list(fill='#3A4A9F'))),
+                     chartOptions = list(title =  list(style = list(fontWeight = '800', fontSize = '22px', textTransform = "uppercase")),
+                                         subtitle =  list(style = list(fontSize = '14px')),
+                                         chart = list(events = list(load = JS('function() {
+                                         this.renderer.image("https://texas-2036.github.io/reference-files/logo_short_w.png",
+                                                             1135, 
+                                                             5,
+                                                             50,
+                                                             41.7 
+                                         ).add();
+                                       }')))))
       
     })
     
@@ -4476,7 +5586,7 @@ server <- function (input, output, session) {
                   opacity = 1, 
                   group="Trauma Service Areas") %>% 
       addCircleMarkers(~long, ~lat,
-                       radius = ~sqrt((cases*.11)),
+                       radius = ~sqrt((cases*.05)),
                        color = "#F26852",
                        stroke = TRUE,
                        weight=2,
