@@ -44,14 +44,15 @@ City of Scotland,City/Town,Archer,28765,5753,0.2
 City of Windthorst,City/Town,Archer,20240,4048,0.2
 Armstrong County,County,Armstrong,35915,7183,0.2
 City of Claude,City/Town,Armstrong,67870,13574,0.2
+City of Claude,City/Town,Armstrong,67870,13574,0.2
 Atascosa County,County,Atascosa,1390400,278080,0.2
 City of Charlotte,City/Town,Atascosa,101310,20262,0.2
 City of Christine,City/Town,Atascosa,23925,4785,0.2
 City of Jourdanton,City/Town,Atascosa,249260,49852,0.2
-City of Lytle,City/Town,Atascosa,131670,26334,0.2
+City of Lytle,City/Town,Atascosa,131670,32516,0.24695071010860484
 City of Pleasanton,City/Town,Atascosa,593670,118734,0.2
 City of Poteet,City/Town,Atascosa,191510,38302,0.2
-City of Lytle,City/Town,Atascosa,131670,26334,0.2
+City of Lytle,City/Town,Atascosa,131670,32516,0.24695071010860484
 Austin County,County,Austin,851345,170269,0.2
 City of Bellville,City/Town,Austin,248765,49753,0.2
 City of Brazos Country,City/Town,Austin,27170,5434,0.2
@@ -91,9 +92,11 @@ City of Johnson City,City/Town,Blanco,113245,22649,0.2
 City of Round Mountain,City/Town,Blanco,10230,2046,0.2
 Borden County,County,Borden,35970,7194,0.2
 Bosque County,County,Bosque,568920,113784,0.2
+Bosque County,County,Bosque,568920,113784,0.2
 City of Clifton,City/Town,Bosque,195910,39182,0.2
 City of Cranfills Gap,City/Town,Bosque,15895,3179,0.2
 City of Iredell,City/Town,Bosque,18700,3740,0.2
+City of Meridian,City/Town,Bosque,83105,16621,0.2
 City of Meridian,City/Town,Bosque,83105,16621,0.2
 City of Morgan,City/Town,Bosque,28325,5665,0.2
 City of Valley Mills,City/Town,Bosque,65835,13167,0.2
@@ -206,7 +209,9 @@ Camp County,County,Camp,456445,91289,0.2
 City of Pittsburg,City/Town,Camp,259820,51964,0.2
 City of Rocky Mound,City/Town,Camp,3905,781,0.2
 Carson County,County,Carson,80465,16093,0.2
+Carson County,County,Carson,80465,16093,0.2
 City of Groom,City/Town,Carson,30965,6193,0.2
+City of Panhandle,City/Town,Carson,133650,26730,0.2
 City of Panhandle,City/Town,Carson,133650,26730,0.2
 City of Skellytown,City/Town,Carson,25080,5016,0.2
 City of White Deer,City/Town,Carson,55770,11154,0.2
@@ -274,7 +279,7 @@ Comal County,County,Comal,4098215,819643,0.2
 City of Bulverde,City/Town,Comal,318065,63613,0.2
 City of Fair Oaks Ranch,City/Town,Comal,23320,4664,0.2
 City of Garden Ridge,City/Town,Comal,226655,45331,0.2
-City of New Braunfels,City/Town,Comal,3845325,769065,0.2
+City of New Braunfels,City/Town,Comal,3845325,930732,0.2420424801544733
 City of Schertz,City/Town,Comal,64405,12881,0.2
 City of Selma,City/Town,Comal,1485,297,0.2
 City of Spring Branch,City/Town,Comal,14025,2805,0.2
@@ -342,7 +347,7 @@ City of Howardwick,City/Town,Donley,20515,4103,0.2
 Duval County,County,Duval,216975,43395,0.2
 City of Benavides,City/Town,Duval,68255,13651,0.2
 City of Freer,City/Town,Duval,144485,28897,0.2
-City of San Diego,City/Town,Duval,183920,36784,0.2
+City of San Diego,City/Town,Duval,183920,46761,0.2542464114832536
 Eastland County,County,Eastland,324280,64856,0.2
 City of Carbon,City/Town,Eastland,14520,2904,0.2
 City of Cisco,City/Town,Eastland,212300,42460,0.2
@@ -352,8 +357,10 @@ City of Ranger,City/Town,Eastland,132770,26554,0.2
 City of Rising Star,City/Town,Eastland,45980,9196,0.2
 Ector County,County,Ector,2613105,522621,0.2
 City of Goldsmith,City/Town,Ector,14795,2959,0.2
-City of Odessa,City/Town,Ector,6514365,1302873,0.2
+City of Odessa,City/Town,Ector,6514365,1326248,0.20358822387139805
 Edwards County,County,Edwards,44110,8822,0.2
+Edwards County,County,Edwards,44110,8822,0.2
+City of Rocksprings,City/Town,Edwards,62150,12430,0.2
 City of Rocksprings,City/Town,Edwards,62150,12430,0.2
 Ellis County,County,Ellis,3460930,692186,0.2
 City of Alma,City/Town,Ellis,22000,4400,0.2
@@ -453,7 +460,7 @@ Goliad County,County,Goliad,308000,61600,0.2
 City of Goliad,City/Town,Goliad,113190,22638,0.2
 Gonzales County,County,Gonzales,500445,100089,0.2
 City of Gonzales,City/Town,Gonzales,416405,83281,0.2
-City of Nixon,City/Town,Gonzales,135465,27093,0.2
+City of Nixon,City/Town,Gonzales,135465,27181,0.2006496142915144
 City of Smiley,City/Town,Gonzales,30580,6116,0.2
 City of Waelder,City/Town,Gonzales,63140,12628,0.2
 Gray County,County,Gray,197615,39523,0.2
@@ -479,9 +486,9 @@ City of Whitesboro,City/Town,Grayson,227645,45529,0.2
 City of Whitewright,City/Town,Grayson,93225,18645,0.2
 Gregg County,County,Gregg,1090980,218196,0.2
 City of Clarksville City,City/Town,Gregg,50820,10164,0.2
-City of Easton,City/Town,Gregg,25190,5038,0.2
-City of Gladewater,City/Town,Gregg,213730,42746,0.2
-City of Kilgore,City/Town,Gregg,623260,124652,0.2
+City of Easton,City/Town,Gregg,25190,5621,0.22314410480349345
+City of Gladewater,City/Town,Gregg,213730,69916,0.32712300566134844
+City of Kilgore,City/Town,Gregg,623260,163482,0.26230144722908577
 City of Lakeport,City/Town,Gregg,58080,11616,0.2
 City of Longview,City/Town,Gregg,4382950,898117,0.2049115321872255
 City of Warren City,City/Town,Gregg,16170,3234,0.2
@@ -500,7 +507,7 @@ City of Marion,City/Town,Guadalupe,68255,13651,0.2
 City of New Berlin,City/Town,Guadalupe,33440,6688,0.2
 City of New Braunfels,City/Town,Guadalupe,808335,161667,0.2
 City of Santa Clara,City/Town,Guadalupe,40315,8063,0.2
-City of Schertz,City/Town,Guadalupe,2082300,416460,0.2
+City of Schertz,City/Town,Guadalupe,2082300,429341,0.20618594823032224
 City of Seguin,City/Town,Guadalupe,1718145,343629,0.2
 City of Selma,City/Town,Guadalupe,146740,29645,0.202023988005997
 City of Staples,City/Town,Guadalupe,14905,2981,0.2
@@ -530,8 +537,6 @@ Hardeman County,County,Hardeman,49115,9823,0.2
 City of Chillicothe,City/Town,Hardeman,35860,7172,0.2
 City of Quanah,City/Town,Hardeman,131340,26268,0.2
 Hardin County,County,Hardin,1840740,368148,0.2
-Hardin County,County,Hardin,1840740,368148,0.2
-City of Kountze,City/Town,Hardin,117150,23430,0.2
 City of Kountze,City/Town,Hardin,117150,23430,0.2
 City of Lumberton,City/Town,Hardin,705870,141174,0.2
 City of Rose Hill Acres,City/Town,Hardin,22825,4565,0.2
@@ -637,10 +642,12 @@ City of Forsan,City/Town,Howard,12045,2409,0.2
 Hudspeth County,County,Hudspeth,247940,49588,0.2
 City of Dell City,City/Town,Hudspeth,20790,4158,0.2
 Hunt County,County,Hunt,2711115,542223,0.2
+Hunt County,County,Hunt,2711115,542223,0.2
 City of Caddo Mills,City/Town,Hunt,93830,18766,0.2
 City of Campbell,City/Town,Hunt,36630,7326,0.2
 City of Celeste,City/Town,Hunt,50875,10175,0.2
 City of Commerce,City/Town,Hunt,538230,107646,0.2
+City of Greenville,City/Town,Hunt,1586805,317361,0.2
 City of Greenville,City/Town,Hunt,1586805,317361,0.2
 City of Hawk Cove,City/Town,Hunt,30470,6094,0.2
 City of Josephine,City/Town,Hunt,5995,1199,0.2
@@ -717,13 +724,11 @@ City of Karnes City,City/Town,Karnes,176110,35222,0.2
 City of Kenedy,City/Town,Karnes,193875,38775,0.2
 City of Runge,City/Town,Karnes,63690,12738,0.2
 Kaufman County,County,Kaufman,3817605,763521,0.2
-Kaufman County,County,Kaufman,3817605,763521,0.2
 City of Combine,City/Town,Kaufman,78265,15653,0.2
 City of Cottonwood,City/Town,Kaufman,11825,2365,0.2
 City of Crandall,City/Town,Kaufman,191235,38247,0.2
 City of Forney,City/Town,Kaufman,1395405,279081,0.2
 City of Grays Prairie,City/Town,Kaufman,20790,4158,0.2
-City of Kaufman,City/Town,Kaufman,416075,83215,0.2
 City of Kaufman,City/Town,Kaufman,416075,83215,0.2
 City of Kemp,City/Town,Kaufman,69740,13948,0.2
 City of Mabank,City/Town,Kaufman,155155,31031,0.2
@@ -750,7 +755,9 @@ Kimble County,County,Kimble,96800,19360,0.2
 City of Junction,City/Town,Kimble,141735,28347,0.2
 King County,County,King,14960,2992,0.2
 Kinney County,County,Kinney,97845,19569,0.2
+Kinney County,County,Kinney,97845,19569,0.2
 City of Brackettville,City/Town,Kinney,98175,19635,0.2
+City of Spofford,City/Town,Kinney,5665,1133,0.2
 City of Spofford,City/Town,Kinney,5665,1133,0.2
 Kleberg County,County,Kleberg,290730,58146,0.2
 City of Kingsville,City/Town,Kleberg,1396670,279334,0.2
@@ -854,7 +861,7 @@ City of Jefferson,City/Town,Marion,112035,22407,0.2
 Martin County,County,Martin,143715,28743,0.2
 City of Ackerly,City/Town,Martin,4015,803,0.2
 City of Stanton,City/Town,Martin,169675,33935,0.2
-Mason County,County,Mason,108955,47014,0.4314992428066633
+Mason County,County,Mason,108955,72237,0.6629984856133266
 City of Mason,City/Town,Mason,126115,25223,0.2
 Matagorda County,County,Matagorda,805860,161172,0.2
 City of Bay City,City/Town,Matagorda,959420,191884,0.2
@@ -898,6 +905,8 @@ City of San Antonio,City/Town,Medina,1540,308,0.2
 Menard County,County,Menard,40590,8118,0.2
 City of Menard,City/Town,Menard,77000,15400,0.2
 Midland County,County,Midland,1655885,331177,0.2
+Midland County,County,Midland,1655885,331177,0.2
+City of Midland,City/Town,Midland,7953000,1590600,0.2
 City of Midland,City/Town,Midland,7953000,1590600,0.2
 City of Odessa,City/Town,Midland,116875,23375,0.2
 Milam County,County,Milam,610115,122023,0.2
@@ -907,6 +916,7 @@ City of Milano,City/Town,Milam,25080,5016,0.2
 City of Rockdale,City/Town,Milam,312675,62535,0.2
 City of Thorndale,City/Town,Milam,77880,15576,0.2
 Mills County,County,Mills,153450,30690,0.2
+City of Goldthwaite,City/Town,Mills,104665,20933,0.2
 City of Goldthwaite,City/Town,Mills,104665,20933,0.2
 City of Mullin,City/Town,Mills,9900,1980,0.2
 Mitchell County,County,Mitchell,220715,44143,0.2
@@ -1080,7 +1090,7 @@ Runnels County,County,Runnels,198990,39798,0.2
 City of Ballinger,City/Town,Runnels,188155,37631,0.2
 City of Miles,City/Town,Runnels,45925,9185,0.2
 City of Winters,City/Town,Runnels,131450,26290,0.2
-Rusk County,County,Rusk,1746580,698632,0.4
+Rusk County,County,Rusk,1746580,1047948,0.6
 City of Easton,City/Town,Rusk,2915,583,0.2
 City of Henderson,City/Town,Rusk,743435,148687,0.2
 City of Kilgore,City/Town,Rusk,194150,38830,0.2
@@ -1306,7 +1316,3 @@ City of Olney,City/Town,Young,172590,34518,0.2
 Zavala County,County,Zavala,251350,50270,0.2
 City of Crystal City,City/Town,Zavala,399850,79970,0.2
 Zapata County,County,Zapata,779845,155969,0.2
-City of Data Source for county data is taken from the U.S. Census Vintage 2019 population estimates as used by the U.S. Treasury.,City/Town,Zapata,NA,NA,NA
-City of This data can be found at the following link:,City/Town,Zapata,NA,NA,NA
-City of Data Source for other jurisdiction population numbers are taken from the Texas Demographic Center's 2019 population,City/Town,Zapata,NA,NA,NA
-City of estimates.  This data can be found at the following link:  https://demographics.texas.gov/Data/TPEPP/Estimates/,City/Town,Zapata,NA,NA,NA
