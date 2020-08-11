@@ -44,7 +44,6 @@ City of Scotland,City/Town,Archer,28765,5753,0.2
 City of Windthorst,City/Town,Archer,20240,4048,0.2
 Armstrong County,County,Armstrong,35915,7183,0.2
 City of Claude,City/Town,Armstrong,67870,13574,0.2
-City of Claude,City/Town,Armstrong,67870,13574,0.2
 Atascosa County,County,Atascosa,1390400,278080,0.2
 City of Charlotte,City/Town,Atascosa,101310,20262,0.2
 City of Christine,City/Town,Atascosa,23925,4785,0.2
@@ -52,7 +51,6 @@ City of Jourdanton,City/Town,Atascosa,249260,49852,0.2
 City of Lytle,City/Town,Atascosa,131670,32516,0.24695071010860484
 City of Pleasanton,City/Town,Atascosa,593670,118734,0.2
 City of Poteet,City/Town,Atascosa,191510,38302,0.2
-City of Lytle,City/Town,Atascosa,131670,32516,0.24695071010860484
 Austin County,County,Austin,851345,170269,0.2
 City of Bellville,City/Town,Austin,248765,49753,0.2
 City of Brazos Country,City/Town,Austin,27170,5434,0.2
@@ -92,11 +90,9 @@ City of Johnson City,City/Town,Blanco,113245,22649,0.2
 City of Round Mountain,City/Town,Blanco,10230,2046,0.2
 Borden County,County,Borden,35970,7194,0.2
 Bosque County,County,Bosque,568920,113784,0.2
-Bosque County,County,Bosque,568920,113784,0.2
 City of Clifton,City/Town,Bosque,195910,39182,0.2
 City of Cranfills Gap,City/Town,Bosque,15895,3179,0.2
 City of Iredell,City/Town,Bosque,18700,3740,0.2
-City of Meridian,City/Town,Bosque,83105,16621,0.2
 City of Meridian,City/Town,Bosque,83105,16621,0.2
 City of Morgan,City/Town,Bosque,28325,5665,0.2
 City of Valley Mills,City/Town,Bosque,65835,13167,0.2
@@ -154,8 +150,6 @@ Brown County,County,Brown,707740,141548,0.2
 City of Bangs,City/Town,Brown,87340,17468,0.2
 City of Blanket,City/Town,Brown,21560,4312,0.2
 City of Brownwood,City/Town,Brown,1094390,218878,0.2
-City of Brownwood,City/Town,Brown,1094390,218878,0.2
-City of Early,City/Town,Brown,171490,34298,0.2
 City of Early,City/Town,Brown,171490,34298,0.2
 Burleson County,County,Burleson,651915,130383,0.2
 City of Caldwell,City/Town,Burleson,249590,49918,0.2
@@ -209,9 +203,7 @@ Camp County,County,Camp,456445,91289,0.2
 City of Pittsburg,City/Town,Camp,259820,51964,0.2
 City of Rocky Mound,City/Town,Camp,3905,781,0.2
 Carson County,County,Carson,80465,16093,0.2
-Carson County,County,Carson,80465,16093,0.2
 City of Groom,City/Town,Carson,30965,6193,0.2
-City of Panhandle,City/Town,Carson,133650,26730,0.2
 City of Panhandle,City/Town,Carson,133650,26730,0.2
 City of Skellytown,City/Town,Carson,25080,5016,0.2
 City of White Deer,City/Town,Carson,55770,11154,0.2
@@ -359,8 +351,6 @@ Ector County,County,Ector,2613105,522621,0.2
 City of Goldsmith,City/Town,Ector,14795,2959,0.2
 City of Odessa,City/Town,Ector,6514365,1326248,0.20358822387139805
 Edwards County,County,Edwards,44110,8822,0.2
-Edwards County,County,Edwards,44110,8822,0.2
-City of Rocksprings,City/Town,Edwards,62150,12430,0.2
 City of Rocksprings,City/Town,Edwards,62150,12430,0.2
 Ellis County,County,Ellis,3460930,692186,0.2
 City of Alma,City/Town,Ellis,22000,4400,0.2
@@ -642,12 +632,10 @@ City of Forsan,City/Town,Howard,12045,2409,0.2
 Hudspeth County,County,Hudspeth,247940,49588,0.2
 City of Dell City,City/Town,Hudspeth,20790,4158,0.2
 Hunt County,County,Hunt,2711115,542223,0.2
-Hunt County,County,Hunt,2711115,542223,0.2
 City of Caddo Mills,City/Town,Hunt,93830,18766,0.2
 City of Campbell,City/Town,Hunt,36630,7326,0.2
 City of Celeste,City/Town,Hunt,50875,10175,0.2
 City of Commerce,City/Town,Hunt,538230,107646,0.2
-City of Greenville,City/Town,Hunt,1586805,317361,0.2
 City of Greenville,City/Town,Hunt,1586805,317361,0.2
 City of Hawk Cove,City/Town,Hunt,30470,6094,0.2
 City of Josephine,City/Town,Hunt,5995,1199,0.2
@@ -755,9 +743,7 @@ Kimble County,County,Kimble,96800,19360,0.2
 City of Junction,City/Town,Kimble,141735,28347,0.2
 King County,County,King,14960,2992,0.2
 Kinney County,County,Kinney,97845,19569,0.2
-Kinney County,County,Kinney,97845,19569,0.2
 City of Brackettville,City/Town,Kinney,98175,19635,0.2
-City of Spofford,City/Town,Kinney,5665,1133,0.2
 City of Spofford,City/Town,Kinney,5665,1133,0.2
 Kleberg County,County,Kleberg,290730,58146,0.2
 City of Kingsville,City/Town,Kleberg,1396670,279334,0.2
@@ -905,8 +891,6 @@ City of San Antonio,City/Town,Medina,1540,308,0.2
 Menard County,County,Menard,40590,8118,0.2
 City of Menard,City/Town,Menard,77000,15400,0.2
 Midland County,County,Midland,1655885,331177,0.2
-Midland County,County,Midland,1655885,331177,0.2
-City of Midland,City/Town,Midland,7953000,1590600,0.2
 City of Midland,City/Town,Midland,7953000,1590600,0.2
 City of Odessa,City/Town,Midland,116875,23375,0.2
 Milam County,County,Milam,610115,122023,0.2
@@ -916,7 +900,6 @@ City of Milano,City/Town,Milam,25080,5016,0.2
 City of Rockdale,City/Town,Milam,312675,62535,0.2
 City of Thorndale,City/Town,Milam,77880,15576,0.2
 Mills County,County,Mills,153450,30690,0.2
-City of Goldthwaite,City/Town,Mills,104665,20933,0.2
 City of Goldthwaite,City/Town,Mills,104665,20933,0.2
 City of Mullin,City/Town,Mills,9900,1980,0.2
 Mitchell County,County,Mitchell,220715,44143,0.2
@@ -1155,11 +1138,9 @@ Somervell County,County,Somervell,347105,69421,0.2
 City of Glen Rose,City/Town,Somervell,154935,30987,0.2
 Starr County,County,Starr,1836945,367389,0.2
 City of Escobares,City/Town,Starr,156970,31394,0.2
-City of Escobares,City/Town,Starr,156970,31394,0.2
 City of La Grulla,City/Town,Starr,92180,18436,0.2
 City of Loma Vista CDP,City/Town,Starr,9405,1881,0.2
 City of Rio Grande City,City/Town,Starr,827695,165539,0.2
-City of Roma,City/Town,Starr,631620,126324,0.2
 City of Roma,City/Town,Starr,631620,126324,0.2
 Stephens County,County,Stephens,195745,39149,0.2
 City of Breckenridge,City/Town,Stephens,319385,63877,0.2
