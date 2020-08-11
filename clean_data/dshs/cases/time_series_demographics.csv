@@ -4135,3 +4135,135 @@ clean_data/dshs/cases/state_case_demographics_2020-08-07.csv,Texas,48,fatalities
 clean_data/dshs/cases/state_case_demographics_2020-08-07.csv,Texas,48,fatalities,race,Other,56,0.006916996047,2020-08-07
 clean_data/dshs/cases/state_case_demographics_2020-08-07.csv,Texas,48,fatalities,race,White,2639,0.32596343874,2020-08-07
 clean_data/dshs/cases/state_case_demographics_2020-08-07.csv,Texas,48,fatalities,race,Unknown,4,4.940711460000001e-4,2020-08-07
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,<1 year,143,0.0035651068285507716,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,1-9 years,648,0.016155169404901398,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,10-19 years,1660,0.0413851561915684,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,20-29 years,7421,0.18501159282989704,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,30-39 years,8084,0.20154072448954152,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,40-49 years,7506,0.1871307122734412,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,50-59 years,6861,0.17105033531948843,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,60-64 years,2676,0.06671486624616689,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,65-69 years,1909,0.047592929620303655,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,70-74 years,1141,0.028446062177457557,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,75-79 years,762,0.018997282540948866,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,80+ years,1269,0.03163720675126524,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,ages,Unknown,31,7.728553264690484e-4,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,gender,Female,14972,0.3732641918675675,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,gender,Male,24250,0.6045723118346589,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,gender,Unknown,889,0.02216349629777368,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,race,Asian,719,0.017925257410685298,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,race,Black,5976,0.148986562289646,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,race,Hispanic,15879,0.395876442871033,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,race,Other,175,0.00436289297200269,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,race,White,10934,0.272593552890728,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,cases,race,Unknown,6428,0.160255291565905,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,<1 year,2,2.3972192256981902e-4,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,1-9 years,5,5.993048064245475e-4,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,10-19 years,8,9.588876902792761e-4,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,20-29 years,63,0.007551240560949299,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,30-39 years,174,0.020855807263574253,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,40-49 years,455,0.05453673738463383,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,50-59 years,961,0.11518638379479804,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,60-64 years,784,0.09397099364736905,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,65-69 years,956,0.11458707898837349,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,70-74 years,1079,0.12932997722641737,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,75-79 years,1039,0.12453553877502098,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,80+ years,2817,0.3376483279395901,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,ages,Unknown,0,0,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,gender,Female,3401,0.4076471293299772,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,gender,Male,4942,0.5923528706700227,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,gender,Unknown,0,0,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,race,Asian,190,0.022773582644132807,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,race,Black,1070,0.12825122857485316,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,race,Hispanic,4311,0.5167206040992449,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,race,Other,60,0.00719165767709457,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,race,White,2708,0.32458348315953495,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-08.csv,Texas,48,fatalities,race,Unknown,4,4.7944384513963804e-4,2020-08-08
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,<1 year,143,0.003527815468,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,1-9 years,650,0.016035524855,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,10-19 years,1674,0.041297644011,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,20-29 years,7506,0.18517330701999998,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,30-39 years,8178,0.20175157271,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,40-49 years,7607,0.18766498088,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,50-59 years,6948,0.17140742568,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,60-64 years,2698,0.066559763168,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,65-69 years,1921,0.047391143456,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,70-74 years,1145,0.028247193783000002,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,75-79 years,764,0.018847909214,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,80+ years,1270,0.031330948563,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,ages,Unknown,31,7.647711849999999e-4,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,gender,Female,15024,0.3706426545,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,gender,Male,24616,0.6072776612799999,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,gender,Unknown,895,0.022079684224,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,race,Asian,722,0.017811767608,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,race,Black,6106,0.15063525348,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,race,Hispanic,16035,0.39558406316000005,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,race,Other,177,0.004366596768,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,race,White,11056,0.27275194277000003,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,cases,race,Unknown,6439,0.15885037622,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,<1 year,2,2.36434567e-4,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,1-9 years,5,5.91086417e-4,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,10-19 years,8,9.45738267e-4,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,20-29 years,63,0.007447688851999999,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,30-39 years,175,0.020688024589,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,40-49 years,459,0.054261733065,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,50-59 years,977,0.11549828585000001,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,60-64 years,798,0.09433739212700001,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,65-69 years,971,0.11478898215,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,70-74 years,1097,0.12968435984999999,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,75-79 years,1049,0.12400993025,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,80+ years,2855,0.33751034400999996,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,ages,Unknown,0,0,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,gender,Female,3442,0.40690388935,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,gender,Male,5017,0.59309611065,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,gender,Unknown,0,0,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,race,Asian,190,0.02246128384,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,race,Black,1086,0.12838396974,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,race,Hispanic,4386,0.51850100485,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,race,Other,58,0.006856602435,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,race,White,2735,0.32332427000999997,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-09.csv,Texas,48,fatalities,race,Unknown,4,4.7286913299999996e-4,2020-08-09
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,<1 year,143,0.003503871410369499,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,1-9 years,651,0.01595119082622758,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,10-19 years,1682,0.041213368617073406,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,20-29 years,7567,0.18541115358227972,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,30-39 years,8252,0.20219543271586787,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,40-49 years,7674,0.18803293149073802,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,50-59 years,6992,0.1713221601489758,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,60-64 years,2711,0.06642654121336862,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,65-69 years,1928,0.04724100754679996,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,70-74 years,1146,0.028079976477506617,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,75-79 years,764,0.018719984318337744,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,80+ years,1271,0.031142801136920514,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,ages,Unknown,31,7.595805155346467e-4,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,gender,Female,15063,0.36908262275801235,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,gender,Male,24853,0.6089630500833089,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,gender,Unknown,896,0.02195432715867882,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,race,Asian,723,0.01771537783005,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,race,Black,6179,0.151401548564148,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,race,Hispanic,16150,0.395716945996276,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,race,Other,84,0.00205821817112614,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,race,White,11134,0.272811918063315,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,cases,race,Unknown,6542,0.160295991375086,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,<1 year,2,2.3557126030624264e-4,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,1-9 years,5,5.889281507656066e-4,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,10-19 years,9,0.0010600706713780918,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,20-29 years,63,0.007420494699646643,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,30-39 years,175,0.02061248527679623,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,40-49 years,459,0.054063604240282684,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,50-59 years,981,0.11554770318021201,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,60-64 years,799,0.09411071849234394,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,65-69 years,972,0.11448763250883393,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,70-74 years,1101,0.12968197879858656,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,75-79 years,1054,0.12414605418138987,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,80+ years,2870,0.3380447585394582,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,ages,Unknown,0,0,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,gender,Female,3456,0.4070671378091873,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,gender,Male,5034,0.5929328621908128,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,gender,Unknown,0,0,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,race,Asian,190,0.02237926972909305,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,race,Black,1086,0.12791519434628976,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,race,Hispanic,4405,0.5188457008244994,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,race,Other,58,0.006831566548881037,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,race,White,2747,0.32355712603062425,2020-08-10
+clean_data/dshs/cases/state_case_demographics_2020-08-10.csv,Texas,48,fatalities,race,Unknown,4,4.711425206124853e-4,2020-08-10
