@@ -210,6 +210,7 @@ nyt_state_cases_tx <- vroom("clean_data/dshs/cases/state_cases_trends.csv") %>%
   rename(cases=cumulative_cases,
          # daily_new_fatalities=fatalities_by_date_of_death,
          deaths=cumulative_fatalities) %>%
+  mutate(deaths=replace(deaths,date=="2020-08-03",7261)) %>% #Adjusts for Aug 3 Absence in Reporting
   mutate(population=27885195,
          min = min(cases),
          max = max(cases),
@@ -330,7 +331,7 @@ tex_today_tests <- test_daily %>%
 
 # COVID Relief Data -------------------------------------------------------
 
-covid_relief <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/covid_relief/crf_data.csv")
+covid_relief <- vroom("clean_data/covid_relief/crf_data.csv")
 
 
 # ~~DSHS Data ----
@@ -1189,9 +1190,9 @@ server <- function (input, output, session) {
   
   shinyalert(
     title = "Fatality Data & Hospital Data Update",
-    text = "<h4><i class='fad fa-virus'></i> | Fatality Data</h4>As of July 27, Texas DSHS is now reporting COVID-19 fatality data based on death certificates. A fatality is counted as a COVID-19 fatality when the medical certifier attests on the death certificate that COVID-19 is a cause of death. This change means fatalities may be counted sooner and demographic data will be more comprehensive. Fatalities are reported by county of residence.</br></br><h4><i class='fad fa-hospital-symbol'></i> |  Hospital Capacity Data</h4>In addition, the state's adjustment to new federal requirements for reporting hospital data is creating a lag in our ability to report daily hospital capacity information. As we get complete data, we will include it on our dash board.",
+    text = "<h4><i class='fad fa-virus'></i> | Fatality Data</h4>As of July 27, Texas DSHS is now reporting COVID-19 fatality data based on death certificates. A fatality is counted as a COVID-19 fatality when the medical certifier attests on the death certificate that COVID-19 is a cause of death. This change means fatalities may be counted sooner and demographic data will be more comprehensive. Fatalities are reported by county of residence.</br></br><h4><i class='fad fa-hospital-symbol'></i> |  Hospital Capacity Data - Aug 4</h4>As of August 4th, we've been able to update most of our hospital capacity data, except in a few instances where the state's adjustment to new federal requirements for reporting hospital data is creating gaps in  metrics that were previously reported, but will be replaced with new metrics. As we get new and complete data for these metrics, we will include it on our dashboard.",
     closeOnEsc = TRUE,
-    closeOnClickOutside = FALSE,
+    closeOnClickOutside = TRUE,
     html = TRUE,
     type = "warning",
     showConfirmButton = TRUE,
