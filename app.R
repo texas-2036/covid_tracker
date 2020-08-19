@@ -16,6 +16,7 @@ library(shiny)
 library(shinyLP)
 library(readxl)
 library(gt)
+library(reactable)
 library(metathis)
 library(highcharter)
 library(tidyverse)
@@ -28,6 +29,7 @@ library(waiter)
 library(sever)
 library(sf)
 library(zoo)
+library(scales)
 library(shinyalert)
 
 # Helper Functions --------------------------------------------------------
@@ -95,6 +97,28 @@ sever_default <- function (title = "Whoops!", subtitle = "You have been disconne
                  tags$title('Texas COVID-19 Resource Kit')),
           tags$h1(title), tags$p(subtitle), reload_button(button, class = button_class))
 }
+
+bar_chart <- function(label, width = "100%", height = "14px", fill = "#00bfc4", background = NULL) {
+  bar <- div(style = list(background = fill, width = width, height = height))
+  chart <- div(style = list(flexGrow = 1, marginLeft = "6px", background = background), bar)
+  div(style = list(display = "flex", alignItems = "center"), label, chart)
+}
+
+rating_cols <- c("pct_of_all")
+
+
+rating_column <- function(maxWidth = 55, ...) {
+  colDef(maxWidth = maxWidth, align = "center", class = "cell number", ...)
+}
+
+make_color_pal <- function(colors, bias = 1) {
+  get_color <- colorRamp(colors, bias = bias)
+  function(x) rgb(get_color(x), maxColorValue = 255)
+}
+
+# off_rating_color <- make_color_pal(c("#ff2700", "#f8fcf8", "#44ab43"), bias = 1.3)
+def_rating_color <- make_color_pal(c("#AAB9D0", "#5572A2", "#002D74", "#001E4D", "#000F26"), bias = 1)
+# knockout_pct_color <- make_color_pal(c("#ffffff", "#f2fbd2", "#c9ecb4", "#93d3ab", "#35b0ab"), bias = 2)
 
 
 # Waiting Screen ----------------------------------------------------------
@@ -295,7 +319,7 @@ tx_county_sf <- tx_counties %>%
 
 # ~~COVID Tracking Data --------------------------------------------------------------
 
-test_daily <- vroom("https://raw.githubusercontent.com/COVID19Tracking/covid-tracking-data/master/data/states_daily_4pm_et.csv") %>% 
+test_daily <- vroom("https://api.covidtracking.com/v1/states/daily.csv") %>% 
   filter(state=="TX") %>%
   mutate(date=as.character(date)) %>%
   mutate(date=str_replace(date,"(\\d{4})(\\d{2})(\\d{2})$","\\1-\\2-\\3")) %>% 
@@ -409,7 +433,9 @@ google_mobil_tx_cnties <- vroom("https://texas-2036.github.io/covid-data/google_
 # ** Economic Data -----------------------------------------------------------
 
 
-# ~~ Affinity Spending Data --------------------------------------------------
+# ~~Affinity Spending Data --------------------------------------------------
+
+dd <- vroom("clean_data/opportunity_tracker/affinity_tables.csv") 
 
 # ~~Homebase Data ---------------------------------------------------------
 
@@ -470,6 +496,13 @@ twc_claims_cnty_summ <- twc_claims_cnty_raw %>%
   group_by(county) %>% 
   summarise(all_claims=sum(value)) %>% 
   mutate_at(vars(all_claims), scales::comma_format(accuracy=1))
+
+
+twc_ui_top_25_tbl <- vroom("https://lmci.state.tx.us/shared/dashboarddata/UI_BY_NAICS_TOP25.csv") %>% 
+  clean_names() %>% 
+  mutate(pct_of_all = round(naics_count/texas_total_ui_count, digits = 4),
+         index = 1:25) %>% 
+  select(index, 1,2,4) 
 
 # ~~FREDR Data -----------------------------------------------------
 
@@ -600,6 +633,7 @@ body <- dashboardBody(
     tags$script(src="https://kit.fontawesome.com/5272d94c6c.js", crossorigin="anonymous"),
     tags$link(rel="shortcut icon", href="favicon.png"),
     tags$link(rel = "stylesheet", type = "text/css", href = "custom2.css"),
+    tags$link(rel = "stylesheet", type = "text/css", href = "tbl_css.css"),
     # includeHTML("social_tags.html"),
     includeHTML(("google_analytics.html")),
     tags$script(HTML("$('body').addClass('fixed');")),
@@ -651,7 +685,7 @@ body <- dashboardBody(
               HTML("<iframe width='100%' height=1200vh' style='border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;' src='https://staging.convex.design/texas-2036/texas-covid-live-report/?currentCounty=Anderson'></iframe>"))),
     
     tabItem(tabName = "state_profiles",
-            use_waiter(include_js = FALSE),
+            use_waiter(),
             use_hostess(),
             waiter_show_on_load(html = tagList(spin_flower(),h4("Thanks for being patient while we get everything set up.")),
                                 color = "#3A4A9F",
@@ -949,6 +983,24 @@ body <- dashboardBody(
                      highchartOutput("state_hours_hchart", height = 350)),
               column(width = 6,
                      highchartOutput("state_employees_hchart", height = 350))
+            ),
+            fluidRow(
+              column(width = 6,
+                     h3("Top 25 Unemployment Claims, by Industry", style="text-align:left;font-size:2em;font-weight:700"),
+                     h3(style="text-align:left;font-size:1em;font-weight:500", includeMarkdown("markdown/charts/unemployment_top25.md")),
+                     reactableOutput("top25_ui_claims", height = 775)),
+              column(width = 6,
+                     h3("Consumer Spending Trends, by Industry", style="text-align:left;font-size:2em;font-weight:700"),
+                     h3(style="text-align:left;font-size:1em;font-weight:500", includeMarkdown("markdown/charts/spending_trends.md")),
+                     tabBox(
+                       title = NULL,
+                       # The id lets us use input$tabset1 on the server to find the current tab
+                       id = "tabset1", width = 12,
+                       tabPanel("By Industry", 
+                                uiOutput("spending_charts_lowinc")),
+                       tabPanel("By Consumer ZIP Code",  
+                                uiOutput("spending_charts_all")))
+                     )
             )
     ),
     
@@ -1189,8 +1241,8 @@ ui <- dashboardPage(title="Texas 2036 | COVID-19 Resource Kit",
 server <- function (input, output, session) {
   
   shinyalert(
-    title = "Fatality Data & Hospital Data Update",
-    text = "<h4><i class='fad fa-virus'></i> | Fatality Data</h4>As of July 27, Texas DSHS is now reporting COVID-19 fatality data based on death certificates. A fatality is counted as a COVID-19 fatality when the medical certifier attests on the death certificate that COVID-19 is a cause of death. This change means fatalities may be counted sooner and demographic data will be more comprehensive. Fatalities are reported by county of residence.</br></br><h4><i class='fad fa-hospital-symbol'></i> |  Hospital Capacity Data - Aug 4</h4>As of August 4th, we've been able to update most of our hospital capacity data, except in a few instances where the state's adjustment to new federal requirements for reporting hospital data is creating gaps in  metrics that were previously reported, but will be replaced with new metrics. As we get new and complete data for these metrics, we will include it on our dashboard.",
+    title = "New Economic Data +</br> Hospital Data Update",
+    text = includeMarkdown("markdown/intro/shinyalert.md"),
     closeOnEsc = TRUE,
     closeOnClickOutside = TRUE,
     html = TRUE,
@@ -3741,11 +3793,214 @@ server <- function (input, output, session) {
     
   })
   
+
+# State Top 25 Industries UI Claims -----------------------------------------------------------
+
+  output$top25_ui_claims <- renderReactable({
+    
+      reactable(twc_ui_top_25_tbl,
+        searchable = FALSE,
+        striped = FALSE,
+        highlight = TRUE,
+        bordered = FALSE,
+        pagination = FALSE,
+        showSortIcon = FALSE,
+        # height = 350,
+        fullWidth = TRUE,
+        compact = TRUE,
+        theme = reactableTheme(
+          color = "#ffffff",
+          backgroundColor = "rgba(58,74,159,1)",
+          borderColor = "rgba(255,255,255,.2)",
+          headerStyle = list(background = "#002D74", fontWeight="700", letterSpacing="1px", 
+                             textTransform="Uppercase",
+                             fontSize="16px"),
+          stripedColor = "rgba(58,74,159,.6)",
+          highlightColor = "#2A7DE1",
+          cellPadding = "8px 12px",
+          style = list(fontFamily = "'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif"),
+          searchInputStyle = list(width = "100%")),
+        columns = list(
+          index = colDef(name = "#",
+                         width = 35, 
+                         align = "right"),
+          naics_title = colDef(name = "Industry",
+                               class = "border-right"),
+          naics_count = colDef(name = "UI Claims",
+                               class = "border-left",
+                               header = NULL,
+                               defaultSortOrder = "desc",
+                               cell = function(value) {
+                                 width <- paste0(value * 100 / max(twc_ui_top_25_tbl$naics_count), "%")
+                                 value <- format(value, big.mark = ",")
+                                 value <- format(value, width = 9, justify = "right")
+                                 value <- format(value, width = 5, justify = "right")
+                                 bar_chart(value, width = width, fill = "#F26852")
+                               },
+                               align = "left",
+                               style = list(fontFamily = "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace", whiteSpace = "pre")),
+          pct_of_all = rating_column(name = "% of All",
+                                     defaultSortOrder = "desc",
+                                     width = 100, 
+                                     cell = function(value) {
+                                       scaled <- (value/max(twc_ui_top_25_tbl$pct_of_all))
+                                       color <- def_rating_color(scaled)
+                                       value <- paste0(format(round(value * 100,digits = 1), nsmall = 1), "")
+                                       div(style = list(background = color, border = "1px solid rgba(255,255,255, .3)"), value)
+                                     },
+                                     style = list(color = "#ffffff",whiteSpace = "pre",
+                                                  fontFamily = "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono','Courier New', monospace"))))
+    
+  })
   
+  # State Spending Charts - All -----------------------------------------------------------------------
+
+  output$spending_charts_all <- renderUI({
+    
+    color_theme <- "#FFD100" # extracted with chrome extension
+    
+    df2 <- dd %>%
+      # rename(Year = date) %>% 
+      # group_by(type) %>%
+      filter(group!="Industry") %>% 
+      mutate(order = case_when(
+        type == "All ZIP Codes" ~ 1,
+        type == "Low Income ZIP Codes" ~ 2,
+        type == "Middle Income ZIP Codes" ~ 3,
+        type == "High Income ZIP Codes" ~ 4,
+      )) %>% 
+      arrange(order)
+    
+    df <- map(unique(df2$type), function(x){
+      df2 %>% filter(type == x) %>% 
+        hchart(., "areaspline", 
+               hcaes(x = date, y = rate, group = type), 
+               animation=FALSE,
+               # threshold = 0,
+               # negativeColor = "#F26852",
+               # color = "#fff",
+               tooltip = list(
+                 pointFormat = "<b>{series.name}</b>: <b>{point.y:,.0f}%</b>"),
+               showInLegend = FALSE) %>% 
+        hc_chart(spacingBottom =  0,
+                 spacingLeft =  -36,
+                 spacingRight =  -10) %>%  # just plying to get these numbers
+        hc_title(
+          text = x,
+          align = 'left',
+          verticalAlign = 'top',
+          floating = TRUE,
+          x = 50,
+          style = list(fontWeight = "800", 
+                       background = "rgba(58,74,159,0.4)",
+                       border = "0px solid rgba(255,255,255,0.6)",
+                       color = "rgba(255,255,255,0.6)",
+                       useHTML = TRUE),
+          useHTML = TRUE) %>%  
+        hc_xAxis(title = list(text = NULL),
+                 opposite = FALSE,
+                 gridLineWidth = 1,
+                 gridLineColor = "rgba(255,209,0,0.3)", # vertical lines
+                 tickColor = "rgba(255,209,0,0.3)",
+                 lineColor = "transparent",  # horizontal line,
+                 labels = list(rotation = 90, y=-35, x=-7, style = list(color = "rgba(255,255,255,.5)", fontSize = "10px")),
+                 tickInterval = 16 * 24 * 7200 * 1000) %>%  # interval of 1 day (in your case = 60)
+        hc_yAxis(title = list(text = ""),
+                 opposite = TRUE,
+                 plotLines = list(list(
+                   # label = list(text="0"),
+                   value = 0,
+                   width = 1,
+                   dashStyle = "Dash",
+                   color = "rgba(255,255,255,.5)",
+                   zIndex = 10
+                 )),
+                 gridLineColor = "transparent",
+                 showFirstLabel = FALSE,
+                 labels = list(enabled=FALSE)) %>%
+        hc_plotOptions(series = list(color = color_theme,
+                                     fillColor = hex_to_rgba(color_theme, 0.20),
+                                     marker = list(enabled = FALSE))) %>% 
+        hc_tooltip(pointFormat = "<b>{point.y:,.0f}%</b>") %>% 
+        hc_legend(enabled=FALSE) %>% 
+        hc_add_theme(tx2036_hc)
+    }) %>% 
+      hw_grid(ncol = 1, rowheight = 123) %>% 
+      htmltools::browsable()
+    
+    df
+    
+  })
   
-  
-  
-  
+  output$spending_charts_lowinc <- renderUI({
+    
+    color_theme <- "#FFD100" # extracted with chrome extension
+    
+    df2 <- dd %>%
+      # rename(Year = date) %>% 
+      # group_by(type) %>%
+      filter(group=="Industry")
+    
+   df <- map(unique(df2$type), function(x){
+     df2 %>% filter(type == x) %>% 
+       hchart(., "areaspline", 
+              hcaes(x = date, y = rate, group = type), 
+              animation=FALSE,
+              # threshold = 0,
+              # negativeColor = "#F26852",
+              # color = "#fff",
+              tooltip = list(
+                pointFormat = "<b>{series.name}</b>: <b>{point.y:,.0f}%</b>"),
+              showInLegend = FALSE) %>% 
+       hc_chart(spacingBottom =  0,
+                spacingLeft =  -36,
+                spacingRight =  -10) %>%  # just plying to get these numbers
+       hc_title(
+         text = x,
+         align = 'left',
+         verticalAlign = 'top',
+         floating = TRUE,
+         x = 50,
+         style = list(fontWeight = "800", 
+                      background = "rgba(58,74,159,0.4)",
+                      border = "0px solid rgba(255,255,255,0.6)",
+                      color = "rgba(255,255,255,0.6)",
+                      useHTML = TRUE),
+         useHTML = TRUE) %>%  
+       hc_xAxis(title = list(text = NULL),
+                opposite = FALSE,
+                gridLineWidth = 1,
+                gridLineColor = "rgba(255,209,0,0.3)", # vertical lines
+                tickColor = "rgba(255,209,0,0.3)",
+                lineColor = "transparent",  # horizontal line,
+                labels = list(rotation = 90, y=-35, x=-7, style = list(color = "rgba(255,255,255,.5)", fontSize = "10px")),
+                tickInterval = 16 * 24 * 7200 * 1000) %>%  # interval of 1 day (in your case = 60)
+       hc_yAxis(title = list(text = ""),
+                opposite = TRUE,
+                plotLines = list(list(
+                  # label = list(text="0"),
+                  value = 0,
+                  width = 1,
+                  dashStyle = "Dash",
+                  color = "rgba(255,255,255,.5)",
+                  zIndex = 10
+                )),
+                gridLineColor = "transparent",
+                showFirstLabel = FALSE,
+                labels = list(enabled=FALSE)) %>%
+       hc_plotOptions(series = list(color = color_theme,
+                                    fillColor = hex_to_rgba(color_theme, 0.20),
+                                    marker = list(enabled = FALSE))) %>% 
+       hc_tooltip(pointFormat = "<b>{point.y:,.0f}%</b>") %>% 
+       hc_legend(enabled=FALSE) %>% 
+       hc_add_theme(tx2036_hc)
+   }) %>% 
+     hw_grid(ncol = 1, rowheight = 123) %>% 
+             htmltools::browsable()
+   
+   df
+    
+  })
   
   
   # {State Businesses Open Chart} -------------------------------------------------
@@ -4091,8 +4346,9 @@ server <- function (input, output, session) {
       req(input$countyname)
       
       nyt_county_cases %>%
+        fill(deaths, .direction="down") %>% 
         filter(county==input$countyname,
-               date==max(date)) %>% 
+               date==max(date)) %>%
         mutate(mort_rate=round(deaths/cases,digits=4)) %>% 
         mutate_at(vars(mort_rate),scales::percent_format(accuracy=.01)) %>% 
         distinct(mort_rate) %>% 
@@ -5587,7 +5843,7 @@ server <- function (input, output, session) {
                   opacity = 1, 
                   group="Trauma Service Areas") %>% 
       addCircleMarkers(~long, ~lat,
-                       radius = ~sqrt((cases*.05)),
+                       radius = ~sqrt((cases*.03)),
                        color = "#F26852",
                        stroke = TRUE,
                        weight=2,

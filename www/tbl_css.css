@@ -1,0 +1,65 @@
+.twitter-followers {
+  /* Center the table */
+  margin: 0 auto;
+  /* Reduce the table width */
+  width: 650px;
+  color: #2d2d2d;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+}
+
+.border-right {
+  border-right: 2px solid #fff;
+}
+
+
+.followers-header {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.followers-title {
+  font-size: 22px;
+  color: #2d2d2d;
+  font-weight: 800;
+}
+
+.followers-tbl {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.followers-tbl a {
+  color: inherit;
+}
+
+.header {
+  border-bottom: 2px solid #555;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.header:hover {
+  background-color: #eee;
+}
+
+.bar-cell {
+  display: flex;
+  align-items: center;
+}
+
+.number {
+  font-family: "Fira Mono", Consolas, Monaco, monospace;
+  font-size: 13.5px;
+  white-space: pre;
+}
+
+.bar-chart {
+  flex-grow: 1;
+  margin-left: 6px;
+  height: 14px;
+}
+
+.bar {
+  height: 100%;
+}

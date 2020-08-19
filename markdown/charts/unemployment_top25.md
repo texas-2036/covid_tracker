@@ -1,0 +1,2 @@
+This table shows the Top 25 Industries filing Unemployment Insurance claims with the Texas Workforce Commission. Industries are classified using the North American Industry Classification System (NAICS). Data shown here reflect the reporting period of: 7/8/2020 to 8/8/2020.</br>
+**SOURCE:** [Statewide Top 25 UI Industries - The Texas Workforce Commission](https://texasmapsonline.com/portal/apps/MapSeries/index.html?appid=e3e490c4196a45868610f65b72e9f303).
