@@ -6,69 +6,69 @@ Aransas,187,16
 Archer,33,0
 Armstrong,8,0
 Atascosa,517,19
-Austin,331,4
+Austin,332,4
 Bailey,187,4
 Bandera,100,3
-Bastrop,1448,23
+Bastrop,1452,23
 Baylor,13,0
-Bee,1382,17
+Bee,1387,17
 Bell,4281,49
-Bexar,36043,892
-Blanco,116,5
+Bexar,36086,892
+Blanco,126,19
 Borden,0,0
 Bosque,180,2
-Bowie,790,39
-Brazoria,8148,111
-Brazos,4173,51
+Bowie,791,39
+Brazoria,8233,111
+Brazos,4185,51
 Brewster,187,2
 Briscoe,12,1
-Brooks,147,6
+Brooks,148,6
 Brown,408,18
-Burleson,250,6
-Burnet,576,11
-Caldwell,1179,29
+Burleson,251,6
+Burnet,577,11
+Caldwell,1183,29
 Calhoun,555,7
 Callahan,52,3
-Cameron,17816,560
-Camp,256,6
+Cameron,18005,565
+Camp,253,6
 Carson,17,0
-Cass,199,9
+Cass,203,9
 Castro,209,4
 Chambers,1028,5
-Cherokee,1232,11
+Cherokee,1234,11
 Childress,53,0
 Clay,47,1
 Cochran,33,0
-Coke,42,2
+Coke,43,2
 Coleman,33,0
-Collin,10007,89
+Collin,10006,90
 Collingsworth,13,0
-Colorado,360,2
+Colorado,362,2
 Comal,2132,80
 Comanche,172,3
 Concho,34,0
 Cooke,265,3
-Coryell,717,6
+Coryell,727,6
 Cottle,18,2
 Crane,70,2
 Crockett,157,4
 Crosby,65,1
 Culberson,21,2
 Dallam,196,6
-Dallas,58607,818
+Dallas,63428,826
 Dawson,172,5
 DeWitt,745,21
 Deaf Smith,726,18
 Delta,17,0
-Denton,8300,104
+Denton,8300,105
 Dickens,5,1
 Dimmit,164,4
 Donley,49,0
-Duval,195,7
+Duval,198,7
 Eastland,92,1
 Ector,2547,49
 Edwards,30,0
-El Paso,18350,343
+El Paso,18486,344
 Ellis,3255,51
 Erath,580,7
 Falls,145,3
@@ -78,8 +78,8 @@ Fisher,31,1
 Floyd,94,6
 Foard,3,0
 Fort Bend,12228,194
-Franklin,95,3
-Freestone,182,0
+Franklin,98,3
+Freestone,185,0
 Frio,571,6
 Gaines,199,4
 Galveston,9937,125
@@ -89,9 +89,9 @@ Glasscock,6,0
 Goliad,119,6
 Gonzales,721,11
 Gray,226,2
-Grayson,1260,16
+Grayson,1272,16
 Gregg,1646,32
-Grimes,932,27
+Grimes,933,27
 Guadalupe,1799,59
 Hale,1478,31
 Hall,15,1
@@ -99,15 +99,15 @@ Hamilton,92,3
 Hansford,93,2
 Hardeman,22,0
 Hardin,1124,18
-Harris,91698,1829
+Harris,92253,1838
 Harrison,735,24
 Hartley,94,0
 Haskell,52,0
 Hays,5111,46
 Hemphill,45,0
 Henderson,697,12
-Hidalgo,21806,791
-Hill,340,7
+Hidalgo,22013,809
+Hill,341,7
 Hockley,223,5
 Hood,657,13
 Hopkins,217,3
@@ -119,11 +119,11 @@ Hutchinson,133,3
 Irion,9,0
 Jack,99,0
 Jackson,418,11
-Jasper,359,15
+Jasper,362,15
 Jeff Davis,8,0
-Jefferson,6247,94
+Jefferson,6247,95
 Jim Hogg,65,2
-Jim Wells,824,19
+Jim Wells,841,19
 Johnson,2159,34
 Jones,600,0
 Karnes,672,10
@@ -135,31 +135,31 @@ Kerr,416,6
 Kimble,16,1
 King,0,0
 Kinney,21,0
-Kleberg,489,18
+Kleberg,498,18
 Knox,62,5
 La Salle,364,2
-Lamar,705,19
+Lamar,730,19
 Lamb,246,17
-Lampasas,128,5
+Lampasas,131,5
 Lavaca,641,25
-Lee,180,12
+Lee,181,12
 Leon,158,3
 Liberty,1115,36
-Limestone,298,3
+Limestone,308,3
 Lipscomb,22,0
 Live Oak,240,5
 Llano,92,1
 Loving,0,0
-Lubbock,6528,80
+Lubbock,6542,80
 Lynn,74,4
 Madison,684,3
 Marion,136,9
 Martin,67,5
 Mason,60,0
-Matagorda,831,35
+Matagorda,832,35
 Maverick,2596,54
-McCulloch,57,1
-McLennan,5322,62
+McCulloch,58,1
+McLennan,5356,62
 McMullen,10,0
 Medina,987,32
 Menard,18,0
@@ -172,11 +172,11 @@ Montgomery,6957,103
 Moore,1082,14
 Morris,134,3
 Motley,6,0
-Nacogdoches,1202,43
+Nacogdoches,1204,43
 Navarro,942,11
 Newton,124,4
 Nolan,140,3
-Nueces,13577,190
+Nueces,13697,190
 Ochiltree,100,2
 Oldham,14,1
 Orange,1579,29
@@ -191,19 +191,19 @@ Presidio,49,4
 Rains,54,1
 Randall,1899,25
 Reagan,66,4
-Real,91,2
+Real,91,3
 Red River,141,12
 Reeves,152,5
-Refugio,243,9
+Refugio,246,9
 Roberts,6,0
 Robertson,239,3
-Rockwall,1105,15
+Rockwall,1105,16
 Runnels,152,2
 Rusk,398,2
-Sabine,65,6
+Sabine,66,6
 San Augustine,178,11
 San Jacinto,187,8
-San Patricio,1114,34
+San Patricio,1114,35
 San Saba,27,0
 Schleicher,36,1
 Scurry,505,2
@@ -212,47 +212,47 @@ Shelby,411,18
 Sherman,44,0
 Smith,2750,34
 Somervell,85,0
-Starr,2422,93
+Starr,2443,94
 Stephens,131,3
 Sterling,1,0
 Stonewall,7,0
 Sutton,68,1
 Swisher,83,3
-Tarrant,35310,504
-Taylor,1156,29
+Tarrant,35997,504
+Taylor,1158,29
 Terrell,2,0
 Terry,173,2
 Throckmorton,4,2
-Titus,1265,17
-Tom Green,1859,34
-Travis,24008,302
+Titus,1267,17
+Tom Green,1877,34
+Travis,24144,303
 Trinity,163,4
-Tyler,146,3
-Upshur,267,2
+Tyler,152,3
+Upshur,269,2
 Upton,16,1
-Uvalde,595,12
+Uvalde,604,12
 Val Verde,1687,47
 Van Zandt,446,8
 Victoria,3584,57
-Walker,3189,43
+Walker,3190,44
 Waller,526,5
 Ward,99,1
 Washington,526,41
-Webb,9435,129
-Wharton,1019,30
+Webb,9552,130
+Wharton,1020,30
 Wheeler,36,0
 Wichita,1117,12
 Wilbarger,78,1
-Willacy,767,30
-Williamson,7330,103
+Willacy,774,30
+Williamson,7330,89
 Wilson,499,20
 Winkler,88,1
 Wise,536,10
 Wood,360,9
 Yoakum,124,3
 Young,200,6
-Zapata,203,3
+Zapata,204,3
 Zavala,243,6
 Unknown,0,4
-Total,535582,9983
+Total,542950,10034
 Probable cases are not included in the total case numbers,NA,NA
