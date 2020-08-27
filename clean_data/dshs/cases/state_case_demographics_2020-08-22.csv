@@ -1,0 +1,45 @@
+state,fips,report_type,demographic_type,group,count,pct
+Texas,48,cases,ages,<1 year,147,0.0032
+Texas,48,cases,ages,1-9 years,681,0.0146
+Texas,48,cases,ages,10-19 years,1787,0.0384
+Texas,48,cases,ages,20-29 years,8897,.19098832217000002
+Texas,48,cases,ages,30-39 years,9833,0.2111
+Texas,48,cases,ages,40-49 years,8929,0.1917
+Texas,48,cases,ages,50-59 years,7870,0.1689
+Texas,48,cases,ages,60-64 years,2988,0.0641
+Texas,48,cases,ages,65-69 years,2075,0.0445
+Texas,48,cases,ages,70-74 years,1221,0.0262
+Texas,48,cases,ages,75-79 years,807,0.0173
+Texas,48,cases,ages,80+ years,1318,0.0283
+Texas,48,cases,ages,Unknown,31,7e-4
+Texas,48,cases,gender,Female,15688,.33676798901
+Texas,48,cases,gender,Male,29871,0.6412
+Texas,48,cases,gender,Unknown,1025,0.022
+Texas,48,cases,race,Asian,741,.015906749098
+Texas,48,cases,race,Black,7425,0.1594
+Texas,48,cases,race,Hispanic,18566,0.3985
+Texas,48,cases,race,Other,200,0.0043
+Texas,48,cases,race,White,13078,0.2807
+Texas,48,cases,race,Unknown,6574,0.1411
+Texas,48,fatalities,ages,<1 year,3,3e-4
+Texas,48,fatalities,ages,1-9 years,5,4e-4
+Texas,48,fatalities,ages,10-19 years,11,0.001
+Texas,48,fatalities,ages,20-29 years,79,0.007
+Texas,48,fatalities,ages,30-39 years,224,0.0199
+Texas,48,fatalities,ages,40-49 years,607,.053878927747
+Texas,48,fatalities,ages,50-59 years,1322,0.1173
+Texas,48,fatalities,ages,60-64 years,1071,0.0951
+Texas,48,fatalities,ages,65-69 years,1318,0.117
+Texas,48,fatalities,ages,70-74 years,1466,0.1301
+Texas,48,fatalities,ages,75-79 years,1384,0.1228
+Texas,48,fatalities,ages,80+ years,3776,.33516776141
+Texas,48,fatalities,ages,Unknown,0,0
+Texas,48,fatalities,gender,Female,4661,0.4137
+Texas,48,fatalities,gender,Male,6605,0.5863
+Texas,48,fatalities,gender,Unknown,0,0
+Texas,48,fatalities,race,Asian,242,0.0215
+Texas,48,fatalities,race,Black,1338,0.1188
+Texas,48,fatalities,race,Hispanic,6142,0.5452
+Texas,48,fatalities,race,Other,68,0.006
+Texas,48,fatalities,race,White,3472,0.3082
+Texas,48,fatalities,race,Unknown,4,4e-4
