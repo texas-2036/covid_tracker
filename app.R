@@ -377,7 +377,10 @@ dshs_completed_investigation <- dshs_state_demographics %>%
   mutate(completed_investigations=completed_investigations/3,
          diff=totals-completed_investigations) %>% 
   select(-totals)
-  
+
+dshs_new_hosp_data <- vroom("clean_data/dshs/hospitals/new_hosp_data_dshs.csv") %>% 
+  clean_names() %>% 
+  filter(date >= as_date("2020-07-25"))
 
 dshs_tsa_hosp_data <- read_rds("clean_data/dshs/hospitals/texas_hosp_bed_ts_data.rds") %>% 
   st_transform(crs="+init=epsg:4326")
@@ -506,16 +509,16 @@ twc_ui_top_25_tbl <- vroom("https://lmci.state.tx.us/shared/dashboarddata/UI_BY_
 
 # ~~FREDR Data -----------------------------------------------------
 
-tx_series_all <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/ui_claims_ts.csv")
+tx_series_all <- vroom("clean_data/fredr/ui_claims_ts.csv")
 
-tx_cont_series <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/cont_claims_ts.csv", delim=",") %>% 
+tx_cont_series <- vroom("clean_data/fredr/cont_claims_ts.csv", delim=",") %>% 
   mutate_at(vars(value),scales::comma) %>% 
   filter(date==max(date))
 
-tx_series <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/tx_series_summ.csv", delim=",") %>% 
+tx_series <- vroom("clean_data/fredr/tx_series_summ.csv", delim=",") %>% 
   mutate_at(vars(value),scales::comma)
 
-tx_urn <- vroom("https://raw.githubusercontent.com/texas-2036/covid_tracker/master/clean_data/fredr/unemploy_rate.csv")
+tx_urn <- vroom("clean_data/fredr/unemploy_rate.csv")
 
 
 # DERIVED METRICS -----------------------------------
@@ -3083,9 +3086,9 @@ server <- function (input, output, session) {
   })
   
   # {State New COVID-19-Related General Bed Admits} -------------------------------------------------
-
+  
   output$daily_covid_gen_admits_hchart <- renderHighchart({
-
+    
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
       filter(str_detect(tsa,"Total|total")) %>%
       # mutate(covid_share_of_new_er_visits=covid19_admitted_gen_24h,
@@ -3156,13 +3159,13 @@ server <- function (input, output, session) {
                                                              41.7 
                                          ).add();
                                        }')))))
-
+    
   })
   
   # {State New COVID-19-Related ICU Bed Admits} -------------------------------------------------
   
   output$daily_covid_icu_admits_hchart <- renderHighchart({
-
+    
     dshs_tsa_24hr_data_hchart <- dshs_tsa_24hr_data %>%
       filter(str_detect(tsa,"Total|total")) %>%
       mutate(covid_share_of_new_er_visits=covid19_admitted_icu_24h,
@@ -3233,8 +3236,9 @@ server <- function (input, output, session) {
                                                              41.7 
                                          ).add();
                                        }')))))
-
+    
   })
+  
   
   # {State Total Confirmed COVID-19 General Bed Admits} -------------------------------------------------
   
