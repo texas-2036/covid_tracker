@@ -1,0 +1,45 @@
+state,fips,report_type,demographic_type,group,count,pct
+Texas,48,cases,ages,<1 year,155,0.00321423387180391
+Texas,48,cases,ages,1-9 years,709,0.0147025278394127
+Texas,48,cases,ages,10-19 years,1869,0.0387574393961388
+Texas,48,cases,ages,20-29 years,9247,0.191754971694005
+Texas,48,cases,ages,30-39 years,10244,0.212429753437157
+Texas,48,cases,ages,40-49 years,9245,0.191713497708562
+Texas,48,cases,ages,50-59 years,8117,0.168322169918918
+Texas,48,cases,ages,60-64 years,3057,0.0633929867490616
+Texas,48,cases,ages,65-69 years,2130,0.0441697944964021
+Texas,48,cases,ages,70-74 years,1255,0.026024925865251
+Texas,48,cases,ages,75-79 years,826,0.0171287559878066
+Texas,48,cases,ages,80+ years,1344,0.0278705182174481
+Texas,48,cases,ages,Unknown,25,5.18424818032889e-4
+Texas,48,cases,gender,Female,16423,0.340563631462165
+Texas,48,cases,gender,Male,30836,0.639445907554486
+Texas,48,cases,gender,Unknown,964,0.0199904609833482
+Texas,48,cases,race,Asian,754,0.0156356925118719
+Texas,48,cases,race,Black,7745,0.160608008626589
+Texas,48,cases,race,Hispanic,19211,0.398378367169193
+Texas,48,cases,race,Other,217,0.00449992742052548
+Texas,48,cases,race,White,13814,0.286460817452253
+Texas,48,cases,race,Unknown,6482,0.134417186819567
+Texas,48,fatalities,ages,<1 year,3,2.33100233100233e-4
+Texas,48,fatalities,ages,1-9 years,5,3.88500388500389e-4
+Texas,48,fatalities,ages,10-19 years,14,0.00108780108780109
+Texas,48,fatalities,ages,20-29 years,88,0.00683760683760684
+Texas,48,fatalities,ages,30-39 years,243,0.0188811188811189
+Texas,48,fatalities,ages,40-49 years,713,0.0554001554001554
+Texas,48,fatalities,ages,50-59 years,1532,0.119036519036519
+Texas,48,fatalities,ages,60-64 years,1231,0.0956487956487957
+Texas,48,fatalities,ages,65-69 years,1496,0.116239316239316
+Texas,48,fatalities,ages,70-74 years,1688,0.131157731157731
+Texas,48,fatalities,ages,75-79 years,1571,0.122066822066822
+Texas,48,fatalities,ages,80+ years,4286,0.333022533022533
+Texas,48,fatalities,ages,Unknown,0,0
+Texas,48,fatalities,gender,Female,5327,0.413908313908314
+Texas,48,fatalities,gender,Male,7543,0.586091686091686
+Texas,48,fatalities,gender,Unknown,0,0
+Texas,48,fatalities,race,Asian,257,0.01996891996892
+Texas,48,fatalities,race,Black,1493,0.116006216006216
+Texas,48,fatalities,race,Hispanic,7129,0.553923853923854
+Texas,48,fatalities,race,Other,74,0.00574980574980575
+Texas,48,fatalities,race,White,3913,0.304040404040404
+Texas,48,fatalities,race,Unknown,4,3.10800310800311e-4
